@@ -143,11 +143,13 @@ function validarDocumento($arreglo){
     
 function guardarEmpleado($arreglo){
        
-       
+   $idUsr = $this->datos->treaerIdUsr($arreglo['id']);
+
 	if($arreglo['opcion']=="editar"){
             
             $arreglo['fechIngreCom'] = date('Y/m/d',strtotime($arreglo['fechIngreCom']));
 
+            $this->datos->actualizarIdRolUsr($arreglo['selcetRol'],$idUsr->id);
             $this->datos->actualizarEmpleado($arreglo);
             
 	}
@@ -156,7 +158,7 @@ function guardarEmpleado($arreglo){
             $this->datos->insertarEmpleado($arreglo);            
 	}
         
-	   $this->mostrarEmpleado($arreglo);
+	  $this->mostrarEmpleado($arreglo);
 }    
     
     function encriptar($cadena){
