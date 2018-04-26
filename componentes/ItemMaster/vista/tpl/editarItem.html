@@ -1,0 +1,154 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr class="titulo">
+            <td colspan="3">{{titulo_tabla|raw}}</td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Categoria </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="combobox required" name="categoria" id="categoria" {{disabled}}>{{select_categoria|raw}}</select>
+                </div>
+            </td> 
+             
+                <td id="acciones_cat">
+                    {% if disabled == "disabled" %}
+                        &nbsp;
+                    {% else %}
+                        <a id="linkCategoria" name="linkCategoria" class="various fancybox.ajax" href="index_blank.php?component=ItemMaster&method=agregarCategoria&idMenu={{idMenu}}&idHistorialCat={{idHistorialCat}}&idHistorialFab={{idHistorialFab}}&idHistorialMar={{idHistorialMar}}" ><button type="button" class="btn btn-link" title="Agregar Categoria"><span class="glyphicon glyphicon-plus"></span> </button>
+                    {% endif %}
+                </td>
+        </tr>
+
+        <tr>
+            <td class="tituloAlineado">Fabricante </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="combobox required" name="fabricante" id="fabricante" {{disabled}}>{{select_fabricante|raw}}</select>
+                </div>
+            </td>
+            <td id="acciones_cat">
+                {% if disabled == "disabled" %}
+                    &nbsp;
+                {% else %}
+                    <a id="linkFabricante" name="linkFabricante" class="various fancybox.ajax" href="index_blank.php?component=ItemMaster&method=agregarFabricante&idMenu={{idMenu}}&idHistorialCat={{idHistorialCat}}&idHistorialFab={{idHistorialFab}}&idHistorialMar={{idHistorialMar}}" ><button type="button" class="btn btn-link" title="Agregar Fabricante"><span class="glyphicon glyphicon-plus"></span> </button>
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="tituloAlineado">Marca </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="combobox required" name="marca" id="marca" {{disabled}}>{{select_marca|raw}}</select>
+                </div>
+            </td>
+            <td id="acciones_cat">
+                {% if disabled == "disabled" %}
+                    &nbsp;
+                {% else %}
+                    <a id="linkMarca" name="linkMarca" class="various fancybox.ajax" href="index_blank.php?component=ItemMaster&method=agregarMarca&idMenu={{idMenu}}&idHistorialCat={{idHistorialCat}}&idHistorialFab={{idHistorialFab}}&idHistorialMar={{idHistorialMar}}" ><button type="button" class="btn btn-link" title="Agregar Marca"><span class="glyphicon glyphicon-plus"></span> </button>
+                {% endif %}
+            </td>
+        </tr>
+        
+        {% for listaAtributos in atributos %}
+        <tr>
+            <td class="tituloAlineado">{{listaAtributos.nombre}}</td>
+            <td colspan="2">
+                <input class="inputGrande" type="text" name="{{listaAtributos.nombre}}" id="{{listaAtributos.nombre}}" value="{{listaAtributos.valor}}" />
+                <input  type="hidden" name="id_{{listaAtributos.nombre}}" id="id_{{listaAtributos.nombre}}" value="{{listaAtributos.idAtributo}}" />
+            </td>
+        </tr>                
+        {% endfor %}
+        
+    </table>
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+    <div style="text-align: right; width: 100%">
+        <input type="submit" class="botonGeneralGrande" value="Guardar Item" />
+    </div>
+    <input type="hidden" name="id" id="id" value="{{datosItem.idItemAtributo}}" />
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idHistorialCat" id="idHistorialCat" value="{{idHistorialCat}}" />
+    <input type="hidden" name="idHistorialFab" id="idHistorialFab" value="{{idHistorialFab}}" />
+    <input type="hidden" name="idHistorialMar" id="idHistorialMar" value="{{idHistorialMar}}" />
+</form>
+<script>
+    $().ready(function(){        
+        
+        $(".various1").fancybox({
+            maxWidth	: 700,
+		maxHeight	: 1100,
+		fitToView	: true,
+		width		: '90%',
+		height		: '90%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+        });
+        
+        $("#categoria").chosen({disable_search_threshold: 10, width:"100%" });
+        $("#fabricante").chosen({disable_search_threshold: 10, width:"100%" });
+        $("#marca").chosen({disable_search_threshold: 10, width:"100%" });
+        
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" });
+        $("#envioDatos").validate({ rules: {chosen:"required"} });
+        
+    });
+    
+    
+    $("#categoria").chosen().change(function() {
+        
+        var idCategoria = this.value;
+        var idFabricante = $("#fabricante").chosen().val();
+        var idMarca = $("#marca").chosen().val();
+
+        $("#linkCategoria").attr("href","index_blank.php?component=ItemMaster&method=agregarCategoria&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        $("#linkFabricante").attr("href","index_blank.php?component=ItemMaster&method=agregarFabricante&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        $("#linkMarca").attr("href","index_blank.php?component=ItemMaster&method=agregarMarca&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        
+            
+    });
+    
+    $("#fabricante").chosen().change(function() {
+        
+        var idFabricante = this.value;
+        var idCategoria = $("#categoria").chosen().val();
+        var idMarca = $("#marca").chosen().val();
+        
+        $("#linkCategoria").attr("href","index_blank.php?component=ItemMaster&method=agregarCategoria&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        $("#linkFabricante").attr("href","index_blank.php?component=ItemMaster&method=agregarFabricante&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        $("#linkMarca").attr("href","index_blank.php?component=ItemMaster&method=agregarMarca&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        
+    });
+    
+    $("#marca").chosen().change(function(){
+        
+        var idMarca = this.value;
+        var idFabricante = $("#fabricante").chosen().val();
+        var idCategoria = $("#categoria").chosen().val();
+        
+        $("#linkCategoria").attr("href","index_blank.php?component=ItemMaster&method=agregarCategoria&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        $("#linkFabricante").attr("href","index_blank.php?component=ItemMaster&method=agregarFabricante&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+        $("#linkMarca").attr("href","index_blank.php?component=ItemMaster&method=agregarMarca&idMenu={{idMenu}}&idHistorialCat=" + idCategoria + "&idHistorialFab=" + idFabricante + "&idHistorialMar=" + idMarca);
+            
+    });   
+    function EnviarFormulario(){
+
+        $.ajax({
+            url:'index_blank.php?component=ItemMaster&method=guardarItem',
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                jQuery.fancybox.close();
+                        $('#componenteCentral').html(msm);
+                }
+        });
+    }
+
+</script>

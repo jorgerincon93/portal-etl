@@ -1,0 +1,54 @@
+{{COMODIN}}
+<table id="listaJobs" class="tablaGeneral" border="1" align="center">
+                <thead>
+                    <tr class="titulo">
+	               <th colspan="3" style="text-align: center">{{titulo|raw}}</th>
+                    </tr>
+                    <tr>
+                        <th width="100" id="columna_cat">Producto</th>
+                        <th width="100" id="columna_can">Cantidad Faltante</th>
+                    </tr>
+                </thead>
+                <tbody>
+              {% for cantNoDispo in cantNo %}
+                  <tr>
+                    <td id="reg_cat_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            {{cantNoDispo.nombreProducto}}
+                        </div>
+                    </td>
+                    <td id="reg_canal_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            {{cantNoDispo.cantidadProducto}}
+                        </div> 
+                    </td>
+                    <!--<td id="reg_tipEst_{{ loop.index }}">
+                        <div class="ui-widget">
+                            {{verFormatoMedicion.tipoEstudio}}
+                        </div>
+                    </td>
+                  <td id="reg_anio_{{loop.index}}">
+                      <div class="ui-widget">
+                            {% if verFormatoMedicion.tipoEstudio == "ESPECIAL" %}
+                            {{verFormatoMedicion.frecuencia}}
+                            {% else %}
+                            {{verFormatoMedicion.anio}}-{{verFormatoMedicion.ciclo}} 
+                            {% endif %}
+                        </div>
+                    </td>
+                    
+                    <td id="reg_met_{{ loop.index }}">
+                        <div class="ui-widget">
+                           {{verFormatoMedicion.areaMetro}}
+                        </div>
+                    </td>
+                    
+                    <td>{{verFormatoMedicion.ciudad}}</td>
+                    
+                    <td>{{verFormatoMedicion.estado}}</td>
+                    -->
+                  </tr>
+                 {% endfor %}
+                </tbody>
+</table>
+    

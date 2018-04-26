@@ -1,0 +1,98 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaLogCargaMasiva">    
+    <div id="logCargaMasiva"></div>    
+</table>
+
+
+<script>
+
+$(function() {
+    $("#logCargaMasiva").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=CargasMasivas&method=ajaxListaCargasMasvias&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            {field: "id", header: "Id"},
+            {field: "tipoCarga", header: "Tipo Carga"},
+            {field: "nombreArchivo", header: "Nombre Archivo"},
+            {field: "tamanoArchivo", header: "Tamaño Archivo"},
+            {field: "filas", header: "Filas"},
+            {field: "columnas", header: "Columnas"},
+            {field: "fechaCarga", header: "Fecha Carga"},
+            {field: "idUsuarioCarga", header: "Usuario Carga"},
+            {field: "estado", header: "Estado"},
+            {field: "fechaProceso", header: "Fecha Proceso"}
+            
+        ],
+        sorting: [
+            {sortingName: "Id", field: "id", order: "none"},
+            {sortingName: "Tipo Carga", field: "tipoCarga", order: "none"},
+            {sortingName: "Nombre Archivo", field: "nombreArchivo", order: "none"},
+            {sortingName: "tamaño Archivo", field: "tamanoArchivo", order: "none"},
+            {sortingName: "Fecha Carga", field: "fechaCarga", order: "none", order: "descending"},
+            {sortingName: "idUsuarioCarga", field: "idUsuarioCarga", order: "none"},
+            {sortingName: "Estado", field: "estado", order: "none"},
+            {sortingName: "Fecha Proceso", field: "fechaProceso", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                
+                 {
+                    filterName: "id", "filterType": "text", field: "id", filterLabel: "ID",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                }
+                           ]
+            {{filtro|raw}}
+        }
+    });
+ 
+});	
+
+   
+                
+$(document).ready(function() {
+   
+   
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 700,
+		fitToView	: true,
+		width		: '90%',
+		height		: '90%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function agregarCargasMasivas(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=CargasMasivas&method=agregarCargasMasivas&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+function editarCargasMasivas(id){
+
+	$.ajax({
+		url:'index_blank.php?component=CargasMasivas&method=editarCargasMasivas',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+</script>

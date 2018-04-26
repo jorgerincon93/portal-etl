@@ -1,0 +1,182 @@
+{{COMODIN}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+<div>
+ <tr>
+            <th colspan="8" style="text-align: center">{{titulo|raw}}</th>
+ </tr>
+</div>    
+</table>
+<br>
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+    
+        
+        <!-- INFORMACION DEL ASESOR-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N ASESOR</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Creaci&oacute;n</td>
+            <td>{{datosOrdenCompra.fechaCreacion}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosOrdenCompra.asesor}} </td>
+            
+        </tr>
+        
+ </table>
+<br>
+<table id="infoCliente" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <!-- INFORMACION DEL CLIENTE-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N PROPONENTE</th>
+        </tr>
+        <tr>
+           <td width="13%" class="tituloAlineado">Nombre Proponente </td>
+            <td>{{datosOrdenCompra.nombreClie}}</td>
+            <td width="30%" class="tituloAlineado">Valor Contrato </td>
+            <td>${{datosOrdenCompra.valorContrato}}</td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Numero Contrato </td>
+            <td>{{datosOrdenCompra.numeroContrato}}</td>
+            
+            <td width="30%" class="tituloAlineado">Numero Contrato Interno</td>
+            <td>{{datosOrdenCompra.numeroContratoInterno}}</td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Inicio</td>
+            <td>{{datosOrdenCompra.fechaInicio}}</td>
+            <td width="30%" class="tituloAlineado">Fecha Fin</td>
+            <td>{{datosOrdenCompra.fechaFin}}</td>    
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Acta Liquidacion </td>
+            <td>{{datosOrdenCompra.actLiqui}}</td>
+            <td class="tituloAlineado">Certificacion </td>
+            <td>{{datosOrdenCompra.certi}}</td>
+        </tr>
+        
+</table>
+<br>
+
+<button class="accordion">SERVICIOS ESPECIALES</button>
+<div class="panel">
+ <table align="center" width="100%" cellpadding="0" cellspacing="0"  class="tablaOferta">
+                
+                <thead>             
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                        <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                        <td width="100" id="columna_serial" class="tituloAlineado">serial</td>
+                        <td width="100" id="columna_referencia" class="tituloAlineado">referencia</td>
+                        <td width="100" id="columna_ciudad" class="tituloAlineado">Ciudad</td>
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                        <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                    </tr>
+                </thead>
+                 <tbody>
+
+                        {% for nomProdCatServDet in nomProdCatServ %}
+                            <tr>
+                                <td id="numFila_{{ loop.index }}">{{ loop.index }}</td>
+                                <td>{{nomProdCatServDet.nombre}}</td>
+                                <td>{{nomProdCatServDet.serial}}</td>
+                                <td>{{nomProdCatServDet.referencia}}</td>
+                                <td>{{nomProdCatServDet.ciudad}}</td>
+                                <td>{{nomProdCatServDet.valorUni}}</td>
+                                <td>{{nomProdCatServDet.valorUniTotal}}</td>
+                            </tr>    
+                        {% endfor %}
+                        
+                </tbody>
+    
+</table>
+</div>                      
+                  
+<button class="accordion">PERSONAL</button>
+        <div class="panel">
+           <table align="center" width="100%" cellpadding="0" cellspacing="0"  class="tablaOferta">
+                
+                <thead>             
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                        <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                        <td width="100" id="columna_serial" class="tituloAlineado">serial</td>
+                        <td width="100" id="columna_referencia" class="tituloAlineado">referencia</td>
+                        <td width="100" id="columna_reg_sel" class="tituloAlineado">Ciudad</td>
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                        <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                    </tr>
+                </thead>
+                 <tbody>
+
+                        {% for nomProdCatPerDet in nomProdCatPer %}
+                            <tr>
+                                <td id="numFila_{{ loop.index }}">{{ loop.index }}</td>
+                                <td>{{nomProdCatPerDet.nombre}}</td>
+                                <td>{{nomProdCatPerDet.serial}}</td>
+                                <td>{{nomProdCatPerDet.referencia}}</td>
+                                <td>{{nomProdCatPerDet.ciudad}}</td>
+                                <td>{{nomProdCatPerDet.valorUni}}</td>
+                                <td>{{nomProdCatPerDet.valorUniTotal}}</td>
+                            </tr>    
+                        {% endfor %}
+                        
+                </tbody>
+    
+            </table>
+        </div>
+
+<button class="accordion">BIENES DE ASEO Y CAFETERIA</button>
+        <div class="panel">
+           <table align="center" width="100%" cellpadding="0" cellspacing="0"  class="tablaOferta">
+                
+                <thead>             
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                        <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                        <td width="100" id="columna_serial" class="tituloAlineado">serial</td>
+                        <td width="100" id="columna_referencia" class="tituloAlineado">referencia</td>
+                        <td width="100" id="columna_reg_sel" class="tituloAlineado">Ciudad</td>
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                        <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                    </tr>
+                </thead>
+                 <tbody>
+
+                        {% for nomProdCatAseoDet in nomProdCatAseo %}
+                            <tr>
+                                <td id="numFila_{{ loop.index }}">{{ loop.index }}</td>
+                                <td>{{nomProdCatAseoDet.nombre}}</td>
+                                <td>{{nomProdCatAseoDet.serial}}</td>
+                                <td>{{nomProdCatAseoDet.referencia}}</td>
+                                <td>{{nomProdCatAseoDet.ciudad}}</td>
+                                <td>{{nomProdCatAseoDet.valorUni}}</td>
+                                <td>{{nomProdCatAseoDet.valorUniTotal}}</td>
+                            </tr>    
+                        {% endfor %}
+                        
+                </tbody>
+    
+            </table>
+        </div>
+
+
+<script>
+
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+            panel.style.display = "none";
+        } else {
+            panel.style.display = "block";
+        }
+    }
+}
+</script>

@@ -1,0 +1,421 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td>{{titulo|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        
+    </table>
+</div>
+
+
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N ASESOR</th>
+        </tr>
+        <tr>            
+            <td width="30%" class="tituloAlineado">Fecha </td>
+            <td> {{datosResumenJob.fechaSis}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosResumenJob.asesor}} </td>
+        </tr>
+
+    </table>    
+    <br>
+    
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">		
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N CLIENTE</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Cliente </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="idCliente" id="idCliente" {{datosResumenJob.cliDisabled}}>{{select_cliente|raw}}</select>
+                </div>                            
+            </td>
+            <td width="30%" class="tituloAlineado">Nombre Contacto Cliente </td>
+            <td><p id="nomcontCliente">{{datosResumenJob.nomcontCliente}}</p></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Telefono Cliente </td>
+            <td><p id="telCliente">{{datosResumenJob.telCliente}}</p></td>
+            <td width="30%" class="tituloAlineado">Email </td>
+            <td><p id="emailCliente">{{datosResumenJob.emailCliente}}</p></td>
+        </tr>
+        
+    </table>
+    <br>
+    <table id="listaJobs" class="tablaGeneral" border="1" align="center">
+                <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">FORMATOS DE MEDICI&Oacute;N</th>
+                    </tr>
+                    <tr>
+                        <th width="100" id="columna_cat">Categoria</th>
+                        <th width="100" id="columna_can">Canal</th>
+                        <th width="100" id="columna_tipEst">Tipo Estudio</th>
+                        <th width="150" id="columna_anio">A&ntilde;o / Ciclo Frecuencia</th>                        
+                        <th width="100" id="columna_met">Area Metropolitana</th>
+                        <th style="width:100px;height:auto;" id="colmna_ciu">Ciudad</th>
+                        <th width="100" id="columna_estado">Estado</th>
+                        <th width="100" id="columna_heredar">Heredar</th>
+                        <th width="100" id="colAcciones">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for formatoMedicion in formatosMedicion %}
+                  <tr id="fila_{{ loop.index }}">
+                    <td id="reg_cat_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="cat_{{ loop.index }}" id="cat_{{ loop.index }}" {{formatoMedicion.disabled}} onchange="cargarHerencia('{{ loop.index }}');">{{formatoMedicion.select_categoria|raw}}</select>
+                        </div>
+                    </td>
+                    <td id="reg_canal_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="canal_{{ loop.index }}" id="canal_{{ loop.index }}" multiple data-placeholder="Seleccione Canales..." {{formatoMedicion.disabled}}>{{formatoMedicion.select_canal|raw}}</select>
+                        </div> 
+                    </td>
+                    <td id="reg_tipEst_{{ loop.index }}">
+                        <div class="ui-widget">
+                            <select class="required" name="estudio_{{ loop.index }}" id="estudio_{{ loop.index }}" {{formatoMedicion.disabled}} onchange="cambioEstudio('{{ loop.index }}');">{{formatoMedicion.select_estudio|raw}}</select>
+                        </div>
+                    </td>
+                    <td id="reg_anio_{{loop.index}}" width="150">
+                        <div class="ui-widget">
+                            <select class="required" name="anio_{{loop.index}}" id="anio_{{loop.index}}" {{formatoMedicion.disabled}}>{{formatoMedicion.select_anio|raw}}</select>
+                            {% if formatoMedicion.tipo_estudio == "ESPECIAL" %}
+                                <select class="required" name="frecuencia_{{loop.index}}" id="frecuencia_{{loop.index}}" {{formatoMedicion.disabled}}>{{formatoMedicion.select_frecuencia|raw}}</select>
+                                <select class="required" name="cantFrecuencia_{{loop.index}}" id="cantFrecuencia_{{loop.index}}" {{formatoMedicion.disabled}}>{{formatoMedicion.select_cantFrecuencia|raw}}</select>
+                            {% else %}                                
+                                <select class="required" name="ciclo_{{ loop.index }}" id="ciclo_{{ loop.index }}" {{formatoMedicion.disabled}}>{{formatoMedicion.select_ciclo|raw}}</select>
+                            {% endif %}
+                        </div>
+                    </td>
+                    <td id="reg_met_{{ loop.index }}">
+                        <div class="ui-widget">
+                            <select class="required" name="met_{{ loop.index }}" id="met_{{ loop.index }}" multiple data-placeholder="Seleccione area metropolitana..." {{formatoMedicion.disabled}} onchange="actualizarMunicipio('1')">{{formatoMedicion.select_areaMet|raw}}</select>
+                        </div>
+                    </td>
+                    
+                    <td style="width:10px;height:auto;" id="reg_ciu_{{ loop.index }}">{{formatoMedicion.ciudad}}</td>
+                    
+                    <td id="reg_estado_{{ loop.index }}">{{formatoMedicion.estado}}
+                        <input type="hidden" name="id_{{ loop.index }}" id="id_{{ loop.index }}" value="{{formatoMedicion.id}}" />
+                        <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{formatoMedicion.disabled}}" />
+                    </td>
+                    <td id="reg_herencia_{{ loop.index }}">
+                        <div class="ui-widget">
+                            <select name="herencia_{{ loop.index }}" id="herencia_{{ loop.index }}" {{formatoMedicion.disabled}} >{{formatoMedicion.select_herencia|raw}}</select>
+                        </div>
+                    </td>
+                    <td id="reg_acciones_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if formatoMedicion.disabled != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFila('{{ loop.index }}')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td class="tituloAlineado">Observaciones Resumen Job </td>
+            <td><textarea  rows="4" cols="50" name="obsGenerales" id="obsGenerales">{{datosResumenJob.observaciones}}</textarea></td>
+        </tr>       
+    </table>
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+    <div style="padding-top: 20px; text-align: right; width: 100%">          
+        <input type="submit" class="botonGeneralGrande" value="Guardar Job Order" />
+    </div>
+    <input type="hidden" name="id" id="id" value="{{datosResumenJob.id}}" />
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idAsesor" id="idAsesor" value="{{datosResumenJob.idAsesor}}" />
+    <input type="hidden" name="cantFilas" id="cantFilas" value="1" />
+    <input type="hidden" name="varFrecuencia" id="varFrecuencia" value="{{formatosMedicion.select_frecuencia}}" />
+    
+</form>
+<script>
+    var arregloFrecuencia = [];    
+    
+    $().ready(function(){
+        $("#anio").chosen({disable_search_threshold: 10, width:"100%"});  
+        $("#idCliente").chosen({disable_search_threshold: 10, width:"150px"});
+        
+        
+        {% for formatoMedicion in formatosMedicion %}
+            $("#cat_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#varFrecuencia{{ loop.index }}").chosen({disable_search_threshold: 10, width:"100%" });            
+            $("#canal_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px" });
+            $("#anio_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#ciclo_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#frecuencia_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#cantFrecuencia_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#estudio_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#herencia_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#met_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"210px" });
+        {% endfor %}
+        
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })       
+        $("#envioDatos").validate({ rules: {chosen:"required"} });
+        
+    });
+       
+    $(function() {
+        $("#fecha").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    
+    $("#idCliente").chosen().change(function() {
+        var arreglo = new Array;
+        var idCliente = this.value;
+        
+        if (!!idCliente){
+          $.ajax({
+            url:'index_blank.php?component=JobOrder&method=consultarCliente',
+                    type: "POST",
+                    data:'idCliente=' + idCliente,
+                    success: function (msm){
+                    arreglo = msm;
+                            data = JSON.parse(msm);
+                            $("#nomcontCliente").html(data.contacto);
+                            $("#telCliente").html(data.telefono);
+                            $("#emailCliente").html(data.email);
+                            $("#nomfactCliente").html(data.nombreContactoFacturacion);
+                            $("#telfactCliente").html(data.telefonoFacturacion);
+                            $("#emailfactCliente").html(data.emailFacturacion);
+                    }
+            });  
+        }
+        else{
+            $("#nomcontCliente").html('');
+            $("#telCliente").html('');
+            $("#emailCliente").html('');
+            $("#nomfactCliente").html('');
+            $("#telfactCliente").html('');
+            $("#emailfactCliente").html('');
+        }        
+    });
+    
+    function cambioEstudio(indexFormato){
+        
+        var selAnio = "{{select_anio|escape('js')}}";
+        var selCiclo = "{{select_ciclo|escape('js')}}";
+        var selFrecuencia = "{{select_frecuencia|escape('js')}}";
+        var selCantFrecuencia = "{{select_cantFrecuencia|escape('js')}}";
+        var htmlTd = "";
+        var estudio = $("#estudio_"+indexFormato).chosen().val();
+        
+       
+        //alert($("#estudio_"+indexFormato).chosen().val());
+        if( estudio == 'ESPECIAL'){
+            htmlTd = '<div class="ui-widget"><select class="required" name="anio_'+indexFormato+'" id="anio_'+indexFormato+'" >'+selAnio+'</select><select class="required" name="frecuencia_'+indexFormato+'" id="frecuencia_'+indexFormato+'" >'+selFrecuencia+'</select><select class="required" name="cantFrecuencia_'+indexFormato+'" id="cantFrecuencia_'+indexFormato+'" >'+selCantFrecuencia+'</select></div>';
+        }else{
+            htmlTd = '<div class="ui-widget"><select class="required" name="anio_'+indexFormato+'" id="anio_'+indexFormato+'" >'+selAnio+'</select><select class="required" name="ciclo_'+indexFormato+'" id="ciclo_'+indexFormato+'" >'+selCiclo+'</select></div>';
+        }
+         
+        $("#reg_anio_"+indexFormato).html(htmlTd);
+         
+        $("#anio_"+indexFormato).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#ciclo_"+indexFormato).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#frecuencia_"+indexFormato).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#cantFrecuencia_"+indexFormato).chosen({disable_search_threshold: 10, width:"150px"});
+//            $("#anio").hide();
+//            $("#ciclo").hide();
+//            $("#varFrecuencia").html('<tr><th colspan="2" style="text-align: center">VARIABLES ESPECIALES</th></tr>');
+//            arregloFrecuencia = [];
+//        }   
+//    });
+    }
+    
+    function cargarHerencia(indexFormato){       
+        var idCliente = $("#idCliente").chosen().val();
+        var idCategoria = $("#cat_" + indexFormato).chosen().val();
+        //alert("idCliente " + idCliente);
+        //alert("categoria " + idCategoria);
+        
+        if (!!idCliente){
+          $.ajax({
+            url:'index_blank.php?component=JobOrder&method=armarListaHerencia',
+                    type: "POST",
+                    data:'idCliente=' + idCliente + '&idCategoria=' + idCategoria,
+                    success: function (msm){
+                        //arreglo = msm;
+                        //alert(msm);                        
+                        $("#herencia_"+ indexFormato).html(msm);
+                        $("#herencia_"+ indexFormato).trigger("chosen:updated");                            
+                    }
+            });  
+        }
+        
+        
+    }
+    
+    function actualizarMunicipio(posicion){
+        areaMet = $("#met_"+posicion).chosen().val();
+        $.ajax({
+            url:'index_blank.php?component=JobOrder&method=consultarMunicipios',
+            type: "POST",
+            data:'areaMet=' + areaMet ,
+            success: function (msm){                
+                $("#reg_ciu_"+posicion).html(msm);                
+            }
+        });
+    }
+    
+    function agregarFila(){
+        var n = $('tr:last td', $("#listaJobs")).length;
+        var j = $('#listaJobs >tbody >tr').length + 1;
+        var tds = '';
+        var $objTabla=$('#listaJobs');
+        var iTotalColumnasExistentes=$('#listaJobs thead tr th').length;
+        var ant = j-1;
+        var tdIdAnt;
+        var cantFilas = $('#cantFilas').val();
+        
+        if(cantFilas>=j){       
+            j = parseInt(cantFilas) + 1;
+        }
+        $('#cantFilas').val(j);
+       
+        var selCategoria = "{{select_categoria|escape('js')}}";
+        var selCanal = "{{select_canal|escape('js')}}";
+        var selAnio = "{{select_anio|escape('js')}}";
+        var selCiclo = "{{select_ciclo|escape('js')}}";
+        var selEstudio = "{{select_estudio|escape('js')}}";
+        var selAreaMet = "{{select_areaMet|escape('js')}}";
+        var selMunicipio = "{{select_ciudad|escape('js')}}";
+        var selHerencia = "{{select_herencia|escape('js')}}";
+        
+        tdIdAnt = $objTabla.find('td:last').attr('id');
+        tdIdAnt = tdIdAnt.replace('reg_acciones_','');
+        //alert(tdIdAnt);
+               
+        //$objTabla.find('td:last').html('&nbsp;');
+        tds +='<tr id="fila_'+j+'">';
+        
+        tds += '<td id="reg_cat_'+j+'" width="100"><div class="ui-widget"><select class="required" name="cat_'+j+'" id="cat_'+j+'" onchange="cargarHerencia('+j+');">'+selCategoria+'</select></div></td>';
+        tds += '<td id="reg_canal_'+j+'" width="100"><div class="ui-widget"><select class="required" name="canal_'+j+'" id="canal_'+j+'" multiple data-placeholder="Seleccione Canales...">'+selCanal+'</select></div></td>';
+        tds += '<td id="reg_tipEst_'+j+'"><div class="ui-widget"><select class="required" name="estudio_'+j+'" id="estudio_'+j+'" onchange="cambioEstudio('+j+');">'+selEstudio+'</select></div></td>';
+        tds += '<td id="reg_anio_'+j+'" width="100"><div class="ui-widget"><select class="required" name="anio_'+j+'" id="anio_'+j+'">'+selAnio+'</select><select class="required" name="ciclo_'+j+'" id="ciclo_'+j+'">'+selCiclo+'</select></div></td>';        
+        tds += '<td id="reg_met_'+j+'"><div class="ui-widget"><select class="required" name="met_'+j+'" id="met_'+j+'" multiple data-placeholder="Seleccione area metropolitana..." onchange="actualizarMunicipio('+j+')" >'+selAreaMet+'</select></div></td>';
+        tds += '<td id="reg_ciu_'+j+'"></td>';
+        tds += '<td id="reg_estado_'+j+'">{{datosOrden.estado}}<input type="hidden" name="id_'+j+'" id="id_'+j+'" value="" /><input type="hidden" name="disable_'+j+'" id="disable_'+j+'" value="" /></td>';
+        tds += '<td id="reg_herencia_'+j+'"><div class="ui-widget"><select name="herencia_'+j+'" id="herencia_'+j+'" >'+selHerencia+'</select></div></td>';
+        tds += '<td id="reg_acciones_'+ j +'"><button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button> <button type="button" class="btn btn-link" onclick="eliminarFila('+j+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        tds += '</tr>';
+        $("#listaJobs").append(tds);
+        
+        $("#cat_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#canal_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#anio_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#ciclo_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#estudio_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#herencia_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#met_"+j).chosen({disable_search_threshold: 10, width:"210px"});
+        $("#ciu_"+j).chosen({disable_search_threshold: 10, width:"210px"});
+        
+        valDisable = $('#disable_' + tdIdAnt).val();
+        if(valDisable == 'disabled'){
+            $("#reg_acciones_"+tdIdAnt).html('')
+        }else{
+            $("#reg_acciones_"+tdIdAnt).html('<button type="button" class="btn btn-link" onclick="eliminarFila('+tdIdAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+        }
+        //$("#cat_1").replaceAll("#cat_"+j);
+        
+        //$("#listaJobs").html('Acciones');
+    }
+    
+    function eliminarFila(pos){
+        var $objTabla=$('#listaJobs');
+        var j = $('#listaJobs >tbody >tr').length;
+        var tdVal = '';
+      
+        $("#fila_"+pos).remove();
+        //alert(j);
+       
+        tdVal = $objTabla.find('td:last').html();
+        //alert(tdVal.length);
+        ant = j -1;
+        valDisable = $('#disable_' + ant).val();
+        //alert(valDisable);
+        if (j>2){
+            if(tdVal.length<150){
+                if(valDisable == 'disabled'){
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+                }else{
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>' + tdVal;
+                }
+            }
+        }else{
+            tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+        }
+       $objTabla.find('td:last').html(tdVal);
+    }
+    
+   
+    
+    function regresar(){
+        $.ajax({
+        url:'index_blank.php?component=JobOrder&method=mostrarJobOrder&idMenu=' + {{idMenu}},
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+        });
+    }
+
+    function EnviarFormulario(){ 
+        var tdId;
+        var formatosMedicion = [];        
+        
+        $('#listaJobs > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            formatosMedicion.push({
+                id : $("#id_"+tdId).val(),
+                categoria : $("#cat_"+tdId).val(),
+                canal : $("#canal_"+tdId).chosen().val(),
+                anio : $("#anio_"+tdId).val(),
+                ciclo : $("#ciclo_"+tdId).val(),
+                tipoEstudio : $("#estudio_"+tdId).val(),
+                frecuencia : $("#frecuencia_"+tdId).val(),
+                cantFrecuencia : $("#cantFrecuencia_"+tdId).val(),
+                areaMet : $("#met_"+tdId).chosen().val(),
+                municipio : $("#ciu_"+tdId).chosen().val(),
+                herencia : $("#herencia_"+tdId).chosen().val(),
+            });            
+        });
+        
+        formatosMedicion = JSON.stringify(formatosMedicion);        
+      if(confirm('Realmente desea Guardar el Resumen Job?')){ 
+        $.ajax({
+            url:'index_blank.php?component=JobOrder&method=guardarOrden',
+                    type: "POST",
+                    data:$('#envioDatos').serialize() + '&formatosMedicion='+formatosMedicion,
+                    success: function (msm){
+                    alert('Resumen Job Guardado');    
+                    //$('#obsGenerales').html(msm);                        
+                    $('#componenteCentral').html(msm);
+                    }
+        });
+      }  
+    }        
+
+</script>

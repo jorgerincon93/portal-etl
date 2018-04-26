@@ -1,0 +1,162 @@
+{{COMODIN}}
+
+<!-- Modal -->
+<div class="modal fade" id="miModalEdit" tabindex="-1" role="dialog" aria-labelledby="miModalEdit" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="miModalEdit">{{titulo_tabla}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="container" name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()" method="POST">
+          
+  		<div class="row">
+        	<div class="col-md-6 mb-3">
+    			<label for="usuario">Usuario</label>
+            {% if opcion == "editar" %} 
+    			   <input type="text" class="form-control" name="usuario" id="usuario" aria-describedby="usuario" placeholder="Login" readonly value="{{datosUsuario.login}}"/>             
+             {% else %}
+             <input type="text" class="form-control" name="usuario" id="usuario" aria-describedby="usuario" placeholder="Login"     value="{{datosUsuario.login}}"/>
+            {% endif %} 
+  			</div>
+        <div class="col-md-6 mb-3">
+          <label for="selectEstado">Estado</label>
+          <select class="form-control" name="selectEstado" id="selectEstado" required>
+            {{select_estado|raw}}
+          </select>   
+        </div>
+  		</div>
+      <div class="row"> 
+        <div class="col-md-6 mb-3">
+          <label for="selectEmpleado">Empleado</label>
+          <select class="form-control" name="selectEmpleado" id="selectEmpleado" required>
+            {{selectEmple|raw}}
+          </select>   
+        </div>  
+        <div class="col-md-6 mb-3">
+          <label for="intento">Intento Ingreso</label>
+          <input type="text" class="form-control" name="intento" id="intento" aria-describedby="intento" placeholder="Intento Ingreso" value="{{datosUsuario.intento}}" />
+        </div>
+      </div>
+  		<div class="row">	        
+  			<div class="col-md-6 mb-3">
+    			<label for="clave">Contraseña</label>
+    			<input type="password" class="form-control" name="clave" id="clave" placeholder="Contraseña" value="" />
+  			</div>
+        <div class="col-md-6 mb-3">
+          <label for="reclave">Repetir Contraseña</label>
+          <input type="password" class="form-control" name="reclave" id="reclave" placeholder="Repetir Contraseña" equalTo="#clave" value="" />
+        </div>
+      </div>
+      <div class="row">       
+
+            <input type="hidden" name="id" id="id" value="{{datosUsuario.id}}" />
+            <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+            <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+      </div>
+  		
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" form="envioDatos" class="btn btn-primary">Guardar Usuario</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();
+	});
+
+$(".form_datetime").datetimepicker({
+        format: "yyyy/mm/dd",
+        autoclose: true,
+        todayBtn: true,
+        //startDate: "2013-02-14 10:00",
+        minuteStep: 10
+});
+
+function usuarioValido(){
+           
+		var usuario=$('#usuario').val();                
+		for(var i=0; i<usuario.length; i++){
+			if(usuario[i]==' '){
+				return false;
+			}
+		}
+		return true;
+}
+
+	function EnviarFormulario(){
+		
+		if(usuarioValido()){                    
+			//if(nombreValido()=='valido'){
+			//	if(documentoValido()=='valido'){
+					var request = $.ajax({
+						url:'index_blank.php?component=Usuario&method=guardarUsuario',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+            dataType: "html"         
+					});
+          request.done(function(msm) {
+
+                $('#miModalEdit').modal('hide');
+                //location.reload('index_blank.php?component=Usuario&method=mostrarUsuarios'+{{idMenu}});
+          });
+
+				/*}
+				else{
+					alert('El No. Documento que desea asignar ya se encuentra atado a otro usuario.\nPor favor verifique.')
+				};
+			}
+			else{
+				alert('El usuario que desea asignar ya se encuentra en uso.');
+			}*/
+		}
+		else{
+			alert('El usuario que desea asignar contiene espacios en blanco.\nPor Favor verifique.');
+		}
+	}
+
+	function nombreValido(){
+		var usuario = $('#usuario').val();
+		var ident = $('#id').val();
+		var responder='';
+                
+		$.ajax({
+			url:'index_blank.php?component=Usuario&method=validarRepetido',
+			type: "POST",
+			async:false,
+			data:'login='+usuario+'&id='+ident,
+			success: function (msm){
+				responder=msm;
+			}
+		});     
+               //alert($.trim(responder));
+		return $.trim(responder);
+	}
+
+	function documentoValido(){
+		var documento = $('#docu').val();
+		var ident = $('#id').val();
+		var responder='';
+                
+		$.ajax({
+			url:'index_blank.php?component=Usuario&method=validarDocumento',
+			type: "POST",
+			async:false,
+			data:'numeroDocumento='+documento+'&id='+ident,
+			success: function (msm){
+				responder=msm;
+			}
+		});                 
+		return $.trim(responder);
+	}
+
+</script>

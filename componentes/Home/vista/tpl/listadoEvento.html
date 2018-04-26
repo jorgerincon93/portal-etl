@@ -1,0 +1,195 @@
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="Evento"></div>
+</table>
+
+<script>
+
+
+$(function() {
+ 
+    $("#Evento").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=Home&method=ajaxListaEvento&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            {field: "fechaInicio", header: "Avance"},
+            {field: "fechaFin", header: "Estado"},
+            {field: "asunto", header: "Fecha Creacion"},
+            {field: "implicados", header: "Fecha Modificacion"},
+            {field: "idEstado", header: "Cliente"},
+            {field: "idOfertaEconomica", header: "Numero Contrato"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+            
+        ],
+        sorting: [
+            {sortingName: "Fecha Inicio", field: "fechaInicio", order: "ascending"},
+            {sortingName: "Fecha Fin", field: "fechaFin", order: "none"},
+            {sortingName: "Asunto", field: "asunto", order: "none"},
+            {sortingName: "implicados", field: "implicados", order: "none"},
+            {sortingName: "Estado", field: "idEstado", order: "none"},
+            {sortingName: "Id Oferta Economica", field: "idOfertaEconomica", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "avance", "filterType": "number", field: "avance", filterLabel: "Avance",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Estado", "filterType": "text", field: "estado", filterLabel: "Nombre",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Fecha Creacion", "filterType": "text", field: "fechaCreacion", filterLabel: "Fecha Creacion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Fecha Modificacion", "filterType": "text", field: "fechaModificacion", filterLabel: "Fecha Modificacion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                }
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 800,
+		fitToView	: true,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verEvento(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=OfertaEconomica&method=verEvento',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarEvento(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=OfertaEconomica&method=agregarEvento&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+function crearEvento(){        
+        
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=crearEvento',
+            type: "POST",
+            data:$('#envioDatos').serialize(),
+            success: function (msm){
+                $('#fancybox-inner').html(msm);
+            }
+        
+       
+        });
+}
+    
+function editarEvento(id){
+
+	$.ajax({
+		url:'index_blank.php?component=OfertaEconomica&method=editarEvento',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+function eliminarEvento(id, nombre){
+	if(confirm('Realmente desea eliminar El Evento '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=OfertaEconomica&method=eliminarEvento&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Evento ' +nombre+ ' Eliminado');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	}
+}
+
+
+var opt = {
+       colorRange:true,
+       colorRangeLimits: {
+        optimal: '91-100-green',
+        newRangeOne: '61-90-#4aa64f',
+        newRangeTwo: '41-60',
+        newRangeThree: '21-40-rgb(241,144,40)',
+        critical: '0-20'
+       },       
+       animTime:1000,
+       forceAnim:true,
+       milestones: {
+        1: {
+         mlPos: 10,
+         mlId: false,
+         mlClass: 'bi-custom',
+         mlDim: '100%',         
+
+         mlHoverRange: 15,
+         mlLineWidth: 1
+        },
+        2: {
+         mlPos: 50,
+         mlId: false,
+         mlClass: 'bi-custom',
+         mlDim: '100%',         
+
+         mlHoverRange: 15,
+         mlLineWidth: 1
+        },
+        3: {
+         mlPos: 90,
+         mlId: false,
+         mlClass: 'bi-custom',
+         mlDim: '100%',         
+
+         mlHoverRange: 15,
+         mlLineWidth: 1
+        }
+    }
+   };
+
+</script>

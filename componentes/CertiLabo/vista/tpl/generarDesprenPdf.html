@@ -1,0 +1,218 @@
+{{COMODIN}}
+<div id="certiLabr">
+        <form method="POST" name="ceLaboral" id="ceLaboral" action="crearPDF.php" target="_blank">
+        	<div id="certiLab">
+        		<div class="card cardEtlDesp card-outline-info">
+                   <div class="card-header" >
+                       <img class="card-img-top imageDespren" src="imagenes/logo1.png" alt="Card image cap"/>
+                        ETL SOLUCIONES INFORMATICAS Y DE SOFTWARE S.A.S 
+                         <div class="divcenter">NIT.900.680.844-0</div>
+                   </div>
+                   <div class="card-body">
+                     <table class="tabDespren">                       
+                        <tr>
+                          <td>
+                            Cedula:
+                          </td>
+                          <td>
+                             {{datosEnca.numeroDocumento}}
+                          </td>
+                          <td>
+                            Nombre:
+                          </td>
+                          <td>
+                             {{datosEnca.nombre}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            Cargo:
+                          </td>
+                          <td>
+                             {{datosEnca.cargo}}
+                          </td>
+                          <td>
+                            Periodo:
+                          </td>
+                          <td>
+                             {{datosEnca.periodo}}
+                          </td>
+                        </tr>
+                        
+                        
+                        <thead>
+                             <tr>
+                              <th colspan="4"><center>INGRESOS</center> </th>
+                         </tr>
+                             <tr class="tabDesprenIngretr">
+                                <td class="tabDesprenIngretd">Codigo</td>
+                                <td class="tabDesprenIngretd">Concepto</td>
+                                <td class="tabDesprenIngretd">Cantidad</td>
+                                <td class="tabDesprenIngretd">Valor</td>
+                           </tr>
+                           </thead>
+                          <tbody>                            
+                              {% for datoscertIngresos in datosCertIngre %}
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.codigo}}</td>
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.descripcion}}</td>
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.cantidad}}</td>
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.valor}}</td>
+                                </tr>
+                              {% endfor %}
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">Total Ingresos</td>
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">{{totales.total}}</td>
+                                </tr>
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td td class="tabDesprenIngretd">Total Neto</td>
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">{{totales.totalNeto}}</td>
+                                </tr>
+                            </tbody>
+                            <tr>
+                              <td>
+                              <thead>
+                             <tr>
+                              <th colspan="4"><center>EGRESOS</center> </th>
+                             </tr>
+                             <tr class="tabDesprenIngretr">
+                                <td class="tabDesprenIngretd">Codigo</td>
+                                <td class="tabDesprenIngretd">Concepto</td>
+                                <td class="tabDesprenIngretd">Cantidad</td>
+                                <td class="tabDesprenIngretd">Valor</td>
+                           </tr>
+                           </thead>
+                           <tbody>                            
+                              {% for datosCertEgresos in datosCertEgre %}
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.codigo}}</td>
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.descripcion}}</td>
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.cantidad}}</td>
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.valor}}</td>
+                                </tr>
+                              {% endfor %}
+                              <tr class="tabDesprenIngretr">
+                                  <td colspan="1" class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">Total Deducciones</td>
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">{{totales.totalDeducciones}}</td>
+                                </tr>
+                            </tbody>
+                            </td>
+                            </tr>
+                        <!-- </table>
+                        </tr>
+                         <table class="tabDesprenIngre">
+                           <thead>
+                             <tr>
+                              <th colspan="4"><center>INGRESOS</center> </th>
+                             </tr>
+                             <tr class="tabDesprenIngretr">
+                                <td class="tabDesprenIngretd">Codigo</td>
+                                <td class="tabDesprenIngretd">Concepto</td>
+                                <td class="tabDesprenIngretd">Cantidad</td>
+                                <td class="tabDesprenIngretd">Valor</td>
+                           </tr>
+                           </thead>
+                           <tbody>                            
+                              {% for datoscertIngresos in datosCertIngre %}
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.codigo}}</td>
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.descripcion}}</td>
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.cantidad}}</td>
+                                  <td class="tabDesprenIngretd">{{datoscertIngresos.valor}}</td>
+                                </tr>
+                              {% endfor %}
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td td class="tabDesprenIngretd">Total Ingresos</td>
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">{{totales.total}}</td>
+                                </tr>
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td td class="tabDesprenIngretd">Total Neto</td>
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">{{totales.totalNeto}}</td>
+                                </tr>
+                            </tbody>
+                         </table>
+                        <table class="tabDesprenEgre">
+                           <thead>
+                             <tr>
+                              <th colspan="4"><center>EGRESOS</center> </th>
+                             </tr>
+                             <tr class="tabDesprenIngretr">
+                                <td class="tabDesprenIngretd">Codigo</td>
+                                <td class="tabDesprenIngretd">Concepto</td>
+                                <td class="tabDesprenIngretd">Cantidad</td>
+                                <td class="tabDesprenIngretd">Valor</td>
+                           </tr>
+                           </thead>
+                           <tbody>                            
+                              {% for datosCertEgresos in datosCertEgre %}
+                                <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.codigo}}</td>
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.descripcion}}</td>
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.cantidad}}</td>
+                                  <td class="tabDesprenIngretd">{{datosCertEgresos.valor}}</td>
+                                </tr>
+                              {% endfor %}
+                              <tr class="tabDesprenIngretr">
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td td class="tabDesprenIngretd">Total Deducciones</td>
+                                  <td class="tabDesprenIngretd"></td>
+                                  <td class="tabDesprenIngretd">{{totales.totalDeducciones}}</td>
+                                </tr>
+                            </tbody>
+                         </table>-->
+                      </table>
+
+                     <table class="tabFirma">
+                        <tr>
+                          <td>
+                            Firma
+                          </td>
+                          <td>
+                            ______________________
+                          </td>
+                        </tr>
+                     </table>
+
+                
+                    <!--<div class="card cardEtl card-outline-info">
+                       <img class="card-img-top imageCertiLab" src="imagenes/desCertiLaboralCon.png" alt="Card image cap">
+                       <div class="card-block">
+                          <h4 class="card-title">Certificado Laboral Con Sueldo</h4>
+                        </div>
+                      <div class="card-block">
+                       <a href="#" id="cerLab" onclick="generarCetiLaSulbPdf()" class="card-link btn btn-outline-primary">Generar</a>
+                      </div>
+                    </div>-->
+                  </div>
+                </div>
+            </div>
+			<input type="hidden" name="datosCertificado" id="datosCertificado" value="">
+        </form>     
+           
+</div>
+
+<script>
+
+$().ready(function(){
+    
+	$("#ceLaboral").validate();
+   
+     var shelf_clone = $("#certiLab").clone(); 
+     var shelf = shelf_clone.prop("outerHTML");
+     var datos = $("#datosCertificado").val(shelf);
+     $("#ceLaboral").submit();
+     $("#certiLabr").hide();
+});
+    
+
+</script>

@@ -1,0 +1,274 @@
+{{COMODIN}}
+
+	<div class="calendario_ajax">
+		<div class="cal"></div><div id="mask"></div>
+	</div>
+
+		
+<script>
+    
+    
+    function generar_calendario(mes,anio,metodo){
+       
+       
+                var agenda=$(".cal");
+		//agenda.html("<img src='imagenes/eventos/loading.gif'>");
+		$.ajax({
+			type: "POST",
+			url: 'index_blank.php?component=Calendario&method=evento',
+			cache: false,
+			data: { mes:mes,anio:anio,accion:"generar_calendario",metodo:metodo }
+		}).done(function( respuesta ) 
+		{
+			agenda.html(respuesta);
+		});
+                
+       
+    }
+		
+    function formatDate(input){
+            
+		var datePart = input.match(/\d+/g),
+		year = datePart[0].substring(2),
+		month = datePart[1], day = datePart[2];
+		return day+'-'+month+'-'+year;
+    }
+		
+    $(document).ready(function(){
+                         
+			/* GENERAMOS CALENDARIO CON FECHA DE HOY */
+			generar_calendario(05,2017,'nuevo');
+			
+			
+			/* AGREGAR UN EVENTO */
+			$(document).on("click",'a.add',function(e){
+				e.preventDefault();
+				var id = $(this).data('evento');
+				var fecha = $(this).attr('rel');
+				
+				$('#mask').fadeIn(1000).html("<div id='nuevo_evento' class='window' rel='"+fecha+"'>Agregar un evento el "+formatDate(fecha)+"</h2>"
+                                                             + "<a href='#' class='close' rel='"+fecha+"'>&nbsp;</a>"
+                                                             + "<div id='respuesta_form'></div>"
+                                                             + "<form name='envioDatos' id='envioDatos' class='formeventos' action='javascript:EnviarFormulario()'>"
+                                                             + "<table id='evento' align='center' width='100%' cellpadding='0' cellspacing='0' class='tablaOferta'>"
+                                                             + "<thead>"
+                                                             + "<tr>"
+                                                             + "<th colspan='9' style='text-align: center'>EVENTO</th>"
+                                                             + "</tr>"
+                                                             + "<tr>"
+                                                             + "<td width='80' id='columna_fe_ini' class='tituloAlineado'>Fecha Inicio</td>"
+                                                             + "<td width='80' id='columna_fe_fin' class='tituloAlineado'>Fecha Fin</td>"
+                                                             + "<td width='80' id='columna_asunto' class='tituloAlineado'>Asunto</td>"
+                                                             + "<td width='80' id='columna_impli' class='tituloAlineado'>Implicados</td>"
+                                                             + "<td width='80' id='columna_estado' class='tituloAlineado'>Estado</td>"                                                             
+                                                             + "</tr>"
+                                                             + "</thead>"
+                                                             + "<tbody>"
+                                                             + "<td><input class='required inputGeneral' type='text' style='WIDTH: 80' size=32 name='fechaInicio' id='fecha_ini' value=''/></td>"
+                                                             + "<td><input class='required inputGeneral' type='text' style='WIDTH: 80' size=32 name='fechaFin' id='fecha_fin' value='' /></td>"
+                                                             + "<td><input class='required inputGeneral' type='text' style='WIDTH: 80' size=32 name='asunto' id='asunto' value='' /></td>"
+                                                             + "<td><input class='required inputGeneral' type='text' style='WIDTH: 80' size=32 name='implicados' id='implicados' value='' /></td>"
+                                                             + "<input type='hidden' name='oferta' id='oferta' value='' />"                                                  
+                                                             + "<input type='hidden' name='opcion' id='opcion' value='Nuevo' />"                                                  
+                                                             + "<td>"                                       
+                                                             + "<select name='estado' id ='estado'>"
+                                                             + "<option value='712'>Evento Agendado</option>"
+                                                             + "<option value='713'>Evento Aplazado</option>"
+                                                             + "<option value='714'>Evento Cancelado</option>"
+                                                             + "<option value='715'>Evento Cerrado</option>"
+                                                             + "</select>"
+                                                             + "</tr>"
+                                                             + "</tbody>"
+                                                             + "</table>"
+                                                             + "<br>"
+                                                             + "<div style='padding-top: 20px; text-align: right; width: 100%'>"
+                                                             + "<input type='submit' class='botonGeneralGrande' value='Guardar Oferta' />"
+                                                             + "</div>"
+                                                             + "</form>");
+                        });
+                                                             
+                    $().ready(function(){
+		        $("#envioDatos").validate();                
+	            });                                   
+                                                             
+			
+			/* LISTAR EVENTOS DEL DIA */
+			/*$(document).on("click",'a.modal',function(e){
+				e.preventDefault();                     
+                                
+				//var fecha = $(this).attr('rel');
+                                var fecha = $("#modal").attr('rel');
+				alert(fecha);
+				$('#mask').fadeIn(1000).html("<div id='nuevo_evento' class='window' rel='"+fecha+"'>Eventos del "+formatDate(fecha)+"</h2><a href='#' class='close' rel='"+fecha+"'>&nbsp;</a><div id='respuesta'></div><div id='respuesta_form'></div></div>");
+				$.ajax({
+					type: "POST",
+					url: 'index_blank.php?component=Calendario&method=evento',
+					cache: false,
+					data: { fecha:fecha,accion:"listar_evento" }
+				}).done(function( respuesta ) 
+				{
+					$("#respuesta_form").html(respuesta);
+				});
+			
+			});*/
+		
+			$(document).on("click",'.close',function (e){
+				e.preventDefault();
+				$('#mask').fadeOut();
+				setTimeout(function() 
+				{ 
+					var fecha=$(".window").attr("rel");
+					var fechacal=fecha.split("-");
+					generar_calendario(fechacal[1],fechacal[0],'cerrar');
+				}, 500);
+			});
+		
+			//guardar evento
+			$(document).on("click",'.enviar',function (e){
+				e.preventDefault();
+                                alert("entra guardar evento");
+				if ($("#evento_titulo").valid()==true){
+					$("#respuesta_form").html("<img src='images/loading.gif'>");
+					var evento=$("#evento_titulo").val();
+					var fecha=$("#evento_fecha").val();
+					$.ajax({
+						type: "POST",
+						url: 'index_blank.php?component=OfertaEconomica&method=crearEvento',
+						cache: false,
+						data: { evento:evento,fecha:fecha,accion:"guardar_evento" }
+					}).done(function( respuesta2 ) 
+					{
+						$("#respuesta_form").html(respuesta2);
+						$(".formeventos,.close").hide();
+						setTimeout(function() 
+						{ 
+							$('#mask').fadeOut('fast');
+							var fechacal=fecha.split("-");
+							generar_calendario(fechacal[1],fechacal[0],'nuevo');
+						}, 3000);
+					});
+				}
+			});
+				
+			//eliminar evento
+			$(document).on("click",'.eliminar_evento',function (e){
+				e.preventDefault();
+				var current_p=$(this);
+                                
+				var id=$(this).attr("rel");
+				$.ajax({
+					type: "POST",
+					url: 'index_blank.php?component=Calendario&method=evento',
+					cache: false,
+					data: { id:id,accion:"borrar_evento" }
+				}).done(function( respuesta2 ){
+					$("#respuesta_form").html(respuesta2);
+					current_p.parent("p").fadeOut();                                        
+                                        
+				});
+			});
+                        
+			//editar evento
+			$(document).on("click",'.editar_evento',function (e){
+				e.preventDefault();
+				var current_p=$(this);
+				
+				var id=$(this).attr("rel");
+				$.ajax({
+					type: "POST",
+					url: 'index_blank.php?component=Calendario&method=EditarEvento',
+					cache: false,
+					data: { id:id }
+				}).done(function( respuesta2 ){
+					$("#respuesta").html(respuesta2);
+					current_p.parent("p").fadeOut();                                        
+                                        
+				});
+			});
+				
+			$(document).on("click",".anterior,.siguiente",function(e){
+				
+                                e.preventDefault();
+				var datos=$(this).attr("rel");
+                                var nueva_fecha=datos.split("-");
+                                alert(nueva_fecha[1]);
+                                generar_calendario(nueva_fecha[1],nueva_fecha[0],'siguiente');
+			});
+                        
+
+
+    });
+                
+            function verEvento(fecha){
+                	
+		    $('#mask').fadeIn(1000).html("<div id='nuevo_evento' class='window' rel='"+fecha+"'>Eventos del "+formatDate(fecha)+"</h2><a href='#' class='close' rel='"+fecha+"'>&nbsp;</a><div id='respuesta'></div><div id='respuesta_form'></div></div>");
+			    $.ajax({
+				    type: "POST",
+				    url: 'index_blank.php?component=Calendario&method=evento',
+				    cache: false,
+				    data: { fecha:fecha,accion:"listar_evento" }
+				  }).done(function( respuesta ) 
+				  {
+					$("#respuesta_form").html(respuesta);
+				  });
+	    }
+            
+            function acordion(){
+                
+               var acc = document.getElementsByClassName("accordion");
+               var i;
+               
+                for(i = 0; i < acc.length; i++) {
+                        acc[i].onclick = function(){
+                        this.classList.toggle("active");
+                        var panel = this.nextElementSibling;
+                        if (panel.style.display === "block"){
+                                panel.style.display = "none";
+                        }else{
+                                panel.style.display = "block";
+                            }
+                        }
+                }     
+            }
+            
+    function EnviarFormulario(){ 
+        
+        var calen = "calendario";
+        $.ajax({
+		url:'index_blank.php?component=OfertaEconomica&method=guardarEvento',
+		type: "POST",
+		data:$('#envioDatos').serialize() + '&calendario=' + calen,
+		success: function (msm){
+					 $('#componenteCentral').html(msm);
+				       }
+	});
+       
+    }
+    
+  /*  function guardarEvento(){
+        
+        if ($("#evento_titulo").valid()==true){
+					
+		var evento=$("#evento_titulo").val();
+		var fecha=$("#evento_fecha").val();
+		$.ajax({
+			type: "POST",
+			url: 'index_blank.php?component=OfertaEconomica&method=crearEvento',
+			cache: false,
+			data: { evento:evento,fecha:fecha,accion:"guardar_evento" }
+		       }).done(function( respuesta2 ){
+						$("#respuesta_form").html(respuesta2);
+						$(".formeventos,.close").hide();
+						setTimeout(function() 
+						{ 
+							$('#mask').fadeOut('fast');
+							var fechacal=fecha.split("-");
+							generar_calendario(fechacal[1],fechacal[0]);
+						}, 3000);
+					});
+				}
+            }    */
+                   
+</script>
+
+

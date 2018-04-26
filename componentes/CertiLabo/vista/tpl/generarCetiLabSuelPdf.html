@@ -1,0 +1,80 @@
+ {{COMODIN}}
+
+<div id="certiLabr">
+        <form method="POST" name="ceLaboral" id="ceLaboral" action="crearPDF.php" target="_blank">
+        	<div id="certiLab">
+        		<td>
+        			<img class="membre" src="imagenes/membrete.png">
+        		</td>
+        		<table align="center" width="100%" cellpadding="0" cellspacing="0">
+        			<tr>
+        			  <td>	
+        				<center>CERTIFICA:</center>
+        			  </td> 	
+        			</tr>	
+            		<tr>
+						<td>							
+            		   	    <br><br><br>
+							<p>Que  el  señor(a) {{datosEmpleado.nombre}}, Identificado con {{datosEmpleado.tipoDocumento}}
+							{{datosEmpleado.numeroDocumento}}, labora  en esta empresa desde el {{datosEmpleado.diaIngre}} de 
+							{{datosEmpleado.mesIngre}} de {{datosEmpleado.anoIngre}},
+							desempeñando el cargo de {{datosEmpleado.cargo}} con un contrato a {{datosEmpleado.tipoContrato}}.</p>
+							<br><br>							
+							<br><br>
+						</td>
+					</tr>
+					<tr>	
+						<td>
+							<u>Salariales: De acuerdo  con lo establecido en el Art.  128 del código sustantivo del trabajo.</u>	
+							<br><br>
+					        <br><br>
+					    </td>
+					</tr>
+					<tr>
+					    <td>        
+					        <p>Salario Ordinario: {{datosEmpleado.SalarioBasico}}</p>
+					        <br><br>
+					        <u>No salariales: De  acuerdo con lo  establecido en el Arti.128 del código sustantivo de trabajo.</u>
+					        <br><br>
+					        <p>Bono de servicio:					{{datosEmpleado.bonoAdicional}}</p>
+					        <p>Medio de transporte:				{{datosEmpleado.transporte}}</p>
+					        <p>Auxilio de Equipo:				{{datosEmpleado.AuxEquipo}}</p><br><br>
+					        <p>Para un total mensual de {{datosEmpleado.totalLetra}} Pesos M/cte. ( ${{datosEmpleado.totalSal}}).</p><br><br><br><br><br><br><br><br><br><br><br><br>
+					        <p>Se expide a solicitud del interesado en Bogotá, a los {{datosEmpleado.diaSoli}} días del mes de {{datosEmpleado.mesSoli}} de {{datosEmpleado.anoSoli}}.</p><br><br>
+						</td>				
+        			</tr>        			
+				</table>
+            </div>
+			<input type="hidden" name="datosCertificado" id="datosCertificado" value="">
+        </form>           
+</div>
+
+<script>
+
+$().ready(function(){
+    
+	$("#ceLaboral").validate();
+   
+     var shelf_clone = $("#certiLab").clone(); 
+     var shelf = shelf_clone.prop("outerHTML");
+     var datos = $("#datosCertificado").val(shelf);
+     $("#ceLaboral").submit();
+     $("#certiLabr").hide();
+});
+    
+        
+	/*function EnviarFormulario(){
+		
+					$.ajax({
+						url:'index_blank.php?component=Geo&method=guardarCiudad',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+						success: function (msm){
+							jQuery.fancybox.open(msm);
+							//$('#componenteCentral').html(msm);
+						}
+					});
+	}	*/
+
+
+</script>

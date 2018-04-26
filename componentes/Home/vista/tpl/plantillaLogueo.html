@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+  
+<head>
+    <meta charset="utf-8">
+
+    <title>ETL SOLUCIONES  S.A.S</title>
+
+    <!-- Estilos Generales del aplicativo -->
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes"> 
+    
+	<!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+
+	<link href="css/font-awesome.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600" rel="stylesheet">
+    
+	<link href="css/style.css" rel="stylesheet" type="text/css">-->
+	<link href="css/signin.css" rel="stylesheet" type="text/css">
+    
+	<link rel="shortcut icon" href="mlp.ico">
+    <!-- Posibilita usar Jquery -->
+	<script type="text/javascript" src="js/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="libraries/javascript/jquery.js"></script>
+
+    
+
+    <!-- Validadores campos de formulario del aplicativo-->
+
+    <script src="libraries/javascript/validacion/jquery.validate.js" type="text/javascript"></script>
+
+    
+
+</head>
+
+<body> 
+
+	<form name="envio_datos" id="envio_datos" method="post" action="javascript:EnviarFormulario()">
+		<div class="form">
+  			<div class="forceColor"></div>
+  			  <div class="topbar">
+    			<div class="spanColor"></div>
+    			  <input type="text" id="usuario" name="usuario" value="" placeholder="Usuario"  class="input"  />
+    			  <input type="password" id="clave" name="clave" value="" placeholder="Contraseña" class="input"/>
+    		      <div id="error_ingreso"></div>
+  			  </div>
+  	 			<button class="submit" id="submit">Login</button>
+  	 			
+         </div>
+
+	    <input type="hidden" name="component" id="component" value="AccederSistema" />
+
+        <input type="hidden" name="method" id="method" value="validarLogueoUsuario" />
+
+    </form>
+
+</body>
+
+<script>
+
+	$(document).ready(function(){
+            // $("#envio_datos").validate();
+	    $(document).ajaxStart(function(){
+
+	        $('#imgCargando').css('visibility','visible');
+
+	    })
+
+	    .ajaxStop(function() {
+
+	        $('#imgCargando').css('visibility','hidden');
+
+	    });
+
+	});
+
+	
+	function EnviarFormulario(){
+		
+		$.ajax({
+
+	        url: "index_blank.php",
+	        type: 'POST',
+	        data:$('#envio_datos').serialize(),
+	        success:function(msm){
+	        	console.log(msm);
+	            switch(msm){
+
+	                case 'faltante':
+
+	                    $('#error_ingreso').html(" * Debe ingresar usuario y clave para continuar.");
+
+	                    break;
+
+	                case 'error':
+
+	                    $('#error_ingreso').html(" * Error de acceso, por favor verifique sus datos.");
+
+	                    break;
+
+                        case 'inactivo':
+
+	                    $('#error_ingreso').html(" * El usuario esta inactivo, contacte al Administrador del sistema.");
+
+	                    break;    
+
+	                case 'logueado':
+
+                            direccionarLogueado();
+
+	                    break;
+
+	                default : 
+
+	                	$('#error_ingreso').html(msm);
+
+	            		break;
+
+	            }
+
+	        }
+
+	    });
+
+	}
+
+	
+
+	function direccionarLogueado(){
+
+		window.location = "";
+
+	}
+
+</script>
+
+
+<script src="libraries/javascript/diseno/jquery-1.7.2.min.js"></script>
+<script src="libraries/javascript/diseno/bootstrap.js"></script>
+
+<script src="libraries/javascript/diseno/signin.js"></script>
+</html>

@@ -1,0 +1,101 @@
+{{COMODIN}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr class="titulo">
+	  <th colspan="3" style="text-align: center">{{titulo|raw}}</th>
+        </tr>
+</table>
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N ASESOR</th>
+        </tr>
+        <tr>            
+            <td class="tituloAlineado">Fecha </td>
+            <td> {{datosResumenJob.fechaCreacion}}</td>
+            <td class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosResumenJob.asesor}} </td>
+        </tr>
+
+    </table>   
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">		
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N CLIENTE</th>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Cliente </td>
+            <td>{{datosResumenJob.nomCliente}}</td>
+            <td class="tituloAlineado">Nombre Contacto Cliente </td>
+            <td>{{datosResumenJob.nomcontCliente}}</td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Telefono Cliente </td>
+            <td>{{datosResumenJob.telCliente}}</td>
+            <td class="tituloAlineado">Email </td>
+            <td>{{datosResumenJob.emailCliente}}</td>
+        </tr>
+        
+    </table>
+    <br>
+    <table id="listaJobs" class="tablaGeneral" border="1" align="center">
+                <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">FORMATOS DE MEDICI&Oacute;N</th>
+                    </tr>
+                    <tr>
+                        <th width="100" id="columna_cat">Categoria</th>
+                        <th width="100" id="columna_can">Canal</th>
+                        <th width="100" id="columna_tipEst">Tipo Estudio</th>
+                        <th width="100" id="columna_anio">A&ntilde;o / Ciclo Frecuencia</th>
+                        <th width="100" id="columna_met">Area Metropolitana</th>
+                        <th style="width:100px;height:auto;" id="colmna_ciu">Ciudad</th>
+                        <th width="100" id="columna_estado">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+              {% for verFormatoMedicion in verFormatosMedicion %}
+                  <tr id="fila_{{ loop.index }}">
+                    <td id="reg_cat_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            {{verFormatoMedicion.nombreCategoria}}
+                        </div>
+                    </td>
+                    <td id="reg_canal_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            {{verFormatoMedicion.ver_canal}}
+                        </div> 
+                    </td>
+                    <td id="reg_tipEst_{{ loop.index }}">
+                        <div class="ui-widget">
+                            {{verFormatoMedicion.tipoEstudio}}
+                        </div>
+                    </td>
+                  <td id="reg_anio_{{loop.index}}">
+                      <div class="ui-widget">
+                            {% if verFormatoMedicion.tipoEstudio == "ESPECIAL" %}
+                            {{verFormatoMedicion.frecuencia}}
+                            {% else %}
+                            {{verFormatoMedicion.anio}}-{{verFormatoMedicion.ciclo}} 
+                            {% endif %}
+                        </div>
+                    </td>
+                    
+                    <td id="reg_met_{{ loop.index }}">
+                        <div class="ui-widget">
+                           {{verFormatoMedicion.areaMetro}}
+                        </div>
+                    </td>
+                    
+                    <td>{{verFormatoMedicion.ciudad}}</td>
+                    
+                    <td>{{verFormatoMedicion.estado}}</td>
+                    
+                  </tr>
+                 {% endfor %}
+                </tbody>
+            </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td class="tituloAlineado">Observaciones Resumen Job </td>
+            <td>{{datosResumenJob.observaciones}}</textarea></td>
+        </tr>       
+    </table> 

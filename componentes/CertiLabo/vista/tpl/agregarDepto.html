@@ -1,0 +1,76 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td align="right"><a class="various fancybox.ajax" href="index_blank.php?component=Geo&method=agregarGeo&idMenu={{idMenu}}" >Regresar</a></td>
+        </tr>
+    </table>
+</div>
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="30%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="2">{{titulo_tabla}}</td>
+		</tr>
+		<tr>
+			<td width="30%" class="tituloAlineado">Nombre Departamento </td>
+			<td><input class="required inputGeneral" type="text" name="nomDepto" id="nomDepto" value="" /></td>
+                </tr>
+                <tr>
+			<td class="tituloAlineado">Pais </td>
+			<td>
+				<div class="ui-widget">
+					<select class="combobox required" name="idPais" id="idPais">{{select_pais|raw}}</select>
+				</div>			
+		</tr>
+                <tr>
+			<td width="30%" class="tituloAlineado">Codigo Dane </td>
+			<td><input class="required inputGeneral" type="text" name="codDane" id="codDane" value="" /></td>
+                </tr>
+		
+	</table>
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Depto" />
+	</div>
+	
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+</form>
+<script>
+    $().ready(function(){
+		$("#envioDatos").validate();                
+    });
+        
+        $().ready(function(){
+		$("#envioDatos").validate();
+                $(".various").fancybox({
+                    maxWidth	: 400,
+                    maxHeight	: 800,
+                    fitToView	: true,
+                    width	: '70%',
+                    height	: '70%',
+                    autoSize	: true,
+                    closeClick	: false,
+                    openEffect	: 'none',
+                    closeEffect	: 'none'
+                });
+	});
+        
+	function EnviarFormulario(){
+		
+					$.ajax({
+						url:'index_blank.php?component=Geo&method=guardarDepto',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+						success: function (msm){
+							jQuery.fancybox.open(msm);
+							//$('#componenteCentral').html(msm);
+						}
+					});
+	}	
+
+
+</script>

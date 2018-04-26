@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>MEIKO</title>
+    </head>
+    <body>
+        <h1 align="CENTER">{{ titulo }}</h1> 
+
+        <table align="CENTER" border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <td align="CENTER">ID USUARIO</td>
+                <td align="CENTER">LOGIN</td>
+                <td align="CENTER">NOMBRE</td>
+                <td align="CENTER">ROL</td>
+                <td align="CENTER">CLAVE</td>
+                <td align="CENTER">JERARQUIA</td>
+                <td align="CENTER">ESTADO</td>
+            </tr>            
+                {% for user in users %}
+                <tr>                
+                <td align="CENTER">{{ user.id }}</td>
+                <td align="CENTER">{{ user.login }}</td>
+                <td align="CENTER">{{ user.nombre }}</td>
+                <td align="CENTER">{{ user.rol }}</td>
+                <td align="CENTER">{{ user.clave }}</td>
+                <td align="CENTER">{{ user.idPadre }}</td>
+                <td align="CENTER">{{ user.estado }}</td>
+                </tr>
+                {% endfor %}
+            </table>       
+
+    </body>
+</html>

@@ -1,0 +1,192 @@
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="productos"></div>
+</table>
+
+<script>
+
+
+$(function() {
+ 
+    $("#productos").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=Productos&method=ajaxListaProductos&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            {field: "id", header: "Id", visible: "no"},
+            {field: "nombre", header: "Nombre Producto"},
+            //{field: "serial", header: "Serial"},
+            {field: "referencia", header: "Referencia"},
+            {field: "categoria", header: "Categoria"},
+            {field: "tipo", header: "Tipo"},
+            {field: "nombreMarca", header: "Nombre Marca"},
+            {field: "tamano", header: "Tamaño"},
+            {field: "empaque", header: "Empaque"},
+            //{field: "olor", header: "Olor"},
+            {field: "presentacion", header: "Presentacion"},
+            {field: "descripcion", header: "Descripcion"},
+            {field: "estado", header: "Estado"},
+            {field: "countDetProducto", header: "Num De Productos"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+            
+        ],
+        sorting: [
+            {sortingName: "Categoria", field: "categoria", order: "ascending"},
+            {sortingName: "Nombre", field: "nombre", order: "ascending"},
+            {sortingName: "Tipo", field: "tipo", order: "none"},
+            {sortingName: "Nombre Marca", field: "nombreMarca", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "Nombre", "filterType": "text", field: "nombre", filterLabel: "Nombre",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Categoria", "filterType": "number", "numberType": "integer", field: "categoria", filterLabel: "Categoria",
+                    excluded_operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal"],
+                    filter_interface: [
+                        {
+                            filter_element: "select"
+                        }
+                    ],
+                    lookup_values_ajax_url: "index_blank.php?component=Insumos&method=ajaxListaProdCateInsumos"
+                },    
+                {
+                    filterName: "Tipo", "filterType": "number", "numberType": "integer", field: "tipo", filterLabel: "Tipo",
+                    excluded_operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal"],
+                    filter_interface: [
+                        {
+                            filter_element: "select"
+                        }
+                    ],
+                    lookup_values_ajax_url: "index_blank.php?component=Insumos&method=ajaxListaProdTipoInsumos"
+                },
+                {
+                    filterName: "Estado", "filterType": "text", field: "estado", filterLabel: "Estado",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Tamaño", "filterType": "text", field: "tamano", filterLabel: "Tamaño",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Empaque", "filterType": "text", field: "empaque", filterLabel: "Empaque",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Nombre Marca", "filterType": "text", field: "nombreMarca", filterLabel: "Nombre Marca",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Presentacion", "filterType": "text", field: "presentacion", filterLabel: "Presentacion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Descripcion", "filterType": "text", field: "descripcion", filterLabel: "Descripcion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                }
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 800,
+		fitToView	: true,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verProductos(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=Productos&method=verProductos',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarProductos(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=Productos&method=agregarProductos&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function editarProductos(id){
+
+	$.ajax({
+		url:'index_blank.php?component=Productos&method=editarProductos',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function eliminarProductos(id,nombre){
+	if(confirm('Realmente desea eliminar el Producto '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=Productos&method=eliminarProductos&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Producto ' +nombre+ ' Inactivado');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	}
+}
+
+
+		</script>

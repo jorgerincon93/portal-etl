@@ -1,0 +1,227 @@
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="clientes"></div>
+</table>
+
+<script>
+
+
+$(function() {
+ 
+    $("#clientes").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=Clientes&method=ajaxListaClientes&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            {field: "id", header: "Id" , visible: "no"},
+            {field: "nombre", header: "Nombre"},
+            {field: "tipoDocumento", header: "Tipo Documento"},
+            {field: "documento", header: "Documento"},
+            {field: "numeroContrato", header: "Contrato", visible: "no"},
+            {field: "numeroCodigo", header: "Codigo"},
+            {field: "vigencia", header: "Vigencia"},
+            {field: "sedes", header: "Sedes"},
+            {field: "insumos", header: "Insumos"},
+            {field: "cantidadOperarios", header: "Operarios"},
+            {field: "telefono", header: "Telefono"},
+            {field: "email", header: "Email"},
+            {field: "direccion", header: "Direccion"},
+            {field: "personaContacto", header: "Contacto"},
+            {field: "estado", header: "Estado Cliente"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+            
+        ],
+        sorting: [
+            {sortingName: "Nombre", field: "nombre", order: "ascending"},
+            {sortingName: "Tipo Documento", field: "tipoDocumento", order: "none"},
+            {sortingName: "Documento", field: "documento", order: "none"},
+            {sortingName: "Vigencia", field: "vigencia", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "Nombre", "filterType": "text", field: "nombre", filterLabel: "Nombre",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Tipo Documento", "filterType": "text", field: "tipoDocumento", filterLabel: "Tipo Documento",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Documento", "filterType": "text", field: "documento", filterLabel: "Documento",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Numero Contrato", "filterType": "text", field: "numeroContrato", filterLabel: "Numero Contrato",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Numero Codigo", "filterType": "text", field: "numeroCodigo", filterLabel: "Numero Codigo",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Vigencia", "filterType": "text", field: "vigencia", filterLabel: "Vigencia",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Sedes", "filterType": "text", field: "sedes", filterLabel: "Sedes",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Insumos", "filterType": "text", field: "insumos", filterLabel: "Insumos",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Cant Operarios", "filterType": "text", field: "cantidadOperarios", filterLabel: "Cantidad Operarios",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Telefono", "filterType": "text", field: "telefono", filterLabel: "Telefono",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Correo Electronico", "filterType": "text", field: "email", filterLabel: "Correo Electronico",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Direccion", "filterType": "text", field: "direccion", filterLabel: "Direccion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Contacto", "filterType": "text", field: "personaContacto", filterLabel: "Contacto",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                }
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 800,
+		fitToView	: true,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verCliente(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=Clientes&method=verCliente',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarCliente(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=Clientes&method=agregarCliente&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function editarCliente(id){
+
+	$.ajax({
+		url:'index_blank.php?component=Clientes&method=editarCliente',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function eliminarCliente(id, nombre){
+	//if(confirm('Realmente desea eliminar el Cliente '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=Clientes&method=eliminarCliente&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Cliente ' +nombre+ ' Eliminado');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	//}
+}
+
+
+		</script>

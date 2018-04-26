@@ -1,0 +1,172 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaGeo">    
+    <div id="Geo"></div>
+</table>
+
+<script>
+
+
+$(function() {
+ 
+    $("#Geo").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=Geo&method=ajaxListaGeo&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            
+            {field: "id", header: "Id Microzona"},
+            {field: "idCiudad", header: "Id Ciudad", visible: "no"},
+            {field: "idMunicipio", header: "Id Municipio", visible: "no"},
+            {field: "ciudad", header: "Ciudad"},
+            {field: "nombreMunicipio", header: "Municipio"},
+            {field: "CodigoDane", header: "Codigo Dane"},
+            {field: "nic", header: "Nic Meiko"},
+            {field: "nicDane", header: "Nic Dane"},
+            {field: "areaKm", header: "Area Kilometros Cuadrados"},
+            {field: "nombreLocalidad", header: "Localidad"},
+            {field: "nombreSubLocalidad", header: "SubLocalidad"},
+            {field: "idLocalidad", header: "Id Localidad", visible: "no"},
+            {field: "idSubLocalidad", header: "Id Sublocalidad", visible: "no"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}        
+        ],
+        sorting: [
+            {sortingName: "Id Ciudad", field: "idCiudad", order: "ascending"}
+           
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "Id Microzona", "filterType": "number", field: "id", filterLabel: "Id Microzona",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "NombreCiudad", "filterType": "text", field: "ciudad", filterLabel: "Ciudad",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "NombreMunicipio", "filterType": "text", field: "nombreMunicipio", filterLabel: "Municipio",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "CodigoDane", "filterType": "number", field: "CodigoDane", filterLabel: "Codigo Dane",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "nic", "filterType": "text", field: "nic", filterLabel: "Nic Meiko",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "nicDane", "filterType": "text", field: "nicDane", filterLabel: "Nic Dane",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "areaKm", "filterType": "text", field: "areaKm", filterLabel: "Area Kilometros Cuadrados",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "nombreLocalidad", "filterType": "text", field: "nombreLocalidad", filterLabel: "Localidad",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "nombreSubLocalidad", "filterType": "text", field: "nombreSubLocalidad", filterLabel: "SubLocalidad",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                }
+                 ]
+               }
+             });
+    } );
+    
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 800,
+		fitToView	: true,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verGeo(id){
+	$.ajax({
+		url:'index_blank.php?component=Geo&method=verGeo',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarGeo(id){
+	$.ajax({
+		url:'index_blank.php?component=Geo&method=agregarGeo&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function editarGeo(id){
+
+	$.ajax({
+		url:'index_blank.php?component=Geo&method=editarGeo',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+</script>

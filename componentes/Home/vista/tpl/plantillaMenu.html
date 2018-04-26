@@ -1,0 +1,31 @@
+{{COMODIN}}
+<ul id="main-menu" class="sm sm-mint">
+    {{lista_menu|raw}}
+    
+    
+</ul>
+
+<script>
+$(function() {
+		$('#main-menu').smartmenus({
+			subMenusSubOffsetX: 6,
+			subMenusSubOffsetY: -8
+		});
+	});
+
+
+function contenido(url, component, method,opciones ){
+  
+    $.ajax({
+        type: "POST",
+		 url: url,
+	    data:'component=' + component + '&method=' + method + '&' + opciones ,
+	    success: function(msm){
+            $('#componenteCentral').html(msm);
+	     }
+    });
+}
+
+
+
+</script>

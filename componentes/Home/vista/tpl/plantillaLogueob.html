@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <title>MEIKO</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />    
+
+        
+
+    <!-- Estilos Generales del aplicativo -->
+
+    <link href="css/styles.css" rel="stylesheet" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    
+
+    <!-- Posibilita usar Jquery -->
+
+    <script type="text/javascript" src="libraries/javascript/jquery.js"></script>
+
+    
+
+    <!-- Validadores campos de formulario del aplicativo-->
+
+    <script src="libraries/javascript/validacion/jquery.validate.js" type="text/javascript"></script>
+
+    
+
+</head>
+
+
+
+<body style="background-color:#f7f7f7; background-image: url(images/imagesLogin/fonLogin.jpg);">    
+
+    <form name="envio_datos" id="envio_datos" method="post" action="javascript:EnviarFormulario()">
+
+	    <table id="tablaLayout" cellpadding="0" cellspacing="0">
+
+	    	<tr>
+
+	    		<td class="backgroundSuperior">
+
+	    			<table id="tablaLogin" cellpadding="0" cellspacing="0">
+
+	    				<tr>
+
+				    		<td colspan="3" align="center"><div id="error_ingreso"></div></td>
+
+				    	</tr>
+
+	    				<tr>
+
+	    					<td class="leftLogin">&nbsp;</td>
+
+	    					<td class="centerLogin">
+
+	    						<table width="378px" border="0" align="center" cellpadding="0" cellspacing="0">
+
+	    							<tr>
+
+	    								<td class="textoLogin">Usuario:</td>
+
+	    								<td><input type="text" class="fondoInput " name="usuario" id="usuario" /></td>
+
+	    							</tr>
+
+	    							<tr>
+
+                                                                    <td class="textoLogin">Contrase&ntilde;a:</td>
+
+	    								<td><input type="password" class="fondoInput " name="clave" id="clave" /></td>
+
+	    							</tr>
+
+	    							<tr>
+
+	    								<td class="ubicacionEnviar" colspan="2">
+
+											<input type="submit"  class="botonGeneralGrande" value="Ingresar" />
+
+	    								</td>
+
+	    							</tr>
+
+	    							<tr>
+
+	    								<td colspan="2" height="50px" class="copyright">
+
+	    									(c) Derechos Reservados Meiko 2015 (v1.0)
+
+	    								</td>
+
+	    							</tr>
+
+	    						</table>
+
+	    					</td>
+
+	    					<td class="rightLogin">&nbsp;</td>
+
+	    				</tr>
+
+	    			</table>
+
+	    		</td>
+
+	    	</tr>
+
+	    	<tr class="backgroundInferior">
+
+	    		<td height="160px"></td>
+
+	    	</tr>
+
+	    </table>
+
+	    <input type="hidden" name="component" id="component" value="AccederSistema" />
+
+        <input type="hidden" name="method" id="method" value="validarLogueoUsuario" />
+
+    </form>
+
+</body>
+
+
+
+<script>
+
+	$(document).ready(function(){
+
+	    $(document).ajaxStart(function(){
+
+	        $('#imgCargando').css('visibility','visible');
+
+	    })
+
+	    .ajaxStop(function() {
+
+	        $('#imgCargando').css('visibility','hidden');
+
+	    });
+
+	});
+
+	
+
+	$().ready(function(){
+
+	    $("#envio_datos").validate();
+
+	});
+
+	        
+
+	function EnviarFormulario(){            
+
+                       
+
+	    $.ajax({
+
+	        url: "index_blank.php",
+
+	        type: 'POST',
+
+	        data:$('#envio_datos').serialize(),
+
+	        success:function(msm){
+
+	            switch(msm){
+
+	                case 'faltante':
+
+	                    $('#error_ingreso').html(" * Debe ingresar usuario y clave para continuar.");
+
+	                    break;
+
+	                case 'error':
+
+	                    $('#error_ingreso').html(" * Error de acceso, por favor verifique sus datos.");
+
+	                    break;
+
+                        case 'inactivo':
+
+	                    $('#error_ingreso').html(" * El usuario esta inactivo, contacte al Administrador del sistema.");
+
+	                    break;
+
+                        case 'intento':
+
+                           $('#error_ingreso').html(" * Ha excedido el numero de intentos, contacte al Administrador del sistema.");
+
+                           break;
+
+	                case 'logueado':
+
+                            direccionarLogueado();
+
+	                    break;
+
+	                default : 
+
+	                	$('#error_ingreso').html(msm);
+
+	            		break;
+
+	            }
+
+	        }
+
+	    });
+
+	}
+
+	
+
+	function direccionarLogueado(){
+
+		window.location = "";
+
+	}
+
+</script>
+
+</html>

@@ -1,0 +1,114 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+	<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="2">{{titulo_tabla|raw}}</td>
+		</tr>
+		<tr>
+			<td width="30%" class="tituloAlineado">Nombre </td>
+			<td><input class="required inputGeneral" type="text" name="nombre" id="nombre" value="{{datosCliente.nombre}}" /></td>
+		</tr>
+                
+                <tr>
+			<td class="tituloAlineado">Tipo Documento </td>
+                        <td>
+                            <div class="ui-widget">
+                                  <select class="combobox required" name="tipoDocumento" id="tipoDocumento">{{select_tipoDoc|raw}}</select>
+                            </div>
+                        </td>
+			
+		</tr>
+		
+		<tr>
+                    <td class="tituloAlineado">Documento </td>
+			<td><input class="required inputGeneral" type="text" name="documento" id="documento" value="{{datosCliente.documento}}" /></td>
+		</tr>
+                
+                <tr>
+                    <td class="tituloAlineado">Numero Contrato </td>
+			<td><input class="required inputGeneral" type="text" name="numeroContrato" id="numeroContrato" value="{{datosCliente.numeroContrato}}" /></td>
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Numero Codigo </td>
+			<td><input class="required inputGeneral" type="text" name="numeroCodigo" id="numeroCodigo" value="{{datosCliente.numeroCodigo}}" /></td>
+		</tr>
+                 <tr>
+			<td class="tituloAlineado">Vigencia </td>
+			<td><input class="required inputGeneral" type="text" name="vigencia" id="vigencia" value="{{datosCliente.vigencia}}" /></td> 
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Sedes </td>
+			<td><input class="required inputGeneral" type="text" name="sedes" id="sedes" value="{{datosCliente.sedes}}" /></td> 
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Insumos </td>
+                          <td><input class="required inputGeneral" type="text" name="insumos" id="insumos" value="{{datosCliente.insumos}}" /></td>
+                           
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Cantidad Operarios </td>
+                          <td><input class="required inputGeneral" type="text" name="cantidadOperarios" id="cantidadOperarios" value="{{datosCliente.cantidadOperarios}}" /></td>
+                           
+		</tr>
+                 <tr>
+                    <td class="tituloAlineado">Telefono </td>
+                          <td><input class="required inputGeneral" type="text" name="telefono" id="telefono" value="{{datosCliente.telefono}}" /></td>
+                           
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Email </td>
+                          <td><input class="required inputGeneral" type="text" name="email" id="email" value="{{datosCliente.email}}" /></td>
+                           
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Direccion </td>
+                          <td><input class="required inputGeneral" type="text" name="direccion" id="direccion" value="{{datosCliente.direccion}}" /></td>
+                           
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Contacto </td>
+                          <td><input class="required inputGeneral" type="text" name="personaContacto" id="personaContacto" value="{{datosCliente.personaContacto}}" /></td>
+                           
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Estado </td>
+                        <td>
+                            <div class="ui-widget">
+                                  <select class="combobox required" name="estado" id="estado">{{select_estado|raw}}</select>
+                            </div>
+                        </td>
+			
+		</tr>
+		
+	</table>
+        <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+        </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Cliente" />
+	</div>
+	<input type="hidden" name="id" id="id" value="{{datosCliente.id}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();                
+	});
+        
+	
+
+	function EnviarFormulario(){
+		
+					$.ajax({
+						url:'index_blank.php?component=Clientes&method=guardarCliente',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+						success: function (msm){
+							jQuery.fancybox.close();
+							$('#componenteCentral').html(msm);
+						}
+					});
+				}
+	
+</script>

@@ -1,0 +1,299 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td>{{titulo|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        
+    </table>
+</div>
+
+
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <!-- INFORMACION DEL ASESOR-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N ASESOR</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Creaci&oacute;n</td>
+            <td>{{datosOfertaEconomica.fechaSis}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosUsuario.nombreUsuario}} </td>
+            
+        </tr>
+        
+    </table>
+    <br>
+    
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <!-- INFORMACION DEL CLIENTE-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N PROPONENTE</th>
+        </tr>
+        <tr>
+            <td width="13%" class="tituloAlineado">Fecha Creaci&oacute;n Proponente</td>
+            <td width="13%">{{datosOfertaEconomica.fechaSis}}</td>
+            
+            <td width="13%" class="tituloAlineado">Nombre Proponente </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="idCliente" id="idCliente" {{datosOfertaEconomica.cliOfeDisabled}}>{{select_cli_ofe|raw}}</select>
+                </div>                            
+            </td>
+            
+             <td width="13%" class="tituloAlineado">Regiones </td>
+               <td>
+                 <div class="ui-widget">
+                   <select class="required" name="region" id="region" >{{select_estado_pro|raw}}</select>
+                 </div>                            
+               </td>
+            
+        </tr>
+        
+    </table>
+    <br>
+    <table id="AIU" class="tablaGeneral" border="1" align="center">
+                <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">FORMATOS DE MEDICI&Oacute;N</th>
+                    </tr>
+                    <tr>
+                        <td width="1" class="tituloAlineado" id="columna_No">No.</td>
+                        <td width="1" class="tituloAlineado" id="columna_BiOser">Bien o Servicio</td>
+                        <td width="1" class="tituloAlineado" id="colAcciones">Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for ofertaEconomica in OfertaEconomica %}
+                  <tr id="fila_{{ loop.index }}">
+                    <td id="numFila_{{ loop.index }}">{{ loop.index }}
+                        <input type="hidden" name="id_{{ loop.index }}" id="id_{{ loop.index }}" value="{{ofertaEconomica.id}}" />
+                        <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{ofertaEconomica.disabled}}" />
+                   </td> 
+                    <td id="reg_bienServ_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="bienServ_{{ loop.index }}" id="bienServ_{{ loop.index }}">{{ofertaEconomica.select_bienServ|raw}}</select>
+                        </div> 
+                    </td>
+                    <td id="reg_acciones_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFilaAIU()" title="Agregar Fila AIU"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if ofertaEconomica.disabled != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFilaAIU('{{ loop.index }}')" title="Eliminar Fila AIU"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+    <br>
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+    <div style="padding-top: 20px; text-align: right; width: 100%">          
+        <input type="submit" class="botonGeneralGrande" value="Guardar Job Order" />
+    </div>
+    <input type="hidden" name="id" id="id" value="{{datosResumenJob.id}}" />
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idAsesor" id="idAsesor" value="{{datosResumenJob.idAsesor}}" />
+    <input type="hidden" name="cantFilas" id="cantFilas" value="1" />
+    <input type="hidden" name="varFrecuencia" id="varFrecuencia" value="{{formatosMedicion.select_frecuencia}}" />
+    
+</form>
+<script>
+    var arregloFrecuencia = [];    
+    
+    $().ready(function(){
+    
+        {% for ofertaEconomica in OfertaEconomica %}
+        
+            $("#bienServ_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            
+        {% endfor %}
+        
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })       
+        $("#envioDatos").validate({ rules: {chosen:"required"} });
+        
+    });
+       
+    $(function() {
+        $("#fecha").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+    });
+    
+    $("#idCliente").chosen().change(function() {
+        var arreglo = new Array;
+        var idCliente = this.value;
+        
+        if (!!idCliente){
+          $.ajax({
+            url:'index_blank.php?component=JobOrder&method=consultarCliente',
+                    type: "POST",
+                    data:'idCliente=' + idCliente,
+                    success: function (msm){
+                    arreglo = msm;
+                            data = JSON.parse(msm);
+                            $("#nomcontCliente").html(data.contacto);
+                            $("#telCliente").html(data.telefono);
+                            $("#emailCliente").html(data.email);
+                            $("#nomfactCliente").html(data.nombreContactoFacturacion);
+                            $("#telfactCliente").html(data.telefonoFacturacion);
+                            $("#emailfactCliente").html(data.emailFacturacion);
+                    }
+            });  
+        }
+        else{
+            $("#nomcontCliente").html('');
+            $("#telCliente").html('');
+            $("#emailCliente").html('');
+            $("#nomfactCliente").html('');
+            $("#telfactCliente").html('');
+            $("#emailfactCliente").html('');
+        }        
+    });
+    
+    function regresar(){
+        $.ajax({
+        url:'index_blank.php?component=OfertaEconomica&method=mostrarOfertaEconomica&idMenu=' + {{idMenu}},
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+        });
+    }
+
+    function agregarFilaAIU(){
+        var n = $('tr:last td', $("#AIU")).length;
+        var j = $('#AIU >tbody >tr').length + 1;
+        var tds = '';
+        var $objTabla=$('#AIU');
+        var iTotalColumnasExistentes=$('#AIU thead tr th').length;
+        var ant = j-1;
+        var tdIdAnt;
+        var cantFilas = $('#cantFilas').val();
+        
+        if(cantFilas>=j){       
+            j = parseInt(cantFilas) + 1;
+        }
+        $('#cantFilas').val(j);
+       
+        var selBienServ = "{{select_bienServ|escape('js')}}";
+        
+        tdIdAnt = $objTabla.find('td:last').attr('id');
+        tdIdAnt = tdIdAnt.replace('reg_acciones_','');
+        //alert(tdIdAnt);
+               
+        //$objTabla.find('td:last').html('&nbsp;');
+        tds +='<tr id="fila_'+j+'">';
+        
+        tds += '<td id="numFila_'+j+'">'+j+'</td>';
+        tds += '<td id="reg_bienServ_'+j+'" width="10"><div class="ui-widget"><select class="required" name="bienServ_'+j+'" id="bienServ_'+j+'">'+selBienServ+'</select></div></td>';
+        tds += '<td id="reg_acciones_'+ j +'"><button type="button" class="btn btn-link" onclick="agregarFilaAIU()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button> <button type="button" class="btn btn-link" onclick="eliminarFilaAIU('+j+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        tds += '</tr>';
+        $("#AIU").append(tds);
+        
+        $("#reg_bienServ_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        
+        
+        valDisable = $('#disable_' + tdIdAnt).val();
+        if(valDisable == 'disabled'){
+            $("#reg_acciones_"+tdIdAnt).html('')
+        }else{
+            $("#reg_acciones_"+tdIdAnt).html('<button type="button" class="btn btn-link" onclick="eliminarFilaAIU('+tdIdAnt+')" title="Eliminar Fila AIU"><span class="glyphicon glyphicon-minus"></span> </button>');
+        }
+        //$("#cat_1").replaceAll("#cat_"+j);
+        
+        //$("#listaJobs").html('Acciones');
+    }
+    
+    function eliminarFilaAIU(pos){
+        var $objTabla=$('#AIU');
+        var j = $('#AIU >tbody >tr').length;
+        var tdVal = '';
+      
+        $("#fila_"+pos).remove();
+        //alert(j);
+       
+        tdVal = $objTabla.find('td:last').html();
+        //alert(tdVal.length);
+        ant = j -1;
+        valDisable = $('#disable_' + ant).val();
+        //alert(valDisable);
+        if (j>2){
+            if(tdVal.length<150){
+                if(valDisable == 'disabled'){
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaAIU()" title="Agregar Fila AIU"><span class="glyphicon glyphicon-plus"></span>';
+                }else{
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaAIU()" title="Agregar Fila AIU"><span class="glyphicon glyphicon-plus"></span>' + tdVal;
+                }
+            }
+        }else{
+            tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+        }
+       $objTabla.find('td:last').html(tdVal);
+    }
+        
+    function EnviarFormulario(){
+		
+	$.ajax({
+		url:'index_blank.php?component=OfertaEconomica&method=guardarOfertaEconomica',
+		type: "POST",
+		data:$('#envioDatos').serialize(),
+		success: function (msm){
+                    jQuery.fancybox.close();
+                    $('#componenteCentral').html(msm);
+		}
+            });
+    }
+
+    function EnviarFormulario(){ 
+        var tdId;
+        var formatosMedicion = [];        
+        
+        $('#AIU > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            formatosMedicion.push({
+                id : $("#id_"+tdId).val(),
+                categoria : $("#cat_"+tdId).val(),
+                canal : $("#canal_"+tdId).chosen().val(),
+                anio : $("#anio_"+tdId).val(),
+                ciclo : $("#ciclo_"+tdId).val(),
+                tipoEstudio : $("#estudio_"+tdId).val(),
+                frecuencia : $("#frecuencia_"+tdId).val(),
+                cantFrecuencia : $("#cantFrecuencia_"+tdId).val(),
+                areaMet : $("#met_"+tdId).chosen().val(),
+                municipio : $("#ciu_"+tdId).chosen().val(),
+                herencia : $("#herencia_"+tdId).chosen().val(),
+            });            
+        });
+        
+        formatosMedicion = JSON.stringify(formatosMedicion);        
+      if(confirm('Realmente desea Guardar el Resumen Job?')){ 
+        $.ajax({
+            url:'index_blank.php?component=JobOrder&method=guardarOrden',
+                    type: "POST",
+                    data:$('#envioDatos').serialize() + '&formatosMedicion='+formatosMedicion,
+                    success: function (msm){
+                    alert('Resumen Job Guardado');    
+                    //$('#obsGenerales').html(msm);                        
+                    $('#componenteCentral').html(msm);
+                    }
+        });
+      }  
+    }        
+
+</script>

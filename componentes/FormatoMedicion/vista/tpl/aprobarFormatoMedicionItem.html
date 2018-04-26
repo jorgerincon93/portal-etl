@@ -1,0 +1,292 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td>{{titulo|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"> {{datosFormatoMedicion.titulo}}</td>
+        </tr>
+    </table>
+</div>
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td width="3%" class="tituloAlineado">Consecutivo Formato Medicion</td>
+            <td><p id="nomcontCliente">{{datosFormatoMedicion.id}}</p></td>
+            <td width="3%" class="tituloAlineado">Consecutivo Resumen Job</td>
+            <td><p id="nomcontCliente">{{datosResumenJob.id}}</p></td>
+            <td width="10%" class="tituloAlineado">Fecha </td>
+            <td><p id="nomcontCliente">{{datosResumenJob.fechaSis}}</p></td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosUsuario.nombre}} </td>
+        </tr>
+    </table>   
+    <br>    
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACIÓN DEL CLIENTE</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Cliente </td>
+            <td><p id="nomcontCliente">{{datosCliente.nombre}}</p></td>
+            <td width="30%" class="tituloAlineado">Nombre Contacto Cliente </td>
+            <td><p id="nomcontCliente">{{datosCliente.contacto}}</p></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Telefono Cliente </td>
+            <td><p id="telCliente">{{datosCliente.telefono}}</p></td>
+            <td width="30%" class="tituloAlineado">Email </td>
+            <td><p id="emailCliente">{{datosCliente.email}}</p></td>
+        </tr>        
+    </table>   
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACIÓN RESUMEN JOB ORDER</th>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Area Metropolitana </td>
+            <td>
+                <p id="areaMet">{{datosFormatoMedicion.areaMet}}</p>
+            </td>
+            <td class="tituloAlineado">Municipios </td>
+            <td>
+                <p id="mun">{{datosFormatoMedicion.municipio}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Tendencia </td>
+            <td>{{datosFormatoMedicion.tendencia}}</td>
+            <td  width="1%" class="tituloAlineado">Observaciones Tendencia </td>
+            <td>{{datosFormatoMedicion.observacionesTendencia}}</td>
+          <!--  <td class="tituloAlineado">Seleccionar Tendencia </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="tipoTendencia" id="tipoTendencia" {{attr_disabled}} >{{select_tipoTendencia|raw}}</select>
+                </div> 
+            </td>-->
+        </tr>      
+        <tr>
+            <td class="tituloAlineado">Ciclo </td>
+            <td>{{datosFormatoMedicion.ciclo}}</td>
+            <td class="tituloAlineado">A&ntilde;o </td>
+            <td>{{datosFormatoMedicion.anio}}</td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Estudio </td>
+            <td>{{datosFormatoMedicion.tipoEstudio}}</td>
+            <td class="tituloAlineado">Categoria </td>
+            <td> {{datosFormatoMedicion.nombreCategoria}}
+            </td>
+        </tr>
+    </table>
+    <br>    
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td class="tituloAlineado">Geo Segmentacion </td>
+            <td>
+                {{datosFormatoMedicion.geosegmentacion}}
+            </td>
+            <td  width="1%" class="tituloAlineado">Observaciones Geomatica</td>
+            <td>{{datosFormatoMedicion.observacionesGeomatica}}</td>
+        </tr>
+        <tr>
+           <td class="tituloAlineado">Anexa Tipifacion </td>
+            <td>{{datosFormatoMedicion.anexaTipificacion}}</td>
+            <td  width="1%" class="tituloAlineado">URL Tipifacion </td>
+            <td>{{datosFormatoMedicion.urlTipificacion}}</td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado" colspan="2">Canales</td>
+            <td colspan="2">{{datosFormatoMedicion.canal}}
+            </td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado" colspan="2">Variables de Medicion</td>
+            <td colspan="2">
+                {{datosFormatoMedicion.varMedicion}}
+            </td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado" colspan="2">Variables Especiales de Analisis</td>
+            <td colspan="2">
+                {{datosFormatoMedicion.varMedicionEspecial}}
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th style="text-align: center">FORMATO MEDICIÓN</th>
+        </tr>
+    </table>
+        <table id="tablaMedicion" class="tablaGeneral" border="1">
+                <thead>
+                    <tr>
+                        <th width="10" id="Numero_Fila">#</th>
+                        <th width="100" id="columna_1">Categoria</th>
+                        <th width="100" id="columna_2">Fabricante</th>
+                        <th width="100" id="columna_3">Marca</th>
+                        {% if contColumnas > 3 %}
+                            {% for j in 4..contColumnas %}
+
+                            <th width="100" id="columna_{{ j }}">                                    
+                                {{columnasFormato[j-1].valor}}
+                            </th>
+                            {% endfor %}
+                        {% endif %}                        
+                        {% for varsMedicion in varMedicion %}
+                            <th style="text-align: center" id="columna_{{varsMedicion.valor}}">{{varsMedicion.nombre}}</th>
+                        {% endfor %}
+                        <th width="100" style="text-align: center;" id="columna_aproba">Rechazar</th>
+                        <th width="100" style="text-align: center;" id="columna_obs">Observaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for i in 1..cantFilas %}
+                  <tr id="fila_{{ i }}">
+                      <td id="numero_{{ i }}">{{ i }}</td>
+                      {% for j in 1..contColumnas %}
+                      {% if i == 1 and j == 1 %}
+                        <td id="reg_{{ i }}_{{ j }}"><input type="hidden" name="input_1_1" id="input_1_1" value="{{ matriz[i][j].valor }}" /> <input type ="hidden" name="herencia_1_1" id="herencia_1_1" value="{{ matriz[i][j].herencia }}" />{{datosFormatoMedicion.nombreCategoria}} </td>
+                      {% else %}
+                        {% if matriz[i][j].valor is defined %}
+                            <td id="reg_{{ i }}_{{ j }}">{{matriz[i][j].valor}}</td>
+                        {% else %}
+                            <td id="reg_{{ i }}_{{ j }}">&nbsp;</td>
+                        {% endif %}
+                      {% endif%}
+                      {% endfor %}
+                      
+                      {% for varsMedicion in varMedicion %}
+                            {% if matriz[i][varsMedicion.valor] == "Si" %}
+                                <td id="reg_{{ i }}_{{varsMedicion.valor}}" align="center">{{matriz[i][varsMedicion.valor]}}</td>
+                            {% else %}
+                                <td id="reg_{{ i }}_{{varsMedicion.valor}}" align="center">&nbsp;</td>
+                            {% endif %}
+                      {% endfor %}
+                      <td id="reg_{{ i }}_rechazar" align="center"><input type="checkbox" name="input_{{ i }}_rechazar" id="input_{{ i }}_rechazar" value="SI" onclick="mostrarObs({{i}})"></td>
+                      <td id="reg_{{ i }}_obsRechazo">&nbsp;</td>                      
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+    <br>
+    <table id="tablaVarEspeciales" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" >
+        <tr>
+            <th colspan="2" style="text-align: center">VARIABLES ESPECIALES DE AN&Aacute;LISIS</th>
+        </tr>
+        {% for varEsps in datosFormatoMedicion.variablesEspeciales %}
+        <tr id="fila_{{loop.index}}">
+            <td class="tituloAlineado">{{varEsps.nombre}}</td>
+            <td>{{varEsps.valorRegistro}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="2" style="text-align: center">OBSERVACIONES</th>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Observaciones Generales </td>
+            <td>{{datosFormatoMedicion.observacionesGenerales}}</td>
+        </tr>       
+    </table>    
+    
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th style="text-align: center">OBSERVACIONES RECHAZO/APROBACION</th>
+        </tr>
+        <tr>            
+            <td align="center"><textarea class="required" rows="4" cols="50" name="obsAprobacion" id="obsAprobacion"></textarea></td>
+        </tr>       
+    </table>    
+    
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+    <div style="padding-top: 20px; text-align: right; width: 100%">
+        <input type="button" class="botonGeneralGrande" value="Aprobar Formato" onclick="aprobarFormato();" />
+        <input type="button" class="botonGeneralGrande" value="Rechazar Formato" onclick="rechazarFormato();" />        
+    </div>
+    <input type="hidden" name="id" id="id" value="{{datosFormatoMedicion.id}}" />
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idAsesor" id="idAsesor" value="{{datosResumenJob.idUsuario}}" />
+    <input type="hidden" name="resAprobar" id="resAprobar" value="" />
+    <input type="hidden" name="cantFilas" id="cantFilas" value="" />
+    
+</form>
+<script>
+    //////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                  //
+    //                              FUNCIONES BASICAS                                   //
+    //                                                                                  //
+    //////////////////////////////////////////////////////////////////////////////////////
+    
+    $().ready(function(){
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })       
+        $("#envioDatos").validate({ rules: {chosen:"required"} });
+    });
+    
+    function mostrarObs(fila){
+        
+        if($("#input_" + fila + "_rechazar").prop('checked')){
+            $("#reg_" + fila + "_obsRechazo").html('<textarea class="required" rows="1" cols="30" name="obs_'+ fila +'_rechazo" id="obs_'+ fila +'_rechazo"></textarea>')
+        }else{
+            $("#reg_" + fila + "_obsRechazo").html('&nbsp;')
+        }        
+    }
+    
+    function aprobarFormato(){
+        if(confirm('¿Esta seguro de Aprobar el Formato?')){
+            $("#resAprobar").val("Aprobar");
+            $("#envioDatos").submit();
+        }
+    }
+    function rechazarFormato(){
+        if(confirm('¿Esta seguro de Rechazar el Formato?\nSe devolvera el estado a En Desarrollo...')){
+            $("#resAprobar").val("Rechazar");
+            $("#envioDatos").submit();
+        }
+    }
+    
+    function regresar(){
+        $.ajax({
+        url:'index_blank.php?component=FormatoMedicion&method=mostrarFormatoMedicion&idMenu=' + {{idMenu}},
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+        });
+    }
+
+    function EnviarFormulario(){        
+        //geoSegmentacion_array = $("#geoSegmentacion").chosen().val();
+        //areaMet_array = $("#areaMet").chosen().val();
+        //municipio_array = $("#municipio").chosen().val();
+    
+        //alert("entra a envio");
+    
+        
+        //geoSegmentacion_array = $("#geoSegmentacion").chosen().val();
+        //areaMet_array = $("#areaMet").chosen().val();
+        //municipio_array = $("#municipio").chosen().val();
+    
+        $.ajax({
+            url:'index_blank.php?component=FormatoMedicion&method=aprobarFormatoProcesoItem',
+                    type: "POST",
+                    data:$('#envioDatos').serialize(),
+                    success: function (msm){
+                        $('#componenteCentral').html(msm);
+                        //$('#obsAprobacion').val(msm);
+                    
+                    }
+        });
+    }
+    
+</script>

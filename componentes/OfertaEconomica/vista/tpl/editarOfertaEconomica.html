@@ -1,0 +1,1510 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td>{{titulo_tabla|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        
+    </table>
+</div>
+
+
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <!-- INFORMACION DEL ASESOR-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N ASESOR</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Creaci&oacute;n</td>
+            <td>{{datosOfertaEconomica.fechaSis}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosOfertaEconomica.asesor}} </td>
+            
+        </tr>
+        
+    </table>
+    <br>
+    
+    <table id="infoCliente" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <!-- INFORMACION DEL CLIENTE-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N PROPONENTE</th>
+        </tr>
+        <tr>
+           <!-- <td width="13%" class="tituloAlineado">Fecha Creaci&oacute;n Proponente</td>
+            <td width="13%">{{datosOfertaEconomica.fechaSis}}</td>-->
+            
+            <td width="13%" class="tituloAlineado">Nombre Proponente </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="idCliente" id="idCliente" >{{select_cli_ofe|raw}}</select>
+                </div>                            
+            </td>
+            <td width="30%" class="tituloAlineado">Valor Contrato </td>
+            <td>$<input class="required number" type="text" size="30" name="valorContra" id="valorContra" value="{{datosOfertaEconomica.valorContrato}}" /></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Numero Contrato </td>
+            <td><input class="required" type="text" name="numContra" id="numContra" value="{{datosOfertaEconomica.numeroContrato}}" /></td>
+            
+            <td width="30%" class="tituloAlineado">Numero Contrato Interno</td>
+            <td><input class="required" type="text" name="numContraInte" id="numContraInte" value="{{datosOfertaEconomica.numeroContratoInterno}}" /></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Inicio</td>
+            <td>
+                <input class="required" type='text' name="feIni" id="feIni" value="{{datosOfertaEconomica.fechaInicio}}" class="datepicker-here" data-position="left top" data-language='en'  />
+            </td>
+            <td width="30%" class="tituloAlineado">Fecha Fin</td>
+            <td>
+                <input class="required" type='text' name="feFin" id="feFin" value="{{datosOfertaEconomica.fechaFin}}" class="datepicker-here" data-position="left top" data-language='en'/>
+                <!--<input class="required number" type="text" name="feFin" id="feFin" value="{{datosOfertaEconomica.fechaFin}}" />-->
+            </td>    
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Acta Liquidacion </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="actLiqui" id="actLiqui">{{select_act_liqui|raw}}</select>
+                </div> 
+            </td>
+            <td class="tituloAlineado">Certificacion </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="certi" id="certi">{{select_certi|raw}}</select>
+                </div> 
+            </td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Tipo Servicio </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="tipoServ" id="tipoServ">{{select_tipo_serv|raw}}</select>
+                </div> 
+            </td>
+        </tr>
+        
+    </table>
+    <!--<table id="tablaReg" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta" style="display: none;">
+        
+        <tr id="filaReg_">
+            <th colspan="2" style="text-align: center">REGIONES SELECCIONADAS</th>
+        </tr>
+        
+    </table>-->
+    <table id="AIU" class="tablaOferta" align="center" width="100%" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">OFERTA ECONOMICA</th>
+                    </tr>
+                    <tr>
+                        <th colspan="9" style="text-align: center">1. SERVICIOS ESPECIALES</th>
+                    </tr>
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                        <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                        <td width="100" id="columna_cantidad" class="tituloAlineado">Cantidad</td>
+                        <td width="100" id="columna_reg_sel" class="tituloAlineado">Ciudad</td>
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                        <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                        <td width="180" id="columna_total_est_can" class="tituloAlineado">Estado Cantidad</td>
+                        <td width="100" id="columna_iva" class="tituloAlineado">IVA</td>
+                        <td width="100" id="colAcciones" class="tituloAlineado">Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for ofertaEconomicaAIU in OfertaEconomicaAIU %}
+                  <tr id="fila_{{ loop.index }}">
+                    <td id="numFila_{{ loop.index }}">{{ loop.index }}
+                        <input type="hidden" name="idOfe" id="idOfe" value="{{ofertaEconomicaAIU.idOfertaEconomica}}" />
+                        <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{ofertaEconomicaAIU.disabled}}" />
+                        <input type="hidden" name="idAIU" id="idAIU" value="{{ofertaEconomicaAIU.IdDetOfe}}" />
+                   </td>
+                    <td id="reg_BienServ_{{ loop.index }}" width="1">
+                        <div class="ui-widget">
+                            <select class="required" name="bienServ_{{ loop.index }}" id="bienServ_{{ loop.index }}">{{ofertaEconomicaAIU.select_bienServ|raw}}</select>
+                           <!-- <input type="hidden" name="id_{{ loop.index }}" id="id_{{ loop.index }}" value="{{ofertaEconomica.id}}" />
+                            <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{ofertaEconomica.disabled}}" />-->
+                        </div> 
+                    </td>
+                    <td id ="reg_fila_cant_{{ loop.index }}">
+                        <input type="text" name="cant_{{ loop.index }}" id="cant_{{ loop.index }}" value="{{ofertaEconomicaAIU.cantidadAIU}}"> <!--onBlur="validarCantidadAIU();">-->
+                        <div id="resCantidad_{{ loop.index }}"> </div>
+                    </td>
+                    <!--traerPrecioAIU(); onchange="setTimeout('multiplicarCantValorUniAIU()',300)"-->
+                    <td id ="reg_fila_sel_{{ loop.index }}">
+                            <div class="ui-widget">
+                                <select class="required"  name="region_{{ loop.index }}" id="sel_reg_{{ loop.index }}">{{ofertaEconomicaAIU.select_reg_aiu|raw}}</select>
+                            </div> 
+                    </td>
+                    <!--id="sel_reg"-->
+                    <td id ="reg_fila_prec_{{ loop.index }}">
+                        $<input class="required" type="text" name="fila_region_{{ loop.index }}" id="fila_region_{{ loop.index }}" value="{{ofertaEconomicaAIU.precioUnidad}}" onBlur="multiplicarCantValorUniAIU()"/>
+                    </td>  
+                    <td id ="reg_fila_total_pre_aiu{{ loop.index }}">
+                        $<input class="required number" type="text" name="fila_region_total_{{ loop.index }}" id="fila_region_total_{{ loop.index }}" value="{{ofertaEconomicaAIU.precioUniTotalAIU}}"/>
+                    </td>  
+                    <td> {{ofertaEconomicaAIU.estadoCanAIU}} </td>
+                    <td>
+                        SI<input type="checkbox" name="ivasi_{{ loop.index }}" id="ivasi_{{ loop.index }}" value="si" onclick="multiplicarCantValorUniAIU();">
+                        NO<input type="checkbox" name="ivano_{{ loop.index }}" id="ivano_{{ loop.index }}" onclick="multiplicarCantValorUniAIU();">
+                    </td>
+                    <td id="reg_acciones_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if ofertaEconomicaAIU.disabled != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFila('{{ loop.index }}')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+                
+       <table id="PERSONAL" class="tablaOferta" align="center" width="100%" cellpadding="0" cellspacing="0">
+                   <thead>    
+                         <tr>
+                            <th colspan="10" style="text-align: center">2. PERSONAL</th>
+                        </tr>
+                        <tr>
+                            <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                            <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                            <td width="100" id="columna_marca" class="tituloAlineado">Cantidad</td>
+                            <td width="100" id="columna_reg" class="tituloAlineado">Ciudad</td>
+                            <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                            <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                            <td width="180" id="columna_total_est_can" class="tituloAlineado">Estado Cantidad</td>
+                            <td width="100" id="columna_iva" class="tituloAlineado">IVA</td>                            
+                            <td width="100" id="columna_aiu" class="tituloAlineado">AIU</td>
+                            <td width="100" id="colAcciones" class="tituloAlineado">Acciones</td>
+                        </tr>
+                    </thead>
+                     
+              <tbody>
+                {% for ofertaEconomicaPER in OfertaEconomicaPER %}
+                  <tr id="fila_per_{{ loop.index }}">
+                    <td id="numFila_per_{{ loop.index }}">{{ loop.index }}
+                        <input type="hidden" name="idOfe" id="idOfe" value="{{ofertaEconomicaPER.idOfertaEconomica}}" />
+                        <input type="hidden" name="disable_per_{{ loop.index }}" id="disable_per_{{ loop.index }}" value="{{ofertaEconomicaPER.disabledPer}}" />
+                        <input type="hidden" name="idPER" id="idPER" value="{{ofertaEconomicaPER.IdDetOfe}}" />
+                    </td>
+                    <td id="reg_BienServ_per_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="bienServ_per_{{ loop.index }}" id="bienServ_per_{{ loop.index }}">{{ofertaEconomicaPER.select_bienServPer|raw}}</select>
+                           <!-- <input type="hidden" name="id_{{ loop.index }}" id="id_{{ loop.index }}" value="{{ofertaEconomica.id}}" />
+                            <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{ofertaEconomica.disabled}}" />-->
+                        </div> 
+                    </td>
+                    <td id ="reg_fila_cant_{{ loop.index }}">
+                        <input type="text" name="cant_per_{{ loop.index }}" id="cant_per_{{ loop.index }}" value="{{ofertaEconomicaPER.cantidadPER}}"> <!--onBlur="validarCantidadPer();">-->
+                        <div id="resCantidad_{{ loop.index }}">
+                            <input type="hidden" name="resCantidad_per_{{ loop.index }}" id="resCantidad_per_{{ loop.index }}"/>
+                        </div>
+                    </td>
+                    <!--traerPrecioPer(); onchange="setTimeout('multiplicarCantValorUniPer()',300)"-->
+                    <td id ="reg_fila_sel_per_{{ loop.index }}">
+                            <div class="ui-widget">
+                                <select class="required" name="region_per_{{ loop.index }}" id="region_per_{{ loop.index }}" >{{ofertaEconomicaPER.select_reg_per|raw}}</select>
+                            </div> 
+                    </td>
+                    <td id ="reg_fila_prec_per_{{ loop.index }}">
+                        $<input class="required" type="text" name="fila_region_per_{{ loop.index }}" id="fila_region_per_{{ loop.index }}" value="{{ofertaEconomicaPER.precioUnidadPer}}" onBlur="multiplicarCantValorUniPer()"/>
+                    </td>  
+                    <td id ="reg_fila_total_pre_aiu{{ loop.index }}">
+                        $<input class="required number" type="text" name="fila_region_total_per_{{ loop.index }}" id="fila_region_total_per_{{ loop.index }}" value="{{ofertaEconomicaPER.precioUniTotalPer}}"/>
+                    </td>
+                    <td> {{ofertaEconomicaPER.estadoCanPER}} </td>
+                    <td>
+                        SI<input type="checkbox" name="ivaPersi_{{ loop.index }}" id="ivaPersi_{{ loop.index }}" value="si"  onclick="multiplicarCantValorUniPer();">
+                        NO<input type="checkbox" name="ivaPerno_{{ loop.index }}" id="ivaPerno_{{ loop.index }}"  onclick="multiplicarCantValorUniPer();">
+                    </td>
+                    <td>
+                        SI<input type="checkbox" name="aiusi_{{ loop.index }}" id="aiusi_{{ loop.index }}" value="si"  onclick="multiplicarCantValorUniPer();">
+                        NO<input type="checkbox" name="aiuno_{{ loop.index }}" id="aiuno_{{ loop.index }}"  onclick="multiplicarCantValorUniPer();">
+                    </td>
+                    <td id="reg_acciones_per_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFilaPer()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if ofertaEconomicaPER.disabledPer != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFilaPer('{{ loop.index }}')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                       
+        </table>
+    
+    <table id="ASEO" class="tablaOferta" align="center" width="100%" cellpadding="0" cellspacing="0">
+                   <thead>    
+                         <tr>
+                            <th colspan="10" style="text-align: center">3. BIENES DE ASEO Y CAFETERIA</th>
+                        </tr>
+                        <tr>
+                            <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                            <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                            <!--<td width="100" id="columna_marca" class="tituloAlineado">Marca</td>-->
+                            <td width="100" id="columna_marca" class="tituloAlineado">Cantidad</td>
+                            <td width="100" id="columna_reg" class="tituloAlineado">Ciudad</td>
+                            <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                            <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                            <td width="180" id="columna_total_est_can" class="tituloAlineado">Estado Cantidad</td>
+                            <td width="100" id="columna_iva19" class="tituloAlineado">IVA</td>
+                            <td width="100" id="colAcciones" class="tituloAlineado">Acciones</td>
+                        </tr>
+                    </thead>
+                     
+                       <tbody>
+                {% for ofertaEconomicaASEO in OfertaEconomicaASEO %}
+                  <tr id="fila_aseo_{{ loop.index }}">
+                    <td id="numFila_aseo_{{ loop.index }}">{{ loop.index }}
+                        <input type="hidden" name="idOfe" id="idOfe" value="{{ofertaEconomicaASEO.idOfertaEconomica}}" />
+                        <input type="hidden" name="disable_aseo_{{ loop.index }}" id="disable_aseo_{{ loop.index }}" value="{{ofertaEconomicaASEO.disabledAseo}}" />
+                        <input type="hidden" name="idASEO" id="idASEO" value="{{ofertaEconomicaASEO.IdDetOfe}}" />
+                    </td>
+                   <td id="reg_BienServ_aseo_{{ loop.index }}" width="100">
+                       <div class="ui-widget">
+                            <select class="required" name="bienServ_aseo_{{ loop.index }}" id="bienServ_aseo_{{ loop.index }}">{{ofertaEconomicaASEO.select_aseo|raw}}</select>
+                       </div>
+                    </td>
+                    <!--<td id="reg_marca_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="marca_{{ loop.index }}" id="marca_{{ loop.index }}">{{ofertaEconomica.select_marca|raw}}</select>
+                        </div> 
+                    </td>-->
+                    <td id ="reg_fila_cant_{{ loop.index }}">
+                        <input type="text" name="cant_ase_{{ loop.index }}" id="cant_ase_{{ loop.index }}" value="{{ofertaEconomicaASEO.cantidadASEO}}"> <!--onBlur="validarCantidadAseo();">-->
+                        <div id="resCantidad_{{ loop.index }}">
+                            <input type="hidden" name="resCantidad_aseo_{{ loop.index }}" id="resCantidad_aseo_{{ loop.index }}"/>
+                        </div>
+                    </td>
+                    <!--traerPrecioAseo(); onchange="setTimeout('multiplicarCantValorUniAseo()',300)"-->
+                    <td id ="reg_fila_sel_aseo_{{ loop.index }}">
+                            <div class="ui-widget">
+                                <select class="required" name="region_aseo_{{ loop.index }}" id="region_aseo_{{ loop.index }}">{{ofertaEconomicaASEO.select_reg_aseo|raw}}</select>
+                            </div> 
+                    </td>
+                    <td id ="reg_fila_prec_aseo_{{ loop.index }}">
+                        $<input class="required" type="text" name="fila_region_aseo_{{ loop.index }}" id="fila_region_aseo_{{ loop.index }}" value="{{ofertaEconomicaASEO.precioUnidadAseo}}" onBlur="multiplicarCantValorUniAseo();"/>
+                    </td>  
+                    <td id ="reg_fila_total_pre_aseo_{{ loop.index }}">
+                        $<input class="required number" type="text" name="fila_region_total_aseo_{{ loop.index }}" id="fila_region_total_aseo_{{ loop.index }}" value="{{ofertaEconomicaASEO.precioUniTotalAseo}}" onBlur="multiplicarCantValorUniAseo();setTimeout('sumarSubTotales()',900);"/> <!--setTimeout('reiniciarValorContrato()',300);  onBlur="sumarSubTotales();"-->
+                    </td>
+                    <td> {{ofertaEconomicaASEO.estadoCanASEO}} </td>
+                    <td> 
+                        SI<input type="checkbox" name="ivaAseosi_{{ loop.index }}" id="ivaAseosi_{{ loop.index }}" value="si" onclick="multiplicarCantValorUniAseo();setTimeout('sumarSubTotales()',900);">
+                        NO<input type="checkbox" name="ivaAseono_{{ loop.index }}" id="ivaAseono_{{ loop.index }}" onclick="multiplicarCantValorUniAseo();">
+                    </td>
+                    <td id="reg_acciones_aseo_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFilaAseo()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if ofertaEconomicaASEO.disabledAseo != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFilaAseo('{{ loop.index }}')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                       
+    </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td class="tituloAlineado">Observaciones Oferta Economica </td>
+            <td><textarea  rows="4" cols="50" name="obsGenerales" id="obsGenerales">{{datosOfertaEconomica.observacion}}</textarea></td>
+        </tr>
+       <!-- <tr>
+            <td width="30%" class="tituloAlineado">Crear Evento</td>
+            <td>
+                <a href="javascript:void(0)" onclick="crearEvento();"><img src="imagenes/eventos/evento1.png" title="Crear Evento" width="50" height="50" border="0" /></a>
+            </td>    
+        </tr> -->
+    </table>
+    
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+    <div id="tipoSerCheck" style="padding-top: 20px; text-align: right; width: 100%">
+      
+    </div>
+    <div style="padding-top: 20px; text-align: right; width: 100%">
+      {% if OfertaEconomica.genOrden != "NULL" %} 
+        <input type="button" class="botonGeneralGrandeAprobar" value="Generar Orden Compra" onclick="generarOrdenCompra();" />
+      {% endif %}  
+        <input type="submit" class="botonGeneralGrande" value="Guardar Oferta" />
+    </div>
+    
+    
+    
+    
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idAsesor" id="idAsesor" value="{{datosOfertaEconomica.idAsesor}}" />
+    <input type="hidden" name="idEstOfertado" id="idEstOfertado" value="{{idEstOfertado}}" />
+    <input type="hidden" name="cantActualizarAIU" id="cantActualizarASEO" value="{{cantActualizarAIU}}" />
+    <input type="hidden" name="cantActualizarPER" id="cantActualizarPER" value="{{cantActualizarPER}}" />
+    <input type="hidden" name="cantActualizarASEO" id="cantActualizarASEO" value="{{cantActualizarASEO}}" />
+    
+    
+    
+</form>
+<script>
+     
+    var arregloRegionesAIU = [];
+    var arregloRegionesPER = [];
+    var arregloRegionesASEO = [];
+    
+    $().ready(function(){
+         
+         $("#idCliente").chosen({disable_search_threshold: 10, width:"100%" });
+         $("#actLiqui").chosen({disable_search_threshold: 10, width:"98%" });
+         $("#certi").chosen({disable_search_threshold: 10, width:"70%" });
+         $("#tipoServ").chosen({disable_search_threshold: 10, width:"100%" });
+         
+         
+        {% for ofertaEconomicaAIU in OfertaEconomicaAIU %}
+        
+            $("#bienServ_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"200px"});
+            $("#sel_reg_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"200px"});
+            
+        {% endfor %}
+        
+        {% for ofertaEconomicaPER in OfertaEconomicaPER %}
+        
+            $("#region_per_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"200px"});
+            $("#bienServ_per_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"200px"});
+            
+            
+        {% endfor %}
+        
+        {% for ofertaEconomicaASEO in OfertaEconomicaASEO %}
+        
+            $("#region_aseo_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"200px"});
+            $("#bienServ_aseo_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"250px"});
+            
+            
+        {% endfor %}
+        
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })       
+        $("#envioDatos").validate({ rules: {chosen:"required"} });
+    
+    });
+  
+   
+  
+    /* PERSONAL  */
+    
+    $("#sel_reg_per").chosen().change(function() {
+        var cont;
+        var index;        
+        
+        if($("#sel_reg_per").chosen().val()!=null){        
+            $("#PERSONAL").show();
+            
+            //AGREGAR
+            $.each($("#sel_reg_per").chosen().val(),function(index,value){
+                var resArray = jQuery.inArray(value,arregloRegionesPER);
+                if(resArray == -1){
+                    arregloRegionesPER.push(value);
+                    
+                }
+                
+            });
+            
+            //ELIMINAR - ELIMINAR COLUMNAS
+            if(arregloRegionesPER.length > 0){
+                for (index = 0; index < arregloRegionesPER.length; ++index) {
+                    var res = jQuery.inArray(arregloRegionesPER[index],$("#sel_reg_per").chosen().val());
+                    if(res == -1){
+                        eliminarRegionesPER(arregloRegionesPER[index]);
+                        arregloRegionesPER.splice(index,1); 
+                    }
+                }
+               
+                
+            }
+            
+            //AGREGAR COLUMNAS
+            $.each(arregloRegionesPER,function(index,value){
+                var nomCol = $("#sel_reg_per option[value='"+value+"']").text();
+                agregarRegionPER(value,nomCol);
+                
+            });
+    
+        }else{
+            
+            if(arregloRegionesPER.length > 0){
+                for (index = 0; index < arregloRegionesPER.length; ++index) {
+                    var res = jQuery.inArray(arregloRegionesPER[index],$("#sel_reg_per").chosen().val());
+                    if(res == -1){
+                        eliminarRegionesPER(arregloRegionesPER[index]);
+                        arregloRegionesPER.splice(index,1); 
+                    }
+                }
+               
+                
+            }
+            
+        }
+    });
+    
+    
+    function agregarRegionAIU(idCol,nomCol){
+       
+           var filas = $('#AIU >tbody >tr').length;
+              var idCol = nomCol.replace(/([%#(,)(.)( )])/g,'');
+              var idCol = idCol.replace(/__/g,'');
+                
+            if($('#reg_fila_'+ idCol).length == 0){
+                   for(var i = 1; i <= filas ; i++){
+                        $('#reg_fila_'+i).append('<tr id="reg_fila_reg_'+idCol+'"><td class="tituloAlineado" id="reg_fila_'+ idCol +'">'+ nomCol +'</td><td><input type="text" name="reg_fila_'+idCol+'" id="reg_fila_'+idCol+'"></td></tr>');
+                
+                    }
+            }
+            
+            
+    }
+    
+function agregarRegionAIUCiu(idCol,nomCol){
+            
+     alert("agregarRegionAIUCiu");
+     
+            var filas = $('#AIU >tbody >tr').length;
+            var $objTabla=$('#AIU'); 
+            var idCol = nomCol.replace(/([%#(,)(.)( )])/g,'');
+                idCol = idCol.replace(/__/g,'');
+                
+            if($('#reg_fila_ciu_'+ idCol).length == 0){
+                //$objTabla.after('<tr id="reg_fila_reg_'+idCol+'"><td class="tituloAlineado" id="reg_fila_ciu_'+ idCol +'">'+ nomCol +'</td><td><input type="text" name="reg_fila_ciu_'+idCol+'" id="reg_fila_ciu_'+idCol+'"></td></tr>');
+                
+                   for(var i = 1; i <= filas ; i++){
+                            $('#reg_fila_ciu_'+i).append('<tr id="reg_fila_reg_'+idCol+'"><td class="tituloAlineado" id="reg_fila_ciu_'+ idCol +'">'+ nomCol +'</td><td><input type="text" name="reg_fila_ciu_'+idCol+'" id="reg_fila_ciu_'+idCol+'"></td></tr>');
+                   }
+            }
+            
+    }
+    
+    function agregarRegionPER(idCol,nomCol){
+           
+           var filasPer = $('#PERSONAL >tbody >tr').length;
+           var idCol = nomCol.replace(/([%#(,)(.)( )])/g,'');
+               idCol = idCol.replace(/__/g,'');
+              
+           if($('#fila_reg_per_'+ idCol).length==0){
+                    for(var p =1; p <=filasPer;p++){
+                        $('#fila_reg_per_'+ p).append('<tr id="fila_reg_per_'+idCol+'"><td class="tituloAlineado" id="reg_fila_per_'+ idCol +'">'+ nomCol +'</td><td><input type="text" name="reg_fila_per_'+idCol+'" id="reg_fila_per_'+idCol+'"></td></tr>');
+                    }
+           }
+           
+       }
+    
+    function agregarRegionASEO(idCol,nomCol){
+           
+           var filasAseo = $('#ASEO >tbody >tr').length;
+           var idCol = nomCol.replace(/([%#(,)(.)( )])/g,'');
+               idCol = idCol.replace(/__/g,'');
+               
+                if($('#fila_reg_aseo_'+ idCol).length==0){
+            
+                    for(var p =1; p <=filasAseo;p++){
+                        $('#fila_reg_aseo_'+ p).append('<tr id="fila_reg_aseo_'+idCol+'"><td class="tituloAlineado" id="fila_reg_aseo_'+ idCol +'">'+ nomCol +'</td><td><input type="text" name="fila_reg_aseo_'+idCol+'" id="fila_reg_aseo_'+idCol+'"></td></tr>');
+                    }
+               }
+       }
+       
+    /* TABLA AIU */        
+    function eliminarRegionesAIU(nomCol){
+      
+          
+            $.each(arregloRegionesAIU,function(index,nomCol){
+                var Elinom = $("#sel_reg option[value='"+nomCol+"']").text();
+                var elim = Elinom.replace(/([%#(,)(.)( )])/g,'');
+    
+                    if($('#reg_fila_reg_'+ elim).length != 0){
+                        $('#reg_fila_reg_'+ elim).remove();
+          
+                   }
+                
+                
+            });
+    }        
+    
+    /* TABLA PERSONAL */        
+    function eliminarRegionesPER(nomCol){
+          $.each(arregloRegionesPER,function(index,nomCol){
+                var ElinomPer = $("#sel_reg_per option[value='"+nomCol+"']").text();
+                var elimPer = ElinomPer.replace(/([%#(,)(.)( )])/g,'');
+                   if($('#fila_reg_per_'+ elimPer).length != 0){
+                       $('#fila_reg_per_'+ elimPer).remove();
+                    }
+                
+                
+            });
+        
+    }    
+    
+    
+    /* TABLA ASEO */
+    function eliminarRegionesASEO(nomCol){     
+        $.each(arregloRegionesASEO,function(index,nomCol){
+                var ElinomAseo = $("#sel_reg_aseo option[value='"+nomCol+"']").text();
+                var elimAseo = ElinomAseo.replace(/([%#(,)(.)( )])/g,'');
+                   if($('#fila_reg_aseo_'+ elimAseo).length != 0){
+                        $('#fila_reg_aseo_'+ elimAseo).remove();
+          
+                   }
+                
+                
+            });
+        
+        
+    }
+    
+    
+    /*$(function() {
+        $("#feIni").datepicker({
+            changeMonth: true,
+            changeYear: true
+         //   dateFormat: "yyyy-mm-dd"
+        });
+        
+        $("#feFin").datepicker({
+            changeMonth: true,
+            changeYear: true
+         //   dateFormat: "yyyy-mm-dd"
+        });
+    });*/
+
+    // Initialization
+      $('#feIni').datepicker();      
+      $('#feFin').datepicker();      
+    // Access instance of plugin
+      $('#feIni').data('datepicker');
+      $('#feFin').data('datepicker');
+    
+    function regresar(){
+        
+       /* $.ajax({
+        url:'index_blank.php?component=OfertaEconomica&method=restaurarCantidad',
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+        });*/
+        
+        $.ajax({
+        url:'index_blank.php?component=OfertaEconomica&method=mostrarOfertaEconomica&idMenu=' + {{idMenu}},
+                type: "POST",
+                data: $('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+        });
+    }
+    
+    function agregarFila(){
+        var j = $('#AIU >tbody >tr').length + 1;
+        var tds = '';
+        var $objTabla=$('#AIU');
+        var iTotalColumnasExistentes=$('#AIU thead tr th').length;
+        var ant = j-1;
+        var tdIdAnt;
+        var cantFilas = $('#cantFilas').val();
+        //var valorNuevo = $('#sel_reg').val()
+        
+        if(cantFilas>=j){       
+            j = parseInt(cantFilas) + 1;
+        }
+        $('#cantFilas').val(j);
+       
+        var selBienServ = "{{select_bienServ|escape('js')}}";
+        var selCiudad = "{{select_reg_aiu|escape('js')}}";
+        
+        tdIdAnt = $objTabla.find('td:last').attr('id');
+        tdIdAnt = tdIdAnt.replace('reg_acciones_','');
+        //alert(tdIdAnt);
+        //$("#AIU tbody tr:eq(0)").clone().appendTo("#AIU");       
+        //$objTabla.find('td:last').html('&nbsp;');
+        //traerPrecioAIU(); onchange="setTimeout(\'multiplicarCantValorUniAIU()\',300)"
+        tds +='<tr id="fila_'+j+'">';
+        tds +='<td id="numFila_'+j+'">'+j+' </td>';
+        tds +='<td id="reg_BienServ_'+j+'" width="100"><div class="ui-widget"><select class="required" name="bienServ_'+j+'" id="bienServ_'+j+'">'+selBienServ+'</select></div></td>';
+        tds +='<td id="reg_fila_cant_'+j+'"><input type="text" name="cant_'+j+'" id="cant_'+j+'"/> <!--onBlur="validarCantidadAIU();"/>--><div id="resCantidad_aiu_'+j+'"></div></td>';
+        tds +='<td id="reg_fila_sel_'+j+'" width="100"><div><select class="required" name="sel_reg_'+j+'" id="sel_reg_'+j+'">'+selCiudad+'</select></div></td>';
+        tds +='<td id ="reg_fila_prec_'+j+'">$<input class="required" type="text" name="fila_region_'+j+'" id="fila_region_'+j+'" value="" onBlur="multiplicarCantValorUniAIU()"/></td>';
+        tds +='<td id ="reg_fila_total_'+j+'">$<input class="required number" type="text" name="fila_region_total_'+j+'" id="fila_region_total_'+j+'" /></td>';
+        tds +='<td> {{OfertaEconomicaAIU.estadoCanAIU}}</td>';
+        tds +='<td>SI<input type="checkbox" name="ivasi_'+j+'" id="ivasi_'+j+'" value="si" onclick="multiplicarCantValorUniAIU();">';
+        tds +='NO<input type="checkbox" name="ivano_'+j+'" id="ivano_'+j+'" onclick="multiplicarCantValorUniAIU();"></td>';        
+        tds +='<td id="reg_acciones_'+j+'"><button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button> <button type="button" class="btn btn-link" onclick="eliminarFila('+j+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        tds +='</tr>';
+        $("#AIU").append(tds);
+        
+        $("#bienServ_"+j).chosen({disable_search_threshold: 10, width:"200px"});
+        $("#sel_reg_"+j).chosen({disable_search_threshold: 10, width:"200px"});
+        
+        /* var referencia = $('#bienServ_'+ant).val();
+        $.ajax({
+                    url:'index_blank.php?component=OfertaEconomica&method=consultarCantidadAIU',
+                    type: "POST",
+                    data:'referencia=' + referencia,
+                    success: function (msm){                            
+                        $("#bienServ_"+j).html(msm);
+                        $("#bienServ_"+j).trigger("chosen:updated");                            
+                    }
+            });*/
+    
+        
+        var valDisable = $('#disable_' + tdIdAnt).val();
+        if(valDisable == 'disabled'){
+            $("#reg_acciones_"+tdIdAnt).html('')
+        }else{
+            $("#reg_acciones_"+tdIdAnt).html('<button type="button" class="btn btn-link" onclick="eliminarFila('+tdIdAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+        }
+        
+    }
+    
+    function eliminarFila(pos){
+        var $objTabla=$('#AIU');
+        var j = $('#AIU >tbody >tr').length;
+        var tdVal = '';
+      
+        $("#fila_"+pos).remove();
+        //alert(j);
+       
+        tdVal = $objTabla.find('td:last').html();
+        //alert(tdVal.length);
+        ant = j -1;
+        var valDisable = $('#disable_' + ant).val();
+        //alert(valDisable);
+        if (j>2){
+            if(tdVal.length<150){
+                if(valDisable == 'disabled'){
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+                }else{
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>' + tdVal;
+                }
+            }
+        }else{
+            tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+        }
+       $objTabla.find('td:last').html(tdVal);
+    }
+    
+    function agregarFilaPer(){
+        
+              var n = $('tr:last td', $("#PERSONAL")).length;
+              var p = $('#PERSONAL >tbody >tr').length + 1;
+              var tds = '';
+              var $objTabla=$('#PERSONAL');
+              var iTotalColumnasExistentes=$('#PERSONAL thead tr th').length;
+              var ant = p-1;
+              var tdIdAnt;
+              var cantFilas = $('#cantFilas').val();
+        
+                if(cantFilas>=p){       
+                    p = parseInt(cantFilas) + 1;
+                }
+                    $('#cantFilas').val(p);
+       
+        var selBienServPer = "{{select_bienServPer|escape('js')}}";
+        var selCiudadPer = "{{select_reg_per|escape('js')}}";
+        
+        tdIdAnt = $objTabla.find('td:last').attr('id');
+        tdIdAnt = tdIdAnt.replace('reg_acciones_per_','');
+        //alert(tdIdAnt);
+        //traerPrecioPer(); onchange="setTimeout(\'multiplicarCantValorUniPer()\',300)"       
+        //$objTabla.find('td:last').html('&nbsp;');
+        tds +='<tr id="fila_per_'+p+'">';
+        tds +='<td id="numFila_per_{{ loop.index }}">'+p+'</td>';
+        tds += '<td id="reg_BienServ_per_'+p+'" width="100"><div class="ui-widget"><select class="required" name="bienServ_per_'+p+'" id="bienServ_per_'+p+'">'+selBienServPer+'</select></div></td>';
+        tds +='<td id="reg_fila_cant_per_'+p+'"><input type="text" name="cant_per_'+p+'" id="cant_per_'+p+'"> <!--onBlur="validarCantidadPer();">--><div id="resCantidad_per_'+p+'"> </div></td>';
+        tds += '<td id="reg_fila_sel_per_'+p+'" width="100"><div class="ui-widget"><select class="required" name="region_per_'+p+'" id="region_per_'+p+'" >'+selCiudadPer+'</select></div></td>';
+        tds += '<td id ="reg_fila_prec_per_'+p+'">$<input class="required" type="text" name="fila_region_per_'+p+'" id="fila_region_per_'+p+'" value="" onBlur="multiplicarCantValorUniPer()"/></td>';
+        tds +='<td id ="reg_fila_total_pre_per_'+p+'">$<input class="required number" type="text" name="fila_region_total_per_'+p+'" id="fila_region_total_per_'+p+'"/></td>';
+        tds +='<td> {{OfertaEconomicaPER.estadoCanPER}}</td>';
+        tds +='<td>SI<input type="checkbox" name="ivaPersi_'+p+'" id="ivaPersi_'+p+'" value="si" onclick="multiplicarCantValorUniPer();">';
+        tds +='NO<input type="checkbox" name="ivaPerno_'+p+'" id="ivaPerno_'+p+'" onclick="multiplicarCantValorUniPer();"></td>';
+        tds +='<td>SI<input type="checkbox" name="aiusi_'+p+'" id="aiusi_'+p+'" value="si" onclick="multiplicarCantValorUniPer();">';
+        tds +='NO<input type="checkbox" name="aiuno_'+p+'" id="aiuno_'+p+'" onclick="multiplicarCantValorUniPer();"></td>';
+        tds +='<td id="reg_acciones_per_'+ p +'"><button type="button" class="btn btn-link" onclick="agregarFilaPer()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button> <button type="button" class="btn btn-link" onclick="eliminarFilaPer('+p+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        tds +='</tr>';
+        $("#PERSONAL").append(tds);        
+        
+        
+        $("#bienServ_per_"+p).chosen({disable_search_threshold: 10, width:"200px"});
+        $("#region_per_"+p).chosen({disable_search_threshold: 10, width:"200px"});
+        
+        var valDisable = $('#disable_per_' + tdIdAnt).val();
+        if(valDisable == 'disabled'){
+            $("#reg_acciones_per_"+tdIdAnt).html('')
+        }else{
+            $("#reg_acciones_per_"+tdIdAnt).html('<button type="button" class="btn btn-link" onclick="eliminarFilaPer('+tdIdAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+        }
+        
+        /* var referencia = $('#bienServ_per_'+ant).val();
+        $.ajax({
+                    url:'index_blank.php?component=OfertaEconomica&method=consultarCantidadPER',
+                    type: "POST",
+                    data:'referencia=' + referencia,
+                    success: function (msm){                            
+                        $("#bienServ_per_"+p).html(msm);
+                        $("#bienServ_per_"+p).trigger("chosen:updated");                            
+                    }
+            });*/
+    }
+    
+    function eliminarFilaPer(pos){
+        var $objTabla=$('#PERSONAL');
+        var j = $('#PERSONAL >tbody >tr').length;
+        var tdVal = '';
+      
+        $("#fila_per_"+pos).remove();
+       //alert(j);
+       
+        tdVal = $objTabla.find('td:last').html();
+        //alert(tdVal.length);
+        ant = j -1;
+        
+        var valDisable = $('#disable_per_' + ant).val();
+        
+        if (j>2){
+            if(tdVal.length<152){
+                if(valDisable == 'disabled'){
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaPer()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+                }else{
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaPer()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>' + tdVal;
+                }
+            }
+        }else{
+            tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaPer()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+        }
+       $objTabla.find('td:last').html(tdVal);
+    }
+    
+    
+    function agregarFilaAseo(){
+        
+              var n = $('tr:last td', $("#ASEO")).length;
+              var p = $('#ASEO >tbody >tr').length + 1;
+              var tds = '';
+              var $objTabla=$('#ASEO');
+              var iTotalColumnasExistentes=$('#ASEO thead tr th').length;
+              var ant = p-1;
+              var tdIdAnt;
+              var cantFilas = $('#cantFilas').val();
+              
+                if(cantFilas>=p){       
+                    p = parseInt(cantFilas) + 1;
+                }
+                    $('#cantFilas').val(p);
+          
+       
+        var selBienServMar = "{{select_aseo|escape('js')}}";
+        //var selMarca = "{{select_marca|escape('js')}}";
+        var selCiudadAseo = "{{select_reg_aseo|escape('js')}}";
+                
+        tdIdAnt = $objTabla.find('td:last').attr('id');
+        tdIdAnt = tdIdAnt.replace('reg_acciones_aseo_','');
+        //traerPrecioAseo();  onchange="setTimeout(\'multiplicarCantValorUniAseo()\',300)"
+        //$objTabla.find('td:last').html('&nbsp;');
+        tds +='<tr id="fila_aseo_'+p+'">';
+        tds +='<td id="numFila_aseo_'+p+'">'+p+'</td>';
+        tds +='<td id="reg_BienServ_aseo_'+p+'" width="100"><div class="ui-widget"><select class="required" name="bienServ_aseo_'+p+'" id="bienServ_aseo_'+p+'">'+selBienServMar+'</select></div><div><input type="hidden" name="cant_aseo_'+p+'" id="cant_aseo_'+p+'" value ="{{OfertaEconomica.cant}}" /></div></td>';
+        //tds +='<td id ="reg_marca_'+p+'" width="100"><div class="ui-widget"><select class="required" name="marca'+p+'" id="marca'+p+'">'+selMarca+'</select></div></td>';
+        tds +='<td id="reg_fila_cant_'+p+'"><input type="text" name="cant_ase_'+p+'" id="cant_ase_'+p+'"> <!--onBlur="validarCantidadAseo();">--><div id="resCantidad_aseo_'+p+'"> </div></td>';
+        tds +='<td id="reg_fila_sel_aseo_'+p+'" width="100"><div class="ui-widget"><select class="required" name="region_aseo_'+p+'" id="region_aseo_'+p+'">'+selCiudadAseo+'</select></div></td>';
+        tds +='<td id ="reg_fila_prec_aseo_'+p+'">$<input class="required" type="text" name="fila_region_aseo_'+p+'" id="fila_region_aseo_'+p+'" value="" onBlur="multiplicarCantValorUniAseo();" /></td>';
+        tds +='<td id ="reg_fila_total_pre_aseo_'+p+'">$<input class="required number" type="text" name="fila_region_total_aseo_'+p+'" id="fila_region_total_aseo_'+p+'" /></td>';
+        tds +='<td> {{ofertaEconomicaASEO.estadoCanASEO}}</td>';
+            tds +='<td>SI<input type="checkbox" name="ivaAseosi_'+p+'" id="ivaAseosi_'+p+'" value="si" onclick="multiplicarCantValorUniAseo();setTimeout(\'sumarSubTotales()\',1000);">';
+        tds +='NO<input type="checkbox" name="ivaAseono_'+p+'" id="ivaAseono_'+p+'" onclick="multiplicarCantValorUniAseo();"></td>';
+        tds +='<td id="reg_acciones_aseo_'+p+'"><button type="button" class="btn btn-link" onclick="agregarFilaAseo()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button> <button type="button" class="btn btn-link" onclick="eliminarFilaAseo('+p+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        tds +='</tr>';
+        $("#ASEO").append(tds);
+       
+       
+        $("#bienServ_aseo_"+p).chosen({disable_search_threshold: 10, width:"250px"});
+        //$("#marca"+p).chosen({disable_search_threshold: 10, width:"200px"});
+        $("#region_aseo_"+p).chosen({disable_search_threshold: 10, width:"200px"});
+        
+        var valDisable = $('#disable_aseo_' + tdIdAnt).val();
+        if(valDisable == 'disabled'){
+            $("#reg_acciones_aseo_"+tdIdAnt).html('')
+        }else{
+            $("#reg_acciones_aseo_"+tdIdAnt).html('<button type="button" class="btn btn-link" onclick="eliminarFilaAseo('+tdIdAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+        }
+        
+        /*var referencia = $('#bienServ_aseo_'+ant).val();
+        $.ajax({
+                    url:'index_blank.php?component=OfertaEconomica&method=consultarCantidadAEO',
+                    type: "POST",
+                    data:'referencia=' + referencia,
+                    success: function (msm){                            
+                        $("#bienServ_aseo_"+p).html(msm);
+                        $("#bienServ_aseo_"+p).trigger("chosen:updated");
+                    }
+            });*/
+        
+    }
+    
+    function eliminarFilaAseo(pos){
+        var $objTabla=$('#ASEO');
+        var j = $('#ASEO >tbody >tr').length;
+        var tdVal = '';
+      
+        $("#fila_aseo_"+pos).remove();
+       //alert(j);
+       
+        tdVal = $objTabla.find('td:last').html();
+        //alert(tdVal.length);
+        ant = j -1;
+        
+        var valDisable = $('#disable_aseo_' + ant).val();
+        
+        if (j>2){            
+            if(tdVal.length<153){                
+                if(valDisable == 'disabled'){
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaAseo()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+                }else{
+                    tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaAseo()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>' + tdVal;
+                }
+            }
+        }else{
+            tdVal = '<button type="button" class="btn btn-link" onclick="agregarFilaAseo()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+        }
+       $objTabla.find('td:last').html(tdVal);
+    }
+    
+    
+    function validarCantidadAIU(){
+    
+        
+        var tdId;
+        var cantidad = [];
+
+        $('#AIU > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            cantidad.push({
+                valorCant : $("#cant_"+tdId).val(),
+                referencia : $("#bienServ_"+tdId).val(),
+            });            
+        });
+        
+        cantidad = JSON.stringify(cantidad);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=calcularCantidad',
+            type: "POST",
+            data:$('#envioDatos').serialize() +'&cantidad=' + cantidad,
+            success: function (msm){         
+            
+                $("#resCantidad_"+tdId).html(msm);
+                
+           
+            }
+        
+       
+        });
+        
+    }
+    
+    function validarCantidadPer(){
+    
+        
+        var tdId;
+        var cantidad = [];
+
+        $('#PERSONAL > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_per_','');
+            cantidad.push({
+                valorCant : $("#cant_per_"+tdId).val(),
+                referencia : $("#bienServ_per_"+tdId).val(),
+            });            
+        });
+        
+        cantidad = JSON.stringify(cantidad);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=calcularCantidad',
+            type: "POST",
+            data:$('#envioDatos').serialize() +'&cantidad=' + cantidad,
+            success: function (msm){         
+            
+                $("#resCantidad_per_"+tdId).html(msm);
+                
+           
+            }
+        
+       
+        });
+    }
+    
+    function validarCantidadAseo(){
+    
+        
+        var tdId;
+        var cantidad = [];
+
+        $('#ASEO > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_aseo_','');
+            cantidad.push({
+                valorCant : $("#cant_ase_"+tdId).val(),
+               idProducto : $("#bienServ_aseo_"+tdId).val(),
+            });            
+        });
+        
+        cantidad = JSON.stringify(cantidad);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=calcularCantidad',
+            type: "POST",
+            data:$('#envioDatos').serialize() +'&cantidad=' + cantidad,
+            success: function (msm){         
+            
+                $("#resCantidad_aseo_"+tdId).html(msm);
+                //$("#obsGenerales").html(msm);
+                
+           
+            }
+        
+       
+        });
+        
+    }
+    
+    function validarCantidadAseo(){
+    
+        
+        var tdId;
+        var cantidad = [];
+
+        $('#ASEO > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_aseo_','');
+            cantidad.push({
+                valorCant : $("#cant_ase_"+tdId).val(),
+               idProducto : $("#bienServ_aseo_"+tdId).val(),
+            });            
+        });
+        
+        cantidad = JSON.stringify(cantidad);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=calcularCantidad',
+            type: "POST",
+            data:$('#envioDatos').serialize() +'&cantidad=' + cantidad,
+            success: function (msm){         
+            
+                $("#resCantidad_aseo_"+tdId).html(msm);
+                //$("#obsGenerales").html(msm);
+                
+           
+            }
+        
+       
+        });
+        
+    }
+    
+    function traerPrecioAIU(){
+        
+        var tdId;
+        var precioCiudad = [];
+        var precioCiu;
+
+        $('#AIU > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            precioCiudad.push({
+                 idCiudad : $("#sel_reg_"+tdId).chosen().val(),
+               idProducto : $("#bienServ_"+tdId).chosen().val(),
+            });            
+        });
+        
+        precioCiudad = JSON.stringify(precioCiudad);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=traerPrecio',
+            type: "POST",
+            data:'precioCiudad=' + precioCiudad,
+            success: function (msm){         
+                
+                $("#fila_region_"+tdId).val(msm);
+            }
+        
+       
+        });
+        
+        
+    }
+    
+    function traerPrecioPer(){
+        
+        var tdId;
+        var precioCiudad = [];
+        var precioCiu;
+
+        $('#PERSONAL > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_per_','');
+            precioCiudad.push({
+                 idCiudad : $("#region_per_"+tdId).chosen().val(),
+               idProducto : $("#bienServ_per_"+tdId).chosen().val(),
+            });            
+        });
+        
+        precioCiudad = JSON.stringify(precioCiudad);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=traerPrecio',
+            type: "POST",
+            data:'precioCiudad=' + precioCiudad,
+            success: function (msm){         
+                
+                $("#fila_region_per_"+tdId).val(msm);
+                //$("#obsGenerales").html(msm);
+            }
+        
+       
+        });
+        
+        
+    }
+    
+    function traerPrecioAseo(){
+        
+        var tdId;
+        var precioCiudad = [];
+        var precioCiu;
+
+        $('#ASEO > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_aseo_','');
+            precioCiudad.push({
+                 idCiudad : $("#region_aseo_"+tdId).chosen().val(),
+               idProducto : $("#bienServ_aseo_"+tdId).chosen().val(),
+            });            
+        });
+        
+        precioCiudad = JSON.stringify(precioCiudad);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=traerPrecio',
+            type: "POST",
+            data:'precioCiudad=' + precioCiudad,
+            success: function (msm){         
+                
+                $("#fila_region_aseo_"+tdId).val(msm);
+           
+            }
+        
+       
+        });
+        
+        
+    }
+    
+    function multiplicarCantValorUniAIU(){
+        
+        var tdId;
+        var preciototal = [];
+        var precioCiu;
+        var iva;
+        var tipoServ = $("#tipoServ").chosen().val();
+        
+        $('#AIU > tbody > tr').each(function() {
+            
+            tdId = $(this).find('td:last').attr('id');
+            tdId = tdId.replace('reg_acciones_','');
+            precioCiu = $("#fila_region_"+tdId).val();
+            idProducto = $("#bienServ_"+tdId).val();
+            
+            
+            preciototal.push({
+                 cantidad : $("#cant_"+tdId).val(),
+                   precio : precioCiu,
+                    ivasi : $("input:checkbox[name=ivasi_"+tdId+"]:checked").val(),                 
+               idProducto : idProducto,
+                   indice : tdId,
+               
+            });            
+            
+          
+        });
+        
+        preciototal = JSON.stringify(preciototal);
+        
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=multiplicarCantValorUni',
+            type: "POST",
+            data:'preciototal=' + preciototal + '&tipoServ='+tipoServ,
+            success: function(resp){         
+               
+               var res = JSON.parse(resp);
+               
+		for (var j in res){
+                    
+                    $("#fila_region_total_"+res[j].indice).val(res[j].totalOpera);
+                 
+                }
+            }
+        
+       
+        });
+    }
+    
+    function multiplicarCantValorUniPer(){
+        
+        var tdId;
+        var preciototal = [];
+        var precioCiu;
+        var tipoServ = $("#tipoServ").chosen().val();
+         
+        $('#PERSONAL > tbody > tr').each(function() {
+            
+            tdId = $(this).find('td:last').attr('id');
+            tdId = tdId.replace('reg_acciones_per_','');
+            precioCiu = $("#fila_region_per_"+tdId).val();
+            
+            preciototal.push({
+                 cantidad : $("#cant_per_"+tdId).val(),
+                   precio : precioCiu,
+                 ivaPersi : $("input:checkbox[name=ivaPersi_"+tdId+"]:checked").val(),
+                    aiusi : $("input:checkbox[name=aiusi_"+tdId+"]:checked").val(),
+               idProducto : $("#bienServ_per_"+tdId).chosen().val(),
+                   indice : tdId,
+            });            
+        });
+        
+        preciototal = JSON.stringify(preciototal);
+        
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=multiplicarCantValorUni',
+            type: "POST",
+            data:'preciototal=' + preciototal + '&tipoServ='+tipoServ,
+            success: function (msm){         
+                
+               var resPer = JSON.parse(msm);
+             
+		for (var i in resPer) {
+                    $("#fila_region_total_per_"+resPer[i].indice).val(resPer[i].totalOpera);
+                }
+               
+            }
+        
+       
+        });
+    }
+    
+    function multiplicarCantValorUniAseo(){
+        
+        var tdId;
+        var preciototal = [];
+        var precioCiu;
+        var tipoServ = $("#tipoServ").chosen().val();
+
+        $('#ASEO > tbody > tr').each(function() {
+            
+            tdId = $(this).find('td:last').attr('id');
+            tdId = tdId.replace('reg_acciones_aseo_','');
+            precioCiu = $("#fila_region_aseo_"+tdId).val();
+            
+            preciototal.push({
+                 cantidad : $("#cant_ase_"+tdId).val(),
+                   precio : precioCiu,
+                ivaAseosi : $("input:checkbox[name=ivaAseosi_"+tdId+"]:checked").val(),
+               idProducto : $("#bienServ_aseo_"+tdId).chosen().val(),
+                   indice : tdId,
+            });            
+        });
+        
+        
+        preciototal = JSON.stringify(preciototal);       
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=multiplicarCantValorUni',
+            type: "POST",
+            data:'preciototal=' + preciototal  + '&tipoServ='+tipoServ,
+            success: function (msm){
+                
+	       var resAseo = JSON.parse(msm);
+               
+		for (var i in resAseo) {
+                    $("#fila_region_total_aseo_"+resAseo[i].indice).val(resAseo[i].totalOpera);
+                }
+            
+               
+            }
+        
+       
+        });
+    }
+    /*function EnviarFormulario(){
+		
+	$.ajax({
+		url:'index_blank.php?component=OfertaEconomica&method=guardarOfertaEconomica',
+		type: "POST",
+		data:$('#envioDatos').serialize(),
+		success: function (msm){
+                    jQuery.fancybox.close();
+                    $('#componenteCentral').html(msm);
+		}
+            });
+    }*/
+    
+    /*function crearEvento(){        
+        
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=crearEvento',
+            type: "POST",
+            data:$('#envioDatos').serialize(),
+            success: function (msm){
+                //$('#componenteCentral').html(msm);
+              //jQuery.fancybox.open(msm);
+            }
+        
+       
+        });
+    }*/
+    
+    function reiniciarValorContrato(){
+        
+        
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=reiniciarValorContrato',
+            type: "POST",
+            data:$('#envioDatos').serialize(),
+            success: function (msm){         
+                
+               $("#valorContra").val(msm);
+               //$("#obsGenerales").html(msm);
+           
+            }
+        
+       
+        });
+    }
+    
+    function sumarSubTotales(){
+        
+        var tdId;
+        var subtotal = [];
+        var tipoServ = $("#tipoServ").chosen().val();
+        var ivaContrato = $('input:checkbox[name=tipoCheck]:checked').val();
+         
+         if(ivaContrato != "si"){
+            
+            ivaContrato = "no";
+         }
+         
+         
+        $('#AIU > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            subtotal.push({
+                subtotalAIU : $("#fila_region_total_"+tdId).val(),
+            });            
+        });
+        
+        $('#PERSONAL > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_per_','');
+            subtotal.push({
+                subtotalPER : $("#fila_region_total_per_"+tdId).val(),
+            });            
+        });
+        
+        $('#ASEO > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_aseo_','');
+            subtotal.push({
+                subtotalASEO : $("#fila_region_total_aseo_"+tdId).val(),
+            });            
+        });
+        
+        subtotal = JSON.stringify(subtotal);
+        
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=sumarSubTotales',
+            type: "POST",
+            data:'subtotal='+subtotal + '&tipoServ='+tipoServ + '&ivaContrato='+ivaContrato,
+            success: function (msm){         
+                
+               $("#valorContra").val(msm);
+               //$("#obsGenerales").html(msm);
+           
+            }
+        
+       
+        });
+    }
+    
+    function generarOrdenCompra(){
+        
+        var tdId;
+        var cantidadAIU = [];
+        var cantidadPER = [];
+        var cantidadASEO = [];
+        
+        
+        //CANTIDAD AIU
+        $('#AIU > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            cantidadAIU.push({
+                valorCant : $("#cant_"+tdId).val(),
+                idProducto : $("#bienServ_"+tdId).val(),
+                idOferta : $("#idOfe").val(),
+            });            
+        });
+        
+        //CANTIDAD PERSONAL
+        $('#PERSONAL > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_per_','');
+            cantidadPER.push({
+                valorCant : $("#cant_per_"+tdId).val(),
+                idProducto : $("#bienServ_per_"+tdId).val(),
+                idOferta : $("#idOfe").val(),
+            });            
+        });
+        
+        //CANTIDAD ASEO
+        $('#ASEO > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_aseo_','');
+            cantidadASEO.push({
+                valorCant : $("#cant_ase_"+tdId).val(),
+               idProducto : $("#bienServ_aseo_"+tdId).val(),
+                 idOferta : $("#idOfe").val(),
+            });            
+        });
+        
+        
+        cantidadAIU = JSON.stringify(cantidadAIU);
+        cantidadPER = JSON.stringify(cantidadPER);
+        cantidadASEO = JSON.stringify(cantidadASEO); 
+        
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=generarOrdenCompra',
+            type: "POST",
+            data:$('#envioDatos').serialize() +'&cantidadAIU=' + cantidadAIU + '&cantidadPER=' + cantidadPER + '&cantidadASEO=' + cantidadASEO, 
+            success: function (msm){
+                jQuery.fancybox.open(msm);
+                //$('#componenteCentral').html(msm);
+               //$('#obsGenerales').html(msm);
+            }
+        
+       
+        });
+        
+    }
+    
+    $("#tipoServ").chosen().change(function() {
+        
+        var idTipoServ = $("#tipoServ").chosen().val();
+        var check = "";
+        $("#tipoSerCheck").empty();
+        if(idTipoServ == 726){
+            
+          check = 'Sumar IVA<input type="checkbox" name="tipoCheck" id="tipoCheck" value="si" onclick="sumarSubTotales();"> ';
+           
+          $('#tipoSerCheck').append(check); 
+        
+        }
+        
+        
+    });
+    
+    function EnviarFormulario(){ 
+        
+        var tdId;
+        var OfertaEconomicaAIU = [];
+        var OfertaEconomicaPERSONAL = [];
+        var OfertaEconomicaASEO = [];
+        
+        $('#AIU > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            OfertaEconomicaAIU.push({
+                idOferta: $("#idOfe").val(),
+              //  idAIU : $("#idAIU").val(),
+                bienServ : $("#bienServ_"+tdId).chosen().val(),
+                cant : $("#cant_"+tdId).val(),
+                region : $("#sel_reg_"+tdId).chosen().val(),
+                precioUnidad : $("#fila_region_"+tdId).val(),
+                totalUnidad : $("#fila_region_total_"+tdId).val(),
+            });            
+        });
+        
+        $('#PERSONAL > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_per_','');
+            OfertaEconomicaPERSONAL.push({
+                idOferta: $("#idOfe").val(),
+              //  idPER: $("#idPER").val(),
+                bienServ_per : $("#bienServ_per_"+tdId).chosen().val(),
+                cant : $("#cant_per_"+tdId).val(),
+                region : $("#region_per_"+tdId).chosen().val(),
+                precioUnidad : $("#fila_region_per_"+tdId).val(),
+                totalUnidad : $("#fila_region_total_per_"+tdId).val(),
+            });            
+        });
+        
+        $('#ASEO > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_aseo_','');
+            OfertaEconomicaASEO.push({
+                idOferta: $("#idOfe").val(),
+               // idASEO: $("#idASEO").val(),
+                bienServ_aseo : $("#bienServ_aseo_"+tdId).chosen().val(),
+                cant : $("#cant_ase_"+tdId).val(),
+                region : $("#region_aseo_"+tdId).chosen().val(),
+                precioUnidad : $("#fila_region_aseo_"+tdId).val(),
+                totalUnidad : $("#fila_region_total_aseo_"+tdId).val(),
+            });            
+        });
+        
+        OfertaEconomicaAIU = JSON.stringify(OfertaEconomicaAIU);    
+        OfertaEconomicaPERSONAL = JSON.stringify(OfertaEconomicaPERSONAL);    
+        OfertaEconomicaASEO = JSON.stringify(OfertaEconomicaASEO);    
+        
+      //if(confirm('Realmente desea Guardar la Oferta Economica?')){ 
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=guardarOfertaEconomica',
+                    type: "POST",
+                    data:$('#envioDatos').serialize() + '&OfertaEconomicaAIU='+OfertaEconomicaAIU + '&OfertaEconomicaPERSONAL='+OfertaEconomicaPERSONAL + '&OfertaEconomicaASEO='+OfertaEconomicaASEO,
+                    success: function (msm){
+                    alert('Oferta Economica Guardada');    
+                    //$('#obsGenerales').html(msm);                        
+                    $('#componenteCentral').html(msm);
+                    }
+        });
+     // }  
+    }        
+
+</script>

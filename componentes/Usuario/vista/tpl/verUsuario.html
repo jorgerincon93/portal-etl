@@ -1,0 +1,67 @@
+{{COMODIN}}
+<div class="modal fade" id="miModalVer" tabindex="-1" role="dialog" aria-labelledby="miModalVer" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="miModalVer">DETALLE USUARIO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       
+  		<div class="row">
+        	<div class="col-md-6 mb-3">
+    			<label for="usuario">Usuario</label>
+    			   <input type="text" class="form-control" name="usuario" id="usuario" aria-describedby="usuario" placeholder="Login" readonly value="{{user.login}}"/>             
+            </div>        	
+  			<div class="col-md-6 mb-3">
+    			<label for="selectEstado">Estado</label>
+    			<input type="text" class="form-control" name="empleado" id="empleado" aria-describedby="empleado" placeholder="Tipo Documento" value="{{user.estado}}" readonly/>
+  			</div>
+  		</div>
+  		<div class="row">	
+  			<div class="col-md-6 mb-3">
+    			<label for="intento">Intento Ingreso</label>
+    			<input type="text" class="form-control" name="intento" id="intento" aria-describedby="intento" placeholder="Intento Ingreso" value="{{user.intento}}" readonly/>
+  			</div>
+  			<div class="col-md-6 mb-3">
+    			<label for="intento">Ultimo Ingreso</label>
+    			<input type="text" class="form-control" name="intento" id="intento" aria-describedby="intento" placeholder="Ultimo Ingreso" value="{{user.ultimoIngreso}}" readonly/>
+  			</div>
+  		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+              <!--  <tr>
+			<td class="tituloAlineado">Intento </td>
+			<td></td>
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Jerarquia </td>
+			<td>{{user.jerarquia}}</td>
+		</tr>
+                
+		<tr>
+			<td class="tituloAlineado">Ultimo Ingreso </td>
+			<td>{{user.ultimoIngreso}}</td>
+		</tr>
+		
+	</table>-->
+<script>
+function regresar(){
+	$.ajax({
+		url:'index_blank.php?component=usuarios&method=listadoUsuarios',
+		type: "POST",
+		success: function (msm){
+			$('#componente_central').html(msm);
+			$('.formError').remove();
+		}
+	});
+}
+</script>

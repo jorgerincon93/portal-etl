@@ -1,0 +1,68 @@
+{{COMODIN}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="2">DETALLE USUARIO</td>
+		</tr>
+		<tr>
+			<td class="tituloAlineado" width="35%">Usuario </td>
+			<td>{{ user.login }}</td>
+		</tr>
+		<tr>
+			<td class="tituloAlineado">Perfil </td>
+			<td>{{user.rol}}</td>
+		</tr>
+		<tr>
+			<td class="tituloAlineado">Nombre </td>
+			<td>{{user.nombreUsuario}}</td>
+		</tr>	
+                <tr>
+			<td class="tituloAlineado">Tipo Documento </td>
+			<td>{{user.tipoDocumento}}</td>
+		</tr>
+		<tr>
+			<td class="tituloAlineado">No. Documento </td>
+			<td>{{user.numeroDocumento}}</td>
+		</tr>
+                <!--<tr>
+			<td class="tituloAlineado">Area</td>
+			<td>{{user.area}}</td>
+		</tr>-->
+		<tr>
+			<td class="tituloAlineado">Email </td>
+			<td>{{user.email}}</td>
+		</tr>
+                <!--<tr>
+			<td class="tituloAlineado">Tipo de Acceso </td>
+			<td>{{user.tipoAcceso}}</td>
+		</tr>-->
+                <tr>
+			<td class="tituloAlineado">Estado </td>
+			<td>{{user.estado}}</td>
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Intento </td>
+			<td>{{user.intento}}</td>
+		</tr>
+                <!--<tr>
+			<td class="tituloAlineado">Jerarquia </td>
+			<td>{{user.jerarquia}}</td>
+		</tr>-->
+                
+		<tr>
+			<td class="tituloAlineado">Ultimo Ingreso </td>
+			<td>{{user.ultimoIngreso}}</td>
+		</tr>
+		
+	</table>
+<script>
+function regresar(){
+	$.ajax({
+		url:'index_blank.php?component=usuarios&method=listadoUsuarios',
+		type: "POST",
+		success: function (msm){
+			$('#componente_central').html(msm);
+			$('.formError').remove();
+		}
+	});
+}
+</script>

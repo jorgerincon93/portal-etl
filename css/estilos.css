@@ -1,0 +1,1303 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400');
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 0.8vw;
+}
+
+
+.menu{
+	/*background: orange;*/
+	width: 100%;
+	height: 60px;
+	margin: 0 auto;
+	overflow: hidden;
+	z-index: 1;
+	position: fixed;
+}
+.menu_scroll{
+	background-color: white;
+	width: 100%;
+	height: 60px;
+	z-index: 1;
+	position: fixed;
+}
+.logo{
+	width: 80px;
+	height: auto;
+	float: left;
+	position:absolute; left:2%;
+}
+
+.boton_menu{
+    padding: 15px;	
+	width: 2%;
+	height: auto;
+	position:absolute; left:50%;
+	display: none;
+}
+
+.boton_menu_scroll{
+	padding: 21px;	
+	width: 2.3%;
+	height: auto;
+	position:absolute; left:47%;
+}
+
+.buscar{
+	top: 15px;
+	width: 2%;
+	height: auto;
+	position:absolute;right: 20px;
+}
+
+.mail{
+	padding: 16px;
+	width: 2.5%;
+	height: auto;
+	position:absolute; right:5%;
+}
+
+.telefono{
+	padding: 15px;
+	width: 2.7%;
+	height: auto;
+	position:absolute; right:17%;
+}
+
+.texto_telefono{
+	top:18px;
+	position:absolute; right:10.5%;
+	font-weight: 300;
+	color:white;
+	font-size: 1.3vw;
+}
+
+.encabezado_principal{
+	background-image: url("../imagenes/ImagenHome.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+/*.imagen_principal{
+	width: 100%;
+	height:100%;
+}*/
+
+.imagen_responsive{
+		display: none;
+}
+
+
+.logo_principal{
+	padding-top: 60px;
+	width: 100%;
+	height: 120;
+	text-align: center;
+	z-index: 1;
+}
+
+.logo_principal_blanco{
+	width: 10%;
+	height: auto;
+}
+
+.texto_home1{
+	width: 55.7%;
+	color:white;
+	font-weight: 400;
+	font-size: 2.8vw;
+	text-align: right;
+	z-index: 1;
+	float: left;
+}
+
+.texto_home2{
+	width: 44.3%;
+	color:white;
+	font-weight: 400;
+	font-size: 2.8vw;
+	text-align: left;
+	z-index: 1;
+	float: right;
+}
+
+.texto2_home{
+	width: 100%;
+	color:white;
+	font-weight: 300;
+	font-size: 1.6vw;
+	text-align:center;
+}
+
+.imagen_consutoria
+{
+	z-index: 2;
+	top:200px;
+	width: 70px;
+	height: auto;
+	position:absolute; left: 20%;
+}
+
+.lineas_negocio{
+	width: 100%;
+    height: 350px;
+}
+
+.linea{
+		position: absolute;
+	}
+
+.img_linea{
+	width: 100%;
+    margin-top: 16.7%;
+    text-align: center;
+}
+
+.boton_consultoria{
+	width: 100%;
+	height: auto;
+	position: absolute
+}
+
+.img_boton_consultoria{
+	width: 7%;
+	margin-top: 13%;
+	margin-left: 15%;
+}
+
+.boton_outsourcing{
+	width: 20.7%;
+	height: auto;
+	top: 73%;
+	position: absolute;left: 37%;
+}
+
+.img_boton_outsourcing{
+	width: 7%;
+	margin-top: 13%;
+	margin-left: 12%;
+}
+
+.boton_bi{
+	width: 20%;
+	height: auto;
+	top: 73%;
+	position: absolute;left: 54%;
+}
+
+.img_boton_bi{
+	width: 15%;
+	margin-top: 13%;
+	margin-left: 10%;
+}
+
+.boton_innovacion{
+	width: 20%;
+	height: auto;
+	top: 73%;
+	position: absolute;left: 77%;
+}
+
+.img_boton_innovacion{
+	width: 7%;
+	margin-top: 13%;
+	margin-left: 10%;
+}
+
+.text3_home{
+	width: 100%;
+	color: #63c9ee;
+	font-weight: 300;
+	font-size: 2vw;
+	text-align: center;
+}
+
+.text4_home{
+	width: 90%;
+	margin: 0% 5% 0% 5%;
+	color: #424040;
+	font-weight: 300;
+	font-size: 1.3vw;
+	text-align: center;
+}
+
+.resumen_lineas_negocio{
+	width: 80%;
+	height: 1000px;
+	position: block;
+	margin: 5% 10% 0% 10%;
+}
+
+.caja1_resumen_consultoria{
+	width: 50%;
+	height: 25%;
+	position: block;
+	float: left;
+}
+
+.img_resumen_consultoria{
+	width: 95%;
+	height: auto;
+}
+
+.caja2_resumen_consultoria{
+	width: 50%;
+	height: 25%;
+	float: right;
+	position: block;
+	text-align: left;
+}
+
+.texto1_caja2_resumen_derecha{
+	width: 95%;
+	margin-left: 5%;
+	color: #63c9ee;
+	font-weight: 300;
+	font-size: 2vw;
+	text-align: left;
+}
+
+.texto2_caja2_resumen_derecha{
+	width: 95%;
+	margin-left: 5%;
+	color: #424040;
+	font-weight: 300;
+	font-size: 1.3vw;
+	text-align: left;
+}
+
+.boton_ver_mas{
+	width: 100%;
+	margin: 5% 0% 0% 0%;
+	text-align: center;
+}
+
+.img_boton_ver_mas{
+	width: 28%;
+}
+
+.caja1_resumen_innovacion{
+	width: 50%;
+	height: 25%;
+	float: left;
+}
+
+.img_resumen_innovacion{
+	width: 95%;
+	height: auto;
+}
+
+.caja2_resumen_innovacion{
+	width: 50%;
+	height: 25%;
+	margin: 0% 0% 0% 0%;
+	float: right;
+	text-align: right;
+}
+
+.texto1_caja1_resumen_izquierda{
+	width: 95%;
+	margin-right: 5%;
+	color: #63c9ee;
+	font-weight: 300;
+	font-size: 2vw;
+	text-align: left;
+}
+
+.texto2_caja2_resumen_izquierda{
+	width: 95%;
+	margin-right: 5%;
+	color: #424040;
+	font-weight: 300;
+	font-size: 1.3vw;
+	text-align: left;
+}
+
+.footer{
+	width: 100%;
+	height: 275px;
+}
+
+.imagen_footer_responsive{
+	display: none;
+}
+
+.imagen_footer{
+	width: 100%;
+	height: 275px;
+	position: absolute;
+	z-index: 0; 
+}
+
+.mapa_footer{
+	width: 30%;
+	height: 25%;
+	position: absolute;
+	margin: 3% 0% 0% 18%;
+	z-index: 0;
+}
+
+.imagen_mapa_etl{
+ width: 100%;
+ height: auto;
+}
+
+.frame_mapa{
+	width: 100%;
+	height: auto;
+}
+
+.celular_contacto{
+	width: 7%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 4% 0% 0% 50%;
+}
+
+.telefono_contacto{
+	width: 8%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 6% 0% 0% 50%;
+}
+
+.correo_contacto{
+	width: 12%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 8% 0% 0% 50%;
+}
+
+.direccion_contacto{
+	width: 19%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 10% 0% 0% 50%;
+}
+
+.texto_redes{
+	width: 20%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 12% 0% 0% 50%;
+	font-weight: 200;
+	color: #d8d8d8;
+	font-size: 1vw;
+}
+
+.link_google{
+	width: 2%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 14% 0% 0% 50%;
+}
+
+.link_twitter{
+	width: 2%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 14% 0% 0% 53%;
+}
+
+.link_facebook{
+	width: 2%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 14% 0% 0% 56%;
+}
+
+.link_pinterest{
+	width: 2%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 14% 0% 0% 59%;
+}
+
+.link_linkedin{
+	width: 2%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin: 14% 0% 0% 62%;
+}
+
+.texto_derechos{
+
+	width: 100%;
+	height: auto;
+	position: absolute;
+	z-index: 0;
+	margin-top: 18%;
+	font-weight: 200;
+	color: #d8d8d8;
+	font-size: 1.2vw;
+	text-align: center;
+}
+
+.principal_consultoria{
+	background-image: url("../imagenes/principal-consultoria.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: 50%;
+	height: 100%;
+}
+
+
+.principal_outsourcing{
+	background-image: url("../imagenes/principal-outsourcing.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: 50%;
+	height: 100%;
+}
+
+.principal_bi{
+	background-image: url("../imagenes/principal-bi.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: 50%;
+	height: 100%;
+}
+
+.principal_innovacion{
+	background-image: url("../imagenes/principal-innovacion.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: 50%;
+	height: 100%;
+}
+
+/*.img_principal_consultoria{
+	width: 100%;
+	height: auto;
+}*/
+
+.contenido1_consultoria , .contenido1_outsourcing, .contenido1_bi, .contenido1_innovacion{
+	width: 69%;
+    height: 260px;
+    margin: 0% 15.5% 0% 15.5%;
+}
+
+.div_img1_consultoria{
+	width: 22%;
+	height: auto;
+	float: left;
+}
+
+.img1_consultoria{
+	width: 100%;
+	height: auto;
+}
+
+.titulo_consultoria{
+	width: 75%;
+	height: auto;
+	margin: 2% 0% 1% 3%;
+	float: right;
+	color: #23b0e3;
+	font-size: 2.5vw;
+	font-weight: 200;
+}
+
+.texto_consultoria, .texto_outsourcing, .texto_bi, .texto_innovacion{
+	width: 75%;
+	height: auto;
+	margin: 0% 0% 0% 3%;
+	float: right;
+	color: #424040;
+	font-weight: 200;
+	font-size: 1.15vw;
+	text-align: left;
+}
+
+.contenido2_consultoria, .contenido2_outsourcing , .contenido2_innovacion{
+	width: 69%;
+    height: 190px;
+    margin: 0% 15.5% 0% 15.5%;
+}
+
+.img2_consultoria,.img2_outsourcing{
+	width: 22%;
+	height: auto;
+	margin: 0% 3% 0% 0%;
+}
+
+.texto_cantactenos3{
+	color: #d8d8d8;
+    width: 68%;
+    float: left;
+    margin: 1.8% 0% 0% 2.5%;
+    text-align:center;
+	display: none;
+}
+
+
+.img3_consultoria,.img3_outsourcing{
+	width: 22%;
+	height: auto;
+	margin: 0% 4% 2.3% 0%;
+}
+
+.img4_consultoria,.img4_outsourcing{
+	width: 22%;
+	height: auto;
+	margin: 0% 4% 2.3% 0%;
+}
+
+.img5_consultoria,.img5_outsourcing{
+	width: 22%;
+	height: auto;
+	margin: 0% 0% 2.3% 0%;
+}
+
+.texto_cantactenos{
+    background-color:#707070;
+    width: 69%;
+    height: 10%;
+    margin: 0% 15.5% 0% 15.5%;
+    
+}
+.texto_cantactenos2{
+    color: #d8d8d8;
+    width: 68%;
+    float: left;
+    margin: 1.8% 0% 0% 2.5%;
+    text-align:center;
+    display: none;
+    font-size: 1vw;
+}
+   
+.boton_cantactenos{
+
+    width: 25%;
+    height: auto;
+    float: right;
+    text-align:center;
+       }
+   
+.img_boton-contactenos{
+       
+       width: 60%;
+       height: auto;
+       margin-top: 13%;
+       }
+   
+.contenido3_consultoria, .contenido3_outsourcing, .contenido3_bi, .contenido3_innovacion{
+       width: 69%;
+       height: 190px;
+       margin: 2% 15.5% 0% 15.5%;
+       }
+.img6_consultoria,.img6_outsourcing, .img6_bi, .img6_innovacion{
+       width: 22%;
+	   height: auto;
+       margin: 0% 3% 2.3% 0%;
+       }
+
+.img7_consultoria,.img7_outsourcing, .img7_bi, .img7_innovacion{
+	width: 22%;
+	height: auto;
+	margin: 0% 4% 2.3% 0%;
+       }
+
+.img8_consultoria,.img8_outsourcing, .img8_bi, .img8_innovacion{
+	width: 22%;
+	height: auto;
+	margin: 0% 4% 2.3% 0%;
+        }
+
+.img9_outsourcing, .img9_bi, .img9_innovacion{
+    width: 22%;
+	height: auto;
+	margin: 0% 0% 2.3% 0%;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    /*background-color: #fefefe;*/
+    margin: auto;
+    padding: 135px 20% 0% 20%;
+    /*border: 1px solid #888;*/
+    width: 60%;
+    text-align: center;
+}
+
+.modal-content-contactenos{
+	/*background-color: #fefefe;*/
+    margin: auto;
+    padding: 135px 26.5% 0% 26.5%;
+    /*border: 1px solid #888;*/
+    width: 45%;
+    text-align: center;
+}
+
+/* The Close Button */
+.close,.closecon {
+    color: white;
+    float: right;
+    font-size: 50px;
+    font-weight: bold;
+    padding: 0px 23px 0px 0px;
+}
+
+.close:hover,
+.close:focus,
+.closecon:hover,
+.closecon:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.buscar_modal{
+	width: 3%;
+	z-index: 2;
+}
+
+.titulo_busqueda{
+	font-size: 1.7vw;
+	font-weight: 300;
+	color: white;
+}
+
+.texto1_contactenos{
+	font-size: 1vw;
+	font-weight: 200;
+	color: white;
+}
+
+.texto_campos{
+	font-size: 1vw;
+	font-weight: 200;
+	color: white;
+}
+
+
+.caja_de_texto_buscar {
+	font-weight: 200;
+	width: 70%;
+	height: 4%;
+	background-color: rgba(211,211,211,0.5);
+	border: 1px solid #A8A8A8;
+	border-radius: 3px 3px 3px 3px;
+	font-size: 1.5vw;
+	color: white;
+}
+
+.caja_de_texto_contactenos {
+	font-weight: 200;
+	width: 75%;
+	height: 3%;
+	background-color: rgba(211,211,211,0.5);
+	border: 1px solid #A8A8A8;
+	border-radius: 3px 3px 3px 3px;
+	font-size: 1vw;
+	color: white;
+}
+
+.formulario_contactenos{
+	padding: 0% 0% 2% 0%
+}
+
+.select_contactenos{
+	font-weight: 200;
+	width: 75%;
+	height: 3%;
+	background-color: rgba(211,211,211,0.5);
+	border: 1px solid #A8A8A8;
+	border-radius: 3px 3px 3px 3px;
+	font-size: 1vw;
+	color: white;
+}
+
+.option_select_contactenos{
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+
+.boton_form_contactenos{
+	font-weight: 200;
+	width: 30%;
+	height: 4%;
+	background-color: rgba(211,211,211,0.5);
+	border: 1px solid #A8A8A8;
+	border-radius: 3px 3px 3px 3px;
+	font-size: 1vw;
+	color: white;
+}
+
+.search{
+
+	width: 41%;
+	/*max-width: 1000px;*/
+	margin: auto;
+	background: #fff;
+	padding: 0 10px;
+	padding-bottom: 5px;
+	max-height: 85%;
+	overflow-x: hidden;
+	opacity: 0.5;
+}
+
+#myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+   /* border: 1px solid #ddd; Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+
+@media screen and (max-width: 800px)
+{
+	.logo{
+		display: none;
+	}
+	.logo_principal
+	{
+	top: 16%;
+	width: 100%;
+	height: auto;
+	}
+
+	.encabezado_principal{
+		background-image: url("../imagenes/imagen-home-responsive.png");
+		height: 100%;
+	}
+
+	.imagen_responsive{
+		margin-top: -10px;
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: auto;
+	}
+
+	.logo_principal_blanco{
+	top: 16%;
+	width: 20%;
+	height: auto;
+	}
+
+
+	.boton_menu{
+	display:inline;
+	padding: 15px;
+	width: 25px;
+	position:absolute; left:0%
+	}
+
+	.boton_menu_scroll{
+	width:25px;
+	margin:0% 0% 0% -7%;
+	}
+
+	.telefono{
+	padding: 13px;
+	width: 28px;
+	position:absolute; right:18%
+	}
+
+	.mail{
+	padding: 15px;
+	width: 25px;
+	position:absolute; right:8%
+	}
+
+	.buscar{
+	width: 20px;
+	position:absolute;right: 2%;
+	}
+
+	.texto_telefono{
+	display: none;
+	}
+
+	.texto_home1{
+	display: inline;
+	width: 100%;
+	top: 27%;
+	font-size: 8vw;
+	text-align: center;
+	z-index: 1;
+	}
+
+	.texto_home2{
+	width: 100%;
+	top: 31%;
+	font-size: 8vw;
+	text-align: center;
+	z-index: 1;
+	}
+
+	.texto2_home{
+	width: 100%;
+	top: 38%;
+	font-size: 4.8vw;
+	text-align: center;
+	z-index: 1;
+	}
+
+	.linea{
+		display: none;
+	}
+
+	.img_boton_consultoria{
+	width: 20%;
+	margin-top: 10%;
+	z-index: 1;
+	height: auto;
+	margin-left: 20%;
+	}
+
+	.img_boton_outsourcing{
+	width: 20%;
+	margin-left: 25%;
+	margin-top: 10%;
+	z-index: 1;
+	height: auto;
+	}
+
+	.img_boton_bi{
+	width: 40%;
+	z-index: 1;
+	height: auto;
+	margin-left: 10%;
+	margin-top: 10%;
+	}
+
+	.img_boton_innovacion{
+	width: 20%;
+	z-index: 1;
+	height: auto;
+	margin-left: 15%;
+	margin-top: 10%;
+	}
+
+	.text3_home{
+    padding-right: 0%;
+    padding-bottom: 0%;
+    padding-left: 0%;
+	width: 100%;
+	color: #63c9ee;
+	font-size: 6vw;
+	text-align: center;
+	z-index: 1;
+	}
+
+	.text4_home{
+	width: 100%;
+	margin: 0% 4% 4% 0%;
+	font-size: 4vw;
+	font-weight: 300;
+	z-index: 1;
+	height: auto;		
+	}
+
+	.resumen_lineas_negocio{
+	width: 100%;
+	height: auto;
+	margin: 0% 0% 0% 0%;
+	}
+
+	.caja1_resumen_consultoria{
+		width: 100%;
+		height: auto;
+		float: none;
+	}
+
+	.img_resumen_consultoria{
+		width: 100%;
+	}
+
+	.caja2_resumen_consultoria{
+		width: 100%;
+		height: auto;
+		float: none;
+		margin: 0% 0% 5% 0%;
+	}
+
+	.texto1_caja2_resumen_derecha{	
+		margin: 0% 0% 0% 0%;	
+		width: 100%;
+		text-align: center;
+		font-size: 6vw;
+	}
+
+	.texto2_caja2_resumen_derecha{
+		margin: 0% 0% 0% 1%;
+		width: 100%;
+		font-size: 4vw;
+		text-align: left;
+	}
+
+	.caja1_resumen_innovacion{
+		width: 100%;
+		height: auto;
+		float: none;
+		margin: 0% 0% 5% 0%;
+	}
+
+	.img_resumen_innovacion{
+		width: 100%;
+	}
+
+	.texto1_caja1_resumen_izquierda{
+		margin: 0% 0% 0% 0%;	
+		width: 100%;
+		text-align: center;
+		font-size: 6vw;
+	}
+
+	.caja2_resumen_innovacion{
+		width: 100%;
+		height: auto;
+		float: none;
+	}
+	
+
+	.texto2_caja2_resumen_izquierda{
+		margin: 0% 0% 0% 1%;
+		width: 100%;
+		font-size: 4vw;
+		text-align: left;
+	}
+
+	.footer {
+    width: 100%;
+    height: 42%;
+	}
+
+	.imagen_footer{
+		display: none;
+	}
+
+	.imagen_footer_responsive{
+		display: inline;
+		width: 100%;
+		height: auto;
+		position: absolute;
+	}
+
+
+	.mapa_footer{
+		width: 80%;
+		height: auto;
+		margin-top: 2%;
+		margin-left: 10%;
+	}
+
+	.imagen_mapa_etl{
+		display: inline;
+		width: 100%;
+		height: auto;
+	}
+
+	.celular_contacto{
+		width: 25%;
+		margin-top:42%;
+		margin-left: 35%;
+	}
+
+	.telefono_contacto{
+		width: 25%;
+		margin-top: 47%;
+		margin-left: 35%;
+	}
+
+	.correo_contacto{
+		width: 40%;
+		height: auto;
+		margin-top:52%;
+		margin-left: 29%;
+	}
+
+	.direccion_contacto{
+		width: 55%;
+		height: auto;
+		margin-top: 56%;
+		margin-left: 22%;
+	}
+
+	.texto_derechos{
+		width: 100%;
+		margin-top:65%;
+		font-size: 3.5vw;
+		font-weight: 300;
+	}
+
+	.texto_redes{
+		display: none;
+	}
+
+	.link_pinterest{
+		display: none;
+	}
+
+	.link_linkedin{
+		display: none;
+	}
+
+	.link_facebook{
+		display: none;
+	}
+
+	.link_twitter{
+		display: none;
+	}
+
+	.link_google{
+		display: none;
+	}
+
+	.div_img1_consultoria{
+		width: 25%;
+		height: auto;
+	}
+
+	.contenido1_consultoria , .contenido1_outsourcing, .contenido1_innovacion, .contenido2_outsourcing, .contenido3_outsourcing{
+	width: 90%;
+    height: 292px;
+    margin: 0% 5% 0% 5%;
+	}
+
+
+	.contenido2_consultoria{
+		width: 90%;
+	    height: auto;
+	    margin: 2% 5% 0% 5%;
+	}
+
+	.contenido3_consultoria{
+		width: 90%;
+		height: auto;
+		margin: 2% 5% 0% 5%;
+	}
+
+	.titulo_consultoria{
+		width: 70%;
+		margin: 8% 0% 0% 5%;
+		font-size: 8vw;
+		font-weight: 300;
+	}
+
+	.texto_consultoria, .texto_outsourcing, .texto_bi, .texto_innovacion{
+		width: 100%;
+		font-size: 3.7vw;
+		margin: 5% 0% 0% 0%;
+	}
+
+	.img2_consultoria{
+		width: 45%;
+		margin: 5% 4% 0% 0%;
+	}
+
+	.img3_consultoria{
+		width: 45%;
+		margin: 0% 0% 0% 0%;
+	}
+
+	.img4_consultoria{
+		width: 45%;
+		margin-top: 5%;
+	}
+
+	.img5_consultoria{
+		width:45%;			
+		margin-top: 5%;
+	}
+
+	.img6_consultoria{
+		width:45%;
+		margin: 5% 8% 0% 0%;
+	}
+
+	.img7_consultoria{
+		width:45%;
+		margin: 5% 0% 0% 0%;
+	}
+
+	.img8_consultoria{
+		width:45%;
+		margin: 5% 8% 5% 0%;
+	}
+
+	.img2_outsourcing{
+	width: 45%;
+    margin: 5% 4% 0% 0%;
+	}
+
+	.img3_outsourcing{
+	width: 45%;
+    margin: 0% 0% 0% 0%;
+	}
+
+	.img4_outsourcing{
+	width: 45%;
+    margin-top: 5%;
+	}
+
+	.img5_outsourcing{
+	width: 45%;
+    margin-top: 5%;
+	}
+
+	.img6_outsourcing{
+	width:45%;
+	margin: 5% 8% 0% 0%;
+	}
+
+	.img7_outsourcing{
+	width:45%;
+	margin: 5% 0% 0% 0%;
+	}
+
+	.img8_outsourcing{
+	width:45%;
+	margin: 5% 8% 5% 0%;
+	}
+
+	.img9_outsourcing{
+	width: 45%;
+	margin: 5% 0% 5% 0%;
+	}
+
+	.principal_bi{
+	background-image: url(../imagenes/bi-responsive.png);
+    background-repeat: no-repeat;
+    background-size: 1000px 575px;
+    background-attachment: fixed;
+    background-position: 52%;
+    height: 100%;
+
+	}
+
+	.contenido1_bi{
+
+	width: 90%;
+    height: 200px;
+    margin: 0% 5% 0% 5%;
+	}
+
+	.contenido3_bi{
+	width: 90%;
+	height: 290px;
+    margin: 0% 5% 0% 5%;
+	}
+
+	.img6_bi{
+	width: 45%;
+	margin: 5% 4% 0% 0%;
+	}
+
+	.img7_bi{
+	width: 45%;
+	margin: 0% 0% 0% 0%;
+	}
+
+	.texto_cantactenos{
+	width: 90%;
+	margin-left: 5%;
+	}
+
+	.img8_bi{
+	width: 45%;
+	margin: 5% 4% 0% 0%;
+	}
+
+	.img9_bi{
+	width: 45%;
+	margin: 5% 4% 0% 0%;
+	}
+
+	.contenido3_innovacion{
+	width: 90%;
+	height: auto;
+    margin: 0% 5% 0% 5%;
+	}
+
+	.img6_innovacion{
+	width: 45%;
+	margin: 5% 4% 1% 0%;
+	}
+
+	.img7_innovacion{
+	width: 45%;
+	margin: 0% 0% 0% 0%;
+	}
+
+	.img8_innovacion{
+	width: 45%;
+	margin: 5% 4% 0% 0%;
+	}
+
+	.img9_innovacion{
+	width: 45%;
+	margin: 5% 4% 0% 0%;
+	}
+
+	.texto_cantactenos{
+		width: 90%;
+		margin-left: 5%;
+	}
+
+	.texto_cantactenos2{
+		width: 90%;
+		font-size: 2vw;
+
+	}
+
+	.img_boton-contactenos{
+		width: 100%;
+		margin-top: 10%;
+		margin-left: -320%;
+	}
+	
+}

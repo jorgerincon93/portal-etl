@@ -1,0 +1,83 @@
+{{COMODIN}}
+
+<!-- Modal -->
+<div class="modal fade" id="miModalAdd" tabindex="-1" role="dialog" aria-labelledby="miModalAdd" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="miModalAdd">{{titulo_tabla}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="container" name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()" method="POST">
+          
+  		<div class="row">
+        	<div class="col-md-6 mb-3">
+            <label for="empleado">Empleado</label>
+             <select class="form-control" id="empleado" name="empleado" required>
+               {{select_empleado|raw}}
+             </select>   
+          </div>          
+        <div class="col-md-6 mb-3">
+            <label for="item">Item</label>
+             <select class="form-control" id="item" name="item" required>
+               {{select_item|raw}}
+             </select>   
+        </div> 
+  		</div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="valor">Valor</label>          
+            <input type="text" class="form-control" name="valor" id="valor" aria-describedby="valor" placeholder="Valor" value="" required/>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="periodo">Periodo</label>          
+            <input type="text" class="form-control" name="periodo" id="periodo" aria-describedby="periodo" placeholder="Periodo" value="" required/>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="estado">Estado</label>
+             <select class="form-control" id="estado" name="estado" required>
+               {{select_estado|raw}}
+             </select>   
+        </div> 
+      </div>
+  	
+            <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+            <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+  	
+  		
+        </form>
+    </div>  
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" form="envioDatos" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();
+	});
+
+function EnviarFormulario(){
+		
+		  $.ajax({
+            url:'index_blank.php?component=DespreNomina&method=guardarDespreNomina',
+            type: "POST",
+            data:$('#envioDatos').serialize(),
+            success: function (msm){
+
+                $('#miModalAdd').modal('hide');
+               // location.reload('index_blank.php?component=Nomina&method=mostrarNomina'+{{idMenu}});
+            }
+          });                  
+			
+		
+}
+
+</script>

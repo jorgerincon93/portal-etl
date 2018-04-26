@@ -1,0 +1,33 @@
+{{COMODIN}}
+<table id="listaJobs" class="tablaGeneral" border="1" align="center">
+
+        <tr class="titulo">
+            <th colspan="3" style="text-align: center">GENERAR ORDEN DE COMPRA</th>
+        </tr>
+       
+</table>
+<br>
+<div style="padding-top: 20px; text-align: right; width: 100%">
+     <input type="button" class="botonGeneralGrandeAprobar" value="Generar Orden Compra" onclick="EnviarFormulario();" />
+        
+</div>
+
+<script>
+
+ function EnviarFormulario(){         
+      
+      //if(confirm('Realmente Desea Generar La Orden De Compra?')){ 
+        $.ajax({
+            url:'index_blank.php?component=OfertaEconomica&method=generarOrden',
+                    type: "POST",
+                    data:$('#envioDatos').serialize(),
+                    success: function (msm){
+                    alert('Orden De Compra Guardada');    
+                   jQuery.fancybox.close(msm);                      
+                    $('#componenteCentral').html(msm);
+                    }
+        });
+      //}  
+    }  
+
+</script>

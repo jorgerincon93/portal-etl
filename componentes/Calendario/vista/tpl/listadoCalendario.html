@@ -1,0 +1,166 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaUsuarios">    
+    <div id="usuarios"></div>
+</table>
+
+<script>
+
+$(function() {
+ 
+    $("#usuarios").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=Usuario&method=ajaxListaUsuario&idMenu="+{{idMenu}},
+        row_primary_key: "idUsuario", 
+        columns: [
+            {field: "idUsuario", header: "Id" , visible: "no"},
+            {field: "login", header: "Login"},
+            {field: "nombreUsuario", header: "Nombre"},
+            {field: "email", header: "correo"},
+            //{field: "area", header: "Area"},
+            {field: "idRol", header: "Rol"},
+            {field: "intento", header: "Intento Clave", visible: "no"},
+            //{field: "idPadre", header: "Jeraquia", visible: "no"},
+            {field: "estado", header: "Estado"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+        ],
+        sorting: [
+            {sortingName: "login", field: "login", order: "ascending"},
+            {sortingName: "nombre", field: "nombre", order: "none"},
+            {sortingName: "rol", field: "idRol", order: "none"}
+            //{sortingName: "area", field: "area", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "FiltroNombre", "filterType": "text", field: "nombreUsuario", filterLabel: "Nombre",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Login", "filterType": "text", field: "login", filterLabel: "Login",
+                    excluded_operators: ["in", "not_in"],
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Rol", "filterType": "number", "numberType": "integer", field: "idRol", filterLabel: "Rol",
+                    excluded_operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal"],
+                    filter_interface: [
+                        {
+                            filter_element: "select"
+                        }
+                    ],                    
+                    lookup_values_ajax_url: "index_blank.php?component=Usuario&method=ajaxListaRoles"
+                },
+                {
+                    filterName: "Email", "filterType": "text", field: "email", filterLabel: "Email",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                /*{
+                    filterName: "Area", "filterType": "text", field: "area", filterLabel: "Area",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },*/
+                {
+                    filterName: "Intento", "filterType": "number", field: "intento", filterLabel: "Intento Clave",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Estado", "filterType": "text", field: "estado", filterLabel: "Estado",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                }
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 500,
+		maxHeight	: 800,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verUsuario(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=Usuario&method=verUsuarios',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarUsuario(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=Usuario&method=agregarUsuario&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+                }
+	});
+}
+
+function editarUsuario(id){
+
+	$.ajax({
+		url:'index_blank.php?component=Usuario&method=editarUsuario',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function eliminarUsuario(id, nombre){
+	if(confirm('Realmente desea eliminar el usuario '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=Usuario&method=eliminarUsuario&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Usuario ' +nombre+ ' Eliminado');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	}
+}
+</script>

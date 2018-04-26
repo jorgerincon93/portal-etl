@@ -1,0 +1,119 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaCalidad">    
+    <div id="calidad"></div>
+</table>
+
+<script>
+
+
+$(function() {
+ 
+    $("#calidad").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=Calidad&method=ajaxListaCalidad&idMenu="+{{idMenu}},
+        row_primary_key: "idCalidad", 
+        columns: [
+            {field: "id", header: "Id" , visible: "no"},
+            {field: "geo", header: "Geo"},
+            {field: "call", header: "Call Center"},
+            {field: "pendiente", header: "Pendientes"},
+            {field: "limpieza", header: "Limpieza"},
+            {field: "estado", header: "Estado"}
+        ],
+        sorting: [
+            {sortingName: "geo", field: "geo", order: "ascending"},
+            {sortingName: "call", field: "call", order: "none"},
+            {sortingName: "pendiente", field: "pendiente", order: "none"},
+            {sortingName: "limpieza", field: "limpieza", order: "none"},
+            {field: "estado", header: "Estado", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "FiltroGeo", "filterType": "text", field: "geo", filterLabel: "Geo",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Pendientes", "filterType": "text", field: "pendiente", filterLabel: "Pendiente",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                }
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 800,
+		fitToView	: true,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verCalidad(idCalidad){
+	$.ajax({
+		url:'index_blank.php?component=Calidad&method=verCalidad',
+		data:'id='+idCalidad,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarCalidad(id_calidad){
+	$.ajax({
+		url:'index_blank.php?component=Calidad&method=agregarCalidad&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function editarCalidad(id){
+
+	$.ajax({
+		url:'index_blank.php?component=Calidad&method=editarCalidad',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+//function eliminarCliente(id, nombre){
+//	if(confirm('Realmente desea eliminar el Cliente '+nombre+' ?')){
+//		$.ajax({
+//		  type: "POST",
+//		  url: 'index_blank.php?component=Clientes&method=eliminarCliente&id='+id+'&idMenu='+{{idMenu}},
+//		  success: function(msm){
+//                      alert('Cliente ' +nombre+ ' Eliminado');
+//		   $('#componenteCentral').html(msm);
+//		  }
+//		});
+//	}
+//}
+
+
+		</script>

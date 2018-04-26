@@ -1,0 +1,145 @@
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="ItemMaster"></div>
+</table>
+
+<script>
+
+
+$(function() {
+ 
+    $("#ItemMaster").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=ItemMaster&method=ajaxListaItems&idMenu="+{{idMenu}},
+        row_primary_key: "idListaValor", 
+        columns: [
+            {field: "id", header: "Id" , visible: "no"},
+            {field: "idCategoria", header: "idCategoria", visible: "no"},
+            {field: "idFabricante", header: "idFabricante", visible: "no"},
+            {field: "idMarca", header: "idMarca", visible: "no"},
+            {field: "nombreCategoria", header: "Categoria"},
+            {field: "nombreFabricante", header: "Fabricante"},            
+            {field: "nombreMarca", header: "Marca"},
+            {field: "idAtributo", header: "idAtributo", visible: "no"},
+            {field: "idItemAtributo", header: "idItemAtributo", visible: "no"},
+            {field: "idItem", header: "idItem", visible: "no"},
+            {field: "nombreAtributo", header: "Atributo"},
+            {field: "valor", header: "Valor"},            
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+            
+        ],
+        sorting: [
+            {sortingName: "Categoria", field: "nombreCategoria", order: "ascending"},
+            {sortingName: "Fabricante", field: "nombreFabricante", order: "none"},
+            {sortingName: "Marca", field: "nombreMarca", order: "none"},
+            {sortingName: "Atributo", field: "nombreAtributo", order: "none"},
+            {sortingName: "Valor", field: "valor", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "FiltroCategoria", "filterType": "text", field: "nombreCategoria", filterLabel: "Categoria",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "FiltroFabricante", "filterType": "text", field: "nombreFabricante", filterLabel: "Fabricante",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "FiltroMarca", "filterType": "text", field: "nombreMarca", filterLabel: "Marca",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "FiltroAtributo", "filterType": "text", field: "nombreAtributo", filterLabel: "Atributo",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "FiltroValor", "filterType": "text", field: "valor", filterLabel: "Valor",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                }
+                        
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 700,
+		maxHeight	: 1100,
+		fitToView	: true,
+		width		: '90%',
+		height		: '90%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verItem(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=ItemMaster&method=verItem',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+
+function editarItem(id){
+
+	$.ajax({
+		url:'index_blank.php?component=ItemMaster&method=editarItem',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function eliminarItem(id, nombre){
+	if(confirm('Realmente desea eliminar el Cliente '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=ItemMaster&method=eliminarItem&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Cliente ' +nombre+ ' Eliminado');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	}
+}
+
+
+		</script>

@@ -1,0 +1,9 @@
+<script>
+    $.ajax({
+		url:'index_blank.php?component=FormatoMedicion&method=mostrarFormatoMedicion&idMenu=12',
+		data:'idResumenJob='+ {{idResumenJob}},
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+</script>

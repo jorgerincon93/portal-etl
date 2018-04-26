@@ -1,0 +1,192 @@
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="insumos"></div>
+</table>
+
+<script>
+
+
+$(function() {
+ 
+    $("#insumos").bs_grid({
+
+        ajaxFetchDataURL: "index_blank.php?component=Insumos&method=ajaxListaInsumos&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            {field: "id", header: "Id", visible: "no"},
+            {field: "nombre", header: "Nombre Producto"},
+           // {field: "serial", header: "Serial"},
+            {field: "referencia", header: "Referencia"},
+            {field: "categoria", header: "Categoria"},
+            {field: "tipo", header: "Tipo"},
+            {field: "nombreMarca", header: "Nombre Marca"},
+            {field: "tamano", header: "Tamaño"},
+            {field: "empaque", header: "Empaque"},
+            {field: "olor", header: "Olor"},
+            {field: "presentacion", header: "Presentacion"},
+            {field: "descripcion", header: "Descripcion"},
+            {field: "countDetProducto", header: "Num de Productos"},
+            {field: "estado", header: "Estado"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+            
+        ],
+        sorting: [
+            {sortingName: "Categoria", field: "categoria", order: "ascending"},
+            {sortingName: "Nombre", field: "nombre", order: "ascending"},
+            {sortingName: "Tipo", field: "tipo", order: "none"},
+            {sortingName: "nombre Marca", field: "nombreMarca", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "Nombre", "filterType": "text", field: "nombre", filterLabel: "Nombre",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Categoria", "filterType": "number", "numberType": "integer", field: "categoria", filterLabel: "Categoria",
+                    excluded_operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal"],
+                    filter_interface: [
+                        {
+                            filter_element: "select"
+                        }
+                    ],
+                    lookup_values_ajax_url: "index_blank.php?component=Insumos&method=ajaxListaProdCateInsumos"
+                },    
+                {
+                    filterName: "Tipo", "filterType": "number", "numberType": "integer", field: "tipo", filterLabel: "Tipo",
+                    excluded_operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal"],
+                    filter_interface: [
+                        {
+                            filter_element: "select"
+                        }
+                    ],
+                    lookup_values_ajax_url: "index_blank.php?component=Insumos&method=ajaxListaProdTipoInsumos"
+                },
+                {
+                    filterName: "Marca", "filterType": "text", field: "nombreMarca", filterLabel: "Nombre Marca",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Tamaño", "filterType": "text", field: "tamano", filterLabel: "Tamaño",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Empaque", "filterType": "text", field: "empaque", filterLabel: "Empaque",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Olor", "filterType": "text", field: "olor", filterLabel: "Olor",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Presentacion", "filterType": "text", field: "presentacion", filterLabel: "Presentacion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                },
+                {
+                    filterName: "Descripcion", "filterType": "text", field: "descripcion", filterLabel: "Descripcion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                }
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 800,
+		fitToView	: true,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verInsumos(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=Insumos&method=verInsumos',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarInsumos(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=Insumos&method=agregarInsumos&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+                }
+	});
+}
+
+function editarInsumos(id){
+
+	$.ajax({
+		url:'index_blank.php?component=Insumos&method=editarInsumos',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function eliminarInsumos(id, nombre){
+	//if(confirm('Realmente desea eliminar el Insumo '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=Insumos&method=eliminarInsumos&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Insumo ' +nombre+ ' Inactivado');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	//}
+}
+
+
+</script>

@@ -1,0 +1,211 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatosAgregar" action="javascript:EnviarFormulario()">
+	<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="3">{{titulo_tabla}}</td>
+                        
+		</tr>
+		<tr>
+			<td class="tituloAlineado">Nombre Rol</td>
+			<td>
+				<div class="ui-widget">
+					<select class="combobox required" name="rol" id="rol">{{select_rol|raw}}</select>
+				</div>
+			</td>
+		        <td id="acciones_rol"><a class="various fancybox.ajax" href="index_blank.php?component=Privilegios&method=agregarRol&idMenu={{idMenu}}"><button type="button" class="btn btn-link" title="Agregar Rol"><span class="glyphicon glyphicon-plus"></span> </button></td>
+                </tr>
+		<tr>
+			<td class="tituloAlineado">Nombre Menu Padre</td>
+			<td>
+				<div class="ui-widget">
+					<select class="combobox required" name="menuPadre" id="menuPadre">{{select_menu_padre|raw}}</select>
+				</div>
+			</td>
+                        <td></td>
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Nombre Menu Hijo</td>
+			<td>
+				<div class="ui-widget">
+					<select class="combobox required" name="menuHijo" id="menuHijo"  {{disabled}}>{{select_menu_hijo|raw}}</select>
+				</div>
+			</td>
+                        <td></td>
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Nombre Menu Hijo</td>
+			<td>
+				<div class="ui-widget">
+					<select class="combobox required" name="menuHijo2" id="menuHijo2"  {{disabled}}>{{select_menu_hijo2|raw}}</select>
+				</div>
+			</td>
+                        <td></td>
+		</tr>
+		<tr>
+			<td class="tituloAlineado">Editar </td>
+			<td>
+				<div class="ui-widget">
+					<select class="combobox required" name="editar" id="editar">{{select_editar|raw}}</select>
+				</div>
+			</td>
+                        <td></td>
+		</tr>
+                
+                <tr>
+			<td class="tituloAlineado">Eliminar </td>
+                        <td>
+                            <div class="ui-widget">
+                                            <select class="combobox required" name="eliminar" id="eliminar">{{select_eliminar|raw}}</select>
+                            </div>
+                        </td>
+                        <td></td>
+			
+		</tr>
+                <tr>
+			<td class="tituloAlineado">Crear </td>
+			<td>
+                            <div class="ui-widget">
+                                            <select class="combobox required" name="crear" id="crear">{{select_crear|raw}}</select>
+                            </div>
+                        </td> 
+                        <td></td>
+		</tr>
+               
+	</table>
+           
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Privilegio" />
+	</div>
+	<input type="hidden" name="id" id="id" value="{{datoPrivilegios.id}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+        <input type="hidden" name="nomRol" id="nomRol" />
+        
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();                
+	});
+        
+        
+     $("#menuPadre").change(function() {
+                    
+        var idRol = $("#rol").chosen().val();
+        var menuPadre =this.value;
+        if (this.value > 0){
+            $("#menuHijo").attr('disabled', false).trigger("chosen:updated");
+            
+            //LLAMAR COMPLETAR EL SELECT HIJO
+            $.ajax({
+            url:'index_blank.php?component=Privilegios&method=agregarMenuHijo',
+                    type: "POST",
+                    data:'idRol=' + idRol,
+                    success: function (msm){
+                        //$("#codiDane").val(msm);                        
+                        $("#menuHijo").html(msm);
+                        $("#menuHijo").trigger("chosen:updated");                            
+                    }
+            });  
+            
+        }
+        else{
+            $("#menuHijo").val(null).trigger("chosen:updated");
+            $("#menuHijo").attr('disabled', true).trigger("chosen:updated");
+            
+        }
+    });
+        
+	/*$("#menuPadre").change(function() {
+        
+        var menuPadre =this.value;
+        if (this.value > 0){
+            $("#menuHijo").attr('disabled', false).trigger("chosen:updated");
+            
+            //LLAMAR COMPLETAR EL SELECT HIJO
+            $.ajax({
+            url:'index_blank.php?component=Privilegios&method=agregarMenuHijo',
+                    type: "POST",
+                    data:'menuPadre=' + menuPadre,
+                    success: function (msm){
+                        //$("#codiDane").val(msm);                        
+                        $("#menuHijo").html(msm);
+                        $("#menuHijo").trigger("chosen:updated");                            
+                    }
+            });  
+            
+        }
+        else{
+            $("#menuHijo").val(null).trigger("chosen:updated");
+            $("#menuHijo").attr('disabled', true).trigger("chosen:updated");
+            
+        }
+    });
+    
+    $("#menuHijo").change(function() {
+        
+        var menuPadreHijo =this.value;
+        
+        if ((this.value > 0) &&  (menuPadreHijo == 3)){
+            $("#menuHijo2").attr('disabled', false).trigger("chosen:updated");
+            
+            //LLAMAR COMPLETAR EL SELECT HIJO
+            $.ajax({
+            url:'index_blank.php?component=Privilegios&method=agregarMenuHijo2',
+                    type: "POST",
+                    data:'menuPadre=' + menuPadreHijo,
+                    success: function (msm){
+                        //$("#codiDane").val(msm);                        
+                        $("#menuHijo2").html(msm);
+                        $("#menuHijo2").trigger("chosen:updated");                            
+                    }
+            });  
+            
+        }
+        else{
+            $("#menuHijo2").val(null).trigger("chosen:updated");
+            $("#menuHijo2").attr('disabled', true).trigger("chosen:updated");
+            
+        }
+    });*/
+    
+   
+    
+    function RolValido(){
+    
+        var valRol = $('#rol').val();
+        
+        $.ajax({
+            url:'index_blank.php?component=Privilegios&method=validarRepetidoRol',
+            type: "POST",
+            data:'rol=' + valRol,
+            success: function (msm){                
+               
+               $('#nomRol').html(msm);
+            }
+        });
+        
+        
+       
+    } 
+	function EnviarFormulario(){
+		
+                $.ajax({
+			url:'index_blank.php?component=Privilegios&method=guardarPrivilegios',
+			type: "POST",
+			data:$('#envioDatosAgregar').serialize(),
+			success: function (msm){
+                                    
+                                    jQuery.fancybox.close();
+                                    $('#componenteCentral').html(msm);
+                                    
+		            }    
+			
+			});	
+	}
+        
+	
+
+</script>

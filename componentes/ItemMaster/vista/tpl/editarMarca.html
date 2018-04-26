@@ -1,0 +1,62 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td align="right"><a class="various fancybox.ajax" href="index_blank.php?component=ItemMaster&method=agregarItem&idMenu={{idMenu}}&idHistorialCat={{idHistorialCat}}&idHistorialFab={{idHistorialFab}}&idHistorialMar={{idHistorialMar}}" >Regresar</a></td>
+        </tr>
+    </table>
+</div>
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+	<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="3">{{titulo_tabla|raw}}</td>
+		</tr>
+		<tr>
+			<td width="30%" class="tituloAlineado">Marca </td>
+			<td><input class="required inputGeneral" type="text" name="marca" id="marca" value="" /></td>                        
+		</tr>
+		
+	</table>
+        <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+        </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Marca" />
+	</div>	
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+        <input type="hidden" name="idHistorialCat" id="idHistorialCat" value="{{idHistorialCat}}" />
+        <input type="hidden" name="idHistorialFab" id="idHistorialFab" value="{{idHistorialFab}}" />
+        <input type="hidden" name="idHistorialMar" id="idHistorialMar" value="{{idHistorialMar}}" />
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();
+                $(".various").fancybox({
+                    maxWidth	: 700,
+		maxHeight	: 1100,
+		fitToView	: true,
+		width		: '90%',
+		height		: '90%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+                });
+	});        
+        
+	function EnviarFormulario(){
+		
+					$.ajax({
+						url:'index_blank.php?component=ItemMaster&method=guardarMarca',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+						success: function (msm){
+							jQuery.fancybox.open(msm);
+							//$('#componenteCentral').html(msm);
+						}
+					});
+				}
+	
+</script>

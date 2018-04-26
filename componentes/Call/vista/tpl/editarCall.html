@@ -1,0 +1,58 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+	<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="2">{{titulo_tabla|raw}}</td>
+		</tr>
+		<tr>
+			<td width="30%" class="tituloAlineado">Id Registro Encuesta</td>
+			<td><input class="required inputGeneral" type="text" name="idRegistroEncuesta" disabled="" id="idRegistroEncuesta" value="{{datosCall.idRegistroEncuesta}}" /></td>
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Respuesta Call</td>
+                    <td><input class="required inputGeneral" type="text" name="res_call" id="res_call"  value="{{datosCall.res_call}}" /></td>
+		</tr>
+                
+		<tr>
+                    <td class="tituloAlineado">Telefono Fijo</td>
+                    <td><input class="required inputGeneral" type="text" name="telefonoFijo" id="telefonoFijo"  value="{{datosCall.telefonoFijo}}" /></td>
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Celular</td>
+                    <td><input class="required inputGeneral" type="text" name="celular" id="celular"  value="{{datosCall.celular}}" /></td>
+		</tr>                
+		
+	</table>
+        <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+        </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Call" />
+	</div>
+	<input type="hidden" name="id" id="id" value="{{datosCall.id}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+        <input type="hidden" name="idModificador" id="idModificador" value="{{datosCall.idModificador}}" />
+        <input type="hidden" name="idRegistroEncuesta" id="idRegistroEncuesta" value="{{datosCall.idRegistroEncuesta}}" />
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();                
+	});
+        
+	
+
+	function EnviarFormulario(){
+		
+					$.ajax({
+						url:'index_blank.php?component=Call&method=guardarCall',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+						success: function (msm){
+							jQuery.fancybox.close();
+							$('#componenteCentral').html(msm);
+						}
+					});
+				}
+	
+</script>

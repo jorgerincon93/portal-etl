@@ -1,0 +1,63 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+	<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="2">{{titulo_tabla|raw}}</td>
+		</tr>
+		<tr>
+			<td width="30%" class="tituloAlineado">Geo </td>
+			<td><input class="required inputGeneral" type="text" name="geo" id="geo" value="{{datosCalidad.geo}}" /></td>
+		</tr>
+                
+                <tr>
+                    <td class="tituloAlineado">Call Center </td>
+			<td><input class="required inputGeneral" type="text" name="call" id="call" value="{{datosCalidad.callCenter}}" /></td>
+		</tr>
+		
+		<tr>
+                    <td class="tituloAlineado">Pendiente </td>
+			<td><input class="required inputGeneral" type="text" name="pendiente" id="pendiente" value="{{datosCalidad.pendiente}}" /></td>
+		</tr>
+                
+                <tr>
+                    <td class="tituloAlineado">Limpieza </td>
+			<td><input class="required inputGeneral" type="text" name="limpieza" id="limpieza" value="{{datosCalidad.limpieza}}" /></td>
+		</tr>
+                <tr>
+                    <td class="tituloAlineado">Estado </td>
+	              <td> 
+                         <div class="ui-widget">
+                             <select class="combobox required" name="estado" id="estado">{{select_estado|raw}}</select>
+                            </div>
+                      </td>
+		</tr>
+		
+	</table>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Calidad" />
+	</div>
+	<input type="hidden" name="id" id="id" value="{{datosCalidad.idCalidad}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();                
+	});
+        
+	
+
+	function EnviarFormulario(){
+		
+					$.ajax({
+						url:'index_blank.php?component=Calidad&method=guardarCalidad',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+						success: function (msm){
+							jQuery.fancybox.close();
+							$('#componenteCentral').html(msm);
+						}
+					});
+				}
+	
+</script>

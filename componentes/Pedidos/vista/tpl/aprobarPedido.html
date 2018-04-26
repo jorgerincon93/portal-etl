@@ -1,0 +1,136 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <tr>
+            <th colspan="8" style="text-align: center">DESPACHO DE PEDIDOS</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Creaci&oacute;n</td>
+            <td>{{datosPedidos.fechaSis}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosPedidos.asesor}} </td>            
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Punto del Servicio</td>
+            <td>{{datosPedidos.nomPuntSer}}</td>
+            <td width="30%" class="tituloAlineado">Contrato</td>
+            <td>{{datosPedidos.numeroContrato}}</td>
+        </tr>
+        
+    </table>
+
+	<table id = "prod" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+            <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">PRODUCTOS</th>
+                    </tr>
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">item</td>
+                        <td width="600" id="columna_bienOserv" class="tituloAlineado">Descripci&oacute;n</td>
+                        <td width="100" id="columna_cantidad" class="tituloAlineado">Und/Medida</td>
+                        <!--<td width="100" id="columna_reg_sel" class="tituloAlineado">Cantidad Disponible</td>-->
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Cantidad Solicitada</td>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for prodPedido in productosPedido %}
+                    <tr>
+                      <td>1</td>
+                      <td>{{prodPedido.nombre}}</td>
+                      <td>{{prodPedido.tamano}}</td>
+                      <!--<td>{{prodPedido.cantidad}}</td>-->
+                      <td>{{prodPedido.cantidadSol}}</td>
+                    </tr>
+                 {% endfor %}
+                </tbody>
+		
+		
+	</table>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="2" style="text-align: center">OBSERVACIONES</th>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Observaciones Generales </td>
+            <td><textarea class="required" rows="4" cols="50" name="obsGenerales" id="obsGenerales">{{datosPedido.observacionesGenerales}}</textarea></td>
+        </tr>        
+    </table>
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+            <input type="button" class="botonGeneralGrande" value="Aprobar Pedido" onclick="aprobarFormato();" />
+            <input type="button" class="botonGeneralGrande" value="Rechazar Pedido" onclick="rechazarFormato();" />        
+        </div>
+	<input type="hidden" name="idPedido" id="idPedido" value="{{idPedido}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+        <input type="hidden" name="metodoEnvio" id="metodoEnvio" value="{{metodoEnvio}}" />
+        <input type="hidden" name="resAprobar" id="resAprobar" value="" />
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();                
+	});
+    
+    function aprobarFormato(){
+        
+        var msg = '';
+        var metodoEnvio = $('#metodoEnvio').val();
+        if(metodoEnvio=='Inicial'){
+            //msg = '¿Esta seguro de Aprobar el Pedido, enviara solicitud de aprobación al resto de areas...';
+            $("#resAprobar").val("Aprobar");
+            $("#envioDatos").submit();
+        }else{
+            //msg = '¿Esta seguro de Aprobar el Formato?';
+            $("#resAprobar").val("Aprobar");
+            $("#envioDatos").submit();
+        }        
+        
+     //   if(confirm(msg)){
+           /* $("#resAprobar").val("Aprobar");
+            $("#envioDatos").submit();*/
+       // }
+    }
+    
+    function rechazarFormato(){
+        //if(confirm('¿Esta seguro de Rechazar el Formato?\nSe devolvera el estado a Rechazado y empezara el proceso de nuevo...')){
+            $("#resAprobar").val("Rechazar");
+            $("#envioDatos").submit();
+       // }
+    }
+    
+    function EnviarFormulario(){        
+       
+        var metodoEnvio = $('#metodoEnvio').val();
+        
+        if(metodoEnvio=='Inicial'){
+            $.ajax({
+            url:'index_blank.php?component=Pedidos&method=aprobarPedidoInicial',
+                    type: "POST",
+                    data:$('#envioDatos').serialize(),
+                    success: function (msm){
+                        $('#componenteCentral').html(msm);
+                        //$('#obsAprobacion').val(msm);
+                    
+                    }
+            });
+        }else{
+            $.ajax({
+            url:'index_blank.php?component=Pedidos&method=aprobarPedidoProceso',
+                    type: "POST",
+                    data:$('#envioDatos').serialize(),
+                    success: function (msm){
+                        $('#componenteCentral').html(msm);
+                        //$('#obsAprobacion').val(msm);
+                    
+                    }
+            });
+        }
+    
+        
+    }
+    
+  
+</script>

@@ -1,0 +1,136 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <tr>
+            <th colspan="8" style="text-align: center">DESPACHO DE PEDIDOS</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Creaci&oacute;n</td>
+            <td>{{datosPedidos.fechaSis}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosPedidos.asesor}} </td>            
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Punto del Servicio</td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="idPuntoServicio" id="idPuntoServicio" >{{select_punto_serv|raw}}</select>
+                </div>
+            </td>
+            <td width="30%" class="tituloAlineado">Contrato</td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="contrato" id="contrato" onchange="setTimeout('traerProductosContra()',300);" >{{select_contrato|raw}}</select>
+                </div>
+            </td>
+        </tr>
+        
+    </table>
+
+	<table id = "prod" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+            <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">PRODUCTOS</th>
+                    </tr>
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">item</td>
+                        <td width="600" id="columna_bienOserv" class="tituloAlineado">Descripci&oacute;n</td>
+                        <td width="100" id="columna_cantidad" class="tituloAlineado">Und/Medida</td>
+                        <td width="100" id="columna_reg_sel" class="tituloAlineado">Cantidad Disponible</td>
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Cantidad Solicitada</td>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+                </tbody>
+		
+		
+	</table>
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Pedido" />
+	</div>
+	<input type="hidden" name="idUsuario" id="idUsuario" value="{{datosPedidos.idAsesor}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();                
+	});
+    
+    function traerProductosContra(){
+        
+        var idOrdenCompra = $("#contrato").val();
+        
+        $.ajax({
+            
+           url:'index_blank.php?component=Pedidos&method=traerProductosContra',
+            type: "POST",
+            data:'idOrdenCompra=' + idOrdenCompra,
+            success: function (nomCampos){         
+                 
+                    var noCampo = JSON.parse(nomCampos);
+                    var nuevCampo = "";
+                    var canLineas = noCampo.canLineas;
+                    console.log(canLineas);
+                  for(var i=1;i<=canLineas;i++){
+                        
+                        nuevCampo += '<tr id ="fila_'+i+'">';
+                        nuevCampo += '<td id="num">1</td>';                        
+                        nuevCampo += '<td id="nombre"><input type="text" id="'+noCampo.nomTd1+'_'+i+'" name="'+noCampo.nomTd1+'_'+i+'" {{disabled}} value="'+noCampo[i-1].nombre+' - '+noCampo[i-1].serial+'" size="50"/></td>';
+                        nuevCampo += '<td id="unMe"><input type="text" id="'+noCampo.nomTd2+'_'+i+'" name="'+noCampo.nomTd2+'_'+i+'" {{disabled}} value="'+noCampo[i-1].tamano+'" /></td>';
+                        nuevCampo += '<td id="canDi"><input type="text" id="'+noCampo.nomTd3+'_'+i+'" name="'+noCampo.nomTd3+'_'+i+'" {{disabled}} value="'+noCampo[i-1].cantidad+'" /></td>';                        
+                        nuevCampo += '<td id="canSo_'+i+'"><input type="text" id="canSol_'+i+'" name="canSol_'+i+'" value="" /></td>';
+                        nuevCampo += '<input type="hidden" id="idProd_'+i+'" name="idProd_'+i+'" value="'+noCampo[i-1].idProd+'" />';
+                        nuevCampo += '</tr>';
+                                                
+                    }
+                    
+                   $("#prod").append(nuevCampo);
+               
+            }
+       
+        });
+        
+        
+        
+    }
+    
+    function EnviarFormulario(){ 
+        
+         var tdId;
+         var pedidos = [];
+         
+            $('#prod > tbody > tr').each(function() {
+                  
+                 tdId = $(this).find('td:last').attr('id');
+                 tdId = tdId.replace('canSo_','');
+                 
+                 pedidos.push({
+                      cantidadSol: $("#canSol_"+tdId).val(),
+                           idProd: $("#idProd_"+tdId).val()
+                 });   
+                  
+            });
+        
+       pedidos = JSON.stringify(pedidos);    
+      //if(confirm('Realmente desea Guardar la Oferta Economica?')){ 
+        $.ajax({
+                     url:'index_blank.php?component=Pedidos&method=guardarPedidos',
+                    type: "POST",
+                    data: $('#envioDatos').serialize() + '&pedido='+pedidos,
+                    success: function (msm){
+                    alert('Pedido Guardado');    
+                    //$('#obsGenerales').html(msm);                        
+                    $('#componenteCentral').html(msm);
+                    }
+        });
+     // }  
+    }  
+    
+  
+</script>

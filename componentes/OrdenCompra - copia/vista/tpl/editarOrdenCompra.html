@@ -1,0 +1,294 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td>{{titulo_tabla|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        
+    </table>
+</div>
+
+
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <!-- INFORMACION DEL ASESOR-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N ASESOR</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Creaci&oacute;n</td>
+            <td>{{datosOfertaEconomica.fechaSis}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosOfertaEconomica.asesor}} </td>
+            
+        </tr>
+        
+    </table>
+    <br>
+    
+    <table id="infoCliente" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <!-- INFORMACION DEL CLIENTE-->
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N PROPONENTE</th>
+        </tr>
+        <tr>
+           <!-- <td width="13%" class="tituloAlineado">Fecha Creaci&oacute;n Proponente</td>
+            <td width="13%">{{datosOfertaEconomica.fechaSis}}</td>-->
+            
+            <td width="13%" class="tituloAlineado">Nombre Proponente </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="idCliente" id="idCliente" >{{select_cli_ofe|raw}}</select>
+                </div>                            
+            </td>
+            <td width="30%" class="tituloAlineado">Valor Contrato </td>
+            <td>$<input class="required number" type="text" size="30" name="valorContra" id="valorContra" value="{{datosOfertaEconomica.valorContrato}}" /></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Numero Contrato </td>
+            <td><input class="required" type="text" name="numContra" id="numContra" value="{{datosOfertaEconomica.numeroContrato}}" /></td>
+            
+            <td width="30%" class="tituloAlineado">Numero Contrato Interno</td>
+            <td><input class="required" type="text" name="numContraInte" id="numContraInte" value="{{datosOfertaEconomica.numeroContratoInterno}}" /></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Inicio</td>
+            <td>
+                <input class="required" type='text' name="feIni" id="feIni" value="{{datosOfertaEconomica.fechaInicio}}" class="datepicker-here" data-position="right top" data-language='en'/>
+            <td width="30%" class="tituloAlineado">Fecha Fin</td>
+            <td>
+                <input class="required" type='text' name="feFin" id="feFin" class="datepicker-here" data-position="right top" data-language='en' /> 
+                <!--<input class="required number" type="text" name="feFin" id="feFin" value="{{datosOfertaEconomica.feFin}}" />-->
+            </td>    
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Acta Liquidacion </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="actLiqui" id="actLiqui">{{select_act_liqui|raw}}</select>
+                </div> 
+            </td>
+            <td class="tituloAlineado">Certificacion </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="certi" id="certi">{{select_certi|raw}}</select>
+                </div> 
+            </td>
+        </tr>
+        
+    </table>
+   
+    <table id="AIU" class="tablaOferta" align="center" width="100%" cellpadding="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">OFERTA ECONOMICA</th>
+                    </tr>
+                    <tr>
+                        <th colspan="9" style="text-align: center">1. SERVICIOS ESPECIALES</th>
+                    </tr>
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                        <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                        <td width="100" id="columna_cantidad" class="tituloAlineado">Cantidad</td>
+                        <td width="100" id="columna_reg_sel" class="tituloAlineado">Ciudad</td>
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                        <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                        <td width="100" id="colAcciones" class="tituloAlineado">Acciones</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for ofertaEconomicaAIU in OfertaEconomicaAIU %}
+                  <tr id="fila_{{ loop.index }}">
+                    <td id="numFila_{{ loop.index }}">{{ loop.index }}
+                        <input type="hidden" name="idOfe" id="idOfe" value="{{ofertaEconomicaAIU.idOfertaEconomica}}" />
+                        <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{ofertaEconomicaAIU.disabled}}" />
+                        <input type="hidden" name="idAIU" id="idAIU" value="{{ofertaEconomicaAIU.IdDetOfe}}" />
+                   </td>
+                    <td id="reg_BienServ_{{ loop.index }}" width="1">
+                        <div class="ui-widget">
+                            <select class="required" name="bienServ_{{ loop.index }}" id="bienServ_{{ loop.index }}">{{ofertaEconomicaAIU.select_bienServ|raw}}</select>
+                           <!-- <input type="hidden" name="id_{{ loop.index }}" id="id_{{ loop.index }}" value="{{ofertaEconomica.id}}" />
+                            <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{ofertaEconomica.disabled}}" />-->
+                        </div> 
+                    </td>
+                    <td id ="reg_fila_cant_{{ loop.index }}">
+                        <input type="text" name="cant_{{ loop.index }}" id="cant_{{ loop.index }}" value="{{ofertaEconomicaAIU.cantidadAIU}}"> <!--onBlur="validarCantidadAIU();">-->
+                        <div id="resCantidad_{{ loop.index }}"> </div>
+                    </td>
+                    <td id ="reg_fila_sel_{{ loop.index }}">
+                            <div class="ui-widget">
+                                <select class="required"  name="region_{{ loop.index }}" id="sel_reg_{{ loop.index }}" onchange="traerPrecioAIU(); setTimeout('multiplicarCantValorUniAIU()',300)" >{{ofertaEconomicaAIU.select_reg_aiu|raw}}</select>
+                            </div> 
+                    </td>
+                    <!--id="sel_reg"-->
+                    <td id ="reg_fila_prec_{{ loop.index }}">
+                        $<input class="required" type="text" name="fila_region_{{ loop.index }}" id="fila_region_{{ loop.index }}" value="{{ofertaEconomicaAIU.precioUnidad}}"/>
+                    </td>  
+                    <td id ="reg_fila_total_pre_aiu{{ loop.index }}">
+                        $<input class="required number" type="text" name="fila_region_total_{{ loop.index }}" id="fila_region_total_{{ loop.index }}" value="{{ofertaEconomicaAIU.precioUniTotalAIU}}"/>
+                    </td>  
+                    <td id="reg_acciones_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if ofertaEconomicaAIU.disabled != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFila('{{ loop.index }}')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+                
+       <table id="PERSONAL" class="tablaOferta" align="center" width="100%" cellpadding="0" cellspacing="0">
+                   <thead>    
+                         <tr>
+                            <th colspan="9" style="text-align: center">2. PERSONAL</th>
+                        </tr>
+                        <tr>
+                            <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                            <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                            <td width="100" id="columna_marca" class="tituloAlineado">Cantidad</td>
+                            <td width="100" id="columna_reg" class="tituloAlineado">Ciudad</td>
+                            <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                            <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                            <td width="100" id="colAcciones" class="tituloAlineado">Acciones</td>
+                        </tr>
+                    </thead>
+                     
+              <tbody>
+                {% for ofertaEconomicaPER in OfertaEconomicaPER %}
+                  <tr id="fila_per_{{ loop.index }}">
+                    <td id="numFila_per_{{ loop.index }}">{{ loop.index }}
+                        <input type="hidden" name="idOfe" id="idOfe" value="{{ofertaEconomicaPER.idOfertaEconomica}}" />
+                        <input type="hidden" name="disable_per_{{ loop.index }}" id="disable_per_{{ loop.index }}" value="{{ofertaEconomicaPER.disabledPer}}" />
+                        <input type="hidden" name="idPER" id="idPER" value="{{ofertaEconomicaPER.IdDetOfe}}" />
+                    </td>
+                    <td id="reg_BienServ_per_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="bienServ_per_{{ loop.index }}" id="bienServ_per_{{ loop.index }}">{{ofertaEconomicaPER.select_bienServPer|raw}}</select>
+                           <!-- <input type="hidden" name="id_{{ loop.index }}" id="id_{{ loop.index }}" value="{{ofertaEconomica.id}}" />
+                            <input type="hidden" name="disable_{{ loop.index }}" id="disable_{{ loop.index }}" value="{{ofertaEconomica.disabled}}" />-->
+                        </div> 
+                    </td>
+                    <td id ="reg_fila_cant_{{ loop.index }}">
+                        <input type="text" name="cant_per_{{ loop.index }}" id="cant_per_{{ loop.index }}" value="{{ofertaEconomicaPER.cantidadPER}}"> <!--onBlur="validarCantidadPer();">-->
+                        <div id="resCantidad_{{ loop.index }}">
+                            <input type="hidden" name="resCantidad_per_{{ loop.index }}" id="resCantidad_per_{{ loop.index }}"/>
+                        </div>
+                    </td>
+                    <td id ="reg_fila_sel_per_{{ loop.index }}">
+                            <div class="ui-widget">
+                                <select class="required" onchange="traerPrecioPer(); setTimeout('multiplicarCantValorUniPer()',300)" name="region_per_{{ loop.index }}" id="region_per_{{ loop.index }}" >{{ofertaEconomicaPER.select_reg_per|raw}}</select>
+                            </div> 
+                    </td>
+                    <td id ="reg_fila_prec_per_{{ loop.index }}">
+                        $<input class="required" type="text" name="fila_region_per_{{ loop.index }}" id="fila_region_per_{{ loop.index }}" value="{{ofertaEconomicaPER.precioUnidadPer}}"/>
+                    </td>  
+                    <td id ="reg_fila_total_pre_aiu{{ loop.index }}">
+                        $<input class="required number" type="text" name="fila_region_total_per_{{ loop.index }}" id="fila_region_total_per_{{ loop.index }}" value="{{ofertaEconomicaPER.precioUniTotalPer}}"/>
+                    </td>
+                    <td id="reg_acciones_per_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFilaPer()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if ofertaEconomicaPER.disabledPer != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFilaPer('{{ loop.index }}')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                       
+        </table>
+    
+    <table id="ASEO" class="tablaOferta" align="center" width="100%" cellpadding="0" cellspacing="0">
+                   <thead>    
+                         <tr>
+                            <th colspan="9" style="text-align: center">3. BIENES DE ASEO Y CAFETERIA</th>
+                        </tr>
+                        <tr>
+                            <td width="100" id="columna_cat" class="tituloAlineado">No.</td>
+                            <td width="100" id="columna_bienOserv" class="tituloAlineado">Bien o Servicio</td>
+                            <!--<td width="100" id="columna_marca" class="tituloAlineado">Marca</td>-->
+                            <td width="100" id="columna_marca" class="tituloAlineado">Cantidad</td>
+                            <td width="100" id="columna_reg" class="tituloAlineado">Ciudad</td>
+                            <td width="100" id="columna_pre_ciu" class="tituloAlineado">Precio Ciudad</td>
+                            <td width="100" id="columna_total_Uni" class="tituloAlineado">Total Unidad</td>
+                            <td width="100" id="colAcciones" class="tituloAlineado">Acciones</td>
+                        </tr>
+                    </thead>
+                     
+                       <tbody>
+                {% for ofertaEconomicaASEO in OfertaEconomicaASEO %}
+                  <tr id="fila_aseo_{{ loop.index }}">
+                    <td id="numFila_aseo_{{ loop.index }}">{{ loop.index }}
+                        <input type="hidden" name="idOfe" id="idOfe" value="{{ofertaEconomicaASEO.idOfertaEconomica}}" />
+                        <input type="hidden" name="disable_aseo_{{ loop.index }}" id="disable_aseo_{{ loop.index }}" value="{{ofertaEconomicaASEO.disabledAseo}}" />
+                        <input type="hidden" name="idASEO" id="idASEO" value="{{ofertaEconomicaASEO.IdDetOfe}}" />
+                    </td>
+                   <td id="reg_BienServ_aseo_{{ loop.index }}" width="100">
+                       <div class="ui-widget">
+                            <select class="required" name="bienServ_aseo_{{ loop.index }}" id="bienServ_aseo_{{ loop.index }}">{{ofertaEconomicaASEO.select_aseo|raw}}</select>
+                       </div>
+                    </td>
+                    <!--<td id="reg_marca_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="marca_{{ loop.index }}" id="marca_{{ loop.index }}">{{ofertaEconomica.select_marca|raw}}</select>
+                        </div> 
+                    </td>-->
+                    <td id ="reg_fila_cant_{{ loop.index }}">
+                        <input type="text" name="cant_ase_{{ loop.index }}" id="cant_ase_{{ loop.index }}" value="{{ofertaEconomicaASEO.cantidadASEO}}"> <!--onBlur="validarCantidadAseo();">-->
+                        <div id="resCantidad_{{ loop.index }}">
+                            <input type="hidden" name="resCantidad_aseo_{{ loop.index }}" id="resCantidad_aseo_{{ loop.index }}"/>
+                        </div>
+                    </td>
+                    <td id ="reg_fila_sel_aseo_{{ loop.index }}">
+                            <div class="ui-widget">
+                                <select class="required" onchange="traerPrecioAseo(); setTimeout('multiplicarCantValorUniAseo()',300)"  name="region_aseo_{{ loop.index }}" id="region_aseo_{{ loop.index }}">{{ofertaEconomicaASEO.select_reg_aseo|raw}}</select>
+                            </div> 
+                    </td>
+                    <td id ="reg_fila_prec_aseo_{{ loop.index }}">
+                        $<input class="required" type="text" name="fila_region_aseo_{{ loop.index }}" id="fila_region_aseo_{{ loop.index }}" value="{{ofertaEconomicaASEO.precioUnidadAseo}}"/> <!--onBlur="multiplicarCantValorUniAseo();"-->
+                    </td>  
+                    <td id ="reg_fila_total_pre_aseo_{{ loop.index }}">
+                        $<input class="required number" type="text" name="fila_region_total_aseo_{{ loop.index }}" id="fila_region_total_aseo_{{ loop.index }}" value="{{ofertaEconomicaASEO.precioUniTotalAseo}}" onBlur="sumarSubTotales();"/> <!--setTimeout('reiniciarValorContrato()',300);-->
+                    </td>  
+                    <td id="reg_acciones_aseo_{{ loop.index }}">                        
+                        {% if loop.last %}
+                        <button type="button" class="btn btn-link" onclick="agregarFilaAseo()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button>
+                        {% endif %}
+                        {% if ofertaEconomicaASEO.disabledAseo != "disabled" %}
+                                <button type="button" class="btn btn-link" onclick="eliminarFilaAseo('{{ loop.index }}')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>
+                        {% endif %}                            
+                        
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                       
+    </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td class="tituloAlineado">Observaciones Oferta Economica </td>
+            <td><textarea  rows="4" cols="50" name="obsGenerales" id="obsGenerales">{{datosResumenJob.observaciones}}</textarea></td>
+        </tr>       
+    </table>
+   
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idAsesor" id="idAsesor" value="{{datosOfertaEconomica.idAsesor}}" />
+    <input type="hidden" name="cantFilas" id="cantFilas" value="1" />
+    
+    
+    
+</form>
+<script>
+</script>

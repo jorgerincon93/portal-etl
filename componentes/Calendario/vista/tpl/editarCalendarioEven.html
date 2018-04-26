@@ -1,0 +1,85 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+	<table id="evento" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+		<thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">EVENTO</th>
+                    </tr>
+                    <tr>
+                        <td width="100" id="columna_fe_ini" class="tituloAlineado">Fecha Inicio</td>
+                        <td width="100" id="columna_fe_fin" class="tituloAlineado">Fecha Fin</td>
+                        <td width="100" id="columna_asunto" class="tituloAlineado">Asunto</td>
+                        <td width="100" id="columna_impli" class="tituloAlineado">Implicados</td>
+                        <td width="100" id="columna_estado" class="tituloAlineado">Estado</td>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    
+                    <td><input class="required inputGeneral" type="text" name="fecha_ini" id="fecha_ini" style="WIDTH: 80" size=32 value="{{evento.fechaIni}}" /></td>
+                    <td><input class="required inputGeneral" type="text" name="fecha_fin" id="fecha_fin" style="WIDTH: 80" size=32 value="{{evento.fechaFin}}" /></td>
+                    <td><input class="required inputGeneral" type="text" name="asunto" id="asunto" style="WIDTH: 80" size=32 value="{{evento.asunto}}" /></td>
+                    <td><input class="required inputGeneral" type="text" name="implicados" id="implicados" style="WIDTH: 80" size=32 value="{{evento.implicados}}" /></td>
+                    <td>
+                       <div class="ui-widget">
+                           <select class="required" name="estado" id="estado">{{select_estado|raw}}</select>
+                       </div> 
+                    </td>
+                    <input type="hidden" name="calendario" id="calendario" value="{{evento.calendario}}" />
+                    <input type="hidden" name="idOferta" id="idOferta" value="{{evento.idOferta}}" />                    
+                  
+		</tr>
+                </tbody>
+						
+	</table>
+    
+        <div class="errorRuta" align="right">
+          <span style="text-align: right" align="right" id="mensajeError"></td>
+        </div>
+	 <div style="padding-top: 20px; text-align: right; width: 100%">
+	   <input type="submit" class="botonGeneralGrande" value="Guardar Evento" />
+	</div>
+    
+	<input type="hidden" name="id" id="id" value="{{evento.id}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+        
+</form>
+<script>
+    
+    $().ready(function(){
+        
+		$("#envioDatos").validate();
+                
+                $(".various").fancybox({
+                    maxWidth	: 10000,
+                    maxHeight	: 11000,
+                    fitToView	: true,
+                    width	: '100%',
+                    height	: '100%',
+                    autoSize	: true,
+                    closeClick	: false,
+                    openEffect	: 'none',
+                    closeEffect	: 'none'
+                    
+                });
+    }); 
+ 
+    
+    function EnviarFormulario(){
+       
+	
+		$.ajax({
+			url:'index_blank.php?component=OfertaEconomica&method=guardarEvento',
+			type: "POST",
+			data: $('#envioDatos').serialize(),
+			success: function (msm){
+					jQuery.fancybox.close();
+					$('#componenteCentral').html(msm);
+				}
+		      });
+    }	
+
+	
+
+</script>

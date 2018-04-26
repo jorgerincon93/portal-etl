@@ -1,0 +1,116 @@
+{{COMODIN}}
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaOferta">
+        
+        <tr>
+            <th colspan="8" style="text-align: center">DESPACHO DE PEDIDOS</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Pedido</td>
+            <td>{{datosPedidos.fechaElaboro}}</td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosPedidos.nombreAsesor}} </td>            
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Punto del Servicio</td>
+            <td>{{datosPedidos.puntoServicio}}</td>
+            <td width="30%" class="tituloAlineado">Contrato</td>
+            <td>{{datosPedidos.contrato}}</td>
+        </tr>
+        
+    </table>
+
+<br>
+
+
+ <table align="center" width="100%" cellpadding="0" cellspacing="0"  class="tablaOferta">
+                
+                <thead>             
+                    <tr>
+                        <td width="100" id="columna_cat" class="tituloAlineado">item</td>
+                        <td width="600" id="columna_bienOserv" class="tituloAlineado">Descripci&oacute;n</td>
+                        <td width="100" id="columna_cantidad" class="tituloAlineado">Und/Medida</td>
+                        <td width="100" id="columna_pre_ciu" class="tituloAlineado">Cantidad Solicitada</td>
+                    </tr>
+                </thead>
+                 <tbody>
+
+                        {% for detPe in detPed %}
+                            <tr>
+                                <td id="numFila_{{ loop.index }}">{{ loop.index }}</td>
+                                <td>{{detPe.nombre}}</td>
+                                <td>{{detPe.referencia}}</td>
+                                <td>{{detPe.cantidad}}</td>
+                            </tr>    
+                        {% endfor %}
+                        
+                </tbody>
+    
+</table>
+
+<br>
+<br>
+<table align="center" width="100%" cellpadding="0" cellspacing="0"  class="tablaOferta">
+    
+        <tr>
+            <td width="30%" class="tituloAlineado">Entregado Por</td>
+            <td></td>
+            <td width="30%" class="tituloAlineado">Recibido Por</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Nombre Completo</td>
+            <td></td>
+            <td width="30%" class="tituloAlineado">Nombre Completo</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Firma</td>
+            <td></td>
+            <td width="30%" class="tituloAlineado">Firma</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Cedula</td>
+            <td></td>
+            <td width="30%" class="tituloAlineado">Cedula</td>
+            <td></td>
+        </tr>
+    
+</table>
+<br>
+
+<table align="center" width="100%" cellpadding="0" cellspacing="0"  class="tablaOferta">
+    
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha</td>
+            <td></td>
+            <td width="30%" class="tituloAlineado">Fecha</td>
+            
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Elaboro</td>
+            <td>{{datosPedidos.nombreAsesor}}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Reviso</td>
+            <td>{{datosPedidos.nombreAsesor}}</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Aprob&oacute;</td>
+            <td>{{datosPedidos.nombreAsesor}}</td>
+            <td></td>
+        </tr>
+    
+</table>  
+
+   <div style="padding-top: 20px; text-align: right; width: 100%">
+       <a href="#" onclick="HTMLtoPDF()"><img src="imagenes/iconos/print.png" title="Imprimir Pedido" width="25" height="25" border="0" /></a>
+    </div>
+
+</form>
+
+<script src="libraries/javascript/jspdf.js"></script>
+

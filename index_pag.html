@@ -1,0 +1,708 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ETL Soluciones</title>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="css/hover-min.css">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<script type="text/javascript" src="js/jquery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/cssrefresh.js"></script>
+</head>
+<!-- Cuerpo de la pagina-->
+<body>
+	<!-- Modal Buscar-->
+<div id="myModal" class="modal">
+<span class="close">&times;</span>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <img src="imagenes/buscar-modal.png" class="buscar_modal">
+    <p class="titulo_busqueda">Búsqueda del sitio</p></br>
+    <input type="text" id="input-search" class="caja_de_texto_buscar" onkeyup="buscador()" placeholder="Buscar aqui"/>
+  </div>
+
+  <div class="search" id="buscador">
+  	<ul id="myUL">
+  		<li><a href="#consultoria">Consultoría</a></li>
+  		<li><a href="#outsourcing">Outsorcing</a></li>
+  		<li><a href="#principal_bi">Inteligencia de Negocios</a></li>
+  		<li><a href="#innovacion">Innovación</a></li>
+  	</ul>
+  	
+  </div>
+</div>
+<div id="ModalContactenos" class="modal">
+<span class="closecon">&times;</span>
+  <!-- Modal content -->
+  <div class="modal-content-contactenos">
+    <p class="titulo_busqueda">Contáctanos</p></br>
+    <p class="texto1_contactenos">Gracias por contactar a ETL Soluciones, porfavor llene el siguiente formulario y unos de nuestros representantes
+    se pondra en contacto en el menor tiempo posible:</p></br>
+    
+    <div class="formulario_contactenos">
+    <p class="texto_campos">Nombres y Apellidos:</p>
+    <input type="text" name="Nombre" class="caja_de_texto_contactenos"/>
+    </div>
+
+    <div class="formulario_contactenos">
+    <p class="texto_campos">Empresa:</p>
+    <input type="text" name="Empresa" class="caja_de_texto_contactenos"/>
+	</div>
+
+	<div class="formulario_contactenos">
+    <p class="texto_campos">Email:</p>
+    <input type="text" name="Email" class="caja_de_texto_contactenos"/>
+    </div>
+
+	<div class="formulario_contactenos">
+    <p class="texto_campos">Telefono:</p>
+    <input type="text" name="Telefono" class="caja_de_texto_contactenos"/>
+    </div>
+
+    <div class="formulario_contactenos">
+    <p class="texto_campos">Servicio:</p>
+    <select class="select_contactenos">
+	  <option class="option_select_contactenos">Consultoría</option>
+	  <option class="option_select_contactenos">Outsourcing</option>
+	  <option class="option_select_contactenos">Inteligencia de Negocios</option>
+	  <option class="option_select_contactenos">Innovación</option>
+	</select>
+    </div>
+
+
+    <div class="formulario_contactenos">
+    <input type="button" value="Enviar" class="boton_form_contactenos">
+    </div>
+
+
+  </div>
+
+</div>
+
+	<div class="encabezado_principal" id="encabezado_principal">
+		<!-- Encabezado Primario-->
+		<div class="menu" id="menu">
+				<img src="imagenes/search.png" class="buscar" id="buscar">
+                 <a href="mailto:info@etlsoluciones.com"><img src="imagenes/mail.png" class="mail" id="mail"></a>
+				<div class="texto_telefono" id="texto_telefono">+57 300 43 45</div>
+				<img src="imagenes/phone.png" class="telefono" id="telefono">
+				<img src="imagenes/menu-button-blanco.png" class="boton_menu" id="boton_menu">
+		</div>
+			<!-- Encabezado Secundario-->
+		<div class="menu_scroll" id="menu_scroll">
+				<img src="imagenes/logo1.png" class="logo" id="logo">
+				<img src="imagenes/menublue.png" class="boton_menu_scroll" id="boton_menu_scroll">
+				<img src="imagenes/searchblue.png" class="buscar" id="buscar_blue">
+				<a href="mailto:info@etlsoluciones.com"><img src="imagenes/mailblue.png" class="mail" id="mail"></a>
+				<div class="texto_telefono" id="texto_telefono">+57 300 43 45</div>
+				<img src="imagenes/phoneblue.png" class="telefono" id="telefono">
+		</div>
+		<div class="logo_principal">
+			<img src="imagenes/logo-blanco.png" class="logo_principal_blanco">
+		</div>
+		<div class="texto_home1" id="texto_home1">Un mundo de soluciones&nbsp;</div>
+		<div class="texto_home2" id="texto_home2">para su empresa</div>
+		<div class="texto2_home" id="texto2_home">Nosotros optimizamos procesos<br/>mediante el uso adecuado de la tecnología</div>
+		<div class="lineas_negocio">
+		<div class="linea" id="linea">
+			<img src="imagenes/linea.png" class="img_linea" id="img_linea">
+		</div>
+ 		<div class="boton_consultoria" id="boton_consultoria">
+ 			<a href="#consultoria"><img src="imagenes/consultoria.png" class="img_boton_consultoria hvr-bounce-in" id="img_boton_consultoria"></a>
+			<a href="#outsourcing"><img src="imagenes/outsourcing.png" class="img_boton_outsourcing hvr-bounce-in" id="img_boton_outsourcing"></a>
+			<a href="#principal_bi"><img src="imagenes/bi.png" class="img_boton_bi hvr-bounce-in" id="img_boton_bi"></a>
+			<a href="#innovacion"><img src="imagenes/innovacion.png" class="img_boton_innovacion hvr-bounce-in" id="img_boton_innovacion"></a>
+ 		</div>
+ 		</div>
+		<!--<div class="boton_outsourcing" id="boton_outsourcing"></div>
+		<div class="boton_bi" id="boton_bi"></div>
+		<div class="boton_innovacion" id="boton_innovacion"></div> -->
+		<!--<img src="imagenes/consultoria.svg" class="imagen_consutoria" id="imagen_consutoria">
+		<img src="imagenes/outsourcing.svg" class="imagen_outsourcing" id="imagen_outsourcing">
+		<img src="imagenes/bi.svg" class="imagen_bi" id="imagen_bi">
+		<img src="imagenes/innovacion.svg" class="imagen_innovacion" id="imagen_innovacion">
+		<img src="imagenes/ImagenHome.png" class="imagen_principal" id="imagen_principal">-->
+	</div>
+	<div class="text3_home" id="text3_home">Somos ETL Soluciones</div>
+	<br/>
+	<div class="text4_home" id="text4_home">ETL Soluciones S.A.S. es una empresa , que pone a disposición de nuestros clientes las capacidades y experiencia de profesionales con más de 10 años en servicios de tecnología y Sistemas de Información, esto ha permitido que ETL en su trayectoria de crecimiento, ya cuente con la participación en proyectos de gran envergadura y desarrollo de soluciones de TI aplicadas en sectores como comunicaciones, transporte, comercio, logístico, solidario, salud, legal, servicios, entre otros.</div>
+
+	<div class="resumen_lineas_negocio" id="resumen_lineas_negocio">
+		<div class="caja1_resumen_consultoria" id="caja1_resumen_consultoria">
+			<img src="imagenes/resumen-consultoria.png" class="img_resumen_consultoria">
+		</div>
+		<div class="caja2_resumen_consultoria" id="caja2_resumen_consultoria">
+				<div class="texto1_caja2_resumen_derecha" id="texto1_caja2_resumen_derecha">
+					Consultoría
+				</div>
+				<br/>
+				<div class="texto2_caja2_resumen_derecha" id="texto2_caja2_resumen_derecha">
+					Apoyamos el logro de los objetivos de su organización a través de nuestras experiencias de éxito en diversos sectores.
+				</div>
+				<div class="boton_ver_mas" id="boton_ver_mas">
+					<a href="#consultoria"><img src="imagenes/boton-vermas.png" class="img_boton_ver_mas"></a>
+				</div>
+		</div>
+
+
+		<div class="caja2_resumen_innovacion" id="caja2_resumen_innovacion">
+			<img src="imagenes/resumen-innovacion.png" class="img_resumen_innovacion">
+		</div>
+		<div class="caja1_resumen_innovacion" id="caja1_resumen_innovacion">
+        <div class="texto1_caja1_resumen_izquierda" id="texto1_caja1_resumen_izquierda">
+				Innovación
+			</div>
+			<br/>
+			<div class="texto2_caja2_resumen_izquierda" id="texto2_caja2_resumen_izquierda">
+				Mediante el uso de nuevas tecnologías y eficiencia en los procesos, apoyamos a nuestros clientes en la resolución de problemáticas existentes en sus negocio.
+			</div>
+			<div class="boton_ver_mas" id="boton_ver_mas">
+				<a href="#innovacion"><img src="imagenes/boton-vermas.png" class="img_boton_ver_mas"></a>
+			</div>
+		</div>
+		
+
+
+		<div class="caja1_resumen_consultoria" id="caja1_resumen_consultoria">
+			<img src="imagenes/resumen-bi.png" class="img_resumen_consultoria">
+		</div>
+		<div class="caja2_resumen_consultoria" id="caja2_resumen_consultoria">
+				<div class="texto1_caja2_resumen_derecha" id="texto1_caja2_resumen_derecha">
+					Outsourcing
+				</div>
+				<br/>
+				<div class="texto2_caja2_resumen_derecha" id="texto2_caja2_resumen_derecha">
+					Operamos eficientemente (completa o parcialmente) procesos en su organización, para permitirle a su empresa  enfocarse en la función principal de su negocio.
+				</div>
+				<div class="boton_ver_mas" id="boton_ver_mas">
+					<a href="#outsourcing"><img src="imagenes/boton-vermas.png" class="img_boton_ver_mas"></a>
+				</div>
+		</div>
+
+
+		<div class="caja2_resumen_innovacion" id="caja2_resumen_innovacion">
+			<img src="imagenes/resumen-outsourcing.png" class="img_resumen_innovacion">
+		</div>
+		<div class="caja1_resumen_innovacion" id="caja1_resumen_innovacion">
+        <div class="texto1_caja1_resumen_izquierda" id="texto1_caja1_resumen_izquierda">
+				Inteligencia de Negocios
+			</div>
+			<br/>
+			<div class="texto2_caja2_resumen_izquierda" id="texto2_caja2_resumen_izquierda">
+				Apoyamos la transformación de sus datos en información relevante para la toma de decisiones en su organización.
+			</div>
+			<div class="boton_ver_mas" id="boton_ver_mas">
+				<a href="#principal_bi"><img src="imagenes/boton-vermas.png" class="img_boton_ver_mas"></a>
+			</div>
+		</div>
+
+	</div>
+	<div class="footer" id="footer">
+	<img src="imagenes/footer.png" class="imagen_footer" id="imagen_footer">
+	<img src="imagenes/footer-responsive.png" class="imagen_footer_responsive" id="imagen_footer_responsive">
+	<div class="mapa_footer" id="mapa_footer">
+		<img src="imagenes/mapa-etl.png" class="imagen_mapa_etl">
+	</div>
+	<img src="imagenes/celular-contacto.png" class="celular_contacto" id="celular_contacto">
+	<img src="imagenes/telefono-contacto.png" class="telefono_contacto" id="telefono_contacto">
+	<a href="mailto:info@etlsoluciones.com"><img src="imagenes/correo-contacto.png" class="correo_contacto" id="correo_contacto"></a>
+	<img src="imagenes/direccion-contacto.png" class="direccion_contacto" id="direccion_contacto">
+	<div class="texto_redes" id="texto_redes">Síguenos en nuestras redes sociales</div>
+	<a href="https://plus.google.com/u/0/115307255602114768207"><img src="imagenes/link-google.png" class="link_google" id="link_google"></a>
+	<a href="https://twitter.com/etlsoftware"><img src="imagenes/link-twitter.png" class="link_twitter" id="link_twitter"></a>
+	<a href="https://www.facebook.com/etlsoftware"><img src="imagenes/link-facebook.png" class="link_facebook" id="link_facebook"></a>
+	<a href="#"><img src="imagenes/link-pinterest.png" class="link_pinterest" id="link_pinterest"></a>
+	<a href="https://co.linkedin.com/in/etlsoluciones"><img src="imagenes/link-linkedin.png" class="link_linkedin" id="link_linkedin"></a>
+
+	<div class="texto_derechos" id="texto_derechos">Todos los derechos reservados ETL Soluciones  © 2017 - Bogotá Colombia |  Términos y Condiciones -  Aviso de Privacidad</div>
+	</div>
+
+<div class="consultoria" id="consultoria">
+	<div class="principal_consultoria" id="principal_consultoria">
+		<!-- <img src="imagenes/principal-consultoria.png" class="img_principal_consultoria" id="img_principal_consultoria"> -->
+	</div>
+	<div class="contenido1_consultoria" id="contenido1_consultoria">
+		<div class="div_img1_consultoria" id="div_img1_consultoria">
+			<img src="imagenes/img1-consultoria.png" class="img1_consultoria" id="img1_consultoria">
+		</div>
+		<div class="titulo_consultoria" id="titulo_consultoria">Cómo lo hacemos?</div>
+		<div class="texto_consultoria" id="texto_consultoria">Entendemos que los procesos consultivos deben ser realizados con el mayor rigor metodológico posible y enmarcarse en situaciones reales de cada sector y cada organización intervenida, así mismo, debe genera a nuestros clientes un retorno cuantificable.</br>
+		El método utilizado incluye fases como: Preparación inicial, diagnostico, generación planes de acción, implementación, seguimiento y control.</br>
+		Los recursos involucrados en nuestros procesos de consultoría cuentas con la formación y experiencia (algunos con mas de 10 años) especifica en sectores de servicios, producción de bienes y producción básica.
+		</div>
+	</div>
+	<div class="contenido2_consultoria" id="contenido2_consultoria">
+		<img src="imagenes/img2-consultoria.png" class="img2_consultoria" id="img2_consultoria">
+		<img src="imagenes/img3-consultoria.png" class="img3_consultoria" id="img3_consultoria">
+		<img src="imagenes/img4-consultoria.png" class="img4_consultoria" id="img4_consultoria">
+		<img src="imagenes/img5-consultoria.png" class="img5_consultoria" id="img5_consultoria">
+	</div>
+	<div  class="texto_cantactenos" id="texto_cantactenos" >
+		<div class="texto_cantactenos2" id="texto_cantactenos2" >
+			Gestionar los servicios tecnológicos como activos de valor en la estrategia corporativa de las organizaciones. 
+		</div>
+		<div class="texto_cantactenos2" id="texto_cantactenos3" >
+			Articular de forma adecuada los procesos, la información, los recursos y la tecnología.
+		</div>
+		<div class="texto_cantactenos2" id="texto_cantactenos4" >
+			Racionalizar los recursos.
+		</div>
+		<div class="texto_cantactenos2" id="texto_cantactenos5" >
+			Definir controles adecuados.
+		</div>
+		<div class="texto_cantactenos2" id="texto_cantactenos6" >
+			 Optimizar los costos de los sistemas de información.
+		</div>
+		<div class="texto_cantactenos2" id="texto_cantactenos7" >
+			 Mejorar el rendimiento de los procesos.
+		</div>
+		<div class="texto_cantactenos2" id="texto_cantactenos8" >
+			 Cuantificar el retorno a las inversiones en tecnología.
+		</div>
+	    <div class="boton_cantactenos" id="boton_cantactenos">
+	        <img src="imagenes/boton-contactenos.png" class="img_boton-contactenos" id="img_boton-contactenos">
+		</div>
+	</div>
+    <div class="contenido3_consultoria" id="contenido3_consultoria">
+		<img src="imagenes/img6-consultoria.png" class="img6_consultoria" id="img6_consultoria">
+		<img src="imagenes/img7-consultoria.png" class="img7_consultoria" id="img7_consultoria">
+		<img src="imagenes/img8-consultoria.png" class="img8_consultoria" id="img8_consultoria">
+	</div>
+    
+   <div class="footer" id="footer">
+	<img src="imagenes/footer.png" class="imagen_footer" id="imagen_footer">
+	<img src="imagenes/footer-responsive.png" class="imagen_footer_responsive" id="imagen_footer_responsive">
+	<div class="mapa_footer" id="mapa_footer">
+		<img src="imagenes/mapa-etl.png" class="imagen_mapa_etl">
+	</div>
+	<img src="imagenes/celular-contacto.png" class="celular_contacto" id="celular_contacto">
+	<img src="imagenes/telefono-contacto.png" class="telefono_contacto" id="telefono_contacto">
+	<a href="mailto:info@etlsoluciones.com"><img src="imagenes/correo-contacto.png" class="correo_contacto" id="correo_contacto"></a>
+	<img src="imagenes/direccion-contacto.png" class="direccion_contacto" id="direccion_contacto">
+	<div class="texto_redes" id="texto_redes">Síguenos en nuestras redes sociales</div>
+	<a href="https://plus.google.com/u/0/115307255602114768207"><img src="imagenes/link-google.png" class="link_google" id="link_google"></a>
+	<a href="https://twitter.com/etlsoftware"><img src="imagenes/link-twitter.png" class="link_twitter" id="link_twitter"></a>
+	<a href="https://www.facebook.com/etlsoftware"><img src="imagenes/link-facebook.png" class="link_facebook" id="link_facebook"></a>
+	<a href="#"><img src="imagenes/link-pinterest.png" class="link_pinterest" id="link_pinterest"></a>
+	<a href="https://co.linkedin.com/in/etlsoluciones"><img src="imagenes/link-linkedin.png" class="link_linkedin" id="link_linkedin"></a>
+
+	<div class="texto_derechos" id="texto_derechos">Todos los derechos reservados ETL Soluciones  © 2017 - Bogotá Colombia |  Términos y Condiciones -  Aviso de Privacidad</div>
+	</div>
+</div>
+
+<div class="outsourcing" id="outsourcing">
+	<div class="principal_outsourcing" id="principal_outsourcing">
+		<!-- <img src="imagenes/principal-consultoria.png" class="img_principal_consultoria" id="img_principal_consultoria"> -->
+	</div>
+	<div class="contenido1_outsourcing" id="contenido1_outsourcing">
+		<div class="div_img1_consultoria" id="div_img1_consultoria">
+			<img src="imagenes/img1-consultoria.png" class="img1_consultoria" id="img1_consultoria">
+		</div>
+		<div class="titulo_consultoria" id="titulo_consultoria">Cómo lo hacemos?</div>
+		<div class="texto_outsourcing" id="texto_outsourcing">Nuestros servicios de outsourcing son ejecutados siguiendo lineamientos estrictamente definidos a través de mejores prácticas del mercado, asegurando que cuentan con:</br>
+		Procesos claramente definidos · Resultados de valor · Indicadores de desempeño y de resultado Acuerdos de niveles de servicio · Recurso humano calificado.</br>
+		El recurso humano de ETL cuenta con más de 10 años de experiencia en la implementación de proyectos y gestión de servicios de soporte de tecnologías basadas en Oracle, My SQL, SQL Server, DB2, Postgresql, entre otros.
+		</div>
+	</div>
+	<div class="contenido2_outsourcing" id="contenido2_outsourcing">
+		<img src="imagenes/img1-outsourcing.png" class="img2_outsourcing" id="img2_outsourcing">
+		<img src="imagenes/img2-outsourcing.png" class="img3_outsourcing" id="img3_outsourcing">
+		<img src="imagenes/img3-outsourcing.png" class="img4_outsourcing" id="img4_outsourcing">
+		<img src="imagenes/img4-outsourcing.png" class="img5_outsourcing" id="img5_outsourcing">
+	</div>
+	<div  class="texto_cantactenos" id="texto_cantactenos" >
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing1" >
+			Ejecución de procesos de Extracción, transformación y carga (ETL) de datos en sistemas de información. 
+		</div>
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing2" >
+			Provisión de mesas de servicios de TI.
+		</div>
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing3" >
+			Desarrollo de software a la medida.
+		</div>
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing4" >
+			Soporte de aplicaciones comerciales o desarrollos "in-house" de nuestros clientes.
+		</div>
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing5" >
+			Soporte y mantenimiento especializado de bases de datos.
+		</div>
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing6" >
+			gestión de proyectos tecnológicos.
+		</div>
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing7" >
+			Servicio de pruebas de software.
+		</div>
+		<div class="texto_cantactenos2" id="texto_contactenos_outsourcing8" >
+			Optimización y afinamiento de software.
+		</div>
+	    <div class="boton_cantactenos" id="boton_cantactenos">
+	        <img src="imagenes/boton-contactenos.png" class="img_boton-contactenos" id="img_boton-contactenos">
+		</div>
+	</div>
+    <div class="contenido3_outsourcing" id="contenido3_outsourcing">
+		<img src="imagenes/img5-outsourcing.png" class="img6_outsourcing" id="img6_outsourcing">
+		<img src="imagenes/img6-outsourcing.png" class="img7_outsourcing" id="img7_outsourcing">
+		<img src="imagenes/img7-outsourcing.png" class="img8_outsourcing" id="img8_outsourcing">
+		<img src="imagenes/img8-outsourcing.png" class="img9_outsourcing" id="img9_outsourcing">
+	</div>
+    
+    <div class="footer" id="footer">
+	<img src="imagenes/footer.png" class="imagen_footer" id="imagen_footer">
+	<img src="imagenes/footer-responsive.png" class="imagen_footer_responsive" id="imagen_footer_responsive">
+	<div class="mapa_footer" id="mapa_footer">
+		<img src="imagenes/mapa-etl.png" class="imagen_mapa_etl">
+	</div>
+	<img src="imagenes/celular-contacto.png" class="celular_contacto" id="celular_contacto">
+	<img src="imagenes/telefono-contacto.png" class="telefono_contacto" id="telefono_contacto">
+	<a href="mailto:info@etlsoluciones.com"><img src="imagenes/correo-contacto.png" class="correo_contacto" id="correo_contacto"></a>
+	<img src="imagenes/direccion-contacto.png" class="direccion_contacto" id="direccion_contacto">
+	<div class="texto_redes" id="texto_redes">Síguenos en nuestras redes sociales</div>
+	<a href="https://plus.google.com/u/0/115307255602114768207"><img src="imagenes/link-google.png" class="link_google" id="link_google"></a>
+	<a href="https://twitter.com/etlsoftware"><img src="imagenes/link-twitter.png" class="link_twitter" id="link_twitter"></a>
+	<a href="https://www.facebook.com/etlsoftware"><img src="imagenes/link-facebook.png" class="link_facebook" id="link_facebook"></a>
+	<a href="#"><img src="imagenes/link-pinterest.png" class="link_pinterest" id="link_pinterest"></a>
+	<a href="https://co.linkedin.com/in/etlsoluciones"><img src="imagenes/link-linkedin.png" class="link_linkedin" id="link_linkedin"></a>
+
+	<div class="texto_derechos" id="texto_derechos">Todos los derechos reservados ETL Soluciones  © 2017 - Bogotá Colombia |  Términos y Condiciones -  Aviso de Privacidad</div>
+	</div>
+</div>
+
+<div class="bi" id="bi">
+	<div class="principal_bi" id="principal_bi">
+		<!-- <img src="imagenes/principal-consultoria.png" class="img_principal_consultoria" id="img_principal_consultoria"> -->
+	</div>
+	<div class="contenido1_bi" id="contenido1_bi">
+		<div class="div_img1_consultoria" id="div_img1_consultoria">
+			<img src="imagenes/img1-consultoria.png" class="img1_consultoria" id="img1_consultoria">
+		</div>
+		<div class="titulo_consultoria" id="titulo_consultoria">Cómo lo hacemos?</div>
+		<div class="texto_bi" id="texto_bi">A traves de esta linea bridamos asesoria a nuestros clientes en el diseño e implementación de procesos, software y tecnología, para gestionar sus datos existentes en múltiples fuentes, convirtiéndolos en información de valor en la compañía.
+		</div>
+	</div>
+
+    <div class="contenido3_bi" id="contenido3_bi">
+		<img src="imagenes/img1-bi.png" class="img6_bi" id="img6_bi">
+		<img src="imagenes/img2-bi.png" class="img7_bi" id="img7_bi">
+		<img src="imagenes/img3-bi.png" class="img8_bi" id="img8_bi">
+		<img src="imagenes/img4-bi.png" class="img9_bi" id="img9_bi">
+	</div>
+    
+   <div class="footer" id="footer">
+	<img src="imagenes/footer.png" class="imagen_footer" id="imagen_footer">
+	<img src="imagenes/footer-responsive.png" class="imagen_footer_responsive" id="imagen_footer_responsive">
+	<div class="mapa_footer" id="mapa_footer">
+		<img src="imagenes/mapa-etl.png" class="imagen_mapa_etl">
+	</div>
+	<img src="imagenes/celular-contacto.png" class="celular_contacto" id="celular_contacto">
+	<img src="imagenes/telefono-contacto.png" class="telefono_contacto" id="telefono_contacto">
+	<a href="mailto:info@etlsoluciones.com"><img src="imagenes/correo-contacto.png" class="correo_contacto" id="correo_contacto"></a>
+	<img src="imagenes/direccion-contacto.png" class="direccion_contacto" id="direccion_contacto">
+	<div class="texto_redes" id="texto_redes">Síguenos en nuestras redes sociales</div>
+	<a href="https://plus.google.com/u/0/115307255602114768207"><img src="imagenes/link-google.png" class="link_google" id="link_google"></a>
+	<a href="https://twitter.com/etlsoftware"><img src="imagenes/link-twitter.png" class="link_twitter" id="link_twitter"></a>
+	<a href="https://www.facebook.com/etlsoftware"><img src="imagenes/link-facebook.png" class="link_facebook" id="link_facebook"></a>
+	<a href="#"><img src="imagenes/link-pinterest.png" class="link_pinterest" id="link_pinterest"></a>
+	<a href="https://co.linkedin.com/in/etlsoluciones"><img src="imagenes/link-linkedin.png" class="link_linkedin" id="link_linkedin"></a>
+
+	<div class="texto_derechos" id="texto_derechos">Todos los derechos reservados ETL Soluciones  © 2017 - Bogotá Colombia |  Términos y Condiciones -  Aviso de Privacidad</div>
+	</div>
+</div>
+
+<div class="innovacion" id="innovacion">
+	<div class="principal_innovacion" id="principal_innovacion">
+		<!-- <img src="imagenes/principal-consultoria.png" class="img_principal_consultoria" id="img_principal_consultoria"> -->
+	</div>
+	<div class="contenido1_innovacion" id="contenido1_innovacion">
+		<div class="div_img1_consultoria" id="div_img1_consultoria">
+			<img src="imagenes/img1-consultoria.png" class="img1_consultoria" id="img1_consultoria">
+		</div>
+		<div class="titulo_consultoria" id="titulo_consultoria">Cómo lo hacemos?</div>
+		<div class="texto_innovacion" id="texto_innovacion">El proceso de acompañamiento inicia con la detección de una necesidad u oportunidad, a partir de allí se generan un esquema de trabajo con personal del cliente y expertos provistos por nuestra compañía para generar ideas de resolución que serán validadas e implementadas, el producto o servicio final es testeado para garantizar que cumple las expectativas de resolución del problema.</br> 
+		El proceso propuesto usa metodologías agiles de desarrollo para garantizar ganancias tempranas y visibilidad de los avances realizados.
+		</div>
+	</div>
+
+    <div class="contenido3_innovacion" id="contenido3_innovacion">
+		<img src="imagenes/img1-innovacion.png" class="img6_innovacion" id="img6_innovacion">
+		<img src="imagenes/img2-innovacion.png" class="img7_innovacion" id="img7_innovacion">
+		<img src="imagenes/img3-innovacion.png" class="img8_innovacion" id="img8_innovacion">
+		<img src="imagenes/img4-innovacion.png" class="img9_innovacion" id="img9_innovacion">
+	</div>
+
+	<div class="contenido3_innovacion" id="contenido3_innovacion">
+		<img src="imagenes/img5-innovacion.png" class="img6_innovacion" id="img6_innovacion">
+	</div>
+    
+    <div class="footer" id="footer">
+	<img src="imagenes/footer.png" class="imagen_footer" id="imagen_footer">
+	<img src="imagenes/footer-responsive.png" class="imagen_footer_responsive" id="imagen_footer_responsive">
+	<div class="mapa_footer" id="mapa_footer">
+		<img src="imagenes/mapa-etl.png" class="imagen_mapa_etl">
+	</div>
+	<img src="imagenes/celular-contacto.png" class="celular_contacto" id="celular_contacto">
+	<img src="imagenes/telefono-contacto.png" class="telefono_contacto" id="telefono_contacto">
+	<a href="mailto:info@etlsoluciones.com"><img src="imagenes/correo-contacto.png" class="correo_contacto" id="correo_contacto"></a>
+	<img src="imagenes/direccion-contacto.png" class="direccion_contacto" id="direccion_contacto">
+	<div class="texto_redes" id="texto_redes">Síguenos en nuestras redes sociales</div>
+	<a href="https://plus.google.com/u/0/115307255602114768207"><img src="imagenes/link-google.png" class="link_google" id="link_google"></a>
+	<a href="https://twitter.com/etlsoftware"><img src="imagenes/link-twitter.png" class="link_twitter" id="link_twitter"></a>
+	<a href="https://www.facebook.com/etlsoftware"><img src="imagenes/link-facebook.png" class="link_facebook" id="link_facebook"></a>
+	<a href="#"><img src="imagenes/link-pinterest.png" class="link_pinterest" id="link_pinterest"></a>
+	<a href="https://co.linkedin.com/in/etlsoluciones"><img src="imagenes/link-linkedin.png" class="link_linkedin" id="link_linkedin"></a>
+
+	<div class="texto_derechos" id="texto_derechos">Todos los derechos reservados ETL Soluciones  © 2017 - Bogotá Colombia |  Términos y Condiciones -  Aviso de Privacidad</div>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript">
+
+
+	/*Textos propuestas de valor consultoria*/
+	$(function() {
+	$('#img2_consultoria').hover(function() {
+    $('#texto_cantactenos2').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_cantactenos2').css('display', 'none');
+  	});
+  	});
+	
+	$(function() {
+	$('#img3_consultoria').hover(function() {
+    $('#texto_cantactenos3').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_cantactenos3').css('display', 'none');
+  	});
+  	});
+
+  	$(function() {
+	$('#img4_consultoria').hover(function() {
+    $('#texto_cantactenos4').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_cantactenos4').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img5_consultoria').hover(function() {
+    $('#texto_cantactenos5').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_cantactenos5').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img6_consultoria').hover(function() {
+    $('#texto_cantactenos6').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_cantactenos6').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img7_consultoria').hover(function() {
+    $('#texto_cantactenos7').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_cantactenos7').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img8_consultoria').hover(function() {
+    $('#texto_cantactenos8').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_cantactenos8').css('display', 'none');
+  	});
+  	});
+
+  	/*Textos propuestas de valor outsourcing*/
+	$(function() {
+	$('#img2_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing1').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing1').css('display', 'none');
+  	});
+  	});
+	
+	$(function() {
+	$('#img3_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing2').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing2').css('display', 'none');
+  	});
+  	});
+
+  	$(function() {
+	$('#img4_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing3').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing3').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img5_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing4').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing4').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img6_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing5').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing5').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img7_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing6').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing6').css('display', 'none');
+  	});
+  	});
+
+
+  	$(function() {
+	$('#img8_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing7').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing7').css('display', 'none');
+  	});
+  	});
+
+  	$(function() {
+	$('#img9_outsourcing').hover(function() {
+    $('#texto_contactenos_outsourcing8').css('display', 'block');
+  	}, function() {
+    // vuelve a dejar el <div> como estaba al hacer el "mouseout"
+    $('#texto_contactenos_outsourcing8').css('display', 'none');
+  	});
+  	});
+
+	var altura = $('.menu').offset().top;
+	$('.menu_scroll').hide();
+	
+	$(window).on('scroll', function(){
+         
+         var scroll = $(this).scrollTop();
+
+		 if(scroll > altura){
+		 	$('.menu').css('display','none');
+		 	$('.menu_scroll').show();
+		 	$('.texto_telefono').css('color','#63c9ee');
+		 }else{
+		 	$('.menu').show();
+		 	$('.menu_scroll').hide();
+		 	$('.texto_telefono').css('color','white');
+		 }
+
+
+	});
+
+	// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("buscar");
+var btnb = document.getElementById("buscar_blue");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks the button, open the modal 
+buscar_blue.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+var modalcon = document.getElementById('ModalContactenos');
+
+// Get the button that opens the modal
+var btncon = document.getElementById("img_boton-contactenos");
+
+var spancon = document.getElementsByClassName("closecon")[0];
+
+// When the user clicks the button, open the modal 
+btncon.onclick = function() {
+    modalcon.style.display = "block";
+}
+
+spancon.onclick = function() {
+    modalcon.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modalcon.style.display = "none";
+    }
+}
+
+$(".search").hide();
+// Buscador
+function buscador() {
+
+   // Declare variables
+    var input, filter, ul, li, a, i;
+    input = document.getElementById('input-search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+    $(".search").show();
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+
+        } else {
+            li[i].style.display = "none";
+
+        }
+    }
+
+
+}
+
+
+</script>
+</html>

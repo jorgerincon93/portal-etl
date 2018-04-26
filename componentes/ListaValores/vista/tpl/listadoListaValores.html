@@ -1,0 +1,136 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="ListaValores"></div>
+</table>
+
+<script>
+
+$(function() {
+ 
+    $("#ListaValores").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=ListaValores&method=ajaxLista&idMenu="+{{idMenu}},
+        row_primary_key: "idListaValor", 
+        columns: [
+            {field: "id", header: "Id", visible: "no"},
+            {field: "idPadreLista", header: "Id Padre Lista", visible: "no"},
+            {field: "tipo", header: "Tipo"},
+            {field: "valor", header: "Valor"},
+            {field: "nombre", header: "Nombre"},
+            {field: "texto", header: "Texto"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+        ],
+        sorting: [
+            {sortingName: "Tipo", field: "tipo", order: "ascending"},
+            {sortingName: "Valor", field: "valor", order: "none"},
+            {sortingName: "Nombre", field: "nombre", order: "none"},
+            {sortingName: "Texto", field: "texto", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "Tipo", "filterType": "text", field: "tipo", filterLabel: "Tipo",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Valor", "filterType": "text", field: "valor", filterLabel: "Valor",
+                    excluded_operators: ["in", "not_in"],
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Nombre", "filterType": "text", field: "nombre", filterLabel: "Nombre",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Texto", "filterType": "text", field: "texto", filterLabel: "Texto",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                }
+            ]
+        }
+    });
+ 
+});	
+
+                
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 500,
+		maxHeight	: 800,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verListaValor(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=ListaValores&method=verListaValor',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarListaValor(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=ListaValores&method=agregarListaValor&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function editarListaValor(id){
+
+	$.ajax({
+		url:'index_blank.php?component=ListaValores&method=editarListaValor',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function eliminarListaValor(id, nombre){
+	//if(confirm('Realmente desea eliminar el Valor '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=ListaValores&method=eliminarListaValor&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Lista de Valor ' +nombre+ ' Eliminado');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	//}
+}
+
+</script>

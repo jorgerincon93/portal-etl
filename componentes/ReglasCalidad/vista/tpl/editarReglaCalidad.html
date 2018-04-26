@@ -1,0 +1,377 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td>{{titulo|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        
+    </table>
+</div>
+
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACI&Oacute;N REGLA</th>
+        </tr>
+        <tr>            
+            <td width="30%" class="tituloAlineado">Fecha</td>
+            <td> {{datosRegla.fechaCreacion}}</td>
+            <td width="30%" class="tituloAlineado">Usuario Creador</td>
+            <td> {{datosRegla.creador}} </td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Fecha Modificacion</td>
+            <td> {{datosRegla.fechaModificacion}}</td>
+            <td width="30%" class="tituloAlineado">Usuario Modificador</td>
+            <td> {{datosRegla.modificador}} </td>
+            
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Nombre Regla</td>
+            <td> <input class="required inputGeneral" type="text" name="nombreRegla" id="nombreRegla" value="{{datosRegla.nombreRegla}}" /></td>
+            <td width="30%" class="tituloAlineado">Estado</td>
+            <td> 
+                <div class="ui-widget">
+                    <select class="required" name="estado" id="estado">{{select_estado_regla|raw}}</select>
+                </div>
+            </td>            
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Tipo Regla</td>
+            <td> <input class="required inputGeneral" type="text" name="tipoRegla" id="tipoRegla" value="{{datosRegla.tipoRegla}}" /></td>    
+            <td width="30%" class="tituloAlineado">Descripci&oacute;n Regla</td>
+            <td> <input class="required inputGeneral" type="text" name="descriRegla" id="descriRegla" value="{{datosRegla.descriRegla}}" /></td>
+        </tr>
+        <tr><td width="30%" class="tituloAlineado">Orden Ejecucion Regla</td>
+            <td> <input class="required inputGeneral" type="text" name="OrdenEjecucionRegla" id="OrdenEjecucionRegla" value="{{datosRegla.ordenEjecucionRegla}}" /></td></tr>
+
+    </table>    
+    <br>
+    <table id="listaReglas" class="tablaGeneral" border="1" align="center">
+                <thead>
+                    <tr>
+                        <th colspan="9" style="text-align: center">CONDICIONES DE LA REGLA</th>
+                    </tr>
+                    <tr>
+                        <th width="300" id="columna_can">Campo Origen</th>
+                        <th width="100" id="columna_anio">Operacion</th>
+                        <th colspan="2" style="text-align: center;" width="400" id="columna_cic">Valor / Campo</th>
+                        <th width="100" id="columna_met">Conector</th>
+                        <th width="100" id="columna_estado">Estado</th>
+                        <th width="50" id="colOrden">Orden</th>
+                        <th width="50" id="colAcciones">Acciones</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                {% for formatoRegla in formatosRegla %}
+                  <tr id="fila_{{ loop.index }}">
+                    <td id="reg_campo_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="campo_{{ loop.index }}" id="campo_{{ loop.index }}" >{{formatoRegla.select_campo|raw}}</select>
+                        </div>
+                    </td>
+                    <td id="reg_operacion_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="operacion_{{ loop.index }}" id="operacion_{{ loop.index }}" >{{formatoRegla.select_operacion|raw}}</select>
+                        </div> 
+                    </td>
+                    <td id="reg_radio_valor_campo_{{loop.index}}" width="100">                        
+                        <input type="radio" name="radio_valor_campo_{{loop.index}}" id="radio_valor_campo_{{loop.index}}" value="Valor" checked onclick="cambioRadio(this,{{loop.index}})">Valor <input type="radio" name="radio_valor_campo_{{loop.index}}" id="radio_valor_campo_{{loop.index}}" onclick="cambioRadio(this,{{loop.index}})" value="Campo">Campo
+                    </td>
+                    <td id="reg_valor_campo_{{ loop.index }}" width="400">
+                        <input class="required inputGeneral" type="text" name="valor_campo_{{loop.index}}" id="valor_campo_{{loop.index}}" value="{{formatoRegla.valor}}" />
+                    </td>
+                    <td id="reg_conector_{{ loop.index }}">
+                        <div class="ui-widget">
+                            <select name="conector_{{ loop.index }}" id="conector_{{ loop.index }}">{{formatoRegla.select_conector|raw}}</select>
+                        </div>
+                    </td>
+                    <td id="reg_estado_{{ loop.index }}">
+                        <div class="ui-widget">
+                            <select class="required" name="estado_{{ loop.index }}" id="estado_{{ loop.index }}">{{formatoRegla.select_estado|raw}}</select>
+                        </div>
+                    </td>
+                    <!--<td id="reg_id_{{ loop.index }}">{{formatoRegla.id}}-->
+                        <input type="hidden" name="id_{{ loop.index }}" id="id_{{ loop.index }}" value="{{formatoRegla.id}}" />
+                    <!--</td>-->
+                    <td id="reg_orden_{{ loop.index }}" width="100"><input type="hidden" name="orden_{{ loop.index }}" id="orden_{{ loop.index }}" value="{{formatoRegla.orden}}" /> {{formatoRegla.orden}}</td>
+                    <td id="reg_acciones_{{ loop.index }}"><button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+    <br>
+    
+    <table id="accionRegla" class="tablaGeneral" border="1" align="center">
+                <thead>
+                    <tr>
+                        <th colspan="4" style="text-align: center">ACCION DE LA REGLA</th>
+                    </tr>
+                    <tr>
+                        <th width="300" id="columna_campo">Campo</th>
+                        <th width="100" id="columna_accion">Accion</th>
+                        <th width="100" id="columna_valor">Valor</th>
+                        <th width="100" id="columna_agregar">Agregar</th>
+                    </tr>              
+                    
+                </thead>
+                <tbody>
+                  {% for formatoReglaAccion in formatosReglaAccion %}
+                    <tr id="fila_accion_{{ loop.index }}">
+                        <td id="reg_campo_accion_{{ loop.index }}" width="100">
+                        <div class="ui-widget">
+                            <select class="required" name="campo_accion_{{ loop.index }}" id="campo_accion_{{ loop.index }}" >{{formatoReglaAccion.select_campo_acciones|raw}}</select>
+                        </div>
+                    </td>
+                        <td id="reg_accion_accion_{{loop.index}}" width="300">
+                            <div class="ui-widget">
+                                <select class="required" name="accion_accion_{{loop.index}}" id="accion_accion_{{loop.index}}" >{{formatoReglaAccion.select_accion_acciones|raw}}</select>
+                            </div> 
+                        </td>
+                        <td id="reg_valor_accion_{{loop.index}}" width="100">
+                            <input class="required inputGeneral" type="text" name="valor_accion_{{loop.index}}" id="valor_accion_{{loop.index}}" value="{{formatoReglaAccion.valorAcciones}}" />
+                        </td>
+                        <input type="hidden" name="id_accion_{{ loop.index }}" id="id_accion_{{ loop.index }}" value="{{formatoReglaAccion.id}}" />
+                        <td id="reg_acciones_accion_{{ loop.index }}"><button type="button" class="btn btn-link" onclick="agregarFilaAccion()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button></td>
+                    </tr>
+                   {% endfor %}
+                </tbody>
+    </table>
+    
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+    <div style="padding-top: 20px; text-align: right; width: 100%">          
+        <input type="submit" class="botonGeneralGrande" value="Guardar Regla" />
+    </div>
+    <input type="hidden" name="id" id="id" value="{{datosRegla.id}}" />
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idCreador" id="idCreador" value="{{datosRegla.idCreador}}" />
+    <input type="hidden" name="cantFilas" id="cantFilas" value="1" />
+    <input type="hidden" name="cantFilasAcciones" id="cantFilasAcciones" value="1" />
+    
+</form>
+<script>    
+    $().ready(function(){
+        $("#estado").chosen({disable_search_threshold: 10, width:"100%"});
+        
+        {% for formatoRegla in formatosRegla %}
+            $("#campo_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"300px"});
+            $("#operacion_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+            $("#conector_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px" });
+            $("#estado_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+        {% endfor %}
+         
+        {% for formatoReglaAccion in formatosReglaAccion %}
+            $("#campo_accion_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"300px"});
+            $("#accion_accion_{{ loop.index }}").chosen({disable_search_threshold: 10, width:"150px"});
+        {% endfor %}
+        
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })       
+        $("#envioDatos").validate({ rules: {chosen:"required"} });
+        
+    });
+    
+    function cambioRadio(radio,fila){
+        var selCampo = "{{select_campo|escape('js')}}";
+        //alert(radio.value);
+        if(radio.value == 'Valor'){            
+            $("#reg_valor_campo_"+fila).html('<input class="required inputGeneral" type="text" name="valor_campo_'+fila+'" id="valor_campo_'+fila+'" value="" />');
+        }else{
+            $("#reg_valor_campo_"+fila).html('<div class="ui-widget"> <select class="required" name="valor_campo_'+fila+'" id="valor_campo_'+fila+'" >'+selCampo+'</select></div>');
+            $("#valor_campo_"+fila).chosen({disable_search_threshold: 10, width:"300px"});
+        }
+    }    
+    
+    function agregarFila(){
+        var n = $('tr:last td', $("#listaReglas")).length;
+        var j = $('#listaReglas >tbody >tr').length + 1;
+        var tds = '';
+        var $objTabla=$('#listaReglas');
+        var iTotalColumnasExistentes=$('#listaReglas thead tr th').length;
+        var ant = j-1;
+        var tdIdAnt;
+        var cantFilas = $('#cantFilas').val();
+        
+        if(cantFilas>=j){       
+            j = parseInt(cantFilas) + 1;
+        }
+        $('#cantFilas').val(j);
+       
+        var selEstado = "{{select_estado|escape('js')}}";
+        var selCampo = "{{select_campo|escape('js')}}";
+        var selOperacion = "{{select_operacion|escape('js')}}";
+        var selConector = "{{select_conector|escape('js')}}";
+        
+        tdIdAnt = $objTabla.find('td:last').attr('id');
+        tdIdAnt = tdIdAnt.replace('reg_acciones_','');
+        //alert(tdIdAnt);
+               
+        //$objTabla.find('td:last').html('&nbsp;');
+        tds +='<tr id="fila_'+j+'">';
+        
+        tds += '<td id="reg_campo_'+j+'" width="100"><div class="ui-widget"><select class="required" name="campo_'+j+'" id="campo_'+j+'" >'+selCampo+'</select></div></td>';
+        tds += '<td id="reg_operacion_'+j+'" width="100"><div class="ui-widget"><select class="required" name="operacion_'+j+'" id="operacion_'+j+'" >'+selOperacion+'</select></div> </td>';
+        tds += '<td id="reg_radio_valor_campo_'+j+'" width="100"><input type="radio" name="radio_valor_campo_'+j+'" id="radio_valor_campo_'+j+'" value="Valor" checked onclick="cambioRadio(this,'+j+')">Valor <input type="radio" name="radio_valor_campo_'+j+'" id="radio_valor_campo_'+j+'" onclick="cambioRadio(this,'+j+')" value="Campo">Campo</td>';
+        tds += '<td id="reg_valor_campo_'+j+'" width="100"><input class="required inputGeneral" type="text" name="valor_campo_'+j+'" id="valor_campo_'+j+'" value="" /></td>';
+        tds += '<td id="reg_conector_'+j+'"><div class="ui-widget"><select name="conector_'+j+'" id="conector_'+j+'">'+selConector+'</select></div></td>';
+        tds += '<td id="reg_estado_'+j+'"><div class="ui-widget"><select class="required" name="estado_'+j+'" id="estado_'+j+'">'+selEstado+'</select></div></td>';
+        tds += 'id="reg_id_'+j+'">{{formatoRegla.id}}<input type="hidden" name="id_'+j+'" id="id_'+j+'" value="" />';
+        tds += '<td id="reg_orden_'+j+'"><input type="hidden" name="orden_'+j+'" id="orden_'+j+'" value="'+j+'" />'+j+'</td>';        
+        tds += '<td id="reg_acciones_'+ j +'"><button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button> <button type="button" class="btn btn-link" onclick="eliminarFila('+j+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        tds += '</tr>';
+        $("#listaReglas").append(tds);
+        
+        $("#campo_"+j).chosen({disable_search_threshold: 10, width:"300px"});
+        $("#operacion_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#valor_campo_"+j).val();
+        $("#conector_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#orden_"+j).val();
+        $("#estado_"+j).chosen({disable_search_threshold: 10, width:"150px"});
+        
+        $("#reg_acciones_"+tdIdAnt).html('<button type="button" class="btn btn-link" onclick="eliminarFila('+tdIdAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+        
+    }
+    
+    function eliminarFila(pos){
+        var $objTabla=$('#listaReglas');
+        var j = $('#listaReglas >tbody >tr').length;
+        var tdVal = '';
+      
+        $("#fila_"+pos).remove();
+       
+        tdVal = $objTabla.find('td:last').html();
+        
+        if (j>2){
+            if(tdVal.length<150){
+                tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>' + tdVal;
+            }
+        }else{
+            tdVal = '<button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+        }
+       $objTabla.find('td:last').html(tdVal);
+    }
+    
+   function agregarFilaAccion(){
+        var n1 = $('tr:last td', $("#accionRegla")).length;
+        var j1 = $('#accionRegla >tbody >tr').length + 1;
+        var tds1 = '';
+        var $objTabla=$('#accionRegla');
+        var iTotalColumnasExistentes=$('#accionRegla thead tr th').length;
+        var ant = j1-1;
+        var tdIdAnt;
+        var cantFilasAcciones = $('#cantFilasAcciones').val();
+        
+        if(cantFilasAcciones>=j1){       
+            j1 = parseInt(cantFilasAcciones) + 1;
+        }
+        $('#cantFilasAcciones').val(j1);
+       
+        var selCampoAccion = "{{select_campo_acciones|escape('js')}}";
+        var selAccion = "{{select_accion_acciones|escape('js')}}";
+        
+        tdIdAnt = $objTabla.find('td:last').attr('id');
+        tdIdAnt = tdIdAnt.replace('reg_acciones_accion_','');
+        //alert(tdIdAnt);
+               
+        //$objTabla.find('td:last').html('&nbsp;');
+        tds1 +='<tr id="fila_accion_'+j1+'">';
+        
+        tds1 += '<td id="reg_campo_accion_'+j1+'" width="100"><div class="ui-widget"><select class="required" name="campo_accion_'+j1+'" id="campo_accion_'+j1+'" >'+selCampoAccion+'</select></div></td>';
+        tds1 += '<td id="reg_accion_accion_'+j1+'" width="100"><div class="ui-widget"><select class="required" name="accion_accion_'+j1+'" id="accion_accion_'+j1+'" >'+selAccion+'</select></div> </td>';
+        tds1 += '<td id="reg_valor_accion_'+j1+'" width="100"><input class="required inputGeneral" type="text" name="valor_accion_'+j1+'" id="valor_accion_'+j1+'" value="" /></td>';
+        //tds += '<td id="reg_orden_acciones_'+j+'"><input type="hidden" name="orden_'+j+'" id="orden_'+j+'" value="'+j+'" />'+j+'</td>';        
+        tds1 += 'id="reg_id_accion_'+j1+'">{{formatoReglaAccion.id}}<input type="hidden" name="id_accion_'+j1+'" id="id_accion_'+j1+'" value="" />';
+        tds1 += '<td id="reg_acciones_accion_'+j1+'"><button type="button" class="btn btn-link" onclick="agregarFilaAccion()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span> </button> <button type="button" class="btn btn-link" onclick="eliminarFilaAccion('+j1+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        tds1 += '</tr>';
+        $("#accionRegla").append(tds1);
+        
+        $("#campo_accion_"+j1).chosen({disable_search_threshold: 10, width:"300px"});
+        $("#accion_accion_"+j1).chosen({disable_search_threshold: 10, width:"150px"});
+        $("#valor_accion_"+j1).val();
+        
+        $("#reg_acciones_accion_"+tdIdAnt).html('<button type="button" class="btn btn-link" onclick="eliminarFilaAccion('+tdIdAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+        
+    }
+    
+    function eliminarFilaAccion(pos){
+        var $objTabla1=$('#accionRegla');
+        var j1 = $('#accionRegla >tbody >tr').length;
+        var tdVal1 = '';
+      
+        $("#fila_accion_"+pos).remove();
+       
+        tdVal1 = $objTabla1.find('td:last').html();        
+        if (j1>2){        
+            if(tdVal1.length<155){                
+                tdVal1 = '<button type="button" class="btn btn-link" onclick="agregarFilaAccion()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>' + tdVal1;
+            }
+        }else{
+            tdVal1 = '<button type="button" class="btn btn-link" onclick="agregarFilaAccion()" title="Agregar Fila"><span class="glyphicon glyphicon-plus"></span>';
+        }
+       $objTabla1.find('td:last').html(tdVal1);
+    }
+    
+    function regresar(){
+        $.ajax({
+        url:'index_blank.php?component=ReglasCalidad&method=mostrarReglasCalidad&idMenu=' + {{idMenu}},
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+        });
+    }
+
+    function EnviarFormulario(){ 
+        var tdId;
+        var formatosRegla = [];
+        var formatosReglaAccion = [];
+        
+        $('#listaReglas > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_','');
+            formatosRegla.push({
+                id : $("#id_"+tdId).val(),
+                campo : $("#campo_"+tdId).val(),
+                operacion : $("#operacion_"+tdId).val(),
+                valor : $("#valor_campo_"+tdId).val(),
+                conector : $("#conector_"+tdId).val(),
+                orden : $("#orden_"+tdId).val(),
+                estado : $("#estado_"+tdId).val()
+              //  orden : $("#met_"+tdId).chosen().val()
+                //municipio : $("#ciu_"+tdId).chosen().val()
+            });            
+        });
+        
+        $('#accionRegla > tbody > tr').each(function() {
+            tdId = $(this).find('td:last').attr('id');
+            
+            tdId = tdId.replace('reg_acciones_accion_','');
+            formatosReglaAccion.push({
+                id : $("#id_"+tdId).val(),
+                campo_accion : $("#campo_accion_"+tdId).val(),
+                accion_accion : $("#accion_accion_"+tdId).val(),
+                valor_campo_accion : $("#valor_accion_"+tdId).val()
+            });            
+        });
+        
+        formatosRegla = JSON.stringify(formatosRegla);
+        formatosReglaAccion = JSON.stringify(formatosReglaAccion);
+       if(confirm('Realmente desea Guardar La Regla?')){  
+          $.ajax({
+            url:'index_blank.php?component=ReglasCalidad&method=guardarReglasCalidad',
+                    type: "POST",
+                    data:$('#envioDatos').serialize() + '&formatosRegla='+formatosRegla + '&formatosReglaAccion='+formatosReglaAccion,
+                    success: function (msm){
+                    $('#componenteCentral').html(msm);
+                    }
+          });
+        } 
+    }        
+
+</script>

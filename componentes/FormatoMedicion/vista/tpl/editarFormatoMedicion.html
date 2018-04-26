@@ -1,0 +1,1382 @@
+{{COMODIN}}
+<div class="ruta">
+    <table align="center" width="100%">
+        <tr>
+            <td>{{titulo|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"> {{datosFormatoMedicion.titulo}}</td>
+        </tr>
+    </table>
+</div>
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td width="3%" class="tituloAlineado">Consecutivo Formato Medicion</td>
+            <td><p id="nomcontCliente">{{datosFormatoMedicion.id}}</p></td>
+            <td width="3%" class="tituloAlineado">Consecutivo Resumen Job</td>
+            <td><p id="nomcontCliente">{{datosResumenJob.id}}</p></td>
+            <td width="10%" class="tituloAlineado">Fecha </td>
+            <td><p id="nomcontCliente">{{datosResumenJob.fechaSis}}</p></td>
+            <td width="30%" class="tituloAlineado">Asesor Comercial </td>
+            <td> {{datosUsuario.nombre}} </td>
+        </tr>
+    </table>   
+    <br>    
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACIÓN DEL CLIENTE</th>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Cliente </td>
+            <td><p id="nomcontCliente">{{datosCliente.nombre}}</p></td>
+            <td width="30%" class="tituloAlineado">Nombre Contacto Cliente </td>
+            <td><p id="nomcontCliente">{{datosCliente.contacto}}</p></td>
+        </tr>
+        <tr>
+            <td width="30%" class="tituloAlineado">Telefono Cliente </td>
+            <td><p id="telCliente">{{datosCliente.telefono}}</p></td>
+            <td width="30%" class="tituloAlineado">Email </td>
+            <td><p id="emailCliente">{{datosCliente.email}}</p></td>
+        </tr>        
+    </table>   
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="8" style="text-align: center">INFORMACIÓN RESUMEN JOB ORDER</th>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Area Metropolitana </td>
+            <td>
+                <p id="areaMet">{{datosFormatoMedicion.areaMet}}</p>
+            </td>
+            <td class="tituloAlineado">Municipios </td>
+            <td>
+                <p id="mun">{{datosFormatoMedicion.municipio}}</p>
+            </td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Tendencia </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="tendencia" id="tendencia">{{select_tendencia|raw}}</select>
+                </div>
+            </td>
+            <td  width="1%" class="tituloAlineado">Observaciones Tendencia </td>
+            <td><input class="required" type="text" size="30" name="observacionesTendencia" id="observacionesTendencia"  value="{{datosFormatoMedicion.observacionesTendencia}}"></td>
+          <!--  <td class="tituloAlineado">Seleccionar Tendencia </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="tipoTendencia" id="tipoTendencia" {{attr_disabled}} >{{select_tipoTendencia|raw}}</select>
+                </div> 
+            </td>-->
+        </tr>      
+        <tr>
+            <td class="tituloAlineado">Estudio </td>
+            <td>{{datosFormatoMedicion.tipoEstudio}}</td>
+            <td class="tituloAlineado">Frecuencia </td>
+            <td>{{datosFormatoMedicion.frecuencia}}</td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Ciclo </td>
+            <td>{{datosFormatoMedicion.ciclo}}</td>
+            <td class="tituloAlineado">A&ntilde;o </td>
+            <td>{{datosFormatoMedicion.anio}}</td>
+        </tr>
+        <tr>            
+            <td class="tituloAlineado">Categoria </td>
+            <td> {{datosFormatoMedicion.nombreCategoria}}</td>
+        </tr>
+    </table>
+    <br>    
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <td class="tituloAlineado">Geo Segmentacion </td>
+            <td>
+                <div class="ui-widget">
+                    <select class="required" name="geoSegmentacion" id="geoSegmentacion" multiple data-placeholder="Seleccione Geosegmentacion...">{{select_geoSegmento|raw}}</select>
+                </div>
+            </td>
+            <td  width="1%" class="tituloAlineado">Observaciones Geomatica</td>
+            <td><textarea class="required" rows="1" cols="50" name="obsGeomatica" id="obsGeomatica">{{datosFormatoMedicion.observacionesGeomatica}}</textarea></td>
+        </tr>
+        <tr>
+           <td class="tituloAlineado">Anexa Tipifacion </td>
+            <td><div class="ui-widget">
+                    <select class="required" name="tipificacion" id="tipificacion">{{select_tipificacion|raw}}</select>
+                </div>
+            </td>
+            <td  width="1%" class="tituloAlineado">URL Tipifacion </td>
+            <td><input class="required" type="text" size="50" name="urlTipificacion" id="urlTipificacion"  value="{{datosFormatoMedicion.urlTipificacion}}"></td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado" colspan="2">Canales</td>
+            <td colspan="2">{{datosFormatoMedicion.canal}}
+            </td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado" colspan="2">Variables de Medicion</td>
+            <td colspan="2">
+                <div class="ui-widget">
+                    <select class="required" name="varMedicion" id="varMedicion" multiple data-placeholder="Seleccione Variable de Medicion...">{{select_varMedicion|raw}}</select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="tituloAlineado" colspan="2">Variables Especiales de Analisis</td>
+            <td colspan="2">
+                <div class="ui-widget">
+                    <select name="varEspeciales" id="varEspeciales" multiple data-placeholder="Seleccione Variable Especial de Analisis...">{{select_varEspeciales|raw}}</select>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th style="text-align: center">FORMATO MEDICIÓN</th>
+        </tr>
+    </table>
+        <table id="tablaMedicion" class="tablaGeneral" border="1">
+                <thead>
+                    <tr>
+                        <th width="10" id="Numero_Fila">#</th>
+                        <th width="100" id="columna_1">Categoria</th>
+                        <th width="100" id="columna_2">Fabricante</th>
+                        <th width="100" id="columna_3">Marca</th>
+                        {% if contColumnas > 3 %}
+                            {% for j in 4..contColumnas %}
+
+                            <th width="100" id="columna_{{ j }}">                            
+                                <div class="ui-widget">
+                                    {% if loop.last %}
+                                    <select name="selColumna_{{ j }}" id="selColumna_{{ j }}" onchange="cambioColumna('{{ j }}');">{{columnasFormato[j-1].selectCol|raw}}</select>
+                                    {% else %}
+                                    <select name="selColumna_{{ j }}" id="selColumna_{{ j }}" onchange="cambioColumna('{{ j }}');" disabled>{{columnasFormato[j-1].selectCol|raw}}</select>
+                                    {% endif %}                                
+                                </div>
+                            </th>
+                            {% endfor %}
+                        {% endif %}
+                        <th width="100" id="colAcciones">Acciones <button type="button" class="btn btn-link" onclick="agregarColumna()" title="Agregar Columna"><span class="glyphicon glyphicon-circle-arrow-right"></span></button></th>
+                        {% for varsMedicion in varMedicion %}
+                            <th style="text-align: center" id="columna_{{varsMedicion.valor}}">{{varsMedicion.nombre}}</th>
+                        {% endfor %}
+                        {% if matriz.rechazoItem is defined %}
+                            <th width="100" id="colRechazo" style="text-align: center;" >Rechazado</th>
+                            <th width="100" id="colRechazoObs" style="text-align: center;">Observaciones</th>
+                            <th width="100" id="colRechazoUsuario" style="text-align: center;">Usuario</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for i in 1..cantFilas %}
+                  <tr id="fila_{{ i }}">
+                      <td id="numero_{{ i }}">{{ i }}</td>
+                      {% for j in 1..contColumnas %}
+                      {% if i == 1 and j == 1 %}
+                        <td id="reg_{{ i }}_{{ j }}"><input type="hidden" name="input_1_1" id="input_1_1" value="{{ matriz[i][j].valor }}" /> <input type ="hidden" name="herencia_1_1" id="herencia_1_1" value="{{ matriz[i][j].herencia }}" />{{datosFormatoMedicion.nombreCategoria}} </td>
+                      {% else %}
+                        {% if matriz[i][j].valor is defined %}
+                            <td id="reg_{{ i }}_{{ j }}" onmouseover="mostrarBoton('{{ i }}','{{ j }}')" onmouseout="ocultarBoton('{{ i }}','{{ j }}')">
+                                <div class="ui-widget">
+                                    <select class="required" name="input_{{ i }}_{{ j }}" id="input_{{ i }}_{{ j }}" onchange="cambioSeleccion({{ i }},{{ j }},'{{matriz[i][j].herencia}}')" >{{matriz[i][j].select|raw}}</select>
+                                    <input type ="hidden" name="herencia_{{ i }}_{{ j }}" id="herencia_{{ i }}_{{ j }}" value="{{matriz[i][j].herencia}}" />
+                                    <button name="boton_{{ i }}_{{ j }}" id="boton_{{ i }}_{{ j }}" type="button" class="btn btn-link" onclick="agregarFila({{ i }},{{ j }},'{{matriz[i][j].herencia}}')" title="Agregar Fila" style="display: none;"><span class="glyphicon glyphicon-list"></span> </button>
+                                    <button name="boton_final_{{ i }}_{{ j }}" id="boton_final_{{ i }}_{{ j }}" type="button" class="btn btn-link" onclick="agregarFilaFinal({{ i }},{{ j }},'{{matriz[i][j].herencia}}')" title="Agregar Fila Final" style="display: none;"><span class="glyphicon glyphicon-arrow-down"></span> </button>
+                                    <button name="eliminar_{{ i }}_{{ j }}" id="eliminar_{{ i }}_{{ j }}" type="button" class="btn btn-red" onclick="eliminarCelda({{ i }},{{ j }})" title="Eliminar Celda" style="display: none;"><span class="glyphicon glyphicon-minus"></span> </button>
+                                </div>
+                            </td>
+                        {% else %}
+                            <td id="reg_{{ i }}_{{ j }}">&nbsp;</td>
+                        {% endif %}
+                      {% endif%}
+                      {% endfor %}
+                      <td id="reg_{{ i }}_acciones">&nbsp;</td>
+                      {% for varsMedicion in varMedicion %}
+                            {% if matriz[i][varsMedicion.valor] == "Si" %}
+                                <td id="reg_{{ i }}_{{varsMedicion.valor}}" align="center"><input type="checkbox" name="input_{{ i }}_{{varsMedicion.valor}}" id="input_{{ i }}_{{varsMedicion.valor}}" value="Si" checked></td>
+                            {% else %}
+                                <td id="reg_{{ i }}_{{varsMedicion.valor}}" align="center"><input type="checkbox" name="input_{{ i }}_{{varsMedicion.valor}}" id="input_{{ i }}_{{varsMedicion.valor}}" value="Si" ></td>
+                            {% endif %}
+                      {% endfor %}
+                      
+                      {% if matriz.rechazoItem is defined %}
+                        {% if matriz[i].rechazo.valor == "SI" %}
+                            <td id="reg_{{ i }}_rechazar" align="center">SI</td>
+                            <td id="reg_{{ i }}_obsRechazo" >{{matriz[i].rechazo.obs}}</td>
+                            <td id="reg_{{ i }}_usuario" align="center">{{matriz[i].rechazo.nomUsuario}}</td>
+                        {% else %}
+                            <td id="reg_{{ i }}_rechazar" align="center">&nbsp;</td>
+                            <td id="reg_{{ i }}_obsRechazo" align="center">&nbsp;</td>
+                            <td id="reg_{{ i }}_usuario" align="center">&nbsp;</td>
+                        {% endif %}
+                      {% endif %}
+                      
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+    <br>
+    <table id="tablaVarEspeciales" align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" style="display: none;">
+        <tr>
+            <th colspan="2" style="text-align: center">VARIABLES ESPECIALES DE AN&Aacute;LISIS</th>
+        </tr>
+    </table>
+    <br>
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+        <tr>
+            <th colspan="2" style="text-align: center">OBSERVACIONES</th>
+        </tr>
+        <tr>
+            <td class="tituloAlineado">Observaciones Generales </td>
+            <td><textarea class="required" rows="4" cols="50" name="obsGenerales" id="obsGenerales">{{datosFormatoMedicion.observacionesGenerales}}</textarea></td>
+        </tr>        
+       <!-- <tr>
+            <td class="tituloAlineado">Observaciones Geomatica</td>
+            <td><textarea class="required" rows="4" cols="50" name="obsGeomatica" id="obsGeomatica">{{datosOrden.observaciones}}</textarea></td>
+        </tr>-->
+    </table>
+    
+    {% if historialAprobacion is defined %}
+    <table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+               
+    <thead>
+        <tr>
+        <th colspan="8" style="text-align: center">HISTORIAL DE APROBACIONES / RECHAZOS</th>
+        </tr>
+         <tr>
+          <td width="100"><b>Nombre Perfil</b></td>
+          <td width="100"><b>Estado</b></td>
+          <td width="100"><b>Fecha Creacion</b></td>
+          <td width="100"><b>Usuario</b></td>
+          <td width="100"><b>Fecha Aprobacion</b></td>
+          <td width="100"><b>Observaciones Aprobacion</b></td>
+        </tr>
+    </thead>
+    <tbody>
+      {% for historialAprobaciones in historialAprobacion %}  
+        <tr>
+            <td>{{historialAprobaciones.nombrePerfil}}</td>
+            <td>{{historialAprobaciones.estado}}</td>
+            <td>{{historialAprobaciones.fechaCreacion}}</td>
+            <td>{{historialAprobaciones.nombreUsuario}}</td>
+            <td>{{historialAprobaciones.fechaAprobacion}}</td>
+            <td>{{historialAprobaciones.obsAprobacion}}</td>
+        </tr>
+      {% endfor %}  
+    </tbody>   
+    </table>  
+    {% endif %}
+    
+    
+    
+    <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+    </div>
+    <div style="padding-top: 20px; text-align: right; width: 100%">
+        <input type="submit" class="botonGeneralGrande" value="Guardar Formato" />
+    </div>
+    <input type="hidden" name="id" id="id" value="{{datosFormatoMedicion.id}}" />
+    <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+    <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+    <input type="hidden" name="idAsesor" id="idAsesor" value="{{datosResumenJob.idUsuario}}" />
+    <input type="hidden" name="colExcluidas" id="colExcluidas" value="{{colExcluidas}}" />
+    <input type="hidden" name="varMedicionArray" id="varMedicionArray" value="" />
+    <input type="hidden" name="varMedicionCont" id="varMedicionCont" value="0" />
+    <input type="hidden" name="numeroLineas" id="numeroLineas" value="{{cantFilas}}" />
+    <input type="hidden" name="contColumnas" id="contColumnas" value="3" />
+    <input type="hidden" name="resumenJob" id="resumenJob" value="{{idResumenJob}}" />
+</form>
+<script>
+    //////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                  //
+    //                              FUNCIONES BASICAS                                   //
+    //                                                                                  //
+    //////////////////////////////////////////////////////////////////////////////////////
+    var arregloVariablesMedicion = [{{arregloVarMedicion|raw}}];
+    var arregloVariablesEspeciales = [];
+    var columnasArray = [{{columnasArray|raw}}];
+    
+    //console.log(arregloVariablesMedicion);
+    
+    $().ready(function(){
+        
+         if ($("#tendencia").val() == 'Si'){             
+            $("#observacionesTendencia").attr('disabled',false).trigger("chosen:updated");                      
+         }else{ 
+            $("#observacionesTendencia").val(null).trigger("chosen:updated");
+            $("#observacionesTendencia").attr('disabled',true).trigger("chosen:updated");             
+         };
+         
+         if ($("#tipificacion").val() == 'Si'){             
+            $("#urlTipificacion").attr('disabled',false).trigger("chosen:updated");                      
+         }else{     
+             $("#urlTipificacion").val(null).trigger("chosen:updated");
+            $("#urlTipificacion").attr('disabled',true).trigger("chosen:updated");             
+         }
+        //$contCol = {{contColumnas}};
+        //$contCol = parseInt($contCol) + parseInt($("#contColumnas").val());
+        //$("#contColumnas").val($contCol);
+        
+        $("#geoSegmentacion").chosen({disable_search_threshold: 10, width:"50%" });
+        $("#tipificacion").chosen({disable_search_threshold: 10, width:"100%" });
+        $("#canales").chosen({disable_search_threshold: 10, width:"100%" });
+        $("#varMedicion").chosen({disable_search_threshold: 10, width:"100%" });
+        $("#varEspeciales").chosen({disable_search_threshold: 10, width:"100%" });        
+        
+        $("#tendencia").chosen({disable_search_threshold: 10, width:"35%"});
+        $("#tipoTendencia").chosen({disable_search_threshold: 10, width:"100%" });        
+        presenciaInicial();
+        variablesEspeciales();
+        //armarColumnas();        
+        
+        $.validator.setDefaults({ ignore: ":hidden:not(select)" })       
+        $("#envioDatos").validate({ rules: {chosen:"required"} });
+    });
+    
+   $("#tendencia").chosen().change(function() {
+        if (this.value == 'Si'){
+            $("#observacionesTendencia").attr('disabled', false).trigger("chosen:updated");
+        }
+        else{
+            $("#observacionesTendencia").val(null).trigger("chosen:updated");
+            $("#observacionesTendencia").attr('disabled', true).trigger("chosen:updated");
+            
+        }
+    });
+    
+    $("#tipificacion").chosen().change(function() {
+        if (this.value == 'Si'){
+            $("#urlTipificacion").attr('disabled', false).trigger("chosen:updated");
+        }
+        else{
+            $("#urlTipificacion").val(null).trigger("chosen:updated");
+            $("#urlTipificacion").attr('disabled', true).trigger("chosen:updated");
+        }
+    });
+    
+ 
+    
+    $("#varMedicion").chosen().change(function() {
+        var cont;
+        var index;
+        var varMedicionArray  =$("#varMedicionArray").val().split(",");
+        
+        if($("#varMedicion").chosen().val()!=null){
+            
+            //AGREGAR
+            $.each($("#varMedicion").chosen().val(),function(index,value){
+                var resArray = jQuery.inArray(value,arregloVariablesMedicion);
+                if(resArray == -1){
+                    arregloVariablesMedicion.push(value);
+                }
+            });
+            
+            //ELIMINAR - ELIMINAR COLUMNAS
+            if(arregloVariablesMedicion.length > 0){
+                for (index = 0; index < arregloVariablesMedicion.length; ++index) {
+                    //alert('Ciclo: ' + arregloVariablesMedicion[index]);
+                    var res = jQuery.inArray(arregloVariablesMedicion[index],$("#varMedicion").chosen().val());
+                    if(res == -1){                        
+                        eliminarColumnaVarMedicion(arregloVariablesMedicion[index]);
+                        arregloVariablesMedicion.splice(index,1);                        
+                    }
+                }
+            }
+            
+            //AGREGAR COLUMNAS
+            $("#varMedicionCont").val($("#varMedicion :selected").length);
+            $.each(arregloVariablesMedicion,function(index,value){
+                
+                var nomCol = $("#varMedicion option[value='"+value+"']").text();
+                agregarColumnaVarMedicion(value,nomCol);
+            });
+            
+            
+            // $.each($("#varMedicion").chosen().val(),function(index,value){
+            //    alert(value);
+            //    var resArray = jQuery.inArray(value,arregloVariablesMedicion);               
+            //    agregarColumnaVarMedicion(value);
+            // });
+            
+            //ELIMINAR COLUMNAS
+
+            //if(varMedicionArray != ''){
+            //    for (index = 0; index < varMedicionArray.length; ++index) {
+            //            var res = jQuery.inArray(varMedicionArray[index],$("#varMedicion").chosen().val());
+            ///            if(res == -1){
+            //                eliminarColumnaVarMedicion(varMedicionArray[index]);
+            //            }
+            //    }
+            //}
+            $("#varMedicionArray").val($("#varMedicion").chosen().val());
+            
+        }else{
+            for (index = 0; index < varMedicionArray.length; ++index) {
+                            eliminarColumnaVarMedicion(varMedicionArray[index]);
+                }
+            $("#varMedicionArray").val($("#varMedicion").chosen().val());
+            $("#varMedicionCont").val("0");
+            arregloVariablesMedicion = [];
+        }
+        //console.log(arregloVariablesMedicion);
+        
+    });
+    
+    $("#varEspeciales").chosen().change(function() {
+        var cont;
+        var index;        
+        
+        if($("#varEspeciales").chosen().val()!=null){
+            $("#tablaVarEspeciales").show();
+            
+            //AGREGAR
+            $.each($("#varEspeciales").chosen().val(),function(index,value){
+                var resArray = jQuery.inArray(value,arregloVariablesEspeciales);
+                if(resArray == -1){
+                    arregloVariablesEspeciales.push(value);
+                }
+            });
+            
+            //ELIMINAR - ELIMINAR COLUMNAS
+            if(arregloVariablesEspeciales.length > 0){
+                for (index = 0; index < arregloVariablesEspeciales.length; ++index) {
+                    //alert('Ciclo: ' + arregloVariablesMedicion[index]);
+                    var res = jQuery.inArray(arregloVariablesEspeciales[index],$("#varEspeciales").chosen().val());
+                    if(res == -1){
+                        eliminarVarEspeciales(arregloVariablesEspeciales[index]);
+                        arregloVariablesEspeciales.splice(index,1);
+                    }
+                }
+            }
+            
+            //AGREGAR COLUMNAS
+            $.each(arregloVariablesEspeciales,function(index,value){
+                var nomCol = $("#varEspeciales option[value='"+value+"']").text();
+                agregarVarEspeciales(value,nomCol);
+            });
+        }else{
+            $("#tablaVarEspeciales").hide();
+            $("#tablaVarEspeciales").html('<tr><th colspan="2" style="text-align: center">VARIABLES ESPECIALES</th></tr>');
+            arregloVariablesEspeciales = [];
+        }
+    });
+    
+    function presenciaInicial(){
+        var cont;
+        var index;
+        var varMedicionArray  =$("#varMedicionArray").val().split(",");
+        if($("#varMedicion").chosen().val()!=null){
+            
+            
+            $("#varMedicionCont").val($("#varMedicion :selected").length);
+            $.each($("#varMedicion").chosen().val(),function(index,value){
+                
+                var resArray = jQuery.inArray(value,arregloVariablesMedicion);
+                
+                if(resArray == -1){
+                    arregloVariablesMedicion.push(value);
+                }
+                var nomCol = $("#varMedicion option[value='"+value+"']").text();                
+                agregarColumnaVarMedicion(value,nomCol);                
+            });
+
+            if(varMedicionArray != ''){                
+                for (index = 0; index < varMedicionArray.length; ++index) {                    
+                        var res = jQuery.inArray(varMedicionArray[index],$("#varMedicion").chosen().val());
+                        if(res == -1){
+                            eliminarColumnaVarMedicion(varMedicionArray[index]);
+                        }
+                }
+            }
+            $("#varMedicionArray").val($("#varMedicion").chosen().val());
+            
+        }else{
+            for (index = 0; index < varMedicionArray.length; ++index) {                        
+                            eliminarColumnaVarMedicion(varMedicionArray[index]);
+                }
+            $("#varMedicionArray").val($("#varMedicion").chosen().val());
+            $("#varMedicionCont").val("0");
+        } 
+        //console.log(arregloVariablesMedicion);
+    }
+    
+    function variablesEspeciales(){
+        var cont;
+        var index;        
+        
+        if($("#varEspeciales").chosen().val()!=null){
+            $("#tablaVarEspeciales").show();
+            
+            //AGREGAR
+            $.each($("#varEspeciales").chosen().val(),function(index,value){
+                var resArray = jQuery.inArray(value,arregloVariablesEspeciales);
+                if(resArray == -1){
+                    arregloVariablesEspeciales.push(value);
+                }
+            });
+            
+            //ELIMINAR - ELIMINAR COLUMNAS
+            if(arregloVariablesEspeciales.length > 0){
+                for (index = 0; index < arregloVariablesEspeciales.length; ++index) {
+                    //alert('Ciclo: ' + arregloVariablesMedicion[index]);
+                    var res = jQuery.inArray(arregloVariablesEspeciales[index],$("#varEspeciales").chosen().val());
+                    if(res == -1){
+                        eliminarVarEspeciales(arregloVariablesEspeciales[index]);
+                        arregloVariablesEspeciales.splice(index,1);
+                    }
+                }
+            }
+            
+            //AGREGAR COLUMNAS
+            $.each(arregloVariablesEspeciales,function(index,value){
+                var nomCol = $("#varEspeciales option[value='"+value+"']").text();
+                agregarVarEspeciales(value,nomCol);
+            });
+        }else{
+            $("#tablaVarEspeciales").hide();
+            $("#tablaVarEspeciales").html('<tr><th colspan="2" style="text-align: center">VARIABLES ESPECIALES</th></tr>');
+            arregloVariablesEspeciales = [];
+        }
+    }
+    
+    function agregarVarEspeciales(idCol,nomCol){
+        var tds = '';
+        var idFormatoMedicion = $('#id').val();
+        //var idCol = nomCol.replace(/([%#(,) ])/g,'_');
+        //idCol = idCol.replace(/__/g,'_');
+        
+        if($('#fila_'+ idCol).length == 0){
+            
+            tds += '<tr id="fila_'+idCol+'">';
+            tds += '<td class="tituloAlineado">'+nomCol+'</td>';
+            tds += '<td><input type="text" name="varEsp_'+idCol+'" id="varEsp_'+idCol+'"></td>';
+            tds += '</tr>';
+            
+            $("#tablaVarEspeciales").append(tds);            
+            $.ajax({
+            url:'index_blank.php?component=FormatoMedicion&method=traerValorEspecial',
+                    type: "POST",
+                    data:'idFormatoMedicion=' + idFormatoMedicion + '&variable=' + idCol,
+                    success: function (msm){
+                    arreglo = msm;
+                    $('#varEsp_'+idCol).val(msm);
+               }
+            });
+        }
+    }
+    
+    function eliminarVarEspeciales(nomCol){
+        var idCol = nomCol.replace(/([%#(,) ])/g,'_');
+        idCol = idCol.replace(/__/g,'_');
+        
+        if($('#fila_'+ idCol).length != 0){
+            $('#fila_'+ idCol).remove();
+        }
+    }
+    
+    function regresar(){
+        $.ajax({
+        url:'index_blank.php?component=FormatoMedicion&method=mostrarFormatoMedicion&idMenu=' + {{idMenu}},
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+        });
+    }
+    
+  
+    function EnviarFormulario(){
+        if(confirm('¿Esta seguro de Guardar el Formato?\nSi el formato esta en proceso de validación se devolvera al estado En Desarrollo...')){
+            geoSegmentacion_array = $("#geoSegmentacion").chosen().val();
+            //areaMet_array = $("#areaMet").chosen().val();
+            //municipio_array = $("#municipio").chosen().val();
+            //var obs = $('#obsGenerales').val();
+            //    obs = encodeURIComponent(obs);
+            //    $('#obsGenerales').val(obs);
+              var pruebaFormato = encodeURIComponent(JSON.stringify($('#envioDatos').serializeArray()));
+              //alert($('#id').val());
+            $.ajax({
+                url:'index_blank.php?component=FormatoMedicion&method=guardarFormato',
+                        type: "POST",
+                        data:'pruebaFormato=' + pruebaFormato + '&columnasArray='+columnasArray+'&arregloVariablesMedicion='+arregloVariablesMedicion+'&arregloVariablesEspeciales='+arregloVariablesEspeciales+'&arregloGeoSegmentacion='+geoSegmentacion_array,
+                        success: function (msm){
+                        $('#componenteCentral').html(msm);
+                        //$('#obsGenerales').val(msm);
+
+                        }
+            });
+        }
+    }
+    
+    function aprobarFormato(){        
+        if(confirm('¿Esta seguro de Aprobar el Formato?\nSe enviara solicitud de aprobación al resto de areas...')){            
+            
+            $.ajax({
+            url:'index_blank.php?component=FormatoMedicion&method=aprobarFormato',
+                    type: "POST",
+                    data:$('#envioDatos').serialize(),
+                    success: function (msm){
+                    $('#componenteCentral').html(msm);
+                    //$('#obsGenerales').val(msm);
+                    
+                    }
+        });
+            
+            
+        }
+        
+        //geoSegmentacion_array = $("#geoSegmentacion").chosen().val();
+        //areaMet_array = $("#areaMet").chosen().val();
+        //municipio_array = $("#municipio").chosen().val();
+    
+        //$.ajax({
+        //    url:'index_blank.php?component=FormatoMedicion&method=guardarFormato',
+        //            type: "POST",
+        //            data:$('#envioDatos').serialize()+'&columnasArray='+columnasArray+'&arregloVariablesMedicion='+arregloVariablesMedicion+'&arregloVariablesEspeciales='+arregloVariablesEspeciales+'&arregloGeoSegmentacion='+geoSegmentacion_array,
+        //            success: function (msm){
+        //            $('#componenteCentral').html(msm);
+        //            //$('#obsGenerales').val(msm);
+        //            
+        //            }
+        //});
+    }
+    
+    //////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                  //
+    //                          FUNCIONES GRILLA MEDICION                               //
+    //                                                                                  //
+    //////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    //console.log(columnasArray);
+    
+    
+    function mostrarBoton(fila,columna){
+        var seleccion =  $("#input_"+fila+"_"+columna).val();        
+        if (seleccion!=0){
+            $("#boton_"+fila+"_"+columna).show();
+            $("#boton_final_"+fila+"_"+columna).show();
+            $("#eliminar_"+fila+"_"+columna).show();
+        }
+    }
+    
+    function ocultarBoton(fila,columna){
+        $("#boton_"+fila+"_"+columna).hide();
+        $("#boton_final_"+fila+"_"+columna).hide();
+        $("#eliminar_"+fila+"_"+columna).hide();
+    }
+    
+    function cambioSeleccion(fila,columna,herencia){    
+        var seleccion =  $("#input_"+fila+"_"+columna).val();
+        var j = $('#tablaMedicion >tbody >tr').length;
+        var $objTabla=$('#tablaMedicion');
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var cantColsRechazo = {{colsRechazo}};
+        var iTotalColumnasExistentes = $('#tablaMedicion thead tr th').length - 2 - cantVarMedicion - cantColsRechazo;
+                
+       
+       //alert(iTotalColumnasExistentes);
+       //alert(columna);
+       //alert(j);
+       
+        if (seleccion!=0){
+            if(j<3){
+                //$("#reg_"+fila+"_acciones").html('<button type="button" class="btn btn-link" onclick="agregarFila('+fila+','+columna+')" title="Agregar Fila"><span class="glyphicon glyphicon-list"></span> </button> <button type="button" class="btn btn-link" onclick="agregarFilaHeredada('+fila+','+columna+')" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button>');
+                if (columna<iTotalColumnasExistentes){
+                    $("#reg_"+fila+"_acciones").html('<button id="boton_heredar_'+fila+'" name="boton_heredar_'+fila+'" type="button" class="btn btn-link" onclick="agregarFilaHeredada('+fila+','+columna+',\''+herencia+'\')" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button>');
+                }else{
+                    $("#reg_"+fila+"_acciones").html('&nbsp;');
+                }
+                
+            }else{
+                //$("#reg_"+fila+"_acciones").html('<button type="button" class="btn btn-link" onclick="agregarFila('+fila+','+columna+')" title="Agregar Fila"><span class="glyphicon glyphicon-list"></span> </button> <button type="button" class="btn btn-link" onclick="agregarFilaHeredada('+fila+','+columna+')" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button><button type="button" class="btn btn-link" onclick="eliminarFila('+fila+','+columna+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+                if (columna<iTotalColumnasExistentes){
+                    $("#reg_"+fila+"_acciones").html('<button id="boton_heredar_'+fila+'" name="boton_heredar_'+fila+'" type="button" class="btn btn-link" onclick="agregarFilaHeredada('+fila+','+columna+',\''+herencia+'\')" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button><button id="boton_eliminar_'+fila+'" name="boton_eliminar_'+fila+'" type="button" class="btn btn-red" onclick="eliminarFila('+fila+','+columna+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+                }else{
+                    $("#reg_"+fila+"_acciones").html('<button id="boton_eliminar_'+fila+'" name="boton_eliminar_'+fila+'" type="button" class="btn btn-red" onclick="eliminarFila('+fila+','+columna+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+                }
+            }
+        }else{
+           $("#reg_"+fila+"_acciones").html('&nbsp;');
+        }    
+    }    
+    
+    /////////////////////////
+    //                     //
+    //  FUNCIONES COLUMNA  //
+    //                     //
+    /////////////////////////
+    
+    function cambioColumna(posColumna){
+        var valor = $('#selColumna_' + posColumna).val();
+        var cantidad = $('select#selColumna_' + posColumna + ' option').length;
+        var iTotalColumnasExistentes=$('#tablaMedicion thead tr th').length;
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var cantColsRechazo = {{colsRechazo}};
+        var nomCol = iTotalColumnasExistentes - 2 - cantVarMedicion - cantColsRechazo;
+        
+        if( valor >0){
+            if(columnasArray.length >= nomCol){
+                columnasArray.splice(-1,1,valor);
+            }else{
+                columnasArray.push(valor);
+            }
+            if(cantidad >2){
+                $('#colAcciones').html('Acciones <button type="button" class="btn btn-link" onclick="agregarColumna()" title="Agregar Columna"><span class="glyphicon glyphicon-circle-arrow-right"></span></button> <button type="button" class="btn btn-red" onclick="eliminarColumna()" title="Eliminar Columna"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>');
+            }
+        }else{
+            columnasArray.splice(-1,1);
+            $('#colAcciones').html('Acciones <button type="button" class="btn btn-red" onclick="eliminarColumna()" title="Eliminar Columna"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>');
+        }
+        //console.log(columnasArray);
+    }
+    
+    function agregarColumna(colSeleccion){
+        colSeleccion = typeof colSeleccion !== 'undefined' ? colSeleccion : 0;
+        var $objTabla=$('#tablaMedicion');
+        //contamos la cantidad de columnas que tiene la tabla
+        var iTotalColumnasExistentes=$('#tablaMedicion thead tr th').length;
+        //alert(iTotalColumnasExistentes);
+        //aumentamos en uno el valor que contiene la variable
+        iTotalColumnasExistentes++;
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var cantColsRechazo = {{colsRechazo}};
+        var nomCol = iTotalColumnasExistentes - 2 - cantVarMedicion - cantColsRechazo;
+        var colAnt = nomCol - 1;
+        var filas = $('#tablaMedicion >tbody >tr').length;            
+        var categoria = {{datosFormatoMedicion.idCategoria}};
+        var valColSeleccion = 0;        
+        
+        if(nomCol > 4){
+            $('#selColumna_' + colAnt).prop('disabled', 'disabled');
+            //columnasArray.push($('#selColumna_' + colAnt).val());
+            //alert(columnasArray);
+
+            if(nomCol > 5){
+                valColSeleccion = $("#colExcluidas").val() + ',' + $('#selColumna_' + colAnt).val();                    
+            }else{
+                valColSeleccion = $('#selColumna_' + colAnt).val();
+            }
+            
+            valColSeleccion = valColSeleccion.replace(/^,|,$/g,'');
+            $("#colExcluidas").val(valColSeleccion);
+        }
+        //alert($("#colExcluidas").val());
+        $.ajax({
+        url:'index_blank.php?component=FormatoMedicion&method=armarListaColumnas',
+                type: "POST",
+                data:'categoria=' + categoria + '&seleccion=' + valColSeleccion + '&colSeleccion=' + colSeleccion,
+                success: function (msm){
+                arreglo = msm;
+                $('#colAcciones').prev('th').after('<th id="columna_'+ nomCol + '"></th>');
+                $('#columna_'+ nomCol ).html(' <div class="ui-widget"><select name="selColumna_' + nomCol + '" id="selColumna_' + nomCol + '" onchange="cambioColumna(' + nomCol + ');">' + msm + '</select></div>');
+           }
+        });
+            
+        $('#colAcciones').html('Acciones <button type="button" class="btn btn-red" onclick="eliminarColumna()" title="Eliminar Columna"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>');
+        //adjuntamos los td's de la columna al body de la tabla
+        for(var i = 1; i <= filas ; i++){
+            $('#reg_'+ i +'_acciones').prev('td').after('<td id=reg_'+ i +'_'+ nomCol +'>&nbsp;</td>');
+        }  
+    }
+    
+    function actualizarColumna(posCol,colSeleccion){
+        colSeleccion = typeof colSeleccion !== 'undefined' ? colSeleccion : 0;
+        var categoria = {{datosFormatoMedicion.idCategoria}};        
+        var cantVarMedicion = $("#varMedicionCont").val();        
+        var valColSeleccion = 0;
+        var colAnt = posCol-1;
+        //alert(posCol);
+        
+        if(posCol > 4){
+            $('#selColumna_' + colAnt).prop('disabled', 'disabled');
+            //columnasArray.push($('#selColumna_' + colAnt).val());
+            //alert(columnasArray);
+
+            if(posCol > 5){
+                valColSeleccion = $("#colExcluidas").val() + ',' + $('#selColumna_' + colAnt).val();
+            }else{
+                valColSeleccion = $('#selColumna_' + colAnt).val();
+            }
+            
+            //alert($('#selColumna_' + colAnt).length);
+            valColSeleccion = valColSeleccion.replace(/^,|,$/g,'');
+            $("#colExcluidas").val(valColSeleccion);
+        }
+        //alert($("#colExcluidas").val());
+        $.ajax({
+        url:'index_blank.php?component=FormatoMedicion&method=armarListaColumnas',
+                type: "POST",
+                data:'categoria=' + categoria + '&seleccion=' + valColSeleccion + '&colSeleccion=' + colSeleccion,
+                success: function (msm){
+                arreglo = msm;                
+                $('#columna_'+ posCol ).html(' <div class="ui-widget"><select name="selColumna_' + posCol + '" id="selColumna_' + posCol + '" onchange="cambioColumna(' + posCol + ');">' + msm + '</select></div>');
+           }
+        });
+            
+        $('#colAcciones').html('Acciones <button type="button" class="btn btn-red" onclick="eliminarColumna()" title="Eliminar Columna"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>');
+        //adjuntamos los td's de la columna al body de la tabla        
+    }
+    
+    function agregarColumnaVarMedicion(idCol,nomCol){
+        var $objTabla=$('#tablaMedicion');        
+        var filas = $('#tablaMedicion >tbody >tr').length;
+        var checked = '';
+        var valColSeleccion = 0;
+        //var idCol = nomCol.replace(/([%#(,) ])/g,'_');
+        //idCol = idCol.replace(/__/g,'_');
+        
+        if (idCol=='PRESENCIA'){
+           checked = 'checked' ;
+        }
+        
+        if($('#columna_'+ idCol).length == 0){
+            $objTabla.find('th:last').after('<th style="text-align: center" id="columna_'+ idCol + '">'+ nomCol +'</th>');
+            //$('#colAcciones').after('<th id="columna_'+ idCol + '">'+ nomCol +'</th>');
+            //adjuntamos los td's de la columna al body de la tabla
+            for(var i = 1; i <= filas ; i++){
+                $('#fila_'+ i).append('<td id=reg_'+ i +'_'+ idCol +' align="center"><input type="checkbox" name="input_'+i+'_'+idCol+'" id="input_'+i+'_'+idCol+'" value="Si" '+checked+'></td>');
+                //$objTabla.find('tr:last td').after('<td id=reg_'+ i +'_'+ idCol +'>&nbsp;</td>');
+                //$('#reg_'+ i +'_acciones').after('<td id=reg_'+ i +'_'+ idCol +'>&nbsp;</td>');
+            }            
+        }
+    }    
+    
+    function eliminarColumna(){
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var cantColsRechazo = {{colsRechazo}};
+        var iColumnaAEliminar = $('#tablaMedicion thead tr th').length - 2 - cantVarMedicion - cantColsRechazo;
+        var colAnt = iColumnaAEliminar -1;
+        var $objTabla=$('#tablaMedicion');
+        var j=1;
+        var selColBorrada = $('#selColumna_' + iColumnaAEliminar).val();
+        var valColSeleccion = $("#colExcluidas").val();
+        //alert($("#colExcluidas").val());
+        $objTabla.find('tr').each(function(){            
+            $('#reg_'+ j + '_' +iColumnaAEliminar+'').remove();
+            j=j+1;
+        });
+
+        $('#columna_'+iColumnaAEliminar+'').remove();
+        if(columnasArray.length == iColumnaAEliminar){
+            columnasArray.splice(-1,1);
+        }
+        
+        if(iColumnaAEliminar>4){
+            $('#selColumna_' + colAnt).prop('disabled', false);
+            //columnasArray.splice(-1,1);
+            //alert(columnasArray);
+            //columnasArray.push($('#selColumna_' + colAnt).val());
+            
+            
+            $('#colAcciones').html('Acciones <button type="button" class="btn btn-link" onclick="agregarColumna()" title="Agregar Columna"><span class="glyphicon glyphicon-circle-arrow-right"></span> </button> <button type="button" class="btn btn-red" onclick="eliminarColumna()" title="Eliminar Columna"><span class="glyphicon glyphicon-circle-arrow-left"></span></button>');        
+            var selColAnt = $('#selColumna_' + colAnt).val();
+            
+            if (selColBorrada>0){
+                valColSeleccion = valColSeleccion.replace(',' + selColBorrada,'');
+            }
+            
+            valColSeleccion = valColSeleccion.replace(',' + selColAnt,'');
+            valColSeleccion = valColSeleccion.replace(/^,|,$/g,'');
+            $("#colExcluidas").val(valColSeleccion);            
+        }else{            
+            $('#colAcciones').html('Acciones <button type="button" class="btn btn-link" onclick="agregarColumna()" title="Agregar Columna"><span class="glyphicon glyphicon-circle-arrow-right"></span> </button>');            
+            $("#colExcluidas").val("");
+        }     
+        //console.log(columnasArray);
+        //alert($("#colExcluidas").val());
+    }
+    
+    function eliminarColumnaVarMedicion(nomCol){
+        var $objTabla=$('#tablaMedicion');
+        var j=1;
+        var idCol = nomCol.replace(/([%#(,) ])/g,'_');
+        idCol = idCol.replace(/__/g,'_');
+        
+        $('#columna_'+ idCol).remove();
+        
+        $objTabla.find('tr').each(function(){
+            $('#reg_'+ j + '_' +idCol+'').remove();
+            j=j+1;
+        });        
+    }
+    
+    function armarColumnas()
+    {
+        var contCol = parseInt($("#contColumnas").val());
+        var valorCol = [];
+        {% for colsFormatos in columnasFormato %}
+            valorCol.push({{colsFormatos.valor}});
+        {% endfor %}
+        //alert('Entra: '+ contCol);
+        //for(i=0;i<contCol-3;i++){
+            
+            actualizarColumna(4,valorCol[0]);
+            //alert(valorCol[0]);
+            
+            //alert($("#selColumna_4").val());
+        //}
+    }
+    
+    /////////////////////////
+    //                     //
+    //   FUNCIONES FILA    //
+    //                     //
+    /////////////////////////    
+    
+    function agregarFila(fila,columna,herencia){        
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var n = $('tr:last td', $("#tablaMedicion")).length;
+        var h = $('#tablaMedicion >tbody >tr').length;
+        var j = fila + 1;
+        var tds = '<tr id="fila_'+j+'">';
+        var $objTabla=$('#tablaMedicion');
+        iTotalColumnasExistentes=$('#tablaMedicion thead tr th').length;
+        var nomCol = 0;
+        var selSegmento = "";
+        var checked = "";
+        var colAnt = columnasArray[columna-1];
+        var colAct = columnasArray[columna-1];
+        var numLineas = $("#numeroLineas").val();
+        var numLineas = parseInt(numLineas) + 1;
+        var cantColsRechazo = {{colsRechazo}};
+        var contCiclo = n - 2 - cantVarMedicion - cantColsRechazo;        
+        
+        //$("#reg_"+h+"_acciones").html('&nbsp;');
+        //$objTabla.find('td:last').html('&nbsp;');
+        
+        //alert('fila: ' + fila);
+        //alert('numLineas: ' + numLineas)
+        for(k=numLineas;(fila+1)<k;k--){
+            var nuevaFila = k;
+            var i = k-1;
+            var ultColumna = '';
+            var valorHerencia = '';
+            //alert('i: ' + i);
+            //alert('nueva fila: ' + nuevaFila);
+            //IDENTIFICADOR FILA
+            $("#fila_"+i).attr("id","fila_" + nuevaFila + "");
+            $("#fila_"+i).attr("name","fila_" + nuevaFila + "");
+            
+            //NUMERO
+            $("#numero_"+i).html("" + nuevaFila + "");
+            $("#numero_"+i).attr("name","numero_" + nuevaFila + "");
+            $("#numero_"+i).attr("id","numero_" + nuevaFila + "");
+            
+            
+            for(var m = 1; m <= contCiclo; m++){
+                //nomCol = m +1;
+                //alert(m);
+                ///alert($("#reg_"+i+"_"+m).html());
+                var valorHtml = $("#reg_"+i+"_"+m).html();
+                
+                if(valorHtml != '&nbsp;'){
+                    
+                    ultColumna = m;
+                    
+                    $("#reg_"+i+"_"+m).attr("onMouseOver","mostrarBoton('" + nuevaFila + "','" + m + "')");
+                    $("#reg_"+i+"_"+m).attr("onMouseOut","ocultarBoton('" + nuevaFila + "','" + m + "')");
+                    
+                    valorHerencia = $("#herencia_"+i+"_"+ m).val();
+                    $("#herencia_"+i+"_"+ m).attr("name","herencia_" + nuevaFila +"_"+ m);
+                    $("#herencia_"+i+"_"+ m).attr("id","herencia_" + nuevaFila +"_"+ m);
+                    
+                    $("#input_"+i+"_"+ m).attr("onChange","cambioSeleccion("+nuevaFila+"," + m + ",'" + valorHerencia + "')");
+                    $("#input_"+i+"_"+ m).attr("name","input_" + nuevaFila +"_"+ m);
+                    $("#input_"+i+"_"+ m).attr("id","input_" + nuevaFila +"_"+ m);                    
+                    
+                    $("#boton_"+i+"_"+ m).attr("onClick","agregarFila("+nuevaFila+"," + m + ",'" + valorHerencia + "')");
+                    $("#boton_"+i+"_"+ m).attr("name","boton_" + nuevaFila +"_"+ m);
+                    $("#boton_"+i+"_"+ m).attr("id","boton_" + nuevaFila +"_"+ m);
+                    
+                    $("#boton_final_"+i+"_"+ m).attr("onClick","agregarFilaFinal("+nuevaFila+"," + m + ",'" + valorHerencia + "')");
+                    $("#boton_final_"+i+"_"+ m).attr("name","boton_final_" + nuevaFila +"_"+ m);
+                    $("#boton_final_"+i+"_"+ m).attr("id","boton_final_" + nuevaFila +"_"+ m);
+                    
+                    $("#eliminar_"+i+"_"+ m).attr("onClick","eliminarCelda("+nuevaFila+"," + m +")");
+                    $("#eliminar_"+i+"_"+ m).attr("name","eliminar_" + nuevaFila +"_"+ m);
+                    $("#eliminar_"+i+"_"+ m).attr("id","eliminar_" + nuevaFila +"_"+ m);
+                }                
+                
+                $("#reg_"+i+"_"+m).attr("name","reg_" + nuevaFila +"_"+m);
+                $("#reg_"+i+"_"+m).attr("id","reg_" + nuevaFila +"_"+m);
+                
+            }
+            
+            //ACCIONES
+            $("#reg_"+i+"_acciones").attr("name","reg_" + nuevaFila +"_acciones");
+            $("#reg_"+i+"_acciones").attr("id","reg_" + nuevaFila +"_acciones");            
+            
+            $("#boton_heredar_"+i).attr("onClick","agregarFilaHeredada("+nuevaFila+"," + ultColumna + ",'" + valorHerencia + "')");
+            $("#boton_heredar_"+i).attr("name","boton_heredar_" + nuevaFila);
+            $("#boton_heredar_"+i).attr("id","boton_heredar_" + nuevaFila);            
+            
+            $("#boton_eliminar_"+i).attr("onClick","eliminarFila("+nuevaFila+","+ultColumna+")");
+            $("#boton_eliminar_"+i).attr("name","boton_eliminar_" + nuevaFila);
+            $("#boton_eliminar_"+i).attr("id","boton_eliminar_" + nuevaFila);
+            
+            
+            //VAR MEDICION
+            if(arregloVariablesMedicion.length>0){
+                $.each(arregloVariablesMedicion,function(index,value){
+                    var idCol = value.replace(/([%#(,) ])/g,'_');
+                    idCol = idCol.replace(/__/g,'_');
+
+                    $("#reg_"+i+"_"+ idCol).attr("name","reg_" + nuevaFila +"_"+ idCol);
+                    $("#reg_"+i+"_"+ idCol).attr("id","reg_" + nuevaFila +"_"+ idCol);
+
+                    $("#input_"+i+"_"+ idCol).attr("name","input_" + nuevaFila +"_"+ idCol);
+                    $("#input_"+i+"_"+ idCol).attr("id","input_" + nuevaFila +"_"+ idCol);                
+
+                });
+            }      
+        
+        }
+        
+        
+        tds += '<td id="numero_'+j+'">'+j+'</td>';
+        for(var i = 0; i < contCiclo; i++){
+            nomCol = i +1;
+            
+            if(parseInt(nomCol) == parseInt(columna)){
+                //alert("entra");
+                tds += '<td id="reg_'+j+'_'+nomCol+'" onmouseover="mostrarBoton('+j+','+nomCol+')" onmouseout="ocultarBoton('+j+','+nomCol+')"></td>';
+                //<td id="reg_'+j+'_'+nomCol+'">&nbsp;</td>';
+            }else{
+                tds += '<td id="reg_'+j+'_'+nomCol+'">&nbsp;</td>';
+            }
+        }        
+        //tds += '<td id="reg_'+ j +'_item">&nbsp;</td>';
+        // <td id=reg_'+ i +'_'+ idCol +'><input type="checkbox" name="input_'+i+'_'+idCol+'" id="input_'+i+'_'+idCol+'" value="Si">
+        tds += '<td id="reg_'+ j +'_acciones"><button id="boton_eliminar_'+j+'" name="boton_eliminar_'+j+'" type="button" class="btn btn-red" onclick="eliminarFila('+j+','+columna+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        //tds += '<td id="reg_'+ j +'_acciones"><button type="button" class="btn btn-link" onclick="agregarFila('+j+','+columna+')" title="Agregar Fila"><span class="glyphicon glyphicon-list"></span> </button> <button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button><button type="button" class="btn btn-link" onclick="eliminarFila()" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';        
+        
+        if(arregloVariablesMedicion.length>0){
+            $.each(arregloVariablesMedicion,function(index,value){
+                var idCol = value.replace(/([%#(,) ])/g,'_');
+                idCol = idCol.replace(/__/g,'_');
+                //alert(idCol);
+                if (idCol=='PRESENCIA'){
+                    checked='checked';
+                }else{
+                    checked='';
+                }
+                tds += '<td id=reg_'+ j +'_'+ idCol +' align="center"><input type="checkbox" name="input_'+j+'_'+idCol+'" id="input_'+j+'_'+idCol+'" value="Si" '+checked+'></td>';
+            });
+        }        
+        
+        if(cantColsRechazo>0){
+            tds += '<td id="reg_'+ j +'_rechazar" align="center">&nbsp</td>';
+            tds += '<td id="reg_'+ j +'_obsRechazo" align="center">&nbsp</td>';
+            tds += '<td id="reg_'+ j +'_usuario" align="center">&nbsp</td>';
+        }
+        
+        tds += '</tr>';
+        $("#fila_"+fila).after(tds);
+        
+        $.ajax({
+            url:'index_blank.php?component=FormatoMedicion&method=armarListaRegistro',
+                type: "POST",
+                data:'herencia=' + herencia + '&columnaAnt=' + colAnt + '&columnaAct=' + colAct + '&arregloCol=' + columnasArray + '&columna=' + columna,
+                success: function (msm){
+                arreglo = msm;
+                //alert(msm);
+                //$('#obsGenerales').html(msm);
+                $('#reg_'+j+'_'+columna).html('<div class="ui-widget"><select name="input_' + j +'_'+columna+'" id="input_' + j +'_'+columna+'" onchange="cambioSeleccion(' + j + ','+columna+',\''+herencia+'\');">' + msm + '</select><button name="boton_'+j+'_'+columna+'" id="boton_'+j+'_'+columna+'" type="button" class="btn btn-link" onclick="agregarFila('+j+','+columna+',\''+herencia+'\')" title="Agregar Fila" style="display: none;"><span class="glyphicon glyphicon-list"></span> </button> <button name="boton_final_'+j+'_'+columna+'" id="boton_final_'+j+'_'+columna+'" type="button" class="btn btn-link" onclick="agregarFilaFinal('+j+','+columna+',\''+herencia+'\')" title="Agregar Fila Final" style="display: none;"><span class="glyphicon glyphicon-arrow-down"></span> </button> <button name="eliminar_'+j+'_'+columna+'" id="eliminar_'+j+'_'+columna+'" type="button" class="btn btn-red" onclick="eliminarCelda('+j+','+columna+')" title="Eliminar Celda" style="display: none;"><span class="glyphicon glyphicon-minus"></span> </button></div><input type ="hidden" name="herencia_'+j+'_'+columna+'" id="herencia_'+j+'_'+columna+'" value="'+herencia+'" />');
+                
+                //$('#colItem').prev('th').after('<th id="columna_'+ nomCol + '"> <div class="ui-widget"><select name="selColumna_' + nomCol + '" id="selColumna_' + nomCol + '" onchange="cambioColumna(' + nomCol + ');">' + msm + '</select></div></tr>');                    
+           }
+        });
+        
+        $("#numeroLineas").val(numLineas);
+        //$('#selColumna_' + nomCol).prop('disabled', 'disabled');
+        //$("#colAcciones").html('Acciones');
+    }
+    
+    
+    
+    function agregarFilaFinal(fila,columna,herencia){        
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var n = $('tr:last td', $("#tablaMedicion")).length;
+        var h = $('#tablaMedicion >tbody >tr').length;
+        var j = h + 1;
+        var tds = '<tr id="fila_'+j+'">';
+        var $objTabla=$('#tablaMedicion');
+        iTotalColumnasExistentes=$('#tablaMedicion thead tr th').length;
+        var nomCol = 0;
+        var selSegmento = "";
+        var checked = "";
+        var colAnt = columnasArray[columna-1];
+        var colAct = columnasArray[columna-1];
+        var numLineas = $("#numeroLineas").val();
+        var numLineas = parseInt(numLineas) + 1;
+        var cantColsRechazo = {{colsRechazo}};
+        var contCiclo = n - 2 - cantVarMedicion - cantColsRechazo;        
+        
+        //$("#reg_"+h+"_acciones").html('&nbsp;');
+        //$objTabla.find('td:last').html('&nbsp;');
+        
+        //alert('fila: ' + fila);
+        //alert('numLineas: ' + numLineas)
+        
+        tds += '<td id="numero_'+j+'">'+j+'</td>';
+        for(var i = 0; i < contCiclo; i++){
+            nomCol = i +1;
+            
+            if(parseInt(nomCol) == parseInt(columna)){
+                //alert("entra");
+                tds += '<td id="reg_'+j+'_'+nomCol+'" onmouseover="mostrarBoton('+j+','+nomCol+')" onmouseout="ocultarBoton('+j+','+nomCol+')"></td>';
+                //<td id="reg_'+j+'_'+nomCol+'">&nbsp;</td>';
+            }else{
+                tds += '<td id="reg_'+j+'_'+nomCol+'">&nbsp;</td>';
+            }
+        }        
+        //tds += '<td id="reg_'+ j +'_item">&nbsp;</td>';
+        // <td id=reg_'+ i +'_'+ idCol +'><input type="checkbox" name="input_'+i+'_'+idCol+'" id="input_'+i+'_'+idCol+'" value="Si">
+        tds += '<td id="reg_'+ j +'_acciones"><button id="boton_eliminar_'+j+'" name="boton_eliminar_'+j+'" type="button" class="btn btn-red" onclick="eliminarFila('+j+','+columna+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        //tds += '<td id="reg_'+ j +'_acciones"><button type="button" class="btn btn-link" onclick="agregarFila('+j+','+columna+')" title="Agregar Fila"><span class="glyphicon glyphicon-list"></span> </button> <button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button><button type="button" class="btn btn-link" onclick="eliminarFila()" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';        
+        
+        if(arregloVariablesMedicion.length>0){
+            $.each(arregloVariablesMedicion,function(index,value){
+                var idCol = value.replace(/([%#(,) ])/g,'_');
+                idCol = idCol.replace(/__/g,'_');
+                //alert(idCol);
+                if (idCol=='PRESENCIA'){
+                    checked='checked';
+                }else{
+                    checked='';
+                }
+                tds += '<td id=reg_'+ j +'_'+ idCol +' align="center"><input type="checkbox" name="input_'+j+'_'+idCol+'" id="input_'+j+'_'+idCol+'" value="Si" '+checked+'></td>';
+            });
+        }        
+        
+        if(cantColsRechazo>0){
+            tds += '<td id="reg_'+ j +'_rechazar" align="center">&nbsp</td>';
+            tds += '<td id="reg_'+ j +'_obsRechazo" align="center">&nbsp</td>';
+            tds += '<td id="reg_'+ j +'_usuario" align="center">&nbsp</td>';
+        }
+        
+        tds += '</tr>';
+        $("#tablaMedicion").append(tds);
+        //$("#fila_"+fila).after(tds);
+        
+        $.ajax({
+            url:'index_blank.php?component=FormatoMedicion&method=armarListaRegistro',
+                type: "POST",
+                data:'herencia=' + herencia + '&columnaAnt=' + colAnt + '&columnaAct=' + colAct + '&arregloCol=' + columnasArray + '&columna=' + columna,
+                success: function (msm){
+                arreglo = msm;
+                //alert(msm);
+                //$('#obsGenerales').html(msm);
+                $('#reg_'+j+'_'+columna).html('<div class="ui-widget"><select name="input_' + j +'_'+columna+'" id="input_' + j +'_'+columna+'" onchange="cambioSeleccion(' + j + ','+columna+',\''+herencia+'\');">' + msm + '</select><button name="boton_'+j+'_'+columna+'" id="boton_'+j+'_'+columna+'" type="button" class="btn btn-link" onclick="agregarFila('+j+','+columna+',\''+herencia+'\')" title="Agregar Fila" style="display: none;"><span class="glyphicon glyphicon-list"></span> </button> <button name="boton_final_'+j+'_'+columna+'" id="boton_final_'+j+'_'+columna+'" type="button" class="btn btn-link" onclick="agregarFilaFinal('+j+','+columna+',\''+herencia+'\')" title="Agregar Fila Final" style="display: none;"><span class="glyphicon glyphicon-arrow-down"></span> </button> <button name="eliminar_'+j+'_'+columna+'" id="eliminar_'+j+'_'+columna+'" type="button" class="btn btn-red" onclick="eliminarCelda('+j+','+columna+')" title="Eliminar Celda" style="display: none;"><span class="glyphicon glyphicon-minus"></span> </button></div><input type ="hidden" name="herencia_'+j+'_'+columna+'" id="herencia_'+j+'_'+columna+'" value="'+herencia+'" />');
+                
+                //$('#colItem').prev('th').after('<th id="columna_'+ nomCol + '"> <div class="ui-widget"><select name="selColumna_' + nomCol + '" id="selColumna_' + nomCol + '" onchange="cambioColumna(' + nomCol + ');">' + msm + '</select></div></tr>');                    
+           }
+        });
+        
+        $("#numeroLineas").val(numLineas);
+        //$('#selColumna_' + nomCol).prop('disabled', 'disabled');
+        //$("#colAcciones").html('Acciones');
+    }
+    
+    
+    
+    
+    function agregarFilaHeredada(fila,columna,herencia){
+        //alert(columnasArray[columna]);
+        
+        var categoria = {{datosFormatoMedicion.idCategoria}};
+        var valorInputAnt = $('#input_'+fila+'_'+columna).val();
+        var colAnt = columnasArray[columna-1];
+        var colAct = columnasArray[columna];
+        var filaActual = fila + 1;
+        var columnaActual = columna + 1;
+        
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var n = $('tr:last td', $("#tablaMedicion")).length;
+        var h = $('#tablaMedicion >tbody >tr').length;
+        var j = h + 1;
+        var tds = '<tr id="fila_'+j+'">';
+        var $objTabla=$('#tablaMedicion');
+        iTotalColumnasExistentes=$('#tablaMedicion thead tr th').length;
+        var nomCol = 0;
+        var selSegmento = "{{select_segmento_inicial|escape('js')}}";
+        var columnaActual = columna + 1;
+        var cantColsRechazo = {{colsRechazo}};
+        
+        //$("#reg_"+h+"_acciones").html('&nbsp;');
+        //$objTabla.find('td:last').html('&nbsp;');
+        
+        herencia = herencia +','+valorInputAnt;
+        
+        for(var i = 0; i < n - 2 - cantVarMedicion - cantColsRechazo; i++){
+            nomCol = i +1;
+            if(parseInt(nomCol) == parseInt(columna)+1){
+                //alert("entra");
+                tds += '<td id="reg_'+j+'_'+nomCol+'" onmouseover="mostrarBoton('+j+','+nomCol+')" onmouseout="ocultarBoton('+j+','+nomCol+')"></td>';
+                //<td id="reg_'+j+'_'+nomCol+'">&nbsp;</td>';
+            }else{
+                tds += '<td id="reg_'+j+'_'+nomCol+'">&nbsp;</td>';
+            }
+        }        
+        //tds += '<td id="reg_'+ j +'_item">&nbsp;</td>';
+        tds += '<td id="reg_'+ j +'_acciones"><button id="boton_eliminar_'+j+'" name="boton_eliminar_'+j+'" type="button" class="btn btn-red" onclick="eliminarFila('+j+','+columna+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button></td>';
+        
+        if($("#varMedicion").chosen().val()!=null){
+            $.each($("#varMedicion").chosen().val(),function(index,value){
+                var idCol = value.replace(/([%#(,) ])/g,'_');
+                idCol = idCol.replace(/__/g,'_');
+                tds += '<td id=reg_'+ j +'_'+ idCol +' align="center"><input type="checkbox" name="input_'+j+'_'+idCol+'" id="input_'+j+'_'+idCol+'" value="Si"></td>';
+            });
+        }        
+        
+        tds += '</tr>';
+        
+        //$("#tablaMedicion").append(tds);                
+        
+        $.ajax({
+            url:'index_blank.php?component=FormatoMedicion&method=armarListaRegistro',
+                type: "POST",
+                data:'herencia=' + herencia + '&valAnt=' + valorInputAnt + '&columnaAnt=' + colAnt + '&columnaAct=' + colAct + '&arregloCol=' + columnasArray + '&columna=' + columnaActual,
+                success: function (msm){
+                arreglo = msm;
+                //alert(msm);}
+                //$('#obsGenerales').html(msm);
+                $('#reg_'+fila+'_'+columnaActual).html('<div class="ui-widget"><select name="input_' + fila +'_'+columnaActual+'" id="input_'+fila+'_'+columnaActual+'" onchange="cambioSeleccion(' + fila + ','+columnaActual+',\''+herencia+'\');">' + msm + '</select><button name="boton_'+fila+'_'+columnaActual+'" id="boton_'+fila+'_'+columnaActual+'" type="button" class="btn btn-link" onclick="agregarFila('+fila+','+columnaActual+',\''+herencia+'\')" title="Agregar Fila" style="display: none;"><span class="glyphicon glyphicon-list"></span> </button> <button name="boton_final_'+fila+'_'+columnaActual+'" id="boton_final_'+fila+'_'+columnaActual+'" type="button" class="btn btn-link" onclick="agregarFilaFinal('+fila+','+columnaActual+',\''+herencia+'\')" title="Agregar Fila Final" style="display: none;"><span class="glyphicon glyphicon-arrow-down"></span> </button> <button name="eliminar_'+fila+'_'+columnaActual+'" id="eliminar_'+fila+'_'+columnaActual+'" type="button" class="btn btn-red" onclick="eliminarCelda('+fila+','+columnaActual+')" title="Eliminar Celda" style="display: none;"><span class="glyphicon glyphicon-minus"></span> </button></div><input type ="hidden" name="herencia_'+fila+'_'+columnaActual+'" id="herencia_'+fila+'_'+columnaActual+'" value="'+herencia+'" />');
+                $('#reg_'+fila+'_'+columnaActual).attr("onmouseover","mostrarBoton('"+fila+"','"+columnaActual+"')");
+                $('#reg_'+fila+'_'+columnaActual).attr("onmouseout","ocultarBoton('"+fila+"','"+columnaActual+"')");
+                $('#reg_'+fila+'_acciones').html("&nbsp;");
+                
+                //$('#colItem').prev('th').after('<th id="columna_'+ nomCol + '"> <div class="ui-widget"><select name="selColumna_' + nomCol + '" id="selColumna_' + nomCol + '" onchange="cambioColumna(' + nomCol + ');">' + msm + '</select></div></tr>');                    
+           }
+        });
+        
+    }    
+    
+    function eliminarCelda(fila,columna){
+        // alert("entra");
+        $("#reg_"+fila+"_"+columna).html("&nbsp;");
+    }
+    
+    function eliminarFila(fila,columna){
+        var cantVarMedicion = $("#varMedicionCont").val();
+        var j = $('#tablaMedicion >tbody >tr').length;
+        var h = j-1;
+        var $objTabla=$('#tablaMedicion');
+        var cantColsRechazo = {{colsRechazo}};
+        iTotalColumnasExistentes=$('#tablaMedicion thead tr th').length;
+        var nomCol = iTotalColumnasExistentes - 2 - cantVarMedicion - cantColsRechazo;
+        var colAnt
+        var numLineasAnt = $("#numeroLineas").val();        
+        var numLineas = parseInt(numLineasAnt) - 1;        
+        var ultColumna = '';
+        
+        $("#fila_"+fila).remove();
+        for(i=(fila+1);i<=numLineasAnt;i++){
+            var nuevaFila = i - 1;
+            
+            //IDENTIFICADOR FILA
+            $("#fila_"+i).attr("id","fila_" + nuevaFila + "");
+            $("#fila_"+i).attr("name","fila_" + nuevaFila + "");
+            
+            //NUMERO
+            $("#numero_"+i).html("" + nuevaFila + "");
+            $("#numero_"+i).attr("id","numero_" + nuevaFila + "");
+            $("#numero_"+i).attr("name","numero_" + nuevaFila + "");
+            
+            for(var m = 1; m <= nomCol; m++){
+                //nomCol = m +1;
+                //alert(m);
+                ///alert($("#reg_"+i+"_"+m).html());
+                var valorHtml = $("#reg_"+i+"_"+m).html();
+                
+                if(valorHtml != '&nbsp;'){
+                    
+                    var ultColumna = m;
+                    
+                    $("#reg_"+i+"_"+m).attr("onMouseOver","mostrarBoton('" + nuevaFila + "','" + m + "')");
+                    $("#reg_"+i+"_"+m).attr("onMouseOut","ocultarBoton('" + nuevaFila + "','" + m + "')");
+                    
+                    var valorHerencia = $("#herencia_"+i+"_"+ m).val();
+                    $("#herencia_"+i+"_"+ m).attr("name","herencia_" + nuevaFila +"_"+ m);
+                    $("#herencia_"+i+"_"+ m).attr("id","herencia_" + nuevaFila +"_"+ m);
+                    
+                    $("#input_"+i+"_"+ m).attr("onChange","cambioSeleccion("+nuevaFila+"," + m + ",'" + valorHerencia + "')");
+                    $("#input_"+i+"_"+ m).attr("name","input_" + nuevaFila +"_"+ m);
+                    $("#input_"+i+"_"+ m).attr("id","input_" + nuevaFila +"_"+ m);
+                    
+                    $("#boton_"+i+"_"+ m).attr("onClick","agregarFila("+nuevaFila+"," + m + ",'" + valorHerencia + "')");
+                    $("#boton_"+i+"_"+ m).attr("name","boton_" + nuevaFila +"_"+ m);
+                    $("#boton_"+i+"_"+ m).attr("id","boton_" + nuevaFila +"_"+ m);
+                    
+                    $("#boton_final_"+i+"_"+ m).attr("onClick","agregarFilaFinal("+nuevaFila+"," + m + ",'" + valorHerencia + "')");
+                    $("#boton_final_"+i+"_"+ m).attr("name","boton_final_" + nuevaFila +"_"+ m);
+                    $("#boton_final_"+i+"_"+ m).attr("id","boton_final_" + nuevaFila +"_"+ m);
+                    
+                    $("#eliminar_"+i+"_"+ m).attr("onClick","eliminarCelda("+nuevaFila+"," + m +")");
+                    $("#eliminar_"+i+"_"+ m).attr("name","eliminar_" + nuevaFila +"_"+ m);
+                    $("#eliminar_"+i+"_"+ m).attr("id","eliminar_" + nuevaFila +"_"+ m);
+                }                
+                
+                $("#reg_"+i+"_"+m).attr("id","reg_" + nuevaFila +"_"+m);
+                $("#reg_"+i+"_"+m).attr("name","reg_" + nuevaFila +"_"+m);
+                
+                
+            }
+            
+            //ACCIONES
+            $("#reg_"+i+"_acciones").attr("name","reg_" + nuevaFila +"_acciones");
+            $("#reg_"+i+"_acciones").attr("id","reg_" + nuevaFila +"_acciones");
+            
+            $("#boton_heredar_"+i).attr("onClick","agregarFilaHeredada("+nuevaFila+"," + ultColumna + ",'" + valorHerencia + "')");
+            $("#boton_heredar_"+i).attr("name","boton_heredar_" + nuevaFila);
+            $("#boton_heredar_"+i).attr("id","boton_heredar_" + nuevaFila);            
+            
+            $("#boton_eliminar_"+i).attr("onClick","eliminarFila("+nuevaFila+","+ultColumna+")");
+            $("#boton_eliminar_"+i).attr("name","boton_eliminar_" + nuevaFila);
+            $("#boton_eliminar_"+i).attr("id","boton_eliminar_" + nuevaFila);
+            
+            //VAR MEDICION
+            if(arregloVariablesMedicion.length>0){
+                $.each(arregloVariablesMedicion,function(index,value){
+                    var idCol = value.replace(/([%#(,) ])/g,'_');
+                    idCol = idCol.replace(/__/g,'_');
+
+                    $("#reg_"+i+"_"+ idCol).attr("name","reg_" + nuevaFila +"_"+ idCol);
+                    $("#reg_"+i+"_"+ idCol).attr("id","reg_" + nuevaFila +"_"+ idCol);
+
+                    $("#input_"+i+"_"+ idCol).attr("name","input_" + nuevaFila +"_"+ idCol);
+                    $("#input_"+i+"_"+ idCol).attr("id","input_" + nuevaFila +"_"+ idCol);                
+
+                });
+            }      
+            
+           
+        }
+        
+        
+        
+        if(("#input_"+h+"_"+columna).length>1){
+            colAnt = columna;
+        }else{
+            colAnt = columna-1;
+        }
+        
+        $("#numeroLineas").val(numLineas);
+        
+        //if(j>3){
+            //$("#reg_"+h+"_acciones").html('<button type="button" class="btn btn-link" onclick="agregarFila('+h+','+colAnt+')" title="Agregar Fila"><span class="glyphicon glyphicon-list"></span> </button> <button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button><button type="button" class="btn btn-link" onclick="eliminarFila('+h+','+colAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');
+        //    $("#reg_"+h+"_acciones").html('<button type="button" class="btn btn-link" onclick="agregarFilaHeredada('+h+','+colAnt+')" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button><button type="button" class="btn btn-link" onclick="eliminarFila('+h+','+colAnt+')" title="Eliminar Fila"><span class="glyphicon glyphicon-minus"></span> </button>');            
+        //}else{
+            //$("#reg_"+h+"_acciones").html('<button type="button" class="btn btn-link" onclick="agregarFila('+h+','+colAnt+')" title="Agregar Fila"><span class="glyphicon glyphicon-list"></span> </button> <button type="button" class="btn btn-link" onclick="agregarFila()" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button>');            
+        //    $("#reg_"+h+"_acciones").html('<button type="button" class="btn btn-link" onclick="agregarFilaHeredada('+h+','+colAnt+')" title="Agregar Fila Heredada"><span class="glyphicon glyphicon-indent-left"></span> </button>');            
+            //$('#selColumna_' + nomCol).prop('disabled', false);
+            //cambioColumna(nomCol);
+        //}        
+    }
+
+</script>

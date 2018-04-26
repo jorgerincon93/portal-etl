@@ -1,0 +1,99 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaCall">    
+    <div id="Call"></div>
+</table>
+<script>
+$(function() {
+     $("#Call").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=Call&method=ajaxListaCall&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            
+            {field: "id", header: "id" , visible: "no"},
+            {field: "idRegistroEncuesta", header: "Id Registro Encuesta"},
+            {field: "res_call", header: "Respuesta Call"},
+            {field: "idUsuarioModificador", header: "Usuario Modificador"},
+            {field: "fechaModificacion", header: "Fecha Modificacion"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}         
+        ],
+        sorting: [
+            {sortingName: "Id Registro Encuesta", field: "idRegistroEncuesta", order: "ascending"},
+            {sortingName: "Respuesta call", field: "res_call", order: "none"}
+           
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "idRegistroEncuesta", "filterType": "text", field: "Id Registro Encuesta", filterLabel: "Id",                    
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "res_call", "filterType": "text", field: "res_call", filterLabel: "Respuesta call",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                           filter_element_attributes: {"type": "text"}
+                       }
+                    ]
+                }   
+                 ]
+                }
+             });
+    } );    
+$(document).ready(function() {
+	$(".various").fancybox({
+		maxWidth	: 400,
+		maxHeight	: 800,
+		fitToView	: true,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verCall(id){
+	$.ajax({
+		url:'index_blank.php?component=Call&method=verCall',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarCall(id){
+	$.ajax({
+		url:'index_blank.php?component=Call&method=agregarCall&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+function editarCall(id){
+
+	$.ajax({
+		url:'index_blank.php?component=Call&method=editarCall',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#wowwindow-inner').html(msm);
+        }
+	});
+}
+
+
+
+</script>

@@ -1,0 +1,49 @@
+{{COMODIN}}
+	{{generar|raw}}
+	<input type="hidden" name="idMenu" id="idMenu" value="{{idMenu|raw}}">
+<script>
+    
+    $().ready(function(){
+		$("#envioDatos").validate();                
+    });
+        
+	function generarCetiLaSulbPdf(){
+		
+					$.ajax({
+						url:'index_blank.php?component=CertiLabo&method=generarCetiLaSulbPdf',
+						type: "POST",
+						data:$('#envioDatos').serialize() + '&idMenu='+ $("#idMenu").val(),
+						success: function (msm){							
+							$('#componenteCentral').html(msm);
+						}
+					});
+	}	
+
+	function generarCetiLabPdf(){
+		
+					$.ajax({
+						url:'index_blank.php?component=CertiLabo&method=generarCetiLabPdf',
+						type: "POST",
+						data:$('#envioDatos').serialize() + '&idMenu='+ $("#idMenu").val(),
+						success: function (msm){							
+							$('#componenteCentral').html(msm);
+							$("#datosCertificado").hide();
+						}
+					});
+	}
+
+	function generarDesprNomina(){
+		
+					$.ajax({
+						url:'index_blank.php?component=CertiLabo&method=generarDesprNomina',
+						type: "POST",
+						data:$('#envioDatos').serialize() + '&idMenu='+ $("#idMenu").val(),
+						success: function (msm){							
+							$('#componenteCentral').html(msm);
+							$("#datosCertificado").hide();
+						}
+					});
+	}
+	
+
+</script>

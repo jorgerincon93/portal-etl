@@ -1,0 +1,190 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="ordencompra"></div>    
+</table>
+
+
+    
+
+
+<script>
+
+$(function() {
+    $("#ordencompra").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=ReglasCalidad&method=ajaxListaReglasCalidad&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            {field: "id", header: "Id"},
+            {field: "nombre", header: "Nombre"},
+            {field: "idUsuario", header: "Usuario"},
+            {field: "fechaCreacion", header: "Fecha Creacion"},
+            {field: "fechaModificacion", header: "Fecha Modificacion"},
+            {field: "idModificador", header: "Usuario Modificador"},
+            {field: "tipoRegla", header: "Tipo Regla"},
+            {field: "descripcionRegla", header: "Descripcion Regla"},
+            {field: "ordenEjecucionRegla", header: "Orden Ejecucion Regla"},
+            {field: "estado", header: "Estado Regla"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+            
+        ],
+        sorting: [
+            {sortingName: "Id", field: "id", order: "none"},
+            {sortingName: "Usuario", field: "idUsuario", order: "none"},
+            {sortingName: "Fecha Creacion", field: "fechaCreacion", order: "none"},
+            {sortingName: "Fecha Modificacion", field: "fechaModificacion", order: "none"},
+            {sortingName: "Usuario Modificador", field: "idModificador", order: "none"},
+            {sortingName: "Tipo Regla", field: "tipoRegla", order: "none"},
+            {sortingName: "Descripcion Regla", field: "descripcionRegla", order: "none"},
+            {sortingName: "Orden Ejecucion Regla", field: "ordenEjecucionRegla", order: "ascending"},
+            {sortingName: "Estado Regla", field: "estado", order: "none"}
+           
+           
+        ],
+        filterOptions: {
+            filters: [
+                
+                 {
+                    filterName: "id", "filterType": "text", field: "id", filterLabel: "ID",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                 {
+                    filterName: "nombre", "filterType": "text", field: "nombre", filterLabel: "Nombre Regla",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                 {
+                    filterName: "fechaCreacion", "filterType": "text", field: "fechaCreacion", filterLabel: "Fecha Creacion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "fechaModificacion", "filterType": "text", field: "fechaModificacion", filterLabel: "Fecha Modificacion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "tipoRegla", "filterType": "text", field: "tipoRegla", filterLabel: "Tipo Regla",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "descripcionRegla", "filterType": "text", field: "descripcionRegla", filterLabel: "Descripcion Regla",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "ordenEjecucionRegla", "filterType": "text", field: "ordenEjecucionRegla", filterLabel: "Orden Ejecucion Regla",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "estado", "filterType": "text", field: "estado", filterLabel: "Estado",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                }
+                           ]
+            {{filtro|raw}}
+        }
+    });
+ 
+});	
+
+   
+                
+$(document).ready(function() {
+   
+   
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 700,
+		fitToView	: true,
+		width		: '90%',
+		height		: '90%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verOrdenCompra(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=ReglasCalidad&method=verJobOrder',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarReglaCalidad(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=ReglasCalidad&method=agregarReglaCalidad&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+function editarReglaCalidad(id){
+
+	$.ajax({
+		url:'index_blank.php?component=ReglasCalidad&method=editarReglaCalidad',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+function eliminarOrdenCompra(id, nombre){
+	if(confirm('Realmente desea eliminar la Regla de Calidad '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=ReglasCalidad&method=eliminarOrdenCompra&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Orden de Compra ' +nombre+ ' Eliminada');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	}
+}
+</script>

@@ -1,0 +1,196 @@
+{{COMODIN}}
+<div class="ruta">{{titulo|raw}}</div>
+{{crear|raw}}
+<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral" id="tablaOrdenCompra">    
+    <div id="ordencompra"></div>    
+</table>
+
+
+    
+
+
+<script>
+
+$(function() {
+    $("#ordencompra").bs_grid({
+ 
+        ajaxFetchDataURL: "index_blank.php?component=JobOrder&method=ajaxListaJobOrder&idMenu="+{{idMenu}},
+        row_primary_key: "id", 
+        columns: [
+            {field: "idResumenJob", header: "Id"},
+            {field: "estado", header: "Estado Resumen Job"},            
+            {field: "nombreUsuario", header: "Asesor Comercial"},
+            {field: "nombreCliente", header: "Cliente"},            
+            {field: "fechaCreacion", header: "Fecha Creacion"},
+            {field: "acciones", header: "Acciones", "sortable": "no"}
+            
+        ],
+        sorting: [
+            {sortingName: "Estado Job", field: "estado", order: "ascending"},
+            {sortingName: "Id", field: "idResumenJob", order: "none"},
+            {sortingName: "Asesor Comercial", field: "nombreUsuario", order: "none"},
+            {sortingName: "fechaCreacion", field: "fechaCreacion", order: "none"}
+        ],
+        filterOptions: {
+            filters: [
+                {
+                    filterName: "estado", "filterType": "text", field: "estado", filterLabel: "Estado",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "Id", "filterType": "number", field: "idResumenJob", filterLabel: "Id",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "nombre Usuario", "filterType": "text", field: "nombreUsuario", filterLabel: "Asesor Comercial",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "nombre Cliente", "filterType": "text", field: "nombreCliente", filterLabel: " Cliente",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                },
+                {
+                    filterName: "fecha Creacion", "filterType": "date", field: "fechaCreacion", filterLabel: "fecha Creacion",
+                    filter_interface: [
+                        {
+                            filter_element: "input",
+                            filter_element_attributes: {"type": "text"}
+                        }
+                    ]
+                }
+            ]
+            {{filtro|raw}}
+        }
+    });
+ 
+});	
+
+   
+                
+$(document).ready(function() {
+   
+   
+	$(".various").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 700,
+		fitToView	: true,
+		width		: '90%',
+		height		: '90%',
+		autoSize	: true,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
+
+function verOrdenCompra(idUsuario){
+	$.ajax({
+		url:'index_blank.php?component=JobOrder&method=verJobOrder',
+		data:'id='+idUsuario,
+		success: function(msm){
+			$('#fancybox-inner').html(msm);
+        }
+	});
+}
+
+function agregarJobOrder(id_usuario){
+	$.ajax({
+		url:'index_blank.php?component=JobOrder&method=agregarJobOrder&idMenu='+{{idMenu}},
+		type: "POST",
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+function editarJobOrder(id){
+
+	$.ajax({
+		url:'index_blank.php?component=JobOrder&method=editarJobOrder',
+		type: "POST",
+		data:'id='+id+'&idMenu='+{{idMenu}},
+		success: function(msm){
+			$('#componenteCentral').html(msm);
+        }
+	});
+}
+
+function eliminarOrdenCompra(id, nombre){
+	if(confirm('Realmente desea eliminar la Orden de Compra '+nombre+' ?')){
+		$.ajax({
+		  type: "POST",
+		  url: 'index_blank.php?component=OrdenCompra&method=eliminarOrdenCompra&id='+id+'&idMenu='+{{idMenu}},
+		  success: function(msm){
+                      alert('Orden de Compra ' +nombre+ ' Eliminada');
+		   $('#componenteCentral').html(msm);
+		  }
+		});
+	}
+}
+
+var opt = {
+       colorRange:true,
+       colorRangeLimits: {
+        optimal: '91-100-green',
+        newRangeOne: '61-90-#4aa64f',
+        newRangeTwo: '41-60',
+        newRangeThree: '21-40-rgb(241,144,40)',
+        critical: '0-20'
+       },       
+       animTime:1000,
+       forceAnim:true,
+       milestones: {
+        1: {
+         mlPos: 10,
+         mlId: false,
+         mlClass: 'bi-custom',
+         mlDim: '100%',
+         mlLabel: 'Creado',
+         mlLabelVis: 'hover',
+         mlHoverRange: 15,
+         mlLineWidth: 1
+        },
+        2: {
+         mlPos: 50,
+         mlId: false,
+         mlClass: 'bi-custom',
+         mlDim: '100%',
+         mlLabel: 'En revision Comercial',
+         mlLabelVis: 'hover',
+         mlHoverRange: 15,
+         mlLineWidth: 1
+        },
+        3: {
+         mlPos: 90,
+         mlId: false,
+         mlClass: 'bi-custom',
+         mlDim: '100%',
+         mlLabel: 'Aprobado - Pendiente Cerrar',
+         mlLabelVis: 'hover',
+         mlHoverRange: 15,
+         mlLineWidth: 1
+        }
+    }
+   };
+
+		</script>

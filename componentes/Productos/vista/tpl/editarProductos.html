@@ -1,0 +1,158 @@
+{{COMODIN}}
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()">
+	<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		<tr class="titulo">
+			<td colspan="3">{{titulo_tabla|raw}}</td>
+		</tr>
+                <tr>
+			<td width="30%" class="tituloAlineado">Nombre Producto </td>
+                        <td><input class="required inputGeneral" type="text" name="nombre" id="nombre" value="{{datosProducto.nombre}}" /></td>
+                        <td></td>
+                </tr>
+                <tr>
+			<td width="30%" class="tituloAlineado">Serial </td>
+                        <td><input class="required inputGeneral" type="text" name="serial" id="serial" value="{{datosProducto.serial}}" /></td>
+                        <td></td>
+                </tr>
+                <tr>
+			<td width="30%" class="tituloAlineado">Referencia </td>
+                        <td><input class="required inputGeneral" type="text" name="ref" id="ref" value="{{datosProducto.referencia}}" /></td>
+                        <td></td>
+                </tr>
+		<tr>
+			<td class="tituloAlineado">Categoria </td>
+                        <td>
+                            <div class="ui-widget">
+                                  <select class="combobox required" name="categoria" id="categoria">{{select_cate_pro|raw}}</select>
+                            </div>
+                        </td>
+			<td></td>
+		</tr>
+                
+                <tr>
+			<td class="tituloAlineado">Tipo </td>
+                        <td>
+                            <div class="ui-widget">
+                                <select class="combobox" name="tipo" id="tipo" {{disabled}}>{{select_tipo_pro|raw}}</select>
+                            </div>
+                        </td>
+			<td></td>
+		</tr>
+		
+		<tr>
+			<td class="tituloAlineado">Marca </td>
+                        <td>
+                            <div class="ui-widget">
+                                <select class="combobox" name="marca" id="marca">{{select_marca|raw}}</select>
+                            </div>
+                        <td><a class="various fancybox.ajax" href="index_blank.php?component=Insumos&method=agregarMarca&idMenu={{idMenu}}"><button type="button" class="btn btn-link" title="Agregar Marca"><span class="glyphicon glyphicon-plus"></span> </button></td>
+                </tr>
+                
+                <tr>
+                    <td class="tituloAlineado">tama&ntildeo </td>
+			<td><input class="inputGeneral" type="text" name="tamano" id="tamano" value="{{datosProducto.tamano}}" /></td>
+                        <td></td>
+                </tr>
+                <tr>
+			<td class="tituloAlineado">Empaque </td>
+			<td><input class="inputGeneral" type="text" name="empaque" id="empaque" value="{{datosProducto.empaque}}" /></td>
+                        <td></td>
+                </tr>
+                 <!--<tr>
+			<td class="tituloAlineado">Olor </td>
+			<td><input class="inputGeneral" type="text" name="olor" id="olor" value="{{datosProducto.olor}}" /></td> 
+		</tr>-->
+                <tr>
+			<td class="tituloAlineado">Presentacion </td>
+			<td><input class="inputGeneral" type="text" name="presentacion" id="presentacion" value="{{datosProducto.presentacion}}" /></td> 
+                        <td></td>
+                </tr>
+                <tr>
+                    <td class="tituloAlineado">Descripcion </td>
+                          <td><input class="inputGeneral" type="text" name="descripcion" id="descripcion" value="{{datosProducto.descripcion}}" /></td>
+                    <td></td>       
+		</tr>
+                 <tr>
+			<td class="tituloAlineado">Estado </td>
+                        <td>
+                            <div class="ui-widget">
+                                  <select class="combobox required" name="estadoPro" id="estadoPro">{{select_estado_pro|raw}}</select>
+                            </div>
+                        </td>
+			<td></td>
+		</tr>
+                <!--<tr>
+                    <td class="tituloAlineado">Id Region </td>
+                          <td><input class="required inputGeneral" type="text" name="idZona" id="idZona" value="{{datosProductos.idZona}}" /></td>
+                           
+		</tr>
+                 <tr>
+                    <td class="tituloAlineado">Id Persona </td>
+                          <td><input class="inputGeneral" type="text" name="idPersona" id="idPersona" value="{{datosProducto.idPersona}}" /></td>
+                           
+		</tr>-->
+                
+		
+	</table>
+        <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+        </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Guardar Producto" />
+	</div>
+	<input type="hidden" name="idProd" id="idProd" value="{{datosProducto.idProd}}" />
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+</form>
+<script>
+	$().ready(function(){
+		$("#envioDatos").validate();
+                
+           $("#categoria").chosen({disable_search_threshold: 10, width:"100%" });
+           $("#tipo").chosen({disable_search_threshold: 10, width:"100%" });
+           $("#estadoPro").chosen({disable_search_threshold: 10, width:"100%" });
+           $("#marca").chosen({disable_search_threshold: 10, width:"100%" });
+        
+        
+	});
+        
+	$("#categoria").chosen().change(function() {
+        
+        var categoria =this.value;
+        if (this.value > 0){
+            $("#tipo").attr('disabled', false).trigger("chosen:updated");
+            
+            //LLAMAR COMPLETAR EL SELECT HIJO
+            $.ajax({
+            url:'index_blank.php?component=Productos&method=consultarTipopro',
+                    type: "POST",
+                    data:'categoria=' + categoria,
+                    success: function (msm){                  
+                        $("#tipo").html(msm);
+                        $("#tipo").trigger("chosen:updated");                            
+                    }
+            });  
+            
+        }
+        else{
+            $("#tipo").val(null).trigger("chosen:updated");
+            $("#tipo").attr('disabled', true).trigger("chosen:updated");
+            
+        }
+    });
+
+	function EnviarFormulario(){
+		
+					$.ajax({
+						url:'index_blank.php?component=Productos&method=guardarProductos',
+						type: "POST",
+						data:$('#envioDatos').serialize(),
+						success: function (msm){
+							jQuery.fancybox.close();
+							$('#componenteCentral').html(msm);
+						}
+					});
+				}
+	
+</script>

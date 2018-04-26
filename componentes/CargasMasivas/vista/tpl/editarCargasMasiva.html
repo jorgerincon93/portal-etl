@@ -1,0 +1,86 @@
+{{COMODIN}}
+<div class="ruta">
+<table align="center" width="100%">
+        <tr>
+            <td>{{titulo|raw}}</td>
+            <td align="right"><a href="javascript:regresar()" >Regresar</a></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"> {{datosFormatoMedicion.titulo}}</td>
+        </tr>
+</table>
+</div>
+
+<form name="envioDatos" id="envioDatos" action="javascript:EnviarFormulario()" enctype="multipart/form-data">
+	<table align="center" width="100%" cellpadding="0" cellspacing="0" class="tablaGeneral">
+		
+	        <tr>
+                <td class="tituloAlineado">Subir Archivo</td>    
+    	        <td><input type="file" class="required file" id="archivo" name="archivo"/></td>
+                </tr>
+                <tr>
+	            <td class="tituloAlineado">TIPO CARGUE MASIVO </td>
+                       <td>
+                          <div class="ui-widget">
+                          <select class="required" name="tipoCargue" id="tipoCargue">{{select_tipoCargue|raw}}</select>
+                          </div>
+                       </td>
+			
+		</tr>
+		
+	</table>
+        <div class="errorRuta" align="right">
+        <span style="text-align: right" align="right" id="mensajeError"></td>
+        </div>
+	<div style="padding-top: 20px; text-align: right; width: 100%">
+		<input type="submit" class="botonGeneralGrande" value="Cargar Archivo" />
+	</div>
+	
+        <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />
+        <input type="hidden" name="idMenu" id="idMenu" value="{{idMenu}}" />
+</form>
+<script>
+    
+    
+	$().ready(function(){
+            $("#tipoCargue").chosen({disable_search_threshold: 10, width:"50%" });
+            
+            $.validator.setDefaults({ ignore: ":hidden:not(select)" })       
+            $("#envioDatos").validate({ rules: {chosen:"required"} });
+	});
+        
+	
+        function regresar(){
+         $.ajax({
+         url:'index_blank.php?component=CargasMasivas&method=mostrarCargasMasivas&idMenu=' + {{idMenu}},
+                type: "POST",
+                data:$('#envioDatos').serialize(),
+                success: function (msm){
+                    $('#componenteCentral').html(msm);
+                }
+          });
+        }
+
+    function EnviarFormulario(){
+        //$("#envioDatos").on("submit", function(e){
+        //    e.preventDefault();
+            var f = $(this);
+            var formData = new FormData(document.getElementById("envioDatos"));
+            formData.append("dato", "valor");
+            $.ajax({
+                url:'index_blank.php?component=CargasMasivas&method=guardarCargaMasiva',
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+	        processData: false,
+                success: function (msm){		
+					$('#componenteCentral').html(msm);
+		               	     }
+            });
+        //});
+    }
+     
+	
+</script>
