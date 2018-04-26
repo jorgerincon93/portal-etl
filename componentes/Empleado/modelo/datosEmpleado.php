@@ -110,17 +110,6 @@ class datosEmpleado extends BDControlador{
         return $db->fetch();
     }
     
-    function treaerIdUsr($idEmpl){
-        global $db;
-        
-        $query="SELECT u.id
-                  FROM etlsoluciones_portal.usuario u
-                 WHERE u.idEmpleado = $idEmpl "  ;
-            
-        $db->query($query);
-        return $db->fetch();
-    }
-
     function validarRepetido($arreglo){
             
 		global $db;
@@ -185,19 +174,6 @@ class datosEmpleado extends BDControlador{
                             ." WHERE id = " . $arreglo['id'];	
 		        
 		$db->query($query);
-        $this->log($_SESSION['datos_logueo']['login'], "Empleado", $query, "actualizarEmpleado");
-       //$this->logMovimiento($_SESSION['datos_logueo']['login'], "Usuario", $funcion = "Actualiza Usuario " . $arreglo['nombre']);
-    }
-
-    function actualizarIdRolUsr($idRol,$id){            
-        global $db;
-                
-               
-        $query="UPDATE etlsoluciones_portal.usuario SET "
-                            ."idRol = '". $idRol . "'"
-                            ." WHERE id = " . $id;   
-             
-        $db->query($query);
         $this->log($_SESSION['datos_logueo']['login'], "Empleado", $query, "actualizarEmpleado");
        //$this->logMovimiento($_SESSION['datos_logueo']['login'], "Usuario", $funcion = "Actualiza Usuario " . $arreglo['nombre']);
     }
