@@ -33,7 +33,8 @@ class __TwigTemplate_5d95d1385da530df0e61dca5e7816f33adff41748dcefa4307b70425e77
                  <th data-column-id=\"nombre\">Empleado</th>
                  <th data-column-id=\"descripcion\">Item</th>
                  <th data-column-id=\"valor\">Descripcion</th>
-                 <th data-column-id=\"mesAnio\">Descripcion</th>
+                 <th data-column-id=\"fechaInicio\">Fecha Inicio</th>
+                 <th data-column-id=\"fechaFin\">Fecha Fin</th>
                  <th data-column-id=\"estado\">Estado</th>
                  <th data-column-id=\"idEmpItem\" data-visible=\"false\">Id Item Empleado</th>
                  <th data-column-accion=\"accion\" data-formatter=\"accion\" data-sortable=\"false\">Acciones</th>
@@ -41,7 +42,7 @@ class __TwigTemplate_5d95d1385da530df0e61dca5e7816f33adff41748dcefa4307b70425e77
          </thead>
      </table>
      <input type=\"hidden\" name=\"nombUsr\" id=\"nombUsr\" value=\"";
-        // line 21
+        // line 22
         echo twig_escape_filter($this->env, (isset($context["nombreUsr"]) ? $context["nombreUsr"] : null), "html", null, true);
         echo "\" />
   </div>
@@ -68,7 +69,7 @@ class __TwigTemplate_5d95d1385da530df0e61dca5e7816f33adff41748dcefa4307b70425e77
                 };
             },
     url:'index_blank.php?component=DespreNomina&method=datosGrilla&idMenu='+";
-        // line 45
+        // line 46
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
     formatters: {
@@ -117,7 +118,7 @@ function verDespreNomina(idNomina){
 function agregarDespreNomina(id_Nomina){
     \$.ajax({
         url:'index_blank.php?component=DespreNomina&method=agregarDespreNomina&idMenu='+";
-        // line 91
+        // line 92
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
         type: \"POST\",
@@ -136,7 +137,7 @@ function editarEmpleadoItemNom(id){
         url:'index_blank.php?component=DespreNomina&method=editarDespreNomina',
         type: \"POST\",
         data:'id='+id+'&idMenu='+";
-        // line 107
+        // line 108
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
         success: function(msm){
@@ -154,7 +155,7 @@ function eliminarDespreNomina(id){
         \$.ajax({
           type: \"POST\",
           url: 'index_blank.php?component=Nomina&method=eliminarNomina&id='+id+'&idMenu='+";
-        // line 122
+        // line 123
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
           success: function(msm){
@@ -180,6 +181,6 @@ function eliminarDespreNomina(id){
 
     public function getDebugInfo()
     {
-        return array (  158 => 122,  140 => 107,  121 => 91,  72 => 45,  45 => 21,  26 => 5,  19 => 1,);
+        return array (  159 => 123,  141 => 108,  122 => 92,  73 => 46,  46 => 22,  26 => 5,  19 => 1,);
     }
 }

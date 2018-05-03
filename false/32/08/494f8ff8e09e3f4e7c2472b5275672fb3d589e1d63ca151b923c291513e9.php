@@ -16,12 +16,165 @@ class __TwigTemplate_3208494f8ff8e09e3f4e7c2472b5275672fb3d589e1d63ca151b923c291
     protected function doDisplay(array $context, array $blocks = array())
     {
         // line 1
+        echo "
+";
+        // line 2
         echo twig_escape_filter($this->env, (isset($context["COMODIN"]) ? $context["COMODIN"] : null), "html", null, true);
         echo "
 <div id=\"agregarUsuario\"></div>
+<dir class=\"container\">
+     <div class=\"row\">
+        <div class=\"col-md-12\">
+          <div class=\"block-web\">
+            <div class=\"header\">
+              <div class=\"actions\"> <a class=\"minimize\" href=\"#\"><i class=\"fa fa-chevron-down\"></i></a> <a class=\"refresh\" href=\"#\"><i class=\"fa fa-repeat\"></i></a> <a class=\"close-down\" href=\"#\"><i class=\"fa fa-times\"></i></a> </div>
+              <h3 class=\"content-header\">Editable Table</h3>
+            </div>
+         <div class=\"porlets-content\">
+          <div class=\"adv-table editable-table \">
+                          <div class=\"clearfix\">
+                              <div class=\"btn-group\">
+                                  <button id=\"editable-sample_new\" class=\"btn btn-primary\">
+                                      Add New <i class=\"fa fa-plus\"></i>
+                                  </button>
+                              </div>
+                              <div class=\"btn-group pull-right\">
+                                  <button class=\"btn dropdown-toggle\" data-toggle=\"dropdown\">Tools <i class=\"fa fa-angle-down\"></i>
+                                  </button>
+                                  <ul class=\"dropdown-menu pull-right\">
+                                      <li><a href=\"#\">Print</a></li>
+                                      <li><a href=\"#\">Save as PDF</a></li>
+                                      <li><a href=\"#\">Export to Excel</a></li>
+                                  </ul>
+                              </div>
+                          </div>
+                          <div class=\"margin-top-10\"></div>
+                          <table class=\"table table-striped table-hover table-bordered\" id=\"editable-sample\">
+                              <thead>
+                              <tr>
+                                  <th>Username</th>
+                                  <th>Full Name</th>
+                                  <th>Points</th>
+                                  <th>Notes</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr class=\"\">
+                                  <td>John Doe</td>
+                                  <td>Stephan Myburgh</td>
+                                  <td>12345</td>
+                                  <td class=\"center\">super user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td>Tom Cooper</td>
+                                  <td>216</td>
+                                  <td class=\"center\">new user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td> Shakib Al Hasan</td>
+                                  <td>432</td>
+                                  <td class=\"center\">super user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td>WebPro</td>
+                                  <td>856</td>
+                                  <td class=\"center\">elite user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td> WebPro</td>
+                                  <td>675</td>
+                                  <td class=\"center\">new user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td>Alex Hales</td>
+                                  <td>423</td>
+                                  <td class=\"center\">new user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>John Doe</td>
+                                  <td>John Doe </td>
+                                  <td>1234</td>
+                                  <td class=\"center\">super user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td>Alex Hales</td>
+                                  <td>642</td>
+                                  <td class=\"center\">new user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td> Aaron Finch</td>
+                                  <td>157</td>
+                                  <td class=\"center\">super user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td>Virat Kohli</td>
+                                  <td>468</td>
+                                  <td class=\"center\">elite user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td> WebPro</td>
+                                  <td>953</td>
+                                  <td class=\"center\">new user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              <tr class=\"\">
+                                  <td>Admin</td>
+                                  <td>Glenn Maxwell</td>
+                                  <td>546</td>
+                                  <td class=\"center\">new user</td>
+                                  <td><a class=\"edit\" href=\"javascript:;\">Edit</a></td>
+                                  <td><a class=\"delete\" href=\"javascript:;\">Delete</a></td>
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div>
+ 
+            </div><!--/porlets-content-->  
+          </div><!--/block-web--> 
+        </div><!--/col-md-12--> 
+      </div><!--/row-->
+</div>
+<script>
+          jQuery(document).ready(function() {
+              EditableTable.init();
+          });
+ </script>
+<!--<div id=\"agregarUsuario\"></div>
 
 ";
-        // line 4
+        // line 155
         echo (isset($context["crear"]) ? $context["crear"] : null);
         echo "
    <div class=\"table-responsive\">
@@ -35,7 +188,7 @@ class __TwigTemplate_3208494f8ff8e09e3f4e7c2472b5275672fb3d589e1d63ca151b923c291
                  <th data-column-id=\"numeroDocumento\">Numero Documento</th>
                  <th data-column-id=\"area\">Area</th>
                  <th data-column-id=\"email\">Email</th>
-                 <th data-column-id=\"rol\">Rol</th>-->
+                 <th data-column-id=\"rol\">Rol</th>--
                  <th data-column-id=\"ultimoIngreso\">Ultimo Ingreso</th>
                  <th data-column-id=\"estado\">Estado</th>
                  <th data-column-id=\"intento\" data-type=\"numeric\">Intento</th>
@@ -44,7 +197,7 @@ class __TwigTemplate_3208494f8ff8e09e3f4e7c2472b5275672fb3d589e1d63ca151b923c291
          </thead>
      </table>
      <input type=\"hidden\" name=\"nombUsr\" id=\"nombUsr\" value=\"";
-        // line 24
+        // line 175
         echo twig_escape_filter($this->env, (isset($context["nombreUsr"]) ? $context["nombreUsr"] : null), "html", null, true);
         echo "\" />
   </div>
@@ -71,7 +224,7 @@ class __TwigTemplate_3208494f8ff8e09e3f4e7c2472b5275672fb3d589e1d63ca151b923c291
                 };
             },
     url:'index_blank.php?component=Usuario&method=datosGrilla&idMenu='+";
-        // line 48
+        // line 199
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
     formatters: {
@@ -125,7 +278,7 @@ function verUsuario(idUsuario){
 function agregarUsuario(id_usuario){
     \$.ajax({
         url:'index_blank.php?component=Usuario&method=agregarUsuario&idMenu='+";
-        // line 99
+        // line 250
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
         type: \"POST\",
@@ -144,7 +297,7 @@ function editarUsuario(id){
         url:'index_blank.php?component=Usuario&method=editarUsuario',
         type: \"POST\",
         data:'id='+id+'&idMenu='+";
-        // line 115
+        // line 266
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
         success: function(msm){
@@ -162,7 +315,7 @@ function eliminarUsuario(id){
         \$.ajax({
           type: \"POST\",
           url: 'index_blank.php?component=Usuario&method=eliminarUsuario&id='+id+'&idMenu='+";
-        // line 130
+        // line 281
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ",
           success: function(msm){
@@ -173,7 +326,7 @@ function eliminarUsuario(id){
         });
     //}
 }
-</script>";
+</script>-->";
     }
 
     public function getTemplateName()
@@ -188,6 +341,6 @@ function eliminarUsuario(id){
 
     public function getDebugInfo()
     {
-        return array (  166 => 130,  148 => 115,  129 => 99,  75 => 48,  48 => 24,  25 => 4,  19 => 1,);
+        return array (  319 => 281,  301 => 266,  282 => 250,  228 => 199,  201 => 175,  178 => 155,  22 => 2,  19 => 1,);
     }
 }
