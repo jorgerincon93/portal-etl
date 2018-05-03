@@ -52,18 +52,6 @@ class DatosCertiLabo extends BDControlador{
         return $db->fetch();
     }
 
-    public function traerPeriEmple($id){
-        global $db;
-        
-        $query="SELECT *
-                  FROM etlsoluciones_portal.empleadoitemnomina a
-                 WHERE a.estado = 21
-                   AND a.idEmpleado = $id";
-            
-        $db->query($query);
-        return $db->getArray();
-    }
-
     public function selectCertiLabSinSuel($id){
         global $db;
         
@@ -119,11 +107,9 @@ class DatosCertiLabo extends BDControlador{
                        emp.cargo,
                        emp.tipoContrato,
                        empitm.valor,
-                       empitm.fechaInicio,
-                       empitm.fechaFin,
+                       empitm.mesAnio,
                        itmnom.codigo,
-                       itmnom.descripcion,
-                       empitm.fechaFin
+                       itmnom.descripcion
                   FROM etlsoluciones_portal.empleados emp,
                        etlsoluciones_portal.empleadoitemnomina empitm,
                        etlsoluciones_portal.itemnomina itmnom
@@ -131,8 +117,7 @@ class DatosCertiLabo extends BDControlador{
                    AND itmnom.tipo = 19
                    AND empitm.estado = 21
                    AND emp.id = empitm.idEmpleado
-                   AND empitm.idItem = itmnom.id
-                   ORDER BY empitm.fechaFin ASC";
+                   AND empitm.idItem = itmnom.id";
           
         $db->query($query);
         return $db->getArray();
@@ -148,8 +133,7 @@ class DatosCertiLabo extends BDControlador{
                        emp.cargo,
                        emp.tipoContrato,
                        empitm.valor,
-                       empitm.fechaInicio,
-                       empitm.fechaFin,
+                       empitm.mesAnio,
                        itmnom.codigo,
                        itmnom.descripcion
                   FROM etlsoluciones_portal.empleados emp,

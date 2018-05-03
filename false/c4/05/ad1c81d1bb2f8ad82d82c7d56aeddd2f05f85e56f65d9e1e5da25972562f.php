@@ -42,12 +42,9 @@ class __TwigTemplate_c405ad1c81d1bb2f8ad82d82c7d56aeddd2f05f85e56f65d9e1e5da2597
     <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/bootstrap.min.css\" />
     <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/jquery.bootgrid.css\" />
     <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/jquery.bootgrid.min.css\" />
-    <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/animate.css\"/>
-    <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/font-awesome.css\"/>
-    <!--<link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/admin.css\"/>-->
     <link type=\"text/css\"  rel=\"stylesheet\" href=\"css/cssBootstrap/DT_bootstrap.css\">
     <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/demo_table.css\" />
-    <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/demo_page.css\">
+    
     <link href=\"https://fonts.googleapis.com/icon?family=Material+Icons\" rel=\"stylesheet\">
     <!--<link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/main.css\" >
     <link type=\"text/css\" rel=\"stylesheet\" href=\"css/cssBootstrap/sweetalert.css\">-->
@@ -133,16 +130,13 @@ class __TwigTemplate_c405ad1c81d1bb2f8ad82d82c7d56aeddd2f05f85e56f65d9e1e5da2597
     <script type=\"text/javascript\" src=\"js/jsBootstrap/tether.js\"></script>
     <script src=\"https://unpkg.com/popper.js@1.12.9/dist/umd/popper.js\"></script>
     <script type=\"text/javascript\" src=\"js/jsBootstrap/bootstrap.min.js\"></script>
-    <script type=\"text/javascript\" src=\"js/jsBootstrap/common-script.js\"></script>
-    <script type=\"text/javascript\" src=\"js/jsBootstrap/jquery.slimscroll.min.js\"></script>
     <script type=\"text/javascript\" src=\"js/jsBootstrap/jquery.bootgrid.js\"></script>
     <script type=\"text/javascript\" src=\"js/jsBootstrap/bootstrap-table.js\"></script>
     <script type=\"text/javascript\" src=\"js/jsBootstrap/jquery.dataTables.js\"></script>
     <script type=\"text/javascript\" src=\"js/jsBootstrap/DT_bootstrap.js\"></script>
     <script type=\"text/javascript\" src=\"js/jsBootstrap/dynamic_table_init.js\"></script>
     <script type=\"text/javascript\" src=\"js/jsBootstrap/edit-table.js\"></script>
-    <script type=\"text/javascript\" src=\"js/jsBootstrap/jPushMenu.js\"></script> 
-    <script type=\"text/javascript\" src=\"js/jsBootstrap/side-chats.js\"></script>
+    
     
 
     <!-- Custom functions file 
@@ -274,7 +268,7 @@ class __TwigTemplate_c405ad1c81d1bb2f8ad82d82c7d56aeddd2f05f85e56f65d9e1e5da2597
     <body>
 
     \t";
-        // line 258
+        // line 252
         echo twig_escape_filter($this->env, (isset($context["COMODIN"]) ? $context["COMODIN"] : null), "html", null, true);
         echo "
    
@@ -417,7 +411,7 @@ class __TwigTemplate_c405ad1c81d1bb2f8ad82d82c7d56aeddd2f05f85e56f65d9e1e5da2597
                 <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                   <img src=\"imagenes/perfil.png\" class=\"user-image\" alt=\"User Image\" >
                   <span class=\"hidden-xs\">";
-        // line 398
+        // line 392
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "nombreUsuario", array()), "html", null, true);
         echo "</span>
                 </a>
@@ -441,7 +435,7 @@ class __TwigTemplate_c405ad1c81d1bb2f8ad82d82c7d56aeddd2f05f85e56f65d9e1e5da2597
               </div>
               <div class=\"pull-left info\">
                 <p>";
-        // line 419
+        // line 413
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "nombreUsuario", array()), "html", null, true);
         echo "</p>
                 <a href=\"#\"><i class=\"fa fa-circle text-success\"></i> Online</a>
@@ -449,12 +443,12 @@ class __TwigTemplate_c405ad1c81d1bb2f8ad82d82c7d56aeddd2f05f85e56f65d9e1e5da2597
             </div>
             <ul class=\"list-sidebar bg-defoult\">
               ";
-        // line 424
+        // line 418
         echo $this->getAttribute($this->getAttribute($this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "menu", array()), "listaMenu", array()), "menuPadre", array());
         echo "
              <ul class=\"sub-menu collapse\" id=\"dashboard\">
                   ";
-        // line 426
+        // line 420
         echo $this->getAttribute((isset($context["datos"]) ? $context["datos"] : null), "menuHijo", array());
         echo "
                 <!--<li class=\"active\"><a href=\"#\">CSS3 Animation</a></li>
@@ -650,6 +644,6 @@ class __TwigTemplate_c405ad1c81d1bb2f8ad82d82c7d56aeddd2f05f85e56f65d9e1e5da2597
 
     public function getDebugInfo()
     {
-        return array (  458 => 426,  453 => 424,  445 => 419,  421 => 398,  278 => 258,  19 => 1,);
+        return array (  452 => 420,  447 => 418,  439 => 413,  415 => 392,  272 => 252,  19 => 1,);
     }
 }

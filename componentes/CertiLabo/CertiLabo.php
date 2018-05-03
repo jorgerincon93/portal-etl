@@ -38,7 +38,7 @@ class CertiLabo{
     	/** 
     	 * Muestra los usuarios del aplicativo
     	 */
-         //echo'<pre>';print_r($arreglo);echo'</pre>';
+       //echo'<pre>';print_r($arreglo);echo'</pre>';
         $permisos = $this->datos->retornarPermisos($_SESSION["datos_logueo"]["idUsuario"],$arreglo["idMenu"]);
         $permisos->idMenu=$arreglo["idMenu"];
 
@@ -153,179 +153,57 @@ function generarCetiLabPdf($arreglo){
 
 function generarDesprNomina($arreglo){
 
-     
-    $arreglo["titulo"] = "NÚMERO DE DESPRENDIBLES";
     
 
-    $this->vista->seleccionarPeriodo($arreglo);
-    $this->mostrarCertifi($arreglo);
+        $idEmp = $this->datos->traerIdEmpleado($_SESSION["datos_logueo"]["idUsuario"]);
+        $arreglo["datosEmpleado"] = $this->datos->selectDespreNomiIngresos($idEmp->idEmpleado);
+        $arreglo["datosEmpEgreso"] = $this->datos->selectDespreNomiEgresos($idEmp->idEmpleado);
+        $total = 0;
+        $totalNeto = 0;
 
-}
-
-
-function generarDesprNominaOK($arreglo){
-
-    
-
-    $idEmp = $this->datos->traerIdEmpleado($_SESSION["datos_logueo"]["idUsuario"]);
-    $arreglo["periodo"] = $this->datos->traerPeriEmple($idEmp->idEmpleado);
-    
-
-
-    foreach ($arreglo["periodo"] as $key => $valuePed) {
-
-        $fechIniPerio = $valuePed["fechaInicio"];
-        $fechFinPerio = $valuePed["fechaFin"];;
-
-    }
-
-               
-    $fechAnt = date('d-m-Y', strtotime('-' . $arreglo["numDespren"] . ' month'));
-
-    $fechaInicio = strtotime(date($fechIniPerio));
-    $fechaFin = strtotime(date($fechFinPerio));
-    $fechAnte = strtotime(date($fechAnt));
-
-    if($fechAnte >= $fechaInicio && $fechAnte <= $fechaFin && $arreglo["numDespren"] <=6){
-
-        $this->datosCertiActual($arreglo);
+        /********************** DATOS ENCABEZADO **************************/
+        $arreglo["datosEnca"]["numeroDocumento"] = $arreglo["datosEmpleado"][0]["numeroDocumento"];
+        $arreglo["datosEnca"]["nombre"] = $arreglo["datosEmpleado"][0]["nombre"];
+        $arreglo["datosEnca"]["cargo"] = $arreglo["datosEmpleado"][0]["cargo"];
+        $arreglo["datosEnca"]["periodo"] = $arreglo["datosEmpleado"][0]["mesAnio"];
+        
+        
 
         
-    }else{
+        //echo'<pre>';print_r($arreglo["datosEmpleado"]);echo'</pre>';
+        
+        
+        /*********************** INGRESOS ***************************/
+        foreach ($arreglo["datosEmpleado"] as $key => $value) {
+
+            $total = $total + $value["valor"];
+            $arreglo["datosCertIngre"][$key]["codigo"] = $value["codigo"];
+            $arreglo["datosCertIngre"][$key]["descripcion"] = $value["descripcion"];
+            $arreglo["datosCertIngre"][$key]["cantidad"] = 1;
+            $arreglo["datosCertIngre"][$key]["valor"] = $value["valor"];
+            
+
+        }
 
         
-        $this->datosCertiAnte($arreglo);
-        //echo'<pre>';print_r("buscar  datos para el desprendible del año pasado");echo'</pre>';
-    }
+        /*********************** EGRESOS ****************************/
+        foreach ($arreglo["datosEmpEgreso"] as $key => $valuEgre) {
 
-        
+            $totalNeto = $totalNeto + $valuEgre["valor"];
+            $arreglo["datosCertEgre"][$key]["codigo"] = $valuEgre["codigo"];
+            $arreglo["datosCertEgre"][$key]["descripcion"] = $valuEgre["descripcion"];
+            $arreglo["datosCertEgre"][$key]["cantidad"] = 1;
+            $arreglo["datosCertEgre"][$key]["valor"] = $valuEgre["valor"];
+
+        }
+
+        $arreglo["totales"]["total"] = $total;
+        $arreglo["totales"]["totalNeto"] = $total - $totalNeto;
+        $arreglo["totales"]["totalDeducciones"] = $totalNeto;
+
+        $this->mostrarCertifi($arreglo);
+        $this->vista->generarDesprenPdf($arreglo);
        
-}
-
-function datosCertiActual($arreglo){
-
-
-        $idEmp = $this->datos->traerIdEmpleado($_SESSION["datos_logueo"]["idUsuario"]);
-        $arreglo["datosEmpleado"] = $this->datos->selectDespreNomiIngresos($idEmp->idEmpleado);
-        $arreglo["datosEmpEgreso"] = $this->datos->selectDespreNomiEgresos($idEmp->idEmpleado);
-      //  $arreglo["numDespren"] = $arreglo["numDespren"];
-        $arreglo["periodoDato"] = "";
-        $total = 0;
-        $totalNeto = 0;
- 
-        /********************** GENERO FECHAS MESES SOLICITADOS *************/        
-        $fechActual = date('d-m-Y');
-        $nuevaFecha = new dateTime($fechActual);
-
-        for ($i=0; $i < $arreglo["numDespren"]; $i++) { 
-
-            $arreglo["meses"][$i]["mes"] = date('d-m-Y', strtotime('-' . $i . ' month'));
-            
-        }
-
-
-        /********************** DATOS ENCABEZADO ****************************/
-        $arreglo["datosEnca"]["numeroDocumento"] = $arreglo["datosEmpleado"][0]["numeroDocumento"];
-        $arreglo["datosEnca"]["nombre"] = $arreglo["datosEmpleado"][0]["nombre"];
-        $arreglo["datosEnca"]["cargo"] = $arreglo["datosEmpleado"][0]["cargo"];
-        
-        
-        /*********************** INGRESOS *****************************/
-        foreach ($arreglo["datosEmpleado"] as $key => $value) {
-
-            $total = $total + $value["valor"];
-            $arreglo["datosCertIngre"][$key]["codigo"] = $value["codigo"];
-            $arreglo["datosCertIngre"][$key]["descripcion"] = $value["descripcion"];
-            $arreglo["datosCertIngre"][$key]["cantidad"] = 1;
-            $arreglo["datosCertIngre"][$key]["valor"] = $value["valor"];
-            
-
-        }
-
-        
-        /*********************** EGRESOS ****************************/
-        foreach ($arreglo["datosEmpEgreso"] as $key => $valuEgre) {
-
-            $totalNeto = $totalNeto + $valuEgre["valor"];
-            $arreglo["datosCertEgre"][$key]["codigo"] = $valuEgre["codigo"];
-            $arreglo["datosCertEgre"][$key]["descripcion"] = $valuEgre["descripcion"];
-            $arreglo["datosCertEgre"][$key]["cantidad"] = 1;
-            $arreglo["datosCertEgre"][$key]["valor"] = $valuEgre["valor"];
-
-        }
-
-        $arreglo["totales"]["total"] = $total;
-        $arreglo["totales"]["totalNeto"] = $total - $totalNeto;
-        $arreglo["totales"]["totalDeducciones"] = $totalNeto;
-
-        
-        $this->vista->generarDesprenPdf($arreglo);
-        $this->mostrarCertifi($arreglo);
-    
-
-
-}
-
-function datosCertiAnte($arreglo){
-      
-        $idEmp = $this->datos->traerIdEmpleado($_SESSION["datos_logueo"]["idUsuario"]);
-        $arreglo["datosEmpleado"] = $this->datos->selectDespreNomiIngresos($idEmp->idEmpleado);
-        
-        $arreglo["datosEmpEgreso"] = $this->datos->selectDespreNomiEgresos($idEmp->idEmpleado);
-      //  $arreglo["numDespren"] = $arreglo["numDespren"];
-        $arreglo["periodoDato"] = "";
-        $total = 0;
-        $totalNeto = 0;
- 
-        /********************** GENERO FECHAS MESES SOLICITADOS *************/     
-        $fechActual = date('d-m-Y');
-        $nuevaFecha = new dateTime($fechActual);
-
-        for ($i=0; $i < $arreglo["numDespren"]; $i++) { 
-
-            $arreglo["meses"][$i]["mes"] = date('d-m-Y', strtotime('-' . $i . ' month'));
-            
-        }
-
-
-        /********************** DATOS ENCABEZADO *****************************/
-        $arreglo["datosEnca"]["numeroDocumento"] = $arreglo["datosEmpleado"][0]["numeroDocumento"];
-        $arreglo["datosEnca"]["nombre"] = $arreglo["datosEmpleado"][0]["nombre"];
-        $arreglo["datosEnca"]["cargo"] = $arreglo["datosEmpleado"][0]["cargo"];
-        
-        
-        /*********************** INGRESOS *****************************/
-        foreach ($arreglo["datosEmpleado"] as $key => $value) {
-
-            $total = $total + $value["valor"];
-            $arreglo["datosCertIngre"][$key]["codigo"] = $value["codigo"];
-            $arreglo["datosCertIngre"][$key]["descripcion"] = $value["descripcion"];
-            $arreglo["datosCertIngre"][$key]["cantidad"] = 1;
-            $arreglo["datosCertIngre"][$key]["valor"] = $value["valor"];
-            
-
-        }
-
-    
-        /*********************** EGRESOS ****************************/
-        foreach ($arreglo["datosEmpEgreso"] as $key => $valuEgre) {
-
-            $totalNeto = $totalNeto + $valuEgre["valor"];
-            $arreglo["datosCertEgre"][$key]["codigo"] = $valuEgre["codigo"];
-            $arreglo["datosCertEgre"][$key]["descripcion"] = $valuEgre["descripcion"];
-            $arreglo["datosCertEgre"][$key]["cantidad"] = 1;
-            $arreglo["datosCertEgre"][$key]["valor"] = $valuEgre["valor"];
-
-        }
-
-        $arreglo["totales"]["total"] = $total;
-        $arreglo["totales"]["totalNeto"] = $total - $totalNeto;
-        $arreglo["totales"]["totalDeducciones"] = $totalNeto;
-
-        
-        $this->vista->generarDesprenPdf($arreglo);
-        $this->mostrarCertifi($arreglo);
-
 }
 
 //------    CONVERTIR NUMEROS A LETRAS         ---------------

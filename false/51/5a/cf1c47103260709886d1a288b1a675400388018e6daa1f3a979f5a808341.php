@@ -64,42 +64,33 @@ class __TwigTemplate_515acf1c47103260709886d1a288b1a675400388018e6daa1f3a979f5a8
         echo "\" required/>
         </div>
         <div class=\"col-md-6 mb-3\">
+            <label for=\"periodo\">Periodo</label>          
+            <input type=\"text\" class=\"form-control\" name=\"periodo\" id=\"periodo\" aria-describedby=\"periodo\" placeholder=\"Periodo\" value=\"";
+        // line 37
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datosDespreNomina"]) ? $context["datosDespreNomina"] : null), "mesAnio", array()), "html", null, true);
+        echo "\" required/>
+        </div>
+        <div class=\"col-md-6 mb-3\">
             <label for=\"estado\">Estado</label>
              <select class=\"form-control\" id=\"estado\" name=\"estado\" required>
                ";
-        // line 38
+        // line 42
         echo (isset($context["select_estado"]) ? $context["select_estado"] : null);
         echo "
              </select>   
         </div> 
       </div>
-      <div class=\"row\">
-        <div class=\"col-md-6 mb-3\">
-            <label for=\"feIni\">Fecha Inicio</label>          
-            <input type=\"date\" class=\"form-control\" name=\"feIni\" id=\"feIni\" aria-describedby=\"feIni\" placeholder=\"Fecha Inicio\" value=\"";
-        // line 45
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datosDespreNomina"]) ? $context["datosDespreNomina"] : null), "fechaInicio", array()), "html", null, true);
-        echo "\" required/>
-        </div>
-        <div class=\"col-md-6 mb-3\">
-            <label for=\"feFin\">Fecha Fin</label>
-            <input type=\"date\" class=\"form-control\" name=\"feFin\" id=\"feFin\" aria-describedby=\"feFin\" placeholder=\"Fecha Inicio\" value=\"";
-        // line 49
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datosDespreNomina"]) ? $context["datosDespreNomina"] : null), "fechaFin", array()), "html", null, true);
-        echo "\" required/>
-        </div>
-      </div>
     
             <input type=\"hidden\" name=\"opcion\" id=\"opcion\" value=\"";
-        // line 53
+        // line 47
         echo twig_escape_filter($this->env, (isset($context["opcion"]) ? $context["opcion"] : null), "html", null, true);
         echo "\" />
             <input type=\"hidden\" name=\"idMenu\" id=\"idMenu\" value=\"";
-        // line 54
+        // line 48
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo "\" />
             <input type=\"hidden\" name=\"idItemEmple\" id=\"idItemEmple\" value=\"";
-        // line 55
+        // line 49
         echo twig_escape_filter($this->env, (isset($context["idItemEmple"]) ? $context["idItemEmple"] : null), "html", null, true);
         echo "\" />
     
@@ -130,7 +121,7 @@ function EnviarFormulario(){
 
                 \$('#miModalEdit').modal('hide');
               //  location.reload('index_blank.php?component=DespreNomina&method=mostrarAdmLab'+";
-        // line 83
+        // line 77
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ");
             }
@@ -154,6 +145,6 @@ function EnviarFormulario(){
 
     public function getDebugInfo()
     {
-        return array (  134 => 83,  103 => 55,  99 => 54,  95 => 53,  88 => 49,  81 => 45,  71 => 38,  63 => 33,  53 => 26,  44 => 20,  29 => 8,  19 => 1,);
+        return array (  125 => 77,  94 => 49,  90 => 48,  86 => 47,  78 => 42,  70 => 37,  63 => 33,  53 => 26,  44 => 20,  29 => 8,  19 => 1,);
     }
 }

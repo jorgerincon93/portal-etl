@@ -101,7 +101,7 @@ function editarDespreNomina($arreglo){
     
 function guardarDespreNomina($arreglo){
        
-       echo'<pre>';print_r($arreglo);echo'</pre>';
+      // echo'<pre>';print_r($arreglo);echo'</pre>';
       
 	if($arreglo['opcion']=="editar"){
             

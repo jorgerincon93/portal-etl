@@ -59,34 +59,28 @@ class __TwigTemplate_69c86359585ce3264bf4f1d903c63e6f3f66b0913ceffcf7326b6af6cf7
         <div class=\"col-md-6 mb-3\">
             <label for=\"valor\">Valor</label>          
             <input type=\"text\" class=\"form-control\" name=\"valor\" id=\"valor\" aria-describedby=\"valor\" placeholder=\"Valor\" value=\"\" required/>
-        </div>        
+        </div>
+        <div class=\"col-md-6 mb-3\">
+            <label for=\"periodo\">Periodo</label>          
+            <input type=\"text\" class=\"form-control\" name=\"periodo\" id=\"periodo\" aria-describedby=\"periodo\" placeholder=\"Periodo\" value=\"\" required/>
+        </div>
         <div class=\"col-md-6 mb-3\">
             <label for=\"estado\">Estado</label>
              <select class=\"form-control\" id=\"estado\" name=\"estado\" required>
                ";
-        // line 38
+        // line 42
         echo (isset($context["select_estado"]) ? $context["select_estado"] : null);
         echo "
              </select>   
         </div> 
       </div>
-      <div class=\"row\">
-        <div class=\"col-md-6 mb-3\">
-            <label for=\"feIni\">Fecha Inicio</label>          
-            <input type=\"date\" class=\"form-control\" name=\"feIni\" id=\"feIni\" aria-describedby=\"feIni\" placeholder=\"fecha Inicio\" value=\"\" required/>
-        </div>
-        <div class=\"col-md-6 mb-3\">
-            <label for=\"feFin\">Fecha Fin</label>          
-            <input type=\"date\" class=\"form-control\" name=\"feFin\" id=\"feFin\" aria-describedby=\"feFin\" placeholder=\"fecha Fin\" value=\"\" required/>
-        </div>
-      </div>
   \t
             <input type=\"hidden\" name=\"opcion\" id=\"opcion\" value=\"";
-        // line 53
+        // line 47
         echo twig_escape_filter($this->env, (isset($context["opcion"]) ? $context["opcion"] : null), "html", null, true);
         echo "\" />
             <input type=\"hidden\" name=\"idMenu\" id=\"idMenu\" value=\"";
-        // line 54
+        // line 48
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo "\" />
   \t
@@ -117,7 +111,7 @@ function EnviarFormulario(){
 
                 \$('#miModalAdd').modal('hide');
                // location.reload('index_blank.php?component=Nomina&method=mostrarNomina'+";
-        // line 82
+        // line 76
         echo twig_escape_filter($this->env, (isset($context["idMenu"]) ? $context["idMenu"] : null), "html", null, true);
         echo ");
             }
@@ -141,6 +135,6 @@ function EnviarFormulario(){
 
     public function getDebugInfo()
     {
-        return array (  121 => 82,  90 => 54,  86 => 53,  68 => 38,  53 => 26,  44 => 20,  29 => 8,  19 => 1,);
+        return array (  115 => 76,  84 => 48,  80 => 47,  72 => 42,  53 => 26,  44 => 20,  29 => 8,  19 => 1,);
     }
 }
