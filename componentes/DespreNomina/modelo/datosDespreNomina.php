@@ -48,7 +48,7 @@ class datosDespreNomina extends BDControlador{
     function datosDespreNomina(){
 		global $db;
 		$query="SELECT emp.id,emp.nombre,nomit.descripcion,
-                       emit.valor,emit.mesAnio,ls.valor estado,
+                       emit.valor,emit.fechaInicio,emit.fechaFin,ls.valor estado,
                        emit.id idEmpItem
                   FROM etlsoluciones_portal.empleadoitemnomina emit,
                        etlsoluciones_portal.empleados emp,
@@ -78,7 +78,7 @@ class datosDespreNomina extends BDControlador{
         global $db;
 
         $query =  "SELECT emp.id,emp.nombre,nomit.descripcion,
-                       emit.valor,emit.mesAnio,ls.valor estado,
+                       emit.valor,emit.fechaInicio,emit.fechaFin,ls.valor estado,
                        emit.id idEmpItem
                   FROM etlsoluciones_portal.empleadoitemnomina emit,
                        etlsoluciones_portal.empleados emp,
@@ -98,7 +98,7 @@ class datosDespreNomina extends BDControlador{
         global $db;
 
         $query = "SELECT emp.id idEmple,emp.nombre,nomit.id idItem,nomit.descripcion,
-                       emit.valor,emit.mesAnio,ls.id idEstado,ls.valor estado,emit.id idItemEmple
+                       emit.valor,emit.fechaInicio,emit.fechaFin,ls.id idEstado,ls.valor estado,emit.id idItemEmple
                   FROM etlsoluciones_portal.empleadoitemnomina emit,
                        etlsoluciones_portal.empleados emp,
                        etlsoluciones_portal.itemnomina nomit,
@@ -124,7 +124,7 @@ class datosDespreNomina extends BDControlador{
         global $db;
         
         $query="SELECT emp.id,emp.nombre,nomit.descripcion,
-                       emit.valor,emit.mesAnio,ls.valor estado
+                       emit.valor,emit.fechaInicio,emit.fechaFin,ls.valor estado
                   FROM etlsoluciones_portal.empleadoitemnomina emit,
                        etlsoluciones_portal.empleados emp,
                        etlsoluciones_portal.itemnomina nomit,
@@ -159,15 +159,17 @@ class datosDespreNomina extends BDControlador{
                         ."  idEmpleado,"
                         ."  idItem,"
                         ."  valor,"
-                        ."  mesAnio,"
-                        ."  estado"
+                        ."  fechaInicio,"
+                        ."  estado,"
+                        ."  fechaFin"
                         .")" 
                         ."VALUES("
                         ."'". $arreglo['empleado'] . "',"
                         ."'". $arreglo['item'] . "',"
                         ."'". $arreglo['valor'] . "',"
-                        ."'". $arreglo['periodo'] . "',"
-                        ."'". $arreglo['estado'] . "'"
+                        ."'". $arreglo['feIni'] . "',"
+                        ."'". $arreglo['estado'] . "',"
+                        ."'". $arreglo['feFin'] . "'"
                         .")";	
 		            
 		    $db->query($query);
@@ -181,7 +183,8 @@ class datosDespreNomina extends BDControlador{
                             ."idEmpleado = '". $arreglo['empleado'] . "',"
                             ."idItem = '". $arreglo['item'] . "',"
                             ."valor = '". $arreglo['valor'] . "',"
-                            ."mesAnio = '". $arreglo['periodo'] . "',"
+                            ."fechaInicio = '". $arreglo['feIni'] . "',"
+                            ."fechaFin = '". $arreglo['feFin'] . "',"
                             ."estado = '". $arreglo['estado'] . "'"
                             ." WHERE id = " . $arreglo['idItemEmple'];	
 		        

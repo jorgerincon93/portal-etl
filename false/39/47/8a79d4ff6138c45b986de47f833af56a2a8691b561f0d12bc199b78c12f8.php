@@ -29,7 +29,8 @@ class __TwigTemplate_39478a79d4ff6138c45b986de47f833af56a2a8691b561f0d12bc199b78
 <script>
     
     \$().ready(function(){
-\t\t\$(\"#envioDatos\").validate();                
+\t\t\$(\"#envioDatos\").validate();
+\t\t\$(\"#miModalDespre\").modal(\"show\");
     });
         
 \tfunction generarCetiLaSulbPdf(){
@@ -59,12 +60,13 @@ class __TwigTemplate_39478a79d4ff6138c45b986de47f833af56a2a8691b561f0d12bc199b78
 
 \tfunction generarDesprNomina(){
 \t\t
+\t\t
 \t\t\t\t\t\$.ajax({
 \t\t\t\t\t\turl:'index_blank.php?component=CertiLabo&method=generarDesprNomina',
 \t\t\t\t\t\ttype: \"POST\",
 \t\t\t\t\t\tdata:\$('#envioDatos').serialize() + '&idMenu='+ \$(\"#idMenu\").val(),
 \t\t\t\t\t\tsuccess: function (msm){\t\t\t\t\t\t\t
-\t\t\t\t\t\t\t\$('#componenteCentral').html(msm);
+\t\t\t\t\t\t\t\$('#componenteCentral').html(msm);\t\t\t\t\t\t\t
 \t\t\t\t\t\t\t\$(\"#datosCertificado\").hide();
 \t\t\t\t\t\t}
 \t\t\t\t\t});

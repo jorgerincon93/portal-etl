@@ -33,15 +33,21 @@
             <input type="text" class="form-control" name="valor" id="valor" aria-describedby="valor" placeholder="Valor" value="{{datosDespreNomina.valor}}" required/>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="periodo">Periodo</label>          
-            <input type="text" class="form-control" name="periodo" id="periodo" aria-describedby="periodo" placeholder="Periodo" value="{{datosDespreNomina.mesAnio}}" required/>
-        </div>
-        <div class="col-md-6 mb-3">
             <label for="estado">Estado</label>
              <select class="form-control" id="estado" name="estado" required>
                {{select_estado|raw}}
              </select>   
         </div> 
+      </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+            <label for="feIni">Fecha Inicio</label>          
+            <input type="date" class="form-control" name="feIni" id="feIni" aria-describedby="feIni" placeholder="Fecha Inicio" value="{{datosDespreNomina.fechaInicio}}" required/>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="feFin">Fecha Fin</label>
+            <input type="date" class="form-control" name="feFin" id="feFin" aria-describedby="feFin" placeholder="Fecha Inicio" value="{{datosDespreNomina.fechaFin}}" required/>
+        </div>
       </div>
     
             <input type="hidden" name="opcion" id="opcion" value="{{opcion}}" />

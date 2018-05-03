@@ -4,7 +4,8 @@
 <script>
     
     $().ready(function(){
-		$("#envioDatos").validate();                
+		$("#envioDatos").validate();
+		$("#miModalDespre").modal("show");
     });
         
 	function generarCetiLaSulbPdf(){
@@ -34,12 +35,13 @@
 
 	function generarDesprNomina(){
 		
+		
 					$.ajax({
 						url:'index_blank.php?component=CertiLabo&method=generarDesprNomina',
 						type: "POST",
 						data:$('#envioDatos').serialize() + '&idMenu='+ $("#idMenu").val(),
 						success: function (msm){							
-							$('#componenteCentral').html(msm);
+							$('#componenteCentral').html(msm);							
 							$("#datosCertificado").hide();
 						}
 					});

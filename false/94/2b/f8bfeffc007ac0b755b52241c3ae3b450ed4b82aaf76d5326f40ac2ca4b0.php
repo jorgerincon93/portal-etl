@@ -96,7 +96,7 @@ class __TwigTemplate_942bf8bfeffc007ac0b755b52241c3ae3b450ed4b82aaf76d5326f40ac2
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datosEmpleado"]) ? $context["datosEmpleado"] : null), "totalLetra", array()), "html", null, true);
         echo " Pesos M/cte. ( \$";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datosEmpleado"]) ? $context["datosEmpleado"] : null), "totalSal", array()), "html", null, true);
-        echo ").</p><br><br><br><br><br><br><br><br><br><br><br><br>
+        echo ").</p><br><br><br><br><br><br><br><br>
 \t\t\t\t\t        <p>Se expide a solicitud del interesado en Bogotá, a los ";
         // line 43
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["datosEmpleado"]) ? $context["datosEmpleado"] : null), "diaSoli", array()), "html", null, true);
